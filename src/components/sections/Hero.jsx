@@ -1,132 +1,240 @@
 import { motion } from "framer-motion";
-import { MapPin, Calendar, ChevronDown } from "lucide-react";
+import { Box, Container, Typography, Button, Chip } from "@mui/material";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
+const scrollTo = (id) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
 export default function Hero() {
-  const scrollTo = (id) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-
   return (
-    <div className='relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#0A0A0A]'>
-      {/* Background gradient mesh */}
-      <div className='absolute inset-0 pointer-events-none'>
-        <div
-          className='absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-10'
-          style={{
-            background: "radial-gradient(circle, #C9A84C 0%, transparent 70%)",
+    <Box
+      sx={{
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        background: "#0A0A0A",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background glow */}
+      <Box sx={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: "25%",
+            width: 600,
+            height: 600,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)",
           }}
         />
-        <div
-          className='absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full opacity-8'
-          style={{
-            background: "radial-gradient(circle, #E8407A 0%, transparent 70%)",
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            right: "25%",
+            width: 500,
+            height: 500,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(232,64,122,0.08) 0%, transparent 70%)",
           }}
         />
-        {/* Grid lines */}
-        <div
-          className='absolute inset-0 opacity-[0.03]'
-          style={{
+        {/* Grid */}
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.025,
             backgroundImage:
               "linear-gradient(#C9A84C 1px, transparent 1px), linear-gradient(90deg, #C9A84C 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }}
         />
-      </div>
+      </Box>
 
-      {/* Placeholder image — replace src with real photo */}
-      <div className='absolute inset-0'>
-        <img
+      {/* Background image */}
+      <Box sx={{ position: "absolute", inset: 0 }}>
+        <Box
+          component='img'
           src='https://images.unsplash.com/photo-1582095133179-bfd08e2fb6b8?w=1600&q=80'
-          alt='Expo Beauty & Barber'
-          className='w-full h-full object-cover opacity-20'
+          alt=''
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: 0.18,
+          }}
         />
-        <div className='absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/60 via-transparent to-[#0A0A0A]' />
-      </div>
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, transparent 50%, #0A0A0A 100%)",
+          }}
+        />
+      </Box>
 
       {/* Content */}
-      <div className='relative z-10 container-site pt-28'>
-        {/* Pill badge */}
+      <Container
+        maxWidth={false}
+        sx={{ position: "relative", zIndex: 1, pt: 16 }}
+      >
+        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className='inline-flex items-center gap-2 border border-[#C9A84C]/30 px-4 py-1.5 mb-8 bg-[#C9A84C]/5'
         >
-          <span className='w-1.5 h-1.5 rounded-full bg-[#E8407A] animate-pulse' />
-          <span
-            className='text-[#C9A84C] text-xs tracking-[0.25em] uppercase'
-            style={{ fontFamily: "Outfit, sans-serif", fontWeight: 500 }}
+          <Box
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 1,
+              border: "1px solid rgba(201,168,76,0.3)",
+              px: 2,
+              py: 0.75,
+              mb: 4,
+              background: "rgba(201,168,76,0.05)",
+            }}
           >
-            Edición 2026
-          </span>
+            <Box
+              sx={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: "#E8407A",
+                animation: "pulse 2s infinite",
+                "@keyframes pulse": {
+                  "0%, 100%": { opacity: 1 },
+                  "50%": { opacity: 0.4 },
+                },
+              }}
+            />
+            <Typography
+              sx={{
+                fontFamily: "'Outfit', sans-serif",
+                fontSize: "0.65rem",
+                fontWeight: 600,
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "#C9A84C",
+              }}
+            >
+              Edición 2026
+            </Typography>
+          </Box>
         </motion.div>
 
-        {/* Main headline */}
-        <div className='overflow-hidden mb-2'>
-          <motion.h1
+        {/* Headline */}
+        <Box sx={{ overflow: "hidden", mb: 0.5 }}>
+          <motion.div
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className='text-[clamp(3.5rem,10vw,9rem)] leading-[0.9] tracking-tight text-[#F5F0E8]'
-            style={{
-              fontFamily: "Bebas Neue, sans-serif",
-              letterSpacing: "0.02em",
-            }}
           >
-            EXPO BEAUTY
-          </motion.h1>
-        </div>
-        <div className='overflow-hidden mb-6'>
-          <motion.h1
+            <Typography
+              variant='h1'
+              sx={{ fontSize: "clamp(3rem, 10vw, 9rem)", color: "#F5F0E8" }}
+            >
+              EXPO BEAUTY
+            </Typography>
+          </motion.div>
+        </Box>
+        <Box sx={{ overflow: "hidden", mb: 3 }}>
+          <motion.div
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className='text-[clamp(3.5rem,10vw,9rem)] leading-[0.9] tracking-tight text-gradient-gold'
-            style={{
-              fontFamily: "Bebas Neue, sans-serif",
-              letterSpacing: "0.02em",
-            }}
           >
-            & BARBER EMPRENDE
-          </motion.h1>
-        </div>
+            <Typography
+              variant='h1'
+              sx={{
+                fontSize: "clamp(3rem, 10vw, 9rem)",
+                background:
+                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              & BARBER EMPRENDE
+            </Typography>
+          </motion.div>
+        </Box>
 
         {/* Subtitle */}
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className='text-[#ABABAB] text-base md:text-lg max-w-xl mb-10 leading-relaxed'
-          style={{ fontFamily: "Outfit, sans-serif" }}
         >
-          El punto de encuentro para la industria de la belleza, barbería y
-          maquillaje en México.
-        </motion.p>
+          <Typography
+            variant='body1'
+            sx={{
+              fontSize: { xs: "1rem", md: "1.1rem" },
+              maxWidth: 520,
+              mb: 5,
+              color: "#ABABAB",
+            }}
+          >
+            El punto de encuentro para la industria de la belleza, barbería y
+            maquillaje en México.
+          </Typography>
+        </motion.div>
 
-        {/* Date & Location badges */}
+        {/* Date & Location */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className='flex flex-wrap gap-4 mb-10'
         >
-          <div className='flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2'>
-            <Calendar size={14} className='text-[#C9A84C]' />
-            <span
-              className='text-sm text-[#F5F0E8]'
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              14, 15 y 16 de Marzo 2026
-            </span>
-          </div>
-          <div className='flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2'>
-            <MapPin size={14} className='text-[#E8407A]' />
-            <span
-              className='text-sm text-[#F5F0E8]'
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              WTC Ciudad de México
-            </span>
-          </div>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 5 }}>
+            {[
+              {
+                icon: (
+                  <CalendarMonthIcon sx={{ fontSize: 14, color: "#C9A84C" }} />
+                ),
+                text: "14, 15 y 16 de Marzo 2026",
+              },
+              {
+                icon: (
+                  <LocationOnIcon sx={{ fontSize: 14, color: "#E8407A" }} />
+                ),
+                text: "WTC Ciudad de México",
+              },
+            ].map((item, i) => (
+              <Box
+                key={i}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  px: 2,
+                  py: 1,
+                  background: "rgba(255,255,255,0.03)",
+                }}
+              >
+                {item.icon}
+                <Typography
+                  sx={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: "0.8rem",
+                    color: "#F5F0E8",
+                  }}
+                >
+                  {item.text}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
         </motion.div>
 
         {/* CTAs */}
@@ -134,46 +242,64 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className='flex flex-wrap gap-4'
         >
-          <button
-            onClick={() => scrollTo("expositores")}
-            className='px-8 py-4 bg-[#C9A84C] text-[#0A0A0A] font-semibold text-sm tracking-widest uppercase hover:bg-[#E8C96A] transition-all duration-200 active:scale-95'
-            style={{ fontFamily: "Outfit, sans-serif" }}
-          >
-            Quiero exponer
-          </button>
-          <button
-            onClick={() => scrollTo("visitantes")}
-            className='px-8 py-4 border border-white/20 text-[#F5F0E8] font-semibold text-sm tracking-widest uppercase hover:border-white/40 hover:bg-white/5 transition-all duration-200 active:scale-95'
-            style={{ fontFamily: "Outfit, sans-serif" }}
-          >
-            Quiero asistir
-          </button>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+            <Button
+              variant='contained'
+              color='primary'
+              size='large'
+              onClick={() => scrollTo("expositores")}
+            >
+              Quiero exponer
+            </Button>
+            <Button
+              variant='outlined'
+              color='secondary'
+              size='large'
+              onClick={() => scrollTo("visitantes")}
+            >
+              Quiero asistir
+            </Button>
+          </Box>
         </motion.div>
-      </div>
+      </Container>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className='absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer'
+        style={{
+          position: "absolute",
+          bottom: 40,
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 4,
+          cursor: "pointer",
+        }}
         onClick={() => scrollTo("inicio")}
       >
-        <span
-          className='text-[#666] text-xs tracking-[0.3em] uppercase'
-          style={{ fontFamily: "Outfit, sans-serif" }}
+        <Typography
+          sx={{
+            fontFamily: "'Outfit', sans-serif",
+            fontSize: "0.6rem",
+            letterSpacing: "0.3em",
+            color: "#444",
+            textTransform: "uppercase",
+          }}
         >
           Scroll
-        </span>
+        </Typography>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <ChevronDown size={16} className='text-[#C9A84C]' />
+          <KeyboardArrowDownIcon sx={{ color: "#C9A84C", fontSize: 18 }} />
         </motion.div>
       </motion.div>
-    </div>
+    </Box>
   );
 }

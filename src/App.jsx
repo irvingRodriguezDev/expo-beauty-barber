@@ -9,6 +9,7 @@ import MapSection from "./components/sections/MapSection";
 import Visitors from "./components/sections/Visitors";
 import Exhibitors from "./components/sections/Exhibitors";
 import Contact from "./components/sections/Contact";
+import Register from "./components/sections/Register";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         {/* VISITANTES */}
         <section id='visitantes'>
           <Visitors />
+          <Register />
         </section>
 
         {/* EXPOSITORES */}

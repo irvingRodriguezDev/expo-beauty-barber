@@ -1,26 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap");
 
-@import "tailwindcss";
-
-@theme {
-  --color-gold: #c9a84c;
-  --color-gold-light: #e8c96a;
-  --color-rose: #e8407a;
-  --color-rose-dark: #c02060;
-  --color-dark: #0a0a0a;
-  --color-dark-2: #141414;
-  --color-dark-3: #1e1e1e;
-  --color-dark-4: #2a2a2a;
-  --color-light: #f5f0e8;
-  --color-muted: #888888;
-
-  --font-display: "Bebas Neue", sans-serif;
-  --font-body: "Outfit", sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -29,30 +11,13 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
   background-color: #0a0a0a;
-  color: #f5f0e8;
   overflow-x: hidden;
-  font-size: 16px;
-  line-height: 1.7;
 }
 
-/* Mobile typography scale */
-@media (max-width: 768px) {
-  body {
-    font-size: 15px;
-  }
-  h1,
-  h2,
-  h3 {
-    line-height: 1.1;
-  }
-  p {
-    font-size: 0.95rem;
-  }
-}
-
-/* Scrollbar custom */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -64,44 +29,10 @@ body {
   border-radius: 2px;
 }
 
-/* Noise texture overlay utility */
-.noise::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Gold gradient text utility */
+/* Gold gradient text */
 .text-gradient-gold {
   background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 50%, #c9a84c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-/* Container: 90% en monitores grandes, padding normal en móvil */
-.container-site {
-  width: 90%;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (max-width: 768px) {
-  .container-site {
-    width: 100%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-/* Section divider */
-.section-divider {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #c9a84c, #e8407a);
-  border-radius: 2px;
 }

@@ -1,23 +1,21 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 import { useRef } from "react";
-import {
-  Scissors,
-  Sparkles,
-  Mic2,
-  ShoppingBag,
-  Camera,
-  Users,
-  Ticket,
-} from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Box, Container, Typography, Button, Chip } from "@mui/material";
+import ContentCutIcon from "@mui/icons-material/ContentCut";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import MicIcon from "@mui/icons-material/Mic";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import GroupsIcon from "@mui/icons-material/Groups";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 const perks = [
-  { icon: Scissors, label: "Barber Shows en vivo" },
-  { icon: Sparkles, label: "Zona de maquillaje profesional" },
-  { icon: Mic2, label: "Conferencias con expertos" },
-  { icon: ShoppingBag, label: "Productos y ofertas exclusivas" },
-  { icon: Camera, label: "Contenido para redes sociales" },
-  { icon: Users, label: "Networking con profesionales" },
+  { Icon: ContentCutIcon, label: "Barber Shows en vivo" },
+  { Icon: AutoAwesomeIcon, label: "Zona de maquillaje profesional" },
+  { Icon: MicIcon, label: "Conferencias con expertos" },
+  { Icon: ShoppingBagIcon, label: "Productos y ofertas exclusivas" },
+  { Icon: CameraAltIcon, label: "Contenido para redes sociales" },
+  { Icon: GroupsIcon, label: "Networking con profesionales" },
 ];
 
 const profiles = [
@@ -30,170 +28,243 @@ const profiles = [
   "Emprendedores del sector",
 ];
 
+const scrollTo = (id) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
 export default function Visitors() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
+    <Box
       ref={ref}
-      className='py-32 bg-[#0D0D0D] border-t border-white/8 relative'
+      component='section'
+      sx={{
+        py: 16,
+        background: "#0D0D0D",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+      }}
     >
-      <div className='container-site'>
-        {/* Header */}
+      <Container maxWidth={false}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className='mb-20'
         >
-          <p
-            className='text-[#E8407A] text-xs tracking-[0.35em] uppercase mb-4'
-            style={{ fontFamily: "Outfit, sans-serif", fontWeight: 600 }}
+          <Typography
+            variant='overline'
+            display='block'
+            sx={{ mb: 2, color: "#E8407A" }}
           >
             Sección visitantes
-          </p>
-          <h2
-            className='text-[clamp(2.5rem,5vw,4.5rem)] text-[#F5F0E8] leading-tight'
-            style={{
-              fontFamily: "Bebas Neue, sans-serif",
-              letterSpacing: "0.02em",
+          </Typography>
+          <Typography
+            variant='h2'
+            sx={{
+              fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
+              color: "#F5F0E8",
+              mb: 0.5,
             }}
           >
             Vive la experiencia
-            <br />
-            <span style={{ color: "#E8407A" }}>Expo Beauty & Barber</span>
-          </h2>
+          </Typography>
+          <Typography
+            variant='h2'
+            sx={{
+              fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
+              color: "#E8407A",
+              mb: 8,
+            }}
+          >
+            Expo Beauty & Barber
+          </Typography>
         </motion.div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-start'>
-          {/* Left: image + description */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+            gap: 10,
+            alignItems: "start",
+          }}
+        >
+          {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className='aspect-[4/3] overflow-hidden mb-8 relative'>
-              {/* Replace with real image */}
-              <img
+            <Box
+              sx={{
+                aspectRatio: "4/3",
+                overflow: "hidden",
+                mb: 4,
+                position: "relative",
+                background: "#1A1A1A",
+              }}
+            >
+              <Box
+                component='img'
                 src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80'
                 alt='Visitantes'
-                className='w-full h-full object-cover opacity-60'
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: 0.65,
+                }}
               />
-              <div className='absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent' />
-            </div>
-
-            <p
-              className='text-[#ABABAB] text-base leading-relaxed mb-8'
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              Durante <span className='text-[#F5F0E8]'>3 días</span> podrás
-              conocer las últimas tendencias, productos y técnicas de la
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, #0D0D0D, transparent)",
+                }}
+              />
+            </Box>
+            <Typography variant='body1' sx={{ mb: 4 }}>
+              Durante{" "}
+              <Box component='span' sx={{ color: "#F5F0E8", fontWeight: 600 }}>
+                3 días
+              </Box>{" "}
+              podrás conocer las últimas tendencias, productos y técnicas de la
               industria de la belleza y barbería.
-            </p>
-
-            {/* Perks grid */}
-            <div className='grid grid-cols-2 gap-3'>
+            </Typography>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 0,
+              }}
+            >
               {perks.map((p, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.07 }}
-                  className='flex items-center gap-3 py-3 border-b border-white/5'
                 >
-                  <p.icon size={13} className='text-[#E8407A] shrink-0' />
-                  <span
-                    className='text-[#ABABAB] text-xs'
-                    style={{ fontFamily: "Outfit, sans-serif" }}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1.5,
+                      py: 2,
+                      borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    }}
                   >
-                    {p.label}
-                  </span>
+                    <p.Icon
+                      sx={{ color: "#E8407A", fontSize: 14, flexShrink: 0 }}
+                    />
+                    <Typography variant='caption' sx={{ color: "#ABABAB" }}>
+                      {p.label}
+                    </Typography>
+                  </Box>
                 </motion.div>
               ))}
-            </div>
+            </Box>
           </motion.div>
 
-          {/* Right: date, audience, CTA */}
+          {/* Right */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Date badge */}
-            <div className='border border-white/10 p-8 mb-8 bg-[#141414] relative overflow-hidden'>
-              <div
-                className='absolute top-0 right-0 w-32 h-32 rounded-full opacity-10'
-                style={{
-                  background: "radial-gradient(circle, #E8407A, transparent)",
-                  transform: "translate(30%, -30%)",
+            <Box
+              sx={{
+                border: "1px solid rgba(255,255,255,0.08)",
+                p: 5,
+                mb: 4,
+                background: "#141414",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  width: 160,
+                  height: 160,
+                  borderRadius: "50%",
+                  background:
+                    "radial-gradient(circle, rgba(232,64,122,0.12), transparent)",
+                  transform: "translate(30%,-30%)",
                 }}
               />
-              <p
-                className='text-[#777] text-xs tracking-widest uppercase mb-2'
-                style={{ fontFamily: "Outfit, sans-serif" }}
+              <Typography
+                variant='caption'
+                sx={{
+                  color: "#666",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  display: "block",
+                  mb: 1,
+                }}
               >
                 Fecha y sede
-              </p>
-              <p
-                className='text-[5rem] leading-none text-[#F5F0E8] mb-0'
-                style={{ fontFamily: "Bebas Neue, sans-serif" }}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: "5.5rem",
+                  color: "#F5F0E8",
+                  lineHeight: 0.9,
+                }}
               >
                 14–16
-              </p>
-              <p
-                className='text-2xl text-[#E8407A] tracking-widest uppercase'
-                style={{ fontFamily: "Bebas Neue, sans-serif" }}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: "1.8rem",
+                  color: "#E8407A",
+                  letterSpacing: "0.1em",
+                  mt: 0.5,
+                }}
               >
                 Marzo 2026
-              </p>
-              <p
-                className='text-[#777] text-sm mt-2'
-                style={{ fontFamily: "Outfit, sans-serif" }}
-              >
+              </Typography>
+              <Typography variant='body2' sx={{ mt: 1.5 }}>
                 WTC Ciudad de México
-              </p>
-            </div>
+              </Typography>
+            </Box>
 
-            {/* Who should attend */}
-            <div className='mb-8'>
-              <p
-                className='text-[#C9A84C] text-xs tracking-[0.3em] uppercase mb-4'
-                style={{ fontFamily: "Outfit, sans-serif", fontWeight: 600 }}
-              >
-                ¿Quién debería asistir?
-              </p>
-              <div className='flex flex-wrap gap-2'>
-                {profiles.map((p, i) => (
-                  <span
-                    key={i}
-                    className='px-3 py-1 border border-white/10 text-[#ABABAB] text-xs'
-                    style={{ fontFamily: "Outfit, sans-serif" }}
-                  >
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <Typography variant='overline' display='block' sx={{ mb: 2 }}>
+              ¿Quién debería asistir?
+            </Typography>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 5 }}>
+              {profiles.map((p, i) => (
+                <Chip
+                  key={i}
+                  label={p}
+                  variant='outlined'
+                  size='small'
+                  sx={{
+                    borderColor: "rgba(255,255,255,0.1)",
+                    color: "#ABABAB",
+                    borderRadius: 0,
+                    fontSize: "0.7rem",
+                  }}
+                />
+              ))}
+            </Box>
 
-            {/* CTA */}
-            <a
-              href='#contacto'
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("contacto")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className='inline-flex items-center gap-3 w-full justify-center px-8 py-5 bg-[#E8407A] text-white font-semibold text-sm tracking-widest uppercase hover:bg-[#C02060] transition-all duration-200 active:scale-95'
-              style={{ fontFamily: "Outfit, sans-serif" }}
+            <Button
+              variant='contained'
+              color='secondary'
+              fullWidth
+              size='large'
+              startIcon={<ConfirmationNumberIcon />}
+              onClick={() => scrollTo("registro")}
             >
-              <Ticket size={16} />
               Registrarme como visitante
-            </a>
+            </Button>
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Container>
+    </Box>
   );
 }

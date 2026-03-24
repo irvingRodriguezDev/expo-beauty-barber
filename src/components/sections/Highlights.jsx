@@ -1,53 +1,53 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 import { useRef } from "react";
-import {
-  Scissors,
-  Sparkles,
-  Mic2,
-  ShoppingBag,
-  Camera,
-  Users,
-} from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Box, Container, Typography, Card, CardContent } from "@mui/material";
+import ContentCutIcon from "@mui/icons-material/ContentCut";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import MicIcon from "@mui/icons-material/Mic";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import GroupsIcon from "@mui/icons-material/Groups";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 const items = [
   {
-    icon: Scissors,
+    Icon: StorefrontIcon,
     label: "Stands comerciales",
     desc: "Expositores con los mejores productos del sector.",
   },
   {
-    icon: Sparkles,
+    Icon: AutoAwesomeIcon,
     label: "Demostraciones en vivo",
     desc: "Técnicas y productos presentados en tiempo real.",
   },
   {
-    icon: Scissors,
+    Icon: ContentCutIcon,
     label: "Barber Shows",
     desc: "Los mejores barberos en escena.",
   },
   {
-    icon: Sparkles,
+    Icon: AutoAwesomeIcon,
     label: "Zona de maquillaje",
     desc: "Arte y tendencias del maquillaje profesional.",
   },
   {
-    icon: Mic2,
+    Icon: MicIcon,
     label: "Talleres y conferencias",
     desc: "Aprende de los referentes de la industria.",
   },
   {
-    icon: Users,
+    Icon: GroupsIcon,
     label: "Networking con marcas",
     desc: "Conecta con distribuidores y compradores.",
   },
   {
-    icon: ShoppingBag,
+    Icon: ShoppingBagIcon,
     label: "Marketplace profesional",
     desc: "Compra y negocia directamente con marcas.",
   },
   {
-    icon: Camera,
+    Icon: CameraAltIcon,
     label: "Contenido para redes",
     desc: "Fotobooth y zonas para crear contenido.",
   },
@@ -58,72 +58,109 @@ export default function Highlights() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className='py-32 bg-[#0A0A0A] relative overflow-hidden'>
-      {/* Background texture */}
-      <div
-        className='absolute inset-0 opacity-[0.015]'
-        style={{
+    <Box
+      ref={ref}
+      component='section'
+      sx={{
+        py: 16,
+        background: "#0A0A0A",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.015,
           backgroundImage:
             "linear-gradient(#C9A84C 1px, transparent 1px), linear-gradient(90deg, #C9A84C 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
-
-      <div className='container-site relative z-10'>
+      <Container maxWidth={false} sx={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className='text-center mb-16'
         >
-          <p
-            className='text-[#C9A84C] text-xs tracking-[0.35em] uppercase mb-4'
-            style={{ fontFamily: "Outfit, sans-serif", fontWeight: 600 }}
-          >
-            Lo que encontrarás
-          </p>
-          <h2
-            className='text-[clamp(2.5rem,5vw,4.5rem)] text-[#F5F0E8]'
-            style={{
-              fontFamily: "Bebas Neue, sans-serif",
-              letterSpacing: "0.02em",
-            }}
-          >
-            Una experiencia completa
-          </h2>
+          <Box sx={{ textAlign: "center", mb: 8 }}>
+            <Typography variant='overline' display='block' sx={{ mb: 2 }}>
+              Lo que encontrarás
+            </Typography>
+            <Typography
+              variant='h2'
+              sx={{ fontSize: "clamp(2.2rem, 5vw, 4.5rem)", color: "#F5F0E8" }}
+            >
+              Una experiencia completa
+            </Typography>
+          </Box>
         </motion.div>
 
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-3'>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" },
+            gap: 2,
+          }}
+        >
           {items.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              className='bg-[#141414] border border-white/8 p-8 group hover:bg-[#1C1C1C] hover:border-[#C9A84C]/30 transition-all duration-300 cursor-default'
             >
-              <div className='w-9 h-9 bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center mb-5 group-hover:bg-[#C9A84C]/20 transition-colors'>
-                <item.icon
-                  size={17}
-                  className='text-[#C9A84C] group-hover:scale-110 transition-transform duration-300'
-                />
-              </div>
-              <h3
-                className='text-[#F0EAD6] text-sm font-semibold mb-2 group-hover:text-[#C9A84C] transition-colors'
-                style={{ fontFamily: "Outfit, sans-serif" }}
+              <Card
+                sx={{
+                  height: "100%",
+                  cursor: "default",
+                  "&:hover .card-icon-wrap": {
+                    background: "rgba(201,168,76,0.2)",
+                    borderColor: "rgba(201,168,76,0.5)",
+                  },
+                }}
               >
-                {item.label}
-              </h3>
-              <p
-                className='text-[#ABABAB] text-xs leading-relaxed'
-                style={{ fontFamily: "Outfit, sans-serif" }}
-              >
-                {item.desc}
-              </p>
+                <CardContent sx={{ p: 4 }}>
+                  <Box
+                    className='card-icon-wrap'
+                    sx={{
+                      width: 40,
+                      height: 40,
+                      background: "rgba(201,168,76,0.08)",
+                      border: "1px solid rgba(201,168,76,0.2)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      mb: 2.5,
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    <item.Icon sx={{ color: "#C9A84C", fontSize: 18 }} />
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "0.85rem",
+                      color: "#F0EAD6",
+                      mb: 1,
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    sx={{ color: "#ABABAB", lineHeight: 1.6 }}
+                  >
+                    {item.desc}
+                  </Typography>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Container>
+    </Box>
   );
 }

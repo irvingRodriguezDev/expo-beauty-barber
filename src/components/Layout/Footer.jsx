@@ -1,126 +1,176 @@
-import { Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
+import { Box, Container, Typography, Divider, IconButton } from "@mui/material";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 export default function Footer() {
   return (
-    <footer className='bg-[#0A0A0A] border-t border-white/5 pt-16 pb-8'>
-      <div className='container-site'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-12 mb-12'>
+    <Box
+      component='footer'
+      sx={{
+        background: "#0A0A0A",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        pt: 10,
+        pb: 4,
+      }}
+    >
+      <Container maxWidth={false}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+            gap: 6,
+            mb: 8,
+          }}
+        >
           {/* Brand */}
-          <div>
-            <h3
-              className='text-3xl text-gradient-gold mb-3'
-              style={{
-                fontFamily: "Bebas Neue, sans-serif",
-                letterSpacing: "0.1em",
+          <Box>
+            <Typography
+              sx={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "1.8rem",
+                letterSpacing: "0.08em",
+                background:
+                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                lineHeight: 1.1,
+                mb: 1.5,
               }}
             >
               Expo Beauty
               <br />& Barber Emprende
-            </h3>
-            <p
-              className='text-[#888] text-sm leading-relaxed'
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
+            </Typography>
+            <Typography variant='body2' sx={{ color: "#777", lineHeight: 1.7 }}>
               El punto de encuentro para la industria de la belleza, barbería y
               maquillaje en México.
-            </p>
-            <p
-              className='text-[#555] text-xs mt-4 tracking-widest uppercase'
-              style={{ fontFamily: "Outfit, sans-serif" }}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Outfit', sans-serif",
+                fontSize: "0.65rem",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "#444",
+                mt: 2,
+              }}
             >
               Organizado por Publicidad Mahur
-            </p>
-          </div>
+            </Typography>
+          </Box>
 
           {/* Contacto */}
-          <div>
-            <h4
-              className='text-[#C9A84C] text-xs tracking-[0.3em] uppercase mb-6'
-              style={{ fontFamily: "Outfit, sans-serif", fontWeight: 600 }}
-            >
+          <Box>
+            <Typography variant='overline' display='block' sx={{ mb: 3 }}>
               Contacto
-            </h4>
-            <ul className='space-y-3'>
-              <li
-                className='flex items-center gap-3 text-[#888] text-sm'
-                style={{ fontFamily: "Outfit, sans-serif" }}
+            </Typography>
+            {[
+              { Icon: EmailIcon, text: "contacto@expobeautybarber.com" },
+              { Icon: PhoneIcon, text: "WhatsApp Ventas" },
+              {
+                Icon: LocationOnIcon,
+                text: "WTC Ciudad de México\nMontecito 38, Nápoles",
+              },
+            ].map(({ Icon, text }, i) => (
+              <Box
+                key={i}
+                sx={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 1.5,
+                  mb: 2,
+                }}
               >
-                <Mail size={14} className='text-[#C9A84C] shrink-0' />
-                contacto@expobeautybarber.com
-              </li>
-              <li
-                className='flex items-center gap-3 text-[#888] text-sm'
-                style={{ fontFamily: "Outfit, sans-serif" }}
-              >
-                <Phone size={14} className='text-[#C9A84C] shrink-0' />
-                WhatsApp Ventas
-              </li>
-              <li
-                className='flex items-start gap-3 text-[#888] text-sm'
-                style={{ fontFamily: "Outfit, sans-serif" }}
-              >
-                <MapPin size={14} className='text-[#C9A84C] shrink-0 mt-0.5' />
-                WTC Ciudad de México
-                <br />
-                Montecito 38, Nápoles
-              </li>
-            </ul>
-          </div>
+                <Icon
+                  sx={{
+                    color: "#C9A84C",
+                    fontSize: 16,
+                    mt: 0.3,
+                    flexShrink: 0,
+                  }}
+                />
+                <Typography variant='body2' sx={{ whiteSpace: "pre-line" }}>
+                  {text}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
 
-          {/* Sede */}
-          <div>
-            <h4
-              className='text-[#C9A84C] text-xs tracking-[0.3em] uppercase mb-6'
-              style={{ fontFamily: "Outfit, sans-serif", fontWeight: 600 }}
-            >
+          {/* Fecha */}
+          <Box>
+            <Typography variant='overline' display='block' sx={{ mb: 3 }}>
               Fecha y sede
-            </h4>
-            <p
-              className='text-5xl text-[#F5F0E8] leading-none mb-2'
-              style={{ fontFamily: "Bebas Neue, sans-serif" }}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "5rem",
+                color: "#F5F0E8",
+                lineHeight: 0.9,
+                mb: 0.5,
+              }}
             >
               14–16
-            </p>
-            <p
-              className='text-lg text-[#888] tracking-widest uppercase'
-              style={{ fontFamily: "Bebas Neue, sans-serif" }}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "1.5rem",
+                color: "#E8407A",
+                letterSpacing: "0.1em",
+              }}
             >
               Marzo 2026
-            </p>
-            <div className='flex gap-4 mt-6'>
-              <a
-                href='#'
-                className='w-8 h-8 border border-white/10 flex items-center justify-center text-[#888] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all'
-              >
-                <Instagram size={14} />
-              </a>
-              <a
-                href='#'
-                className='w-8 h-8 border border-white/10 flex items-center justify-center text-[#888] hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all'
-              >
-                <Facebook size={14} />
-              </a>
-            </div>
-          </div>
-        </div>
+            </Typography>
+            <Box sx={{ display: "flex", gap: 1, mt: 3 }}>
+              {[InstagramIcon, FacebookIcon].map((Icon, i) => (
+                <IconButton
+                  key={i}
+                  size='small'
+                  sx={{
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: 0,
+                    color: "#777",
+                    "&:hover": { borderColor: "#C9A84C", color: "#C9A84C" },
+                  }}
+                >
+                  <Icon sx={{ fontSize: 16 }} />
+                </IconButton>
+              ))}
+            </Box>
+          </Box>
+        </Box>
 
-        {/* Bottom bar */}
-        <div className='border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4'>
-          <p
-            className='text-[#444] text-xs'
-            style={{ fontFamily: "Outfit, sans-serif" }}
-          >
+        <Divider />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            pt: 3,
+            flexWrap: "wrap",
+            gap: 2,
+          }}
+        >
+          <Typography variant='caption'>
             © 2026 Expo Beauty & Barber Emprende. Todos los derechos reservados.
-          </p>
-          <a
+          </Typography>
+          <Typography
+            component='a'
             href='#'
-            className='text-[#444] text-xs hover:text-[#888] transition-colors'
-            style={{ fontFamily: "Outfit, sans-serif" }}
+            variant='caption'
+            sx={{
+              color: "#444",
+              textDecoration: "none",
+              "&:hover": { color: "#777" },
+            }}
           >
             Política de Privacidad
-          </a>
-        </div>
-      </div>
-    </footer>
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 }

@@ -1,88 +1,162 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Box, Container, Typography } from "@mui/material";
 
 export default function AboutEvent() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
+    <Box
       ref={ref}
-      className='py-32 bg-[#0D0D0D] border-t border-white/8 relative'
+      component='section'
+      sx={{
+        py: 16,
+        background: "#0D0D0D",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        position: "relative",
+      }}
     >
-      <div className='absolute top-0 left-0 w-32 h-px bg-gradient-to-r from-[#C9A84C] to-transparent' />
-      <div className='container-site'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 120,
+          height: "1px",
+          background: "linear-gradient(90deg, #C9A84C, transparent)",
+        }}
+      />
+      <Container maxWidth={false}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+            gap: 10,
+            alignItems: "center",
+          }}
+        >
           {/* Text */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p
-              className='text-[#C9A84C] text-xs tracking-[0.35em] uppercase mb-4'
-              style={{ fontFamily: "Outfit, sans-serif", fontWeight: 600 }}
-            >
+            <Typography variant='overline' display='block' sx={{ mb: 2 }}>
               Sobre el evento
-            </p>
-            <h2
-              className='text-[clamp(2.5rem,5vw,4.5rem)] leading-tight text-[#F5F0E8] mb-6'
-              style={{
-                fontFamily: "Bebas Neue, sans-serif",
-                letterSpacing: "0.02em",
+            </Typography>
+            <Typography
+              variant='h2'
+              sx={{
+                fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
+                color: "#F5F0E8",
+                mb: 1,
               }}
             >
               Donde la industria
-              <br />
-              <span className='text-gradient-gold'>se encuentra</span>
-            </h2>
-            <div className='section-divider mb-8' />
-            <p
-              className='text-[#ABABAB] text-base leading-relaxed mb-4'
-              style={{ fontFamily: "Outfit, sans-serif" }}
+            </Typography>
+            <Typography
+              variant='h2'
+              sx={{
+                fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
+                background:
+                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                mb: 3,
+              }}
             >
+              se encuentra
+            </Typography>
+            <Box
+              sx={{
+                width: 60,
+                height: 3,
+                background: "linear-gradient(90deg, #C9A84C, #E8407A)",
+                mb: 4,
+              }}
+            />
+            <Typography variant='body1' sx={{ mb: 2 }}>
               Expo Beauty & Barber Emprende reúne a{" "}
-              <span className='text-[#F5F0E8]'>
+              <Box component='span' sx={{ color: "#F5F0E8", fontWeight: 600 }}>
                 marcas, emprendedores y profesionales
-              </span>{" "}
+              </Box>{" "}
               del sector belleza para generar relaciones comerciales,
               posicionamiento de marca y nuevas oportunidades de negocio.
-            </p>
-            <p
-              className='text-[#777] text-sm leading-relaxed'
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              El evento es organizado por{" "}
-              <span className='text-[#ABABAB]'>Publicidad Mahur</span>, empresa
-              con más de{" "}
-              <span className='text-[#C9A84C]'>15 años de experiencia</span> en
-              la organización de exposiciones comerciales.
-            </p>
+            </Typography>
+            <Typography variant='body2' sx={{ color: "#777" }}>
+              Organizado por{" "}
+              <Box component='span' sx={{ color: "#ABABAB" }}>
+                Publicidad Mahur
+              </Box>
+              , empresa con más de{" "}
+              <Box component='span' sx={{ color: "#C9A84C" }}>
+                15 años de experiencia
+              </Box>{" "}
+              en la organización de exposiciones comerciales.
+            </Typography>
           </motion.div>
 
-          {/* Image placeholder */}
+          {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className='relative'
+            style={{ position: "relative" }}
           >
-            <div className='aspect-[4/3] bg-[#1A1A1A] overflow-hidden relative'>
-              {/* Replace with real image */}
-              <img
+            <Box
+              sx={{
+                aspectRatio: "4/3",
+                overflow: "hidden",
+                position: "relative",
+                background: "#1A1A1A",
+              }}
+            >
+              <Box
+                component='img'
                 src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=80'
                 alt='Expo'
-                className='w-full h-full object-cover opacity-70'
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: 0.75,
+                }}
               />
-              <div className='absolute inset-0 bg-gradient-to-tr from-[#0A0A0A]/60 to-transparent' />
-            </div>
-            {/* Decorative accent */}
-            <div className='absolute -bottom-4 -right-4 w-24 h-24 border-2 border-[#C9A84C]/30 -z-10' />
-            <div className='absolute -top-4 -left-4 w-16 h-16 border border-[#E8407A]/20 -z-10' />
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top right, rgba(10,10,10,0.6), transparent)",
+                }}
+              />
+            </Box>
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: -12,
+                right: -12,
+                width: 80,
+                height: 80,
+                border: "2px solid rgba(201,168,76,0.25)",
+                zIndex: -1,
+              }}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: -12,
+                left: -12,
+                width: 56,
+                height: 56,
+                border: "1px solid rgba(232,64,122,0.2)",
+                zIndex: -1,
+              }}
+            />
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Container>
+    </Box>
   );
 }
