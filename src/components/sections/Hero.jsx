@@ -53,7 +53,7 @@ export default function Hero() {
             inset: 0,
             opacity: 0.025,
             backgroundImage:
-              "linear-gradient(#C9A84C 1px, transparent 1px), linear-gradient(90deg, #C9A84C 1px, transparent 1px)",
+              "linear-gradient(#E040A0 1px, transparent 1px), linear-gradient(90deg, #E040A0 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }}
         />
@@ -63,7 +63,7 @@ export default function Hero() {
       <Box sx={{ position: "absolute", inset: 0 }}>
         <Box
           component='img'
-          src='https://images.unsplash.com/photo-1582095133179-bfd08e2fb6b8?w=1600&q=80'
+          src='https://images.unsplash.com/photo-1566833963559-bfbbacad87e5?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           alt=''
           sx={{
             width: "100%",
@@ -125,7 +125,7 @@ export default function Hero() {
                 fontWeight: 600,
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
-                color: "#C9A84C",
+                color: "#E040A0",
               }}
             >
               Edición 2026
@@ -159,7 +159,7 @@ export default function Hero() {
               sx={{
                 fontSize: "clamp(3rem, 10vw, 9rem)",
                 background:
-                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -199,7 +199,7 @@ export default function Hero() {
             {[
               {
                 icon: (
-                  <CalendarMonthIcon sx={{ fontSize: 14, color: "#C9A84C" }} />
+                  <CalendarMonthIcon sx={{ fontSize: 14, color: "#E040A0" }} />
                 ),
                 text: "14, 15 y 16 de Marzo 2026",
               },
@@ -297,7 +297,7 @@ export default function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <KeyboardArrowDownIcon sx={{ color: "#C9A84C", fontSize: 18 }} />
+          <KeyboardArrowDownIcon sx={{ color: "#E040A0", fontSize: 18 }} />
         </motion.div>
       </motion.div>
     </Box>

@@ -96,7 +96,7 @@ Coloca tus imágenes en `public/images/` y referencia como `/images/foto.jpg`
 
 | Variable     | Valor     | Uso                |
 | ------------ | --------- | ------------------ |
-| `gold`       | `#C9A84C` | Acento principal   |
+| `gold`       | `#E040A0` | Acento principal   |
 | `gold-light` | `#E8C96A` | Hover estados      |
 | `rose`       | `#E8407A` | Sección visitantes |
 | `dark`       | `#0A0A0A` | Fondo base         |

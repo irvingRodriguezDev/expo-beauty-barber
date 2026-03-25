@@ -1,10 +1,11 @@
 import { Box, Container, Typography, Divider, IconButton } from "@mui/material";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from "@mui/icons-material/Email";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
 
+import LogoRosa from "../../assets/logolargorosa.png";
+import MailIcon from "../icons/MailIcon";
+import PhoneIcon from "../icons/PhoneIcon";
+import LocationIcon from "../icons/LocationIcon";
+import FacebookIcon from "../icons/FacebookIcon";
+import InstagramIcon from "../icons/InstagramIcon";
 export default function Footer() {
   return (
     <Box
@@ -27,13 +28,13 @@ export default function Footer() {
         >
           {/* Brand */}
           <Box>
-            <Typography
+            {/* <Typography
               sx={{
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "1.8rem",
                 letterSpacing: "0.08em",
                 background:
-                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 lineHeight: 1.1,
@@ -42,7 +43,8 @@ export default function Footer() {
             >
               Expo Beauty
               <br />& Barber Emprende
-            </Typography>
+            </Typography> */}
+            <img src={LogoRosa} width='100%' />
             <Typography variant='body2' sx={{ color: "#777", lineHeight: 1.7 }}>
               El punto de encuentro para la industria de la belleza, barbería y
               maquillaje en México.
@@ -67,10 +69,13 @@ export default function Footer() {
               Contacto
             </Typography>
             {[
-              { Icon: EmailIcon, text: "contacto@expobeautybarber.com" },
-              { Icon: PhoneIcon, text: "WhatsApp Ventas" },
               {
-                Icon: LocationOnIcon,
+                Icon: <MailIcon width={40} />,
+                text: "contacto@expobeautybarber.com",
+              },
+              { Icon: <PhoneIcon width={40} />, text: "WhatsApp Ventas" },
+              {
+                Icon: <LocationIcon width={40} />,
                 text: "WTC Ciudad de México\nMontecito 38, Nápoles",
               },
             ].map(({ Icon, text }, i) => (
@@ -83,14 +88,7 @@ export default function Footer() {
                   mb: 2,
                 }}
               >
-                <Icon
-                  sx={{
-                    color: "#C9A84C",
-                    fontSize: 16,
-                    mt: 0.3,
-                    flexShrink: 0,
-                  }}
-                />
+                {Icon}
                 <Typography variant='body2' sx={{ whiteSpace: "pre-line" }}>
                   {text}
                 </Typography>
@@ -125,20 +123,8 @@ export default function Footer() {
               Marzo 2026
             </Typography>
             <Box sx={{ display: "flex", gap: 1, mt: 3 }}>
-              {[InstagramIcon, FacebookIcon].map((Icon, i) => (
-                <IconButton
-                  key={i}
-                  size='small'
-                  sx={{
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: 0,
-                    color: "#777",
-                    "&:hover": { borderColor: "#C9A84C", color: "#C9A84C" },
-                  }}
-                >
-                  <Icon sx={{ fontSize: 16 }} />
-                </IconButton>
-              ))}
+              <InstagramIcon width={40} />
+              <FacebookIcon width={40} />
             </Box>
           </Box>
         </Box>

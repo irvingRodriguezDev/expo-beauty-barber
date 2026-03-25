@@ -125,7 +125,7 @@ export default function Contact() {
               sx={{
                 fontSize: "clamp(2.2rem, 4vw, 4rem)",
                 background:
-                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 mb: 3,
@@ -137,7 +137,7 @@ export default function Contact() {
               sx={{
                 width: 60,
                 height: 3,
-                background: "linear-gradient(90deg, #C9A84C, #E8407A)",
+                background: "linear-gradient(90deg, #E040A0, #E8407A)",
                 mb: 4,
               }}
             />
@@ -153,7 +153,7 @@ export default function Contact() {
                 label: "Email",
                 value: CONTACT_EMAIL,
                 href: `mailto:${CONTACT_EMAIL}`,
-                color: "#C9A84C",
+                color: "#E040A0",
               },
               {
                 Icon: WhatsAppIcon,
@@ -236,7 +236,7 @@ export default function Contact() {
                 }}
               >
                 <CheckCircleOutlineIcon
-                  sx={{ color: "#C9A84C", fontSize: 48, mb: 3 }}
+                  sx={{ color: "#E040A0", fontSize: 48, mb: 3 }}
                 />
                 <Typography
                   variant='h3'

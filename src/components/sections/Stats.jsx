@@ -93,7 +93,7 @@ export default function Stats() {
                     fontSize: "clamp(3rem, 6vw, 5.5rem)",
                     lineHeight: 1,
                     background:
-                      "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                      "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     mb: 1,

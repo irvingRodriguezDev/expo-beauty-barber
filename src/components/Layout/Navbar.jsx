@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AppBar, Box, Container, IconButton, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
+import LogoRosa from "../../assets/logolargorosa.png";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
   { label: "Visitantes", to: "visitantes" },
@@ -65,31 +65,7 @@ export default function Navbar() {
                 onClick={() => scrollTo("inicio")}
                 sx={{ cursor: "pointer", lineHeight: 1 }}
               >
-                <Typography
-                  sx={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "1.4rem",
-                    letterSpacing: "0.12em",
-                    background:
-                      "linear-gradient(135deg, #C9A84C 0%, #E8C96A 50%, #C9A84C 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    lineHeight: 1.1,
-                  }}
-                >
-                  EXPO BEAUTY
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "0.6rem",
-                    letterSpacing: "0.25em",
-                    color: "#666",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  & Barber Emprende 2026
-                </Typography>
+                <img src={LogoRosa} width='100%' height={150} />
               </Box>
 
               {/* Desktop nav */}
@@ -114,7 +90,7 @@ export default function Navbar() {
                         fontWeight: 500,
                         letterSpacing: "0.2em",
                         textTransform: "uppercase",
-                        color: active === link.to ? "#C9A84C" : "#ABABAB",
+                        color: active === link.to ? "#E040A0" : "#ABABAB",
                         transition: "color 0.2s",
                         p: 0,
                         "&:hover": { color: "#F5F0E8" },
@@ -131,7 +107,7 @@ export default function Navbar() {
                           left: 0,
                           right: 0,
                           height: "1px",
-                          background: "#C9A84C",
+                          background: "#E040A0",
                         }}
                       />
                     )}
@@ -144,18 +120,18 @@ export default function Navbar() {
                   onClick={() => scrollTo("contacto")}
                   sx={{
                     background: "none",
-                    border: "1px solid #C9A84C",
+                    border: "1px solid #E040A0",
                     cursor: "pointer",
                     fontFamily: "'Outfit', sans-serif",
                     fontSize: "0.65rem",
                     fontWeight: 600,
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    color: "#C9A84C",
+                    color: "#E040A0",
                     px: 2.5,
                     py: 1,
                     transition: "all 0.2s",
-                    "&:hover": { background: "#C9A84C", color: "#0A0A0A" },
+                    "&:hover": { background: "#E040A0", color: "#0A0A0A" },
                   }}
                 >
                   Quiero exponer
@@ -214,7 +190,7 @@ export default function Navbar() {
                     fontSize: "3rem",
                     letterSpacing: "0.08em",
                     color: "#F5F0E8",
-                    "&:hover": { color: "#C9A84C" },
+                    "&:hover": { color: "#E040A0" },
                     transition: "color 0.2s",
                   }}
                 >
@@ -234,7 +210,7 @@ export default function Navbar() {
                   setMenuOpen(false);
                 }}
                 sx={{
-                  background: "#C9A84C",
+                  background: "#E040A0",
                   border: "none",
                   cursor: "pointer",
                   fontFamily: "'Outfit', sans-serif",

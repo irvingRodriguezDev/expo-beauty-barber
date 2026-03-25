@@ -57,7 +57,7 @@ function downloadQR(code) {
     ctx.fillRect(0, 0, 400, 500);
     // Gold top bar
     const grad = ctx.createLinearGradient(0, 0, 400, 0);
-    grad.addColorStop(0, "#C9A84C");
+    grad.addColorStop(0, "#E040A0");
     grad.addColorStop(1, "#E8C96A");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 400, 6);
@@ -72,7 +72,7 @@ function downloadQR(code) {
     ctx.font = "13px sans-serif";
     ctx.fillText("14, 15 y 16 de Marzo 2026 · WTC CDMX", 200, 355);
     // Code
-    ctx.fillStyle = "#C9A84C";
+    ctx.fillStyle = "#E040A0";
     ctx.font = "bold 22px monospace";
     ctx.fillText(code, 200, 405);
     ctx.fillStyle = "#555";
@@ -372,7 +372,7 @@ export default function Register() {
                         fontSize: "1.5rem",
                         fontWeight: 700,
                         letterSpacing: "0.15em",
-                        color: "#C9A84C",
+                        color: "#E040A0",
                       }}
                     >
                       {registration.code}

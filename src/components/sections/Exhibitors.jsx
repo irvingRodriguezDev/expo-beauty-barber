@@ -107,7 +107,7 @@ export default function Exhibitors() {
                 sx={{
                   fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
                   background:
-                    "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                    "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -166,7 +166,7 @@ export default function Exhibitors() {
                       transition: "all 0.3s ease",
                     }}
                   >
-                    <b.Icon sx={{ color: "#C9A84C", fontSize: 20 }} />
+                    <b.Icon sx={{ color: "#E040A0", fontSize: 20 }} />
                   </Box>
                   <Typography
                     sx={{
@@ -224,7 +224,7 @@ export default function Exhibitors() {
                     width: 4,
                     height: 4,
                     borderRadius: "50%",
-                    background: "#C9A84C",
+                    background: "#E040A0",
                     flexShrink: 0,
                   }}
                 />

@@ -74,7 +74,7 @@ export default function Highlights() {
           inset: 0,
           opacity: 0.015,
           backgroundImage:
-            "linear-gradient(#C9A84C 1px, transparent 1px), linear-gradient(90deg, #C9A84C 1px, transparent 1px)",
+            "linear-gradient(#E040A0 1px, transparent 1px), linear-gradient(90deg, #E040A0 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -136,7 +136,7 @@ export default function Highlights() {
                       transition: "all 0.3s ease",
                     }}
                   >
-                    <item.Icon sx={{ color: "#C9A84C", fontSize: 18 }} />
+                    <item.Icon sx={{ color: "#E040A0", fontSize: 18 }} />
                   </Box>
                   <Typography
                     sx={{

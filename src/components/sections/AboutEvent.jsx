@@ -24,7 +24,7 @@ export default function AboutEvent() {
           left: 0,
           width: 120,
           height: "1px",
-          background: "linear-gradient(90deg, #C9A84C, transparent)",
+          background: "linear-gradient(90deg, #E040A0, transparent)",
         }}
       />
       <Container maxWidth={false}>
@@ -60,7 +60,7 @@ export default function AboutEvent() {
               sx={{
                 fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
                 background:
-                  "linear-gradient(135deg, #C9A84C, #E8C96A, #C9A84C)",
+                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 mb: 3,
@@ -72,7 +72,7 @@ export default function AboutEvent() {
               sx={{
                 width: 60,
                 height: 3,
-                background: "linear-gradient(90deg, #C9A84C, #E8407A)",
+                background: "linear-gradient(90deg, #E040A0, #E8407A)",
                 mb: 4,
               }}
             />
@@ -90,7 +90,7 @@ export default function AboutEvent() {
                 Publicidad Mahur
               </Box>
               , empresa con más de{" "}
-              <Box component='span' sx={{ color: "#C9A84C" }}>
+              <Box component='span' sx={{ color: "#E040A0" }}>
                 15 años de experiencia
               </Box>{" "}
               en la organización de exposiciones comerciales.

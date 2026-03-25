@@ -112,7 +112,7 @@ export default function MapSection() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 0.5,
-                color: "#C9A84C",
+                color: "#E040A0",
                 fontSize: "0.7rem",
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 500,
