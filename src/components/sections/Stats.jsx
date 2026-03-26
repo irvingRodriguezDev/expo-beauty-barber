@@ -6,7 +6,7 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
-import { Box, Container, Typography, Divider } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 function Counter({ to, suffix = "" }) {
   const ref = useRef(null);
@@ -16,60 +16,82 @@ function Counter({ to, suffix = "" }) {
 
   useEffect(() => {
     if (inView) {
-      const controls = animate(count, to, { duration: 2, ease: "easeOut" });
-      return controls.stop;
+      const c = animate(count, to, { duration: 3, ease: [0.16, 1, 0.3, 1] });
+      return c.stop;
     }
   }, [inView, to]);
 
   return (
-    <span ref={ref}>
+    <Box
+      component='span'
+      ref={ref}
+      sx={{ display: "inline-flex", alignItems: "baseline" }}
+    >
       <motion.span>{rounded}</motion.span>
-      {suffix}
-    </span>
+      <Box
+        component='span'
+        sx={{
+          color: "#eb188cff",
+          ml: 1,
+          fontSize: "0.4em",
+          fontWeight: 400,
+          opacity: 0.8,
+        }}
+      >
+        {suffix}
+      </Box>
+    </Box>
   );
 }
 
 const stats = [
-  { value: 5000, suffix: "+", label: "Visitantes estimados" },
-  { value: 3, suffix: "", label: "Días de actividades" },
-  { value: 50, suffix: "+", label: "Marcas participantes" },
-  { value: 20, suffix: "+", label: "Demos y talleres" },
+  { value: 5000, suffix: "+", label: "AUDIENCIA \n ESTIMADA" },
+  { value: 3, suffix: "DÍAS", label: "EXPERIENCIA \n CURADA" },
+  { value: 50, suffix: "+", label: "MARCAS \n EXHIBIDORAS" },
+  { value: 20, suffix: "+", label: "PONENTES \n INTERNACIONALES" },
 ];
 
 export default function Stats() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <Box
       ref={ref}
       component='section'
       sx={{
-        py: 12,
-        background: "#0D0D0D",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        py: { xs: 12, md: 18 },
+        // REGRESO AL ROSADO: Usamos el mismo tono base del Hero para total conexión
+        background: "linear-gradient(180deg, #FDF2F8 0%, #FCE7F3 100%)",
         position: "relative",
         overflow: "hidden",
       }}
     >
+      {/* Decoración: Resplandor rosa vibrante para dar profundidad */}
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "1px",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "120%",
+          height: "120%",
           background:
-            "linear-gradient(90deg, transparent, rgba(232,64,122,0.4), transparent)",
+            "radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 60%)",
+          pointerEvents: "none",
         }}
       />
-      <Container maxWidth={false}>
+
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "repeat(2,1fr)", md: "repeat(4,1fr)" },
-            gap: 0,
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(4, 1fr)",
+            },
+            gap: { xs: 8, md: 0 },
           }}
         >
           {stats.map((stat, i) => (
@@ -77,38 +99,54 @@ export default function Stats() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              transition={{ duration: 1, delay: i * 0.15 }}
             >
               <Box
                 sx={{
                   textAlign: "center",
-                  px: 4,
-                  borderRight:
-                    i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                  px: 2,
+                  position: "relative",
+                  // Separadores ultra finos en color rosa oscuro
+                  "&:not(:last-child)::after": {
+                    content: { xs: "none", md: '""' },
+                    position: "absolute",
+                    right: 0,
+                    top: "20%",
+                    height: "60%",
+                    width: "1px",
+                    background:
+                      "linear-gradient(to bottom, transparent, rgba(190, 24, 93, 0.15), transparent)",
+                  },
                 }}
               >
                 <Typography
                   sx={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "clamp(3rem, 6vw, 5.5rem)",
+                    fontFamily: "'Syne', sans-serif",
+                    fontWeight: 800,
+                    fontSize: { xs: "3.5rem", md: "4.5rem", lg: "5.8rem" },
                     lineHeight: 1,
-                    background:
-                      "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    mb: 1,
+                    // Color Borgoña para legibilidad sobre el rosa
+                    color: "#2D0A1A",
+                    mb: 2,
+                    letterSpacing: "-0.04em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "baseline",
                   }}
                 >
                   <Counter to={stat.value} suffix={stat.suffix} />
                 </Typography>
+
                 <Typography
                   sx={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "0.65rem",
-                    fontWeight: 500,
-                    letterSpacing: "0.2em",
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: "0.75rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.4em", // Mucho espacio entre letras (Top Brand style)
                     textTransform: "uppercase",
-                    color: "#666",
+                    color: "#BE185D", // Rosa vibrante para los labels
+                    whiteSpace: "pre-line",
+                    lineHeight: 1.6,
                   }}
                 >
                   {stat.label}
@@ -118,17 +156,6 @@ export default function Stats() {
           ))}
         </Box>
       </Container>
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "1px",
-          background:
-            "linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent)",
-        }}
-      />
     </Box>
   );
 }

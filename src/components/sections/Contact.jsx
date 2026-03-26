@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   Box,
   Container,
@@ -7,38 +7,35 @@ import {
   TextField,
   Button,
   MenuItem,
+  Stack,
+  CircularProgress,
   Paper,
 } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
 import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import SendIcon from "@mui/icons-material/Send";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useForm, Controller } from "react-hook-form";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-// ─── CONFIG ──────────────────────────────────────────────────────────────────
 const WHATSAPP_NUMBER = "521XXXXXXXXXX";
 const CONTACT_EMAIL = "contacto@expobeautybarber.com";
-const EMAILJS_SERVICE_ID = "";
-const EMAILJS_TEMPLATE_ID = "";
-const EMAILJS_PUBLIC_KEY = "";
-// ─────────────────────────────────────────────────────────────────────────────
 
 const productTypes = [
-  "Productos capilares",
-  "Barbería",
-  "Maquillaje",
-  "Uñas",
-  "Estética",
-  "Equipos y mobiliario",
-  "Academia / Educación",
+  "Productos Capilares",
+  "Barbería Profesional",
+  "Maquillaje & Color",
+  "Nails & Care",
+  "Aparatología / Estética",
+  "Mobiliario de Lujo",
+  "Educación / Academia",
   "Otro",
 ];
 
 export default function Contact() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
   const [status, setStatus] = useState("idle");
+
   const {
     register,
     handleSubmit,
@@ -48,327 +45,397 @@ export default function Contact() {
   } = useForm();
 
   const buildWaMessage = (d) =>
-    `Hola, me interesa exponer en Expo Beauty & Barber 2026.%0A%0A*Nombre:* ${d.nombre}%0A*Empresa:* ${d.empresa}%0A*Teléfono:* ${d.telefono}%0A*Email:* ${d.email}%0A*Tipo de producto:* ${d.tipo_producto}`;
+    `Hola, solicito información comercial para Expo Beauty & Barber 2027.%0A%0A*Marca:* ${d.empresa}%0A*Interés:* ${d.tipo_producto}`;
 
   const onSubmit = async (data) => {
     setStatus("sending");
-    if (EMAILJS_SERVICE_ID) {
-      try {
-        const emailjs = await import("@emailjs/browser");
-        await emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          {
-            from_name: data.nombre,
-            empresa: data.empresa,
-            telefono: data.telefono,
-            reply_to: data.email,
-            tipo_producto: data.tipo_producto,
-            mensaje: data.mensaje || "",
-          },
-          EMAILJS_PUBLIC_KEY,
-        );
-        setStatus("success");
-        reset();
-        return;
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${buildWaMessage(data)}`,
-      "_blank",
-    );
-    setStatus("success");
-    reset();
+    setTimeout(() => {
+      window.open(
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${buildWaMessage(data)}`,
+        "_blank",
+      );
+      setStatus("success");
+      reset();
+    }, 1500);
   };
 
   return (
     <Box
       ref={ref}
       component='section'
+      id='contacto'
       sx={{
-        py: 16,
-        background: "#0D0D0D",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        py: { xs: 12, md: 20 },
+        // REGRESO AL ROSADO DE MARCA
+        background: "linear-gradient(180deg, #FDF2F8 0%, #FCE7F3 100%)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <Container maxWidth={false}>
+      {/* Decoración de fondo (Aura rosa) */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: "20%",
+          left: "-10%",
+          width: 600,
+          height: 600,
+          background:
+            "radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%)",
+          zIndex: 0,
+        }}
+      />
+
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: 10,
+            gridTemplateColumns: { xs: "1fr", lg: "0.8fr 1.2fr" },
+            gap: { xs: 8, lg: 15 },
+            alignItems: "center",
           }}
         >
-          {/* Left */}
+          {/* Lado Izquierdo: Copy Editorial */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8 }}
           >
-            <Typography variant='overline' display='block' sx={{ mb: 2 }}>
-              Contacto
-            </Typography>
             <Typography
-              variant='h2'
               sx={{
-                fontSize: "clamp(2.2rem, 4vw, 4rem)",
-                color: "#F5F0E8",
-                mb: 0.5,
-              }}
-            >
-              Solicita información
-            </Typography>
-            <Typography
-              variant='h2'
-              sx={{
-                fontSize: "clamp(2.2rem, 4vw, 4rem)",
-                background:
-                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontFamily: "'DM Sans'",
+                fontSize: "0.75rem",
+                fontWeight: 900,
+                letterSpacing: "0.5em",
+                color: "#BE185D",
                 mb: 3,
               }}
             >
-              para exponer
+              NEGOCIOS E IMPULSO
             </Typography>
-            <Box
+            <Typography
+              variant='h2'
               sx={{
-                width: 60,
-                height: 3,
-                background: "linear-gradient(90deg, #E040A0, #E8407A)",
+                fontFamily: "'Syne', sans-serif",
+                fontSize: { xs: "3.5rem", md: "5rem" },
+                fontWeight: 800,
+                color: "#2D0A1A",
+                lineHeight: 1,
                 mb: 4,
+                letterSpacing: "-0.02em",
               }}
-            />
-            <Typography variant='body1' sx={{ mb: 6, maxWidth: 420 }}>
-              Completa el formulario y un asesor te contactará en menos de 24
-              horas con toda la información de paquetes y disponibilidad de
-              stands.
+            >
+              Hablemos de tu <br />
+              <span className='gradient-text'>visibilidad</span>
             </Typography>
 
-            {[
-              {
-                Icon: EmailIcon,
-                label: "Email",
-                value: CONTACT_EMAIL,
-                href: `mailto:${CONTACT_EMAIL}`,
-                color: "#E040A0",
-              },
-              {
-                Icon: WhatsAppIcon,
-                label: "WhatsApp",
-                value: "Ventas directas",
-                href: `https://wa.me/${WHATSAPP_NUMBER}`,
-                color: "#25D366",
-              },
-            ].map(({ Icon, label, value, href, color }, i) => (
-              <Box
-                key={i}
-                component='a'
-                href={href}
-                target='_blank'
-                rel='noopener noreferrer'
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  mb: 3,
-                  textDecoration: "none",
-                  "&:hover .contact-text": { color: "#F5F0E8" },
-                }}
-              >
+            <Typography
+              sx={{
+                color: "#552F3F",
+                fontSize: "1.1rem",
+                mb: 6,
+                maxWidth: 450,
+                lineHeight: 1.8,
+                opacity: 0.8,
+              }}
+            >
+              Diseñamos espacios que no solo exhiben, sino que venden. Deja tus
+              datos y un consultor senior te contactará personalmente.
+            </Typography>
+
+            <Stack spacing={4}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
                 <Box
                   sx={{
-                    width: 42,
-                    height: 42,
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    "&:hover": { borderColor: color },
+                    p: 2,
+                    bgcolor: "#FFF",
+                    color: "#EC4899",
+                    boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
                   }}
                 >
-                  <Icon sx={{ color, fontSize: 17 }} />
+                  <EmailIcon fontSize='small' />
                 </Box>
                 <Box>
                   <Typography
                     variant='caption'
                     sx={{
-                      color: "#555",
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      display: "block",
+                      letterSpacing: "0.3em",
+                      color: "#BE185D",
+                      fontWeight: 700,
                     }}
                   >
-                    {label}
+                    EMAIL
                   </Typography>
                   <Typography
-                    className='contact-text'
-                    variant='body2'
-                    sx={{ transition: "color 0.2s" }}
+                    sx={{
+                      fontFamily: "'Syne'",
+                      fontWeight: 800,
+                      color: "#2D0A1A",
+                    }}
                   >
-                    {value}
+                    {CONTACT_EMAIL}
                   </Typography>
                 </Box>
               </Box>
-            ))}
-          </motion.div>
 
-          {/* Right: form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {status === "success" ? (
-              <Paper
-                sx={{
-                  p: 8,
-                  textAlign: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  minHeight: 400,
-                }}
-              >
-                <CheckCircleOutlineIcon
-                  sx={{ color: "#E040A0", fontSize: 48, mb: 3 }}
-                />
-                <Typography
-                  variant='h3'
-                  sx={{ fontSize: "2rem", color: "#F5F0E8", mb: 1.5 }}
-                >
-                  ¡Mensaje enviado!
-                </Typography>
-                <Typography variant='body2' sx={{ mb: 4 }}>
-                  Un asesor te contactará pronto.
-                </Typography>
-                <Button
-                  variant='outlined'
-                  color='primary'
-                  size='small'
-                  onClick={() => setStatus("idle")}
-                >
-                  Enviar otro mensaje
-                </Button>
-              </Paper>
-            ) : (
-              <Paper
-                component='form'
-                onSubmit={handleSubmit(onSubmit)}
-                sx={{
-                  p: 5,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2.5,
-                }}
-              >
-                <TextField
-                  label='Nombre completo'
-                  fullWidth
-                  error={!!errors.nombre}
-                  helperText={errors.nombre ? "Campo requerido" : ""}
-                  {...register("nombre", { required: true })}
-                />
-                <TextField
-                  label='Empresa / Marca'
-                  fullWidth
-                  error={!!errors.empresa}
-                  helperText={errors.empresa ? "Campo requerido" : ""}
-                  {...register("empresa", { required: true })}
-                />
+              <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
                 <Box
                   sx={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: 2,
+                    p: 2,
+                    bgcolor: "#25D366",
+                    color: "#FFF",
+                    boxShadow: "0 10px 20px rgba(37, 211, 102, 0.2)",
                   }}
                 >
-                  <TextField
-                    label='Teléfono'
-                    fullWidth
-                    error={!!errors.telefono}
-                    {...register("telefono", { required: true })}
-                  />
-                  <TextField
-                    label='Email'
-                    type='email'
-                    fullWidth
-                    error={!!errors.email}
-                    {...register("email", {
-                      required: true,
-                      pattern: /^\S+@\S+\.\S+$/,
-                    })}
-                  />
+                  <WhatsAppIcon fontSize='small' />
                 </Box>
-                <Controller
-                  name='tipo_producto'
-                  control={control}
-                  rules={{ required: true }}
-                  defaultValue=''
-                  render={({ field }) => (
-                    <TextField
-                      select
-                      label='Tipo de producto / servicio'
-                      fullWidth
-                      error={!!errors.tipo_producto}
-                      {...field}
-                    >
-                      {productTypes.map((t) => (
-                        <MenuItem key={t} value={t}>
-                          {t}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  )}
-                />
-                <TextField
-                  label='Mensaje (opcional)'
-                  multiline
-                  rows={3}
-                  fullWidth
-                  {...register("mensaje")}
-                />
-                <Button
-                  type='submit'
-                  variant='contained'
-                  color='primary'
-                  size='large'
-                  fullWidth
-                  disabled={status === "sending"}
-                  endIcon={
-                    status === "sending" ? (
-                      <CircularProgress size={16} color='inherit' />
-                    ) : (
-                      <SendIcon />
-                    )
-                  }
-                  sx={{ mt: 1 }}
-                >
-                  {status === "sending"
-                    ? "Enviando..."
-                    : "Solicitar información"}
-                </Button>
-                <Typography
-                  variant='caption'
-                  sx={{ textAlign: "center", color: "#444" }}
-                >
-                  Al enviar aceptas nuestra{" "}
-                  <Box
-                    component='a'
-                    href='#'
-                    sx={{ color: "#666", "&:hover": { color: "#ABABAB" } }}
+                <Box>
+                  <Typography
+                    variant='caption'
+                    sx={{
+                      letterSpacing: "0.3em",
+                      color: "#128C7E",
+                      fontWeight: 700,
+                    }}
                   >
-                    Política de Privacidad
-                  </Box>
-                </Typography>
-              </Paper>
-            )}
+                    WHATSAPP BUSINESS
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Syne'",
+                      fontWeight: 800,
+                      color: "#2D0A1A",
+                    }}
+                  >
+                    +52 1 55 0000 0000
+                  </Typography>
+                </Box>
+              </Box>
+            </Stack>
           </motion.div>
+
+          {/* Lado Derecho: Formulario Estilo Glass Luxury */}
+          <Box sx={{ position: "relative" }}>
+            <AnimatePresence mode='wait'>
+              {status === "success" ? (
+                <motion.div
+                  key='success'
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Box
+                    sx={{
+                      p: 10,
+                      textAlign: "center",
+                      bgcolor: "rgba(45, 10, 26, 0.95)",
+                      color: "#FFF",
+                      backdropFilter: "blur(10px)",
+                      boxShadow: "0 50px 100px rgba(45, 10, 26, 0.2)",
+                    }}
+                  >
+                    <CheckCircleOutlineIcon
+                      sx={{ color: "#EC4899", fontSize: 60, mb: 3 }}
+                    />
+                    <Typography
+                      variant='h4'
+                      sx={{ fontFamily: "'Syne'", fontWeight: 800, mb: 2 }}
+                    >
+                      SOLICITUD ENVIADA
+                    </Typography>
+                    <Typography
+                      sx={{ opacity: 0.7, mb: 4, fontFamily: "'DM Sans'" }}
+                    >
+                      Un consultor te contactará en menos de 24 horas.
+                    </Typography>
+                    <Button
+                      onClick={() => setStatus("idle")}
+                      sx={{
+                        color: "#F9A8D4",
+                        fontFamily: "'Syne'",
+                        fontWeight: 800,
+                        letterSpacing: "0.2em",
+                      }}
+                    >
+                      VOLVER AL FORMULARIO
+                    </Button>
+                  </Box>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key='form'
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <Paper
+                    elevation={0}
+                    component='form'
+                    onSubmit={handleSubmit(onSubmit)}
+                    sx={{
+                      p: { xs: 5, md: 8 },
+                      background: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "blur(20px)",
+                      borderRadius: 0,
+                      border: "1px solid #FFF",
+                      boxShadow: "0 40px 100px rgba(190, 24, 93, 0.1)",
+                    }}
+                  >
+                    <Stack spacing={5}>
+                      <Box
+                        sx={{
+                          display: "grid",
+                          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                          gap: 5,
+                        }}
+                      >
+                        <TextField
+                          variant='standard'
+                          label='NOMBRE COMPLETO'
+                          fullWidth
+                          error={!!errors.nombre}
+                          {...register("nombre", { required: true })}
+                          sx={{
+                            "& .MuiInputLabel-root": {
+                              fontSize: "0.65rem",
+                              letterSpacing: "0.2em",
+                              fontWeight: 800,
+                              color: "#7D4A5F",
+                            },
+                          }}
+                        />
+                        <TextField
+                          variant='standard'
+                          label='EMPRESA'
+                          fullWidth
+                          error={!!errors.empresa}
+                          {...register("empresa", { required: true })}
+                          sx={{
+                            "& .MuiInputLabel-root": {
+                              fontSize: "0.65rem",
+                              letterSpacing: "0.2em",
+                              fontWeight: 800,
+                              color: "#7D4A5F",
+                            },
+                          }}
+                        />
+                      </Box>
+
+                      <Box
+                        sx={{
+                          display: "grid",
+                          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                          gap: 5,
+                        }}
+                      >
+                        <TextField
+                          variant='standard'
+                          label='TELÉFONO'
+                          fullWidth
+                          error={!!errors.telefono}
+                          {...register("telefono", { required: true })}
+                          sx={{
+                            "& .MuiInputLabel-root": {
+                              fontSize: "0.65rem",
+                              letterSpacing: "0.2em",
+                              fontWeight: 800,
+                              color: "#7D4A5F",
+                            },
+                          }}
+                        />
+                        <TextField
+                          variant='standard'
+                          label='EMAIL BUSINESS'
+                          type='email'
+                          fullWidth
+                          error={!!errors.email}
+                          {...register("email", {
+                            required: true,
+                            pattern: /^\S+@\S+\.\S+$/,
+                          })}
+                          sx={{
+                            "& .MuiInputLabel-root": {
+                              fontSize: "0.65rem",
+                              letterSpacing: "0.2em",
+                              fontWeight: 800,
+                              color: "#7D4A5F",
+                            },
+                          }}
+                        />
+                      </Box>
+
+                      <Controller
+                        name='tipo_producto'
+                        control={control}
+                        rules={{ required: true }}
+                        defaultValue=''
+                        render={({ field }) => (
+                          <TextField
+                            select
+                            variant='standard'
+                            label='CATEGORÍA DE INTERÉS'
+                            fullWidth
+                            error={!!errors.tipo_producto}
+                            {...field}
+                            sx={{
+                              "& .MuiInputLabel-root": {
+                                fontSize: "0.65rem",
+                                letterSpacing: "0.2em",
+                                fontWeight: 800,
+                                color: "#7D4A5F",
+                              },
+                            }}
+                          >
+                            {productTypes.map((t) => (
+                              <MenuItem
+                                key={t}
+                                value={t}
+                                sx={{ fontFamily: "'Syne'", fontWeight: 600 }}
+                              >
+                                {t.toUpperCase()}
+                              </MenuItem>
+                            ))}
+                          </TextField>
+                        )}
+                      />
+
+                      <Button
+                        type='submit'
+                        variant='contained'
+                        size='large'
+                        disabled={status === "sending"}
+                        endIcon={
+                          status === "sending" ? (
+                            <CircularProgress size={20} color='inherit' />
+                          ) : (
+                            <ArrowForwardIcon />
+                          )
+                        }
+                        sx={{
+                          bgcolor: "#2D0A1A",
+                          color: "#FFF",
+                          borderRadius: 0,
+                          py: 3,
+                          fontWeight: 900,
+                          fontFamily: "'Syne'",
+                          letterSpacing: "0.3em",
+                          fontSize: "0.8rem",
+                          "&:hover": {
+                            bgcolor: "#EC4899",
+                            boxShadow: "0 20px 40px rgba(236,72,153,0.3)",
+                          },
+                        }}
+                      >
+                        {status === "sending"
+                          ? "PROCESANDO..."
+                          : "SOLICITAR PROPUESTA"}
+                      </Button>
+                    </Stack>
+                  </Paper>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Box>
         </Box>
       </Container>
     </Box>

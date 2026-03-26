@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AppBar, Box, Container, IconButton, Typography } from "@mui/material";
+import { AppBar, Box, Container, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import LogoRosa from "../../assets/logolargorosa.png";
+import Logo from "../../assets/logolargorosa.png";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
   { label: "Visitantes", to: "visitantes" },
@@ -43,13 +43,14 @@ export default function Navbar() {
         <AppBar
           position='static'
           sx={{
-            background: scrolled ? "rgba(10,10,10,0.96)" : "transparent",
-            backdropFilter: scrolled ? "blur(12px)" : "none",
-            borderBottom: scrolled
-              ? "1px solid rgba(255,255,255,0.06)"
-              : "none",
-            transition: "all 0.3s ease",
-            py: scrolled ? 1 : 2,
+            mx: "auto",
+            mt: scrolled ? 0 : 2,
+            width: scrolled ? "100%" : "95%",
+            borderRadius: scrolled ? 0 : "100px",
+            transition: "all 0.5s ease",
+            // Glassmorphism
+            background: scrolled ? "rgba(255, 245, 247, 0.85)" : "transparent",
+            boxShadow: scrolled ? "0 10px 30px rgba(0,0,0,0.05)" : "none",
           }}
         >
           <Container maxWidth={false}>
@@ -63,9 +64,22 @@ export default function Navbar() {
               {/* Logo */}
               <Box
                 onClick={() => scrollTo("inicio")}
-                sx={{ cursor: "pointer", lineHeight: 1 }}
+                sx={{
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                }}
               >
-                <img src={LogoRosa} width='100%' height={150} />
+                <Box
+                  component='img'
+                  src={Logo}
+                  alt='Expo Beauty & Barber Emprende 2027'
+                  sx={{
+                    height: { xs: 40, md: 70 },
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
+                />
               </Box>
 
               {/* Desktop nav */}
@@ -78,26 +92,26 @@ export default function Navbar() {
               >
                 {navLinks.map((link) => (
                   <Box key={link.to} sx={{ position: "relative", pb: 0.5 }}>
-                    <Typography
+                    <Box
                       component='button'
                       onClick={() => scrollTo(link.to)}
                       sx={{
                         background: "none",
                         border: "none",
                         cursor: "pointer",
-                        fontFamily: "'Outfit', sans-serif",
-                        fontSize: "0.7rem",
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: "0.75rem",
                         fontWeight: 500,
-                        letterSpacing: "0.2em",
+                        letterSpacing: "0.12em",
                         textTransform: "uppercase",
-                        color: active === link.to ? "#E040A0" : "#ABABAB",
+                        color: active === link.to ? "#EC4899" : "#555",
                         transition: "color 0.2s",
                         p: 0,
-                        "&:hover": { color: "#F5F0E8" },
+                        "&:hover": { color: "#BE185D" },
                       }}
                     >
                       {link.label}
-                    </Typography>
+                    </Box>
                     {active === link.to && (
                       <motion.div
                         layoutId='nav-indicator'
@@ -106,42 +120,40 @@ export default function Navbar() {
                           bottom: 0,
                           left: 0,
                           right: 0,
-                          height: "1px",
-                          background: "#E040A0",
+                          height: "2px",
+                          background:
+                            "linear-gradient(90deg, #F9A8D4, #BE185D)",
                         }}
                       />
                     )}
                   </Box>
                 ))}
 
-                {/* CTA */}
                 <Box
                   component='button'
-                  onClick={() => scrollTo("contacto")}
                   sx={{
-                    background: "none",
-                    border: "1px solid #E040A0",
-                    cursor: "pointer",
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "0.65rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "#E040A0",
-                    px: 2.5,
+                    background: "transparent",
+                    border: "1.5px solid #EC4899",
+                    color: "#EC4899",
+                    borderRadius: "50px",
+                    px: 4,
                     py: 1,
-                    transition: "all 0.2s",
-                    "&:hover": { background: "#E040A0", color: "#0A0A0A" },
+                    fontSize: "0.65rem",
+                    fontWeight: 700,
+                    "&:hover": {
+                      background: "linear-gradient(135deg, #F9A8D4, #EC4899)",
+                      color: "#fff",
+                      borderColor: "transparent",
+                    },
                   }}
                 >
-                  Quiero exponer
+                  QUIERO EXPONER
                 </Box>
               </Box>
 
-              {/* Mobile burger */}
               <IconButton
                 onClick={() => setMenuOpen(!menuOpen)}
-                sx={{ display: { md: "none" }, color: "#F5F0E8" }}
+                sx={{ display: { md: "none" }, color: "#1A1A1A" }}
               >
                 {menuOpen ? <CloseIcon /> : <MenuIcon />}
               </IconButton>
@@ -150,7 +162,6 @@ export default function Navbar() {
         </AppBar>
       </motion.div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -161,7 +172,7 @@ export default function Navbar() {
               position: "fixed",
               inset: 0,
               zIndex: 1090,
-              background: "rgba(10,10,10,0.98)",
+              background: "rgba(250,248,245,0.98)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -176,7 +187,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
               >
-                <Typography
+                <Box
                   component='button'
                   onClick={() => {
                     scrollTo(link.to);
@@ -186,47 +197,19 @@ export default function Navbar() {
                     background: "none",
                     border: "none",
                     cursor: "pointer",
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "3rem",
-                    letterSpacing: "0.08em",
-                    color: "#F5F0E8",
-                    "&:hover": { color: "#E040A0" },
+                    fontFamily: "'Syne', sans-serif",
+                    fontSize: "2.5rem",
+                    fontWeight: 800,
+                    color: "#1A1A1A",
+                    "&:hover": { color: "#EC4899" },
                     transition: "color 0.2s",
+                    display: "block",
                   }}
                 >
                   {link.label}
-                </Typography>
+                </Box>
               </motion.div>
             ))}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Box
-                component='button'
-                onClick={() => {
-                  scrollTo("contacto");
-                  setMenuOpen(false);
-                }}
-                sx={{
-                  background: "#E040A0",
-                  border: "none",
-                  cursor: "pointer",
-                  fontFamily: "'Outfit', sans-serif",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "#0A0A0A",
-                  px: 5,
-                  py: 2,
-                  mt: 2,
-                }}
-              >
-                Quiero exponer
-              </Box>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

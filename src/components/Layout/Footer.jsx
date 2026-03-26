@@ -1,161 +1,254 @@
-import { Box, Container, Typography, Divider, IconButton } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Divider,
+  IconButton,
+  Stack,
+  Grid,
+} from "@mui/material";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import Logo from "../../assets/logolargorosa.png";
 
-import LogoRosa from "../../assets/logolargorosa.png";
-import MailIcon from "../icons/MailIcon";
-import PhoneIcon from "../icons/PhoneIcon";
-import LocationIcon from "../icons/LocationIcon";
-import FacebookIcon from "../icons/FacebookIcon";
-import InstagramIcon from "../icons/InstagramIcon";
 export default function Footer() {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <Box
       component='footer'
       sx={{
-        background: "#0A0A0A",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        pt: 10,
+        // CAMBIO A FONDO CLARO CON GRADIENTE SUTIL
+        background: "linear-gradient(180deg, #FFFFFF 0%, #FFF5F9 100%)",
+        pt: { xs: 10, md: 15 },
         pb: 4,
+        position: "relative",
+        borderTop: "1px solid rgba(236, 72, 153, 0.1)",
       }}
     >
-      <Container maxWidth={false}>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
-            gap: 6,
-            mb: 8,
-          }}
-        >
-          {/* Brand */}
-          <Box>
-            {/* <Typography
+      <Container maxWidth='xl'>
+        <Grid container spacing={8}>
+          {/* Columna 1: Brand Identity */}
+          <Grid item xs={12} md={4}>
+            <Box
+              component='img'
+              src={Logo}
+              alt='Expo Beauty & Barber'
               sx={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "1.8rem",
-                letterSpacing: "0.08em",
-                background:
-                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                lineHeight: 1.1,
-                mb: 1.5,
+                height: 70,
+                width: "100%",
+                mb: 4,
+                // Quitamos el filtro de brillo para que luzca su color original
               }}
-            >
-              Expo Beauty
-              <br />& Barber Emprende
-            </Typography> */}
-            <img src={LogoRosa} width='100%' />
-            <Typography variant='body2' sx={{ color: "#777", lineHeight: 1.7 }}>
-              El punto de encuentro para la industria de la belleza, barbería y
-              maquillaje en México.
-            </Typography>
+            />
             <Typography
               sx={{
-                fontFamily: "'Outfit', sans-serif",
-                fontSize: "0.65rem",
-                letterSpacing: "0.25em",
-                textTransform: "uppercase",
-                color: "#444",
-                mt: 2,
+                color: "#552F3F",
+                lineHeight: 1.8,
+                maxWidth: 320,
+                fontFamily: "'DM Sans'",
+                fontSize: "0.95rem",
+                opacity: 0.7,
               }}
             >
-              Organizado por Publicidad Mahur
+              Transformando la industria de la belleza a través de la conexión,
+              la educación y los negocios de alto impacto.
             </Typography>
-          </Box>
 
-          {/* Contacto */}
-          <Box>
-            <Typography variant='overline' display='block' sx={{ mb: 3 }}>
-              Contacto
-            </Typography>
-            {[
-              {
-                Icon: <MailIcon width={40} />,
-                text: "contacto@expobeautybarber.com",
-              },
-              { Icon: <PhoneIcon width={40} />, text: "WhatsApp Ventas" },
-              {
-                Icon: <LocationIcon width={40} />,
-                text: "WTC Ciudad de México\nMontecito 38, Nápoles",
-              },
-            ].map(({ Icon, text }, i) => (
-              <Box
-                key={i}
-                sx={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 1.5,
-                  mb: 2,
-                }}
-              >
-                {Icon}
-                <Typography variant='body2' sx={{ whiteSpace: "pre-line" }}>
-                  {text}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+            <Stack direction='row' spacing={1} sx={{ mt: 4 }}>
+              {[InstagramIcon, FacebookIcon, LinkedInIcon].map((Icon, i) => (
+                <IconButton
+                  key={i}
+                  sx={{
+                    color: "#2D0A1A",
+                    bgcolor: "rgba(236, 72, 153, 0.05)",
+                    borderRadius: 0,
+                    transition: "0.4s",
+                    "&:hover": {
+                      bgcolor: "#EC4899",
+                      color: "#FFF",
+                      transform: "translateY(-5px) rotate(8deg)",
+                    },
+                  }}
+                >
+                  <Icon sx={{ fontSize: 18 }} />
+                </IconButton>
+              ))}
+            </Stack>
+          </Grid>
 
-          {/* Fecha */}
-          <Box>
-            <Typography variant='overline' display='block' sx={{ mb: 3 }}>
-              Fecha y sede
-            </Typography>
+          {/* Columna 2: Navegación */}
+          <Grid item xs={6} md={2}>
             <Typography
               sx={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "5rem",
-                color: "#F5F0E8",
-                lineHeight: 0.9,
-                mb: 0.5,
+                color: "#2D0A1A",
+                fontFamily: "'Syne'",
+                fontWeight: 800,
+                mb: 4,
+                fontSize: "0.75rem",
+                letterSpacing: "0.2em",
               }}
             >
-              14–16
+              EXPLORAR
+            </Typography>
+            <Stack spacing={2}>
+              {["CONFERENCIAS", "EXPOSITORES", "BOLETOS", "CONTACTO"].map(
+                (link) => (
+                  <Typography
+                    key={link}
+                    component='a'
+                    href={`#${link.toLowerCase()}`}
+                    sx={{
+                      color: "#552F3F",
+                      textDecoration: "none",
+                      fontSize: "0.8rem",
+                      fontWeight: 600,
+                      transition: "0.3s",
+                      "&:hover": { color: "#EC4899", letterSpacing: "0.1em" },
+                    }}
+                  >
+                    {link}
+                  </Typography>
+                ),
+              )}
+            </Stack>
+          </Grid>
+
+          {/* Columna 3: Sede */}
+          <Grid item xs={6} md={3}>
+            <Typography
+              sx={{
+                color: "#2D0A1A",
+                fontFamily: "'Syne'",
+                fontWeight: 800,
+                mb: 4,
+                fontSize: "0.75rem",
+                letterSpacing: "0.2em",
+              }}
+            >
+              UBICACIÓN
             </Typography>
             <Typography
               sx={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "1.5rem",
-                color: "#E8407A",
+                color: "#552F3F",
+                fontSize: "0.9rem",
+                lineHeight: 2,
+                mb: 2,
+                fontWeight: 500,
+              }}
+            >
+              WTC Ciudad de México <br />
+              Montecito 38, Nápoles <br />
+              03810, CDMX.
+            </Typography>
+            <Typography
+              sx={{
+                color: "#EC4899",
+                fontWeight: 800,
+                fontSize: "0.8rem",
                 letterSpacing: "0.1em",
+                cursor: "pointer",
+                textDecoration: "underline",
               }}
             >
-              Marzo 2026
+              COMO LLEGAR
             </Typography>
-            <Box sx={{ display: "flex", gap: 1, mt: 3 }}>
-              <InstagramIcon width={40} />
-              <FacebookIcon width={40} />
-            </Box>
-          </Box>
-        </Box>
+          </Grid>
 
-        <Divider />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            pt: 3,
-            flexWrap: "wrap",
-            gap: 2,
-          }}
+          {/* Columna 4: Fecha Estilo Editorial */}
+          <Grid
+            item
+            xs={12}
+            md={3}
+            sx={{ textAlign: { xs: "left", md: "right" } }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Syne'",
+                fontWeight: 900,
+                fontSize: { xs: "3.5rem", md: "5.5rem" },
+                color: "rgba(236, 72, 153, 0.08)", // Rosa muy clarito de fondo
+                lineHeight: 0.8,
+                mb: -1,
+              }}
+            >
+              MARZO
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Syne'",
+                fontWeight: 800,
+                fontSize: "1.8rem",
+                color: "#2D0A1A",
+                mb: 3,
+              }}
+            >
+              14 <span style={{ color: "#EC4899" }}>•</span> 16
+            </Typography>
+            <IconButton
+              onClick={scrollToTop}
+              sx={{
+                border: "1px solid #2D0A1A",
+                color: "#2D0A1A",
+                borderRadius: 0,
+                width: 45,
+                height: 45,
+                transition: "0.4s",
+                "&:hover": {
+                  bgcolor: "#2D0A1A",
+                  color: "#FFF",
+                  transform: "scale(1.1)",
+                },
+              }}
+            >
+              <ArrowUpwardIcon fontSize='small' />
+            </IconButton>
+          </Grid>
+        </Grid>
+
+        <Divider
+          sx={{ borderColor: "rgba(45, 10, 26, 0.06)", mt: 10, mb: 4 }}
+        />
+
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          justifyContent='space-between'
+          alignItems='center'
+          spacing={2}
         >
-          <Typography variant='caption'>
-            © 2026 Expo Beauty & Barber Emprende. Todos los derechos reservados.
-          </Typography>
           <Typography
-            component='a'
-            href='#'
-            variant='caption'
             sx={{
-              color: "#444",
-              textDecoration: "none",
-              "&:hover": { color: "#777" },
+              color: "#552F3F",
+              fontSize: "0.7rem",
+              opacity: 0.5,
+              fontWeight: 600,
             }}
           >
-            Política de Privacidad
+            © 2027 EXPO BEAUTY & BARBER | CDMX
           </Typography>
-        </Box>
+
+          <Stack direction='row' spacing={4}>
+            {["PRIVACIDAD", "TÉRMINOS"].map((item) => (
+              <Typography
+                key={item}
+                component='a'
+                href='#'
+                sx={{
+                  color: "#552F3F",
+                  fontSize: "0.7rem",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  opacity: 0.5,
+                  "&:hover": { opacity: 1, color: "#EC4899" },
+                }}
+              >
+                {item}
+              </Typography>
+            ))}
+          </Stack>
+        </Stack>
       </Container>
     </Box>
   );

@@ -1,38 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap");
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
-  padding: 0;
-  background-color: #0a0a0a;
-  overflow-x: hidden;
+  /* Fondo "Aura Pink" */
+  background: radial-gradient(
+    circle at top right,
+    #fff5f7 0%,
+    #fce7f3 50%,
+    #f9a8d4 150%
+  );
+  background-attachment: fixed;
+  color: #2d0a1a;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #e040a0;
-  border-radius: 2px;
+/* Efecto de Vidrio Esmerilado Premium */
+.glass-card {
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 20px 40px rgba(131, 24, 67, 0.05) !important;
 }
 
-/* Gold gradient text */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #e040a0 0%, #e8c96a 50%, #e040a0 100%);
+/* Animación de entrada para elementos premium */
+.reveal-text {
+  background: linear-gradient(90deg, #831843, #ec4899, #831843);
+  background-size: 200% auto;
+  color: transparent;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }

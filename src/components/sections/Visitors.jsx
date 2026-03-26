@@ -1,269 +1,309 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Box, Container, Typography, Button, Chip } from "@mui/material";
-import ContentCutIcon from "@mui/icons-material/ContentCut";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import MicIcon from "@mui/icons-material/Mic";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import GroupsIcon from "@mui/icons-material/Groups";
+import { Box, Container, Typography, Button, Stack, Grid } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
+// Importación de ilustraciones (Idealmente .svg para máxima calidad)
+import Barber from "../../assets/images/barber.svg";
+import Makeup from "../../assets/images/makeup.svg";
+import Masterclass from "../../assets/images/masterclass.svg";
+import Deal from "../../assets/images/deal.svg";
+import Spot from "../../assets/images/spot.svg";
+import Networking from "../../assets/images/networking.svg";
+
 const perks = [
-  { Icon: ContentCutIcon, label: "Barber Shows en vivo" },
-  { Icon: AutoAwesomeIcon, label: "Zona de maquillaje profesional" },
-  { Icon: MicIcon, label: "Conferencias con expertos" },
-  { Icon: ShoppingBagIcon, label: "Productos y ofertas exclusivas" },
-  { Icon: CameraAltIcon, label: "Contenido para redes sociales" },
-  { Icon: GroupsIcon, label: "Networking con profesionales" },
+  { img: Barber, label: "Barber Shows" },
+  { img: Makeup, label: "Makeup Zone" },
+  { img: Masterclass, label: "Masterclasses" },
+  { img: Deal, label: "Exclusive Deals" },
+  { img: Spot, label: "Creator Spot" },
+  { img: Networking, label: "Networking" },
 ];
 
 const profiles = [
-  "Profesionales de la belleza",
+  "Estilistas",
   "Barberos",
-  "Maquilladores",
-  "Estudiantes de academias",
-  "Dueños de salones",
+  "Makeup Artists",
+  "Dueños de Salón",
   "Distribuidores",
-  "Emprendedores del sector",
+  "Emprendedores",
 ];
-
-const scrollTo = (id) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
 export default function Visitors() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <Box
       ref={ref}
       component='section'
+      id='visitantes'
       sx={{
-        py: 16,
-        background: "#0D0D0D",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        py: { xs: 10, md: 20 },
+        background: "linear-gradient(180deg, #FCE7F3 0%, #FDF2F8 100%)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <Container maxWidth={false}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <Typography
-            variant='overline'
-            display='block'
-            sx={{ mb: 2, color: "#E8407A" }}
-          >
-            Sección visitantes
-          </Typography>
-          <Typography
-            variant='h2'
-            sx={{
-              fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
-              color: "#F5F0E8",
-              mb: 0.5,
-            }}
-          >
-            Vive la experiencia
-          </Typography>
-          <Typography
-            variant='h2'
-            sx={{
-              fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
-              color: "#E8407A",
-              mb: 8,
-            }}
-          >
-            Expo Beauty & Barber
-          </Typography>
-        </motion.div>
-
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: 10,
-            alignItems: "start",
-          }}
-        >
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Box
-              sx={{
-                aspectRatio: "4/3",
-                overflow: "hidden",
-                mb: 4,
-                position: "relative",
-                background: "#1A1A1A",
-              }}
+      <Container maxWidth='xl'>
+        <Grid container spacing={0} alignItems='center'>
+          {/* LADO IZQUIERDO: GRID 6 (CONTENIDO + MARQUEE) */}
+          <Grid item xs={12} md={6} sx={{ pr: { md: 4 } }}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8 }}
             >
-              <Box
-                component='img'
-                src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80'
-                alt='Visitantes'
+              <Typography
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  opacity: 0.65,
+                  fontFamily: "'DM Sans'",
+                  fontSize: "0.8rem",
+                  fontWeight: 900,
+                  letterSpacing: "0.6em",
+                  color: "#BE185D",
+                  mb: 2,
                 }}
-              />
-              <Box
+              >
+                VISITANTES
+              </Typography>
+              <Typography
+                variant='h2'
                 sx={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to top, #0D0D0D, transparent)",
+                  fontFamily: "'Syne'",
+                  fontSize: { xs: "3rem", md: "5.5rem" },
+                  fontWeight: 800,
+                  color: "#2D0A1A",
+                  lineHeight: 0.85,
+                  mb: 6,
                 }}
-              />
-            </Box>
-            <Typography variant='body1' sx={{ mb: 4 }}>
-              Durante{" "}
-              <Box component='span' sx={{ color: "#F5F0E8", fontWeight: 600 }}>
-                3 días
-              </Box>{" "}
-              podrás conocer las últimas tendencias, productos y técnicas de la
-              industria de la belleza y barbería.
-            </Typography>
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: 0,
-              }}
-            >
-              {perks.map((p, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.3 + i * 0.07 }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1.5,
-                      py: 2,
-                      borderBottom: "1px solid rgba(255,255,255,0.05)",
-                    }}
-                  >
-                    <p.Icon
-                      sx={{ color: "#E8407A", fontSize: 14, flexShrink: 0 }}
-                    />
-                    <Typography variant='caption' sx={{ color: "#ABABAB" }}>
-                      {p.label}
-                    </Typography>
-                  </Box>
-                </motion.div>
-              ))}
-            </Box>
-          </motion.div>
+              >
+                La cima del <br />
+                <span className='gradient-text'>arte técnico</span>
+              </Typography>
+            </motion.div>
 
-          {/* Right */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
+            {/* CONTENEDOR MARQUEE GIGANTE */}
             <Box
               sx={{
-                border: "1px solid rgba(255,255,255,0.08)",
-                p: 5,
-                mb: 4,
-                background: "#141414",
+                width: "100%",
                 position: "relative",
+                mt: 4,
                 overflow: "hidden",
-              }}
-            >
-              <Box
-                sx={{
+                // Desvanecido elegante en los bordes
+                "&::before, &::after": {
+                  content: '""',
                   position: "absolute",
                   top: 0,
-                  right: 0,
-                  width: 160,
-                  height: 160,
-                  borderRadius: "50%",
+                  width: "15%",
+                  height: "100%",
+                  zIndex: 2,
+                },
+                "&::before": {
+                  left: 0,
                   background:
-                    "radial-gradient(circle, rgba(232,64,122,0.12), transparent)",
-                  transform: "translate(30%,-30%)",
-                }}
-              />
-              <Typography
-                variant='caption'
-                sx={{
-                  color: "#666",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  display: "block",
-                  mb: 1,
-                }}
-              >
-                Fecha y sede
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "5.5rem",
-                  color: "#F5F0E8",
-                  lineHeight: 0.9,
-                }}
-              >
-                14–16
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "1.8rem",
-                  color: "#E8407A",
-                  letterSpacing: "0.1em",
-                  mt: 0.5,
-                }}
-              >
-                Marzo 2026
-              </Typography>
-              <Typography variant='body2' sx={{ mt: 1.5 }}>
-                WTC Ciudad de México
-              </Typography>
-            </Box>
-
-            <Typography variant='overline' display='block' sx={{ mb: 2 }}>
-              ¿Quién debería asistir?
-            </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 5 }}>
-              {profiles.map((p, i) => (
-                <Chip
-                  key={i}
-                  label={p}
-                  variant='outlined'
-                  size='small'
-                  sx={{
-                    borderColor: "rgba(255,255,255,0.1)",
-                    color: "#ABABAB",
-                    borderRadius: 0,
-                    fontSize: "0.7rem",
-                  }}
-                />
-              ))}
-            </Box>
-
-            <Button
-              variant='contained'
-              color='secondary'
-              fullWidth
-              size='large'
-              startIcon={<ConfirmationNumberIcon />}
-              onClick={() => scrollTo("registro")}
+                    "linear-gradient(to right, transparent, transparent)",
+                },
+                "&::after": {
+                  right: 0,
+                  background:
+                    "linear-gradient(to left, transparent, transparent)",
+                },
+              }}
             >
-              Registrarme como visitante
-            </Button>
-          </motion.div>
-        </Box>
+              <motion.div
+                animate={{ x: [0, -3000] }} // Ajustado para un loop suave de imágenes grandes
+                transition={{
+                  repeat: Infinity,
+                  duration: 50, // Velocidad tipo "Gallery Walk"
+                  ease: "linear",
+                }}
+                style={{ display: "flex", gap: "120px", width: "max-content" }}
+              >
+                {/* Triplicamos el contenido para un loop sin saltos visibles */}
+                {[...perks, ...perks, ...perks].map((p, i) => (
+                  <Stack key={i} alignItems='center' sx={{ minWidth: 300 }}>
+                    <Box
+                      component='img'
+                      src={p.img}
+                      alt={p.label}
+                      sx={{
+                        width: "100%",
+                        height: 250, // ALTURA GIGANTE PARA IMPACTO
+                        objectFit: "contain",
+                        filter:
+                          "drop-shadow(0 25px 40px rgba(236,72,153,0.12))",
+                        mb: 3,
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        fontFamily: "'Syne'",
+                        fontWeight: 800,
+                        fontSize: "0.9rem",
+                        color: "#2D0A1A",
+                        letterSpacing: "0.2em",
+                        textAlign: "center",
+                      }}
+                    >
+                      {p.label.toUpperCase()}
+                    </Typography>
+                  </Stack>
+                ))}
+              </motion.div>
+            </Box>
+          </Grid>
+
+          {/* LADO DERECHO: GRID 6 (INVITACIÓN) */}
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              mt: { xs: 8, md: 0 },
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 1 }}
+              style={{ width: "100%", maxWidth: "550px" }}
+            >
+              <Box
+                sx={{
+                  background: "rgba(255, 255, 255, 0.6)",
+                  backdropFilter: "blur(25px)",
+                  p: { xs: 5, md: 8 },
+                  border: "2px solid #FFF",
+                  boxShadow: "0 60px 120px rgba(190, 24, 93, 0.08)",
+                  position: "relative",
+                  borderRadius: 0, // Estilo Luxury Square
+                }}
+              >
+                {/* Badge Flotante */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    bgcolor: "#2D0A1A",
+                    color: "#FFF",
+                    px: 4,
+                    py: 1.2,
+                    fontFamily: "'Syne'",
+                    fontWeight: 800,
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.4em",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  SAVE THE DATE
+                </Box>
+
+                <Stack spacing={6}>
+                  <Box textAlign='center'>
+                    <Typography
+                      sx={{
+                        fontFamily: "'Syne'",
+                        fontSize: { xs: "5rem", md: "8rem" }, // FECHA MASIVA
+                        fontWeight: 800,
+                        lineHeight: 0.8,
+                        color: "#2D0A1A",
+                        letterSpacing: "-0.06em",
+                      }}
+                    >
+                      14<span style={{ color: "#EC4899" }}>.</span>16
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "'DM Sans'",
+                        fontWeight: 800,
+                        letterSpacing: "0.4em",
+                        color: "#BE185D",
+                        fontSize: "0.85rem",
+                        mt: 4,
+                      }}
+                    >
+                      MARZO • CDMX • WTC
+                    </Typography>
+                  </Box>
+
+                  <Box>
+                    <Typography
+                      textAlign='center'
+                      sx={{
+                        fontSize: "0.6rem",
+                        fontWeight: 900,
+                        mb: 3,
+                        color: "#2D0A1A",
+                        letterSpacing: "0.3em",
+                        opacity: 0.4,
+                      }}
+                    >
+                      COMUNIDAD EXCLUSIVA:
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        gap: 1.5,
+                      }}
+                    >
+                      {profiles.map((p, i) => (
+                        <Box
+                          key={i}
+                          sx={{
+                            px: 3,
+                            py: 1,
+                            fontSize: "0.7rem",
+                            fontWeight: 800,
+                            color: "#BE185D",
+                            border: "1px solid rgba(236,72,153,0.3)",
+                            fontFamily: "'Syne'",
+                            transition: "0.4s",
+                            "&:hover": {
+                              bgcolor: "#2D0A1A",
+                              color: "#FFF",
+                              borderColor: "#2D0A1A",
+                            },
+                          }}
+                        >
+                          {p.toUpperCase()}
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
+
+                  <Button
+                    variant='contained'
+                    fullWidth
+                    startIcon={<ConfirmationNumberIcon />}
+                    sx={{
+                      bgcolor: "#2D0A1A",
+                      color: "#FFF",
+                      borderRadius: 0,
+                      py: 3,
+                      fontSize: "0.9rem",
+                      fontWeight: 800,
+                      fontFamily: "'Syne'",
+                      letterSpacing: "0.2em",
+                      "&:hover": {
+                        bgcolor: "#EC4899",
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 20px 40px rgba(236,72,153,0.3)",
+                      },
+                    }}
+                  >
+                    REGISTRO GRATUITO
+                  </Button>
+                </Stack>
+              </Box>
+            </motion.div>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );

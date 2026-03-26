@@ -9,27 +9,28 @@ import {
   MenuItem,
   Paper,
   Divider,
-  CircularProgress,
+  IconButton,
+  Tooltip,
+  Stack,
 } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { QRCodeSVG } from "qrcode.react";
 import DownloadIcon from "@mui/icons-material/Download";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import PersonIcon from "@mui/icons-material/Person";
+import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const visitorTypes = [
-  "Profesional de la belleza",
-  "Barbero",
-  "Maquillador/a",
-  "Estudiante de academia",
-  "Dueño/a de salón",
-  "Distribuidor",
-  "Emprendedor del sector",
-  "Otro",
+  "Profesional de la Belleza",
+  "Barbero / Hair Stylist",
+  "Maquillador Profesional",
+  "Estudiante de Academia",
+  "Dueño de Salón / Spa",
+  "Distribuidor / Mayorista",
+  "Emprendedor",
 ];
 
-// Genera un código legible: EBB-XXXX
 function generateCode() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "EBB-";
@@ -38,63 +39,10 @@ function generateCode() {
   return code;
 }
 
-// Descarga el QR como imagen PNG
-function downloadQR(code) {
-  const svg = document.getElementById("qr-svg");
-  if (!svg) return;
-  const serializer = new XMLSerializer();
-  const svgStr = serializer.serializeToString(svg);
-  const img = new Image();
-  const blob = new Blob([svgStr], { type: "image/svg+xml" });
-  const url = URL.createObjectURL(blob);
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 400;
-    canvas.height = 500;
-    const ctx = canvas.getContext("2d");
-    // Background
-    ctx.fillStyle = "#0A0A0A";
-    ctx.fillRect(0, 0, 400, 500);
-    // Gold top bar
-    const grad = ctx.createLinearGradient(0, 0, 400, 0);
-    grad.addColorStop(0, "#E040A0");
-    grad.addColorStop(1, "#E8C96A");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 400, 6);
-    // QR
-    ctx.drawImage(img, 75, 40, 250, 250);
-    // Event name
-    ctx.fillStyle = "#F5F0E8";
-    ctx.font = "bold 18px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("EXPO BEAUTY & BARBER EMPRENDE", 200, 330);
-    ctx.fillStyle = "#888";
-    ctx.font = "13px sans-serif";
-    ctx.fillText("14, 15 y 16 de Marzo 2026 · WTC CDMX", 200, 355);
-    // Code
-    ctx.fillStyle = "#E040A0";
-    ctx.font = "bold 22px monospace";
-    ctx.fillText(code, 200, 405);
-    ctx.fillStyle = "#555";
-    ctx.font = "11px sans-serif";
-    ctx.fillText("Presenta este código en la entrada", 200, 430);
-    // Bottom bar
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 494, 400, 6);
-    // Download
-    const a = document.createElement("a");
-    a.download = `registro-${code}.png`;
-    a.href = canvas.toDataURL("image/png");
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-  img.src = url;
-}
-
 export default function Register() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [status, setStatus] = useState("idle"); // idle | success
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [status, setStatus] = useState("idle");
   const [registration, setRegistration] = useState(null);
   const [copied, setCopied] = useState(false);
 
@@ -117,350 +65,341 @@ export default function Register() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleReset = () => {
-    setStatus("idle");
-    setRegistration(null);
-    reset();
-  };
-
   return (
     <Box
       ref={ref}
       component='section'
       id='registro'
       sx={{
-        py: 16,
-        background: "#0A0A0A",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        py: { xs: 12, md: 20 },
+        background: "linear-gradient(180deg, #FAF8F5 0%, #FCE7F3 100%)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Background accent */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%,-50%)",
-          width: 700,
-          height: 700,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(232,64,122,0.05) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <Container maxWidth={false} sx={{ position: "relative", zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <Box sx={{ textAlign: "center", mb: 8 }}>
+      <Container maxWidth='lg' sx={{ position: "relative", zIndex: 1 }}>
+        <Box sx={{ textAlign: "center", mb: { xs: 6, md: 10 } }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+          >
             <Typography
-              variant='overline'
-              display='block'
-              sx={{ mb: 2, color: "#E8407A" }}
+              sx={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.75rem",
+                fontWeight: 800,
+                letterSpacing: "0.4em",
+                color: "#BE185D",
+                textTransform: "uppercase",
+                mb: 2,
+              }}
             >
-              Registro de visitantes
+              ACCESO EXCLUSIVO
             </Typography>
             <Typography
               variant='h2'
               sx={{
-                fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
-                color: "#F5F0E8",
-                mb: 1,
+                fontFamily: "'Syne', sans-serif",
+                fontSize: { xs: "2.8rem", md: "4.5rem" },
+                fontWeight: 800,
+                color: "#2D0A1A",
+                mb: 2,
               }}
             >
-              Regístrate gratis
+              Obtén tu{" "}
+              <span
+                className='gradient-text'
+                style={{ fontStyle: "italic", fontWeight: 500 }}
+              >
+                Pase Digital
+              </span>
             </Typography>
-            <Typography variant='body1' sx={{ maxWidth: 480, mx: "auto" }}>
-              Obtén tu pase de acceso al instante. Presenta el QR en la entrada
-              del evento.
+            <Typography
+              variant='body1'
+              sx={{
+                maxWidth: 600,
+                mx: "auto",
+                color: "#7D4A5F",
+                fontSize: "1.1rem",
+              }}
+            >
+              El registro es gratuito por tiempo limitado. Asegura tu lugar en
+              el evento más importante de la industria.
             </Typography>
-          </Box>
-        </motion.div>
+          </motion.div>
+        </Box>
 
         <AnimatePresence mode='wait'>
           {status === "idle" ? (
-            /* ── FORM ── */
             <motion.div
               key='form'
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
             >
               <Paper
+                elevation={0}
                 component='form'
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{
-                  maxWidth: 520,
+                  maxWidth: 600,
                   mx: "auto",
-                  p: { xs: 4, md: 6 },
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 3,
+                  p: { xs: 4, md: 8 },
+                  background: "rgba(255, 255, 255, 0.7)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(236, 72, 153, 0.2)",
+                  borderRadius: 0, // Estética minimalista
+                  boxShadow: "0 40px 100px rgba(45, 10, 26, 0.08)",
                 }}
               >
-                {/* Form header */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1.5,
-                    mb: 1,
-                  }}
-                >
+                <Stack spacing={3}>
                   <Box
                     sx={{
-                      width: 36,
-                      height: 36,
-                      background: "rgba(232,64,122,0.1)",
-                      border: "1px solid rgba(232,64,122,0.25)",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
+                      gap: 2,
+                      mb: 2,
                     }}
                   >
-                    <PersonIcon sx={{ color: "#E8407A", fontSize: 18 }} />
-                  </Box>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Outfit', sans-serif",
-                      fontWeight: 600,
-                      fontSize: "0.9rem",
-                      color: "#F5F0E8",
-                    }}
-                  >
-                    Datos de acceso
-                  </Typography>
-                </Box>
-
-                <Divider />
-
-                <TextField
-                  label='Nombre completo'
-                  fullWidth
-                  error={!!errors.nombre}
-                  helperText={errors.nombre ? "Campo requerido" : ""}
-                  {...register("nombre", { required: true })}
-                />
-                <TextField
-                  label='Email'
-                  type='email'
-                  fullWidth
-                  error={!!errors.email}
-                  helperText={errors.email ? "Email inválido" : ""}
-                  {...register("email", {
-                    required: true,
-                    pattern: /^\S+@\S+\.\S+$/,
-                  })}
-                />
-                <TextField
-                  label='Teléfono'
-                  fullWidth
-                  error={!!errors.telefono}
-                  helperText={errors.telefono ? "Campo requerido" : ""}
-                  {...register("telefono", { required: true })}
-                />
-                <TextField
-                  select
-                  label='Tipo de visitante'
-                  fullWidth
-                  defaultValue=''
-                  error={!!errors.tipo}
-                  {...register("tipo", { required: true })}
-                >
-                  {visitorTypes.map((t) => (
-                    <MenuItem key={t} value={t}>
-                      {t}
-                    </MenuItem>
-                  ))}
-                </TextField>
-
-                <Button
-                  type='submit'
-                  variant='contained'
-                  color='secondary'
-                  size='large'
-                  fullWidth
-                  sx={{ mt: 1 }}
-                >
-                  Obtener mi pase QR
-                </Button>
-
-                <Typography
-                  variant='caption'
-                  sx={{ textAlign: "center", color: "#444" }}
-                >
-                  Registro gratuito · Entrada libre al evento
-                </Typography>
-              </Paper>
-            </motion.div>
-          ) : (
-            /* ── SUCCESS + QR ── */
-            <motion.div
-              key='success'
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Box sx={{ maxWidth: 520, mx: "auto" }}>
-                <Paper sx={{ p: { xs: 4, md: 6 }, textAlign: "center" }}>
-                  {/* Header */}
-                  <CheckCircleOutlineIcon
-                    sx={{ color: "#E8407A", fontSize: 44, mb: 2 }}
-                  />
-                  <Typography
-                    variant='h3'
-                    sx={{ fontSize: "1.8rem", color: "#F5F0E8", mb: 1 }}
-                  >
-                    ¡Registro exitoso!
-                  </Typography>
-                  <Typography variant='body2' sx={{ mb: 4 }}>
-                    Hola{" "}
-                    <Box
-                      component='span'
-                      sx={{ color: "#F5F0E8", fontWeight: 600 }}
+                    <LocalActivityIcon sx={{ color: "#EC4899" }} />
+                    <Typography
+                      sx={{
+                        fontFamily: "'Syne'",
+                        fontWeight: 700,
+                        letterSpacing: "0.1em",
+                      }}
                     >
-                      {registration.nombre}
-                    </Box>
-                    , tu pase está listo.
-                  </Typography>
+                      FORMULARIO DE REGISTRO
+                    </Typography>
+                  </Box>
 
-                  <Divider sx={{ mb: 4 }} />
+                  <TextField
+                    variant='standard'
+                    label='NOMBRE COMPLETO'
+                    fullWidth
+                    error={!!errors.nombre}
+                    {...register("nombre", { required: true })}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        fontSize: "0.7rem",
+                        letterSpacing: "0.2em",
+                      },
+                    }}
+                  />
 
-                  {/* QR */}
                   <Box
                     sx={{
-                      display: "inline-flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      background: "#F5F0E8",
-                      p: 3,
-                      mb: 3,
+                      display: "grid",
+                      gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                      gap: 3,
                     }}
                   >
-                    <QRCodeSVG
-                      id='qr-svg'
-                      value={`EXPO-BEAUTY-BARBER-2026|${registration.code}|${registration.nombre}|${registration.email}`}
-                      size={200}
-                      bgColor='#F5F0E8'
-                      fgColor='#0A0A0A'
-                      level='H'
-                      includeMargin={false}
+                    <TextField
+                      variant='standard'
+                      label='EMAIL CORPORATIVO'
+                      type='email'
+                      fullWidth
+                      error={!!errors.email}
+                      {...register("email", {
+                        required: true,
+                        pattern: /^\S+@\S+\.\S+$/,
+                      })}
+                      sx={{
+                        "& .MuiInputLabel-root": {
+                          fontSize: "0.7rem",
+                          letterSpacing: "0.2em",
+                        },
+                      }}
+                    />
+                    <TextField
+                      variant='standard'
+                      label='TELÉFONO'
+                      fullWidth
+                      error={!!errors.telefono}
+                      {...register("telefono", { required: true })}
+                      sx={{
+                        "& .MuiInputLabel-root": {
+                          fontSize: "0.7rem",
+                          letterSpacing: "0.2em",
+                        },
+                      }}
                     />
                   </Box>
 
-                  {/* Code */}
-                  <Box
+                  <TextField
+                    select
+                    variant='standard'
+                    label='PERFIL PROFESIONAL'
+                    fullWidth
+                    defaultValue=''
+                    error={!!errors.tipo}
+                    {...register("tipo", { required: true })}
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 1.5,
-                      mb: 4,
+                      "& .MuiInputLabel-root": {
+                        fontSize: "0.7rem",
+                        letterSpacing: "0.2em",
+                      },
                     }}
                   >
+                    {visitorTypes.map((t) => (
+                      <MenuItem
+                        key={t}
+                        value={t}
+                        sx={{ fontSize: "0.9rem", fontFamily: "Syne" }}
+                      >
+                        {t}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <Button
+                    type='submit'
+                    variant='contained'
+                    fullWidth
+                    sx={{
+                      mt: 4,
+                      py: 2.5,
+                      bgcolor: "#2D0A1A",
+                      color: "#FFF",
+                      borderRadius: 0,
+                      fontWeight: 800,
+                      fontFamily: "'Syne'",
+                      letterSpacing: "0.2em",
+                      "&:hover": { bgcolor: "#BE185D" },
+                    }}
+                  >
+                    GENERAR MI BOLETO
+                  </Button>
+                </Stack>
+              </Paper>
+            </motion.div>
+          ) : (
+            /* ── SUCCESS: TICKET LOOK ── */
+            <motion.div
+              key='success'
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Box sx={{ maxWidth: 500, mx: "auto" }}>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    background: "#371022f4",
+                    color: "#FFF",
+                    p: 0,
+                    borderRadius: 0,
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  {/* Ticket Header */}
+                  <Box
+                    sx={{
+                      p: 4,
+                      textAlign: "center",
+                      borderBottom: "1px dashed rgba(255,255,255,0.2)",
+                    }}
+                  >
+                    <CheckCircleOutlineIcon
+                      sx={{ color: "#EC4899", fontSize: 40, mb: 2 }}
+                    />
                     <Typography
                       sx={{
-                        fontFamily: "monospace",
+                        fontFamily: "'Syne'",
+                        fontWeight: 800,
                         fontSize: "1.5rem",
-                        fontWeight: 700,
-                        letterSpacing: "0.15em",
-                        color: "#E040A0",
+                      }}
+                    >
+                      REGISTRO CONFIRMADO
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "0.8rem",
+                        opacity: 0.6,
+                        letterSpacing: "0.1em",
+                      }}
+                    >
+                      BIENVENIDO/A, {registration.nombre.toUpperCase()}
+                    </Typography>
+                  </Box>
+
+                  {/* Ticket Body */}
+                  <Box sx={{ p: 6, textAlign: "center" }}>
+                    <Box
+                      sx={{
+                        background: "#FFF",
+                        p: 3,
+                        display: "inline-block",
+                        mb: 4,
+                      }}
+                    >
+                      <QRCodeSVG
+                        value={`EBB-2026-${registration.code}`}
+                        size={180}
+                        level='H'
+                      />
+                    </Box>
+
+                    <Typography
+                      sx={{
+                        fontFamily: "'Syne'",
+                        fontSize: "2rem",
+                        fontWeight: 800,
+                        color: "#F9A8D4",
+                        mb: 1,
                       }}
                     >
                       {registration.code}
                     </Typography>
-                    <Button
-                      size='small'
-                      variant='outlined'
-                      color='primary'
-                      onClick={handleCopy}
-                      sx={{
-                        minWidth: "auto",
-                        px: 1.5,
-                        py: 0.5,
-                        fontSize: "0.65rem",
-                      }}
-                      startIcon={
-                        <ContentCopyIcon sx={{ fontSize: "14px !important" }} />
-                      }
-                    >
-                      {copied ? "¡Copiado!" : "Copiar"}
-                    </Button>
-                  </Box>
 
-                  {/* Event info */}
-                  <Box
-                    sx={{
-                      background: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      p: 2.5,
-                      mb: 4,
-                    }}
-                  >
-                    <Typography
-                      variant='caption'
-                      display='block'
-                      sx={{ color: "#777", mb: 0.5 }}
-                    >
-                      Evento
-                    </Typography>
                     <Typography
                       sx={{
-                        fontFamily: "'Outfit', sans-serif",
-                        fontWeight: 600,
-                        fontSize: "0.85rem",
-                        color: "#F5F0E8",
-                        mb: 0.25,
+                        fontSize: "0.75rem",
+                        opacity: 0.5,
+                        letterSpacing: "0.2em",
+                        mb: 4,
                       }}
                     >
-                      Expo Beauty & Barber Emprende 2026
+                      PRESENTA ESTE CÓDIGO AL INGRESAR
                     </Typography>
-                    <Typography variant='caption' sx={{ color: "#ABABAB" }}>
-                      14, 15 y 16 de Marzo · WTC Ciudad de México
-                    </Typography>
+
+                    <Stack spacing={2}>
+                      <Button
+                        variant='outlined'
+                        fullWidth
+                        startIcon={<DownloadIcon />}
+                        sx={{
+                          color: "#FFF",
+                          borderColor: "rgba(255,255,255,0.3)",
+                          borderRadius: 0,
+                        }}
+                      >
+                        GUARDAR EN DISPOSITIVO
+                      </Button>
+                      <Button
+                        variant='text'
+                        onClick={() => setStatus("idle")}
+                        startIcon={<ArrowBackIcon />}
+                        sx={{
+                          color: "rgba(255,255,255,0.4)",
+                          fontSize: "0.7rem",
+                        }}
+                      >
+                        REALIZAR OTRO REGISTRO
+                      </Button>
+                    </Stack>
                   </Box>
 
-                  {/* Actions */}
+                  {/* Ticket Footer Decor */}
                   <Box
                     sx={{
-                      display: "flex",
-                      gap: 2,
-                      flexDirection: { xs: "column", sm: "row" },
+                      height: 10,
+                      background: "linear-gradient(90deg, #F9A8D4, #BE185D)",
                     }}
-                  >
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      fullWidth
-                      startIcon={<DownloadIcon />}
-                      onClick={() => downloadQR(registration.code)}
-                    >
-                      Descargar QR
-                    </Button>
-                    <Button
-                      variant='outlined'
-                      color='secondary'
-                      fullWidth
-                      onClick={handleReset}
-                    >
-                      Nuevo registro
-                    </Button>
-                  </Box>
-
-                  <Typography
-                    variant='caption'
-                    sx={{ display: "block", mt: 3, color: "#444" }}
-                  >
-                    Presenta este código en la entrada del evento
-                  </Typography>
+                  />
                 </Paper>
               </Box>
             </motion.div>

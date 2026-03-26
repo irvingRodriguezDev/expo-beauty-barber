@@ -4,11 +4,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    // https: {
-    //   key: fs.readFileSync("./localhost-key.pem"),
-    //   cert: fs.readFileSync("./localhost.pem"),
-    // },
+    // Esto es correcto para ngrok
     allowedHosts: ["excogitable-mavis-sulfureous.ngrok-free.dev"],
     port: 5173,
+    strictPort: true, // Te recomiendo añadir esto para que no salte al 5174 si el puerto se traba
   },
 });

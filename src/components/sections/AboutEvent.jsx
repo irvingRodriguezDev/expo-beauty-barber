@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Stack } from "@mui/material";
 
 export default function AboutEvent() {
   const ref = useRef(null);
@@ -10,151 +10,228 @@ export default function AboutEvent() {
     <Box
       ref={ref}
       component='section'
+      id='visitantes'
       sx={{
-        py: 16,
-        background: "#0D0D0D",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        py: { xs: 12, md: 20 },
+        background: "linear-gradient(180deg, #FCE7F3 0%, #FAF8F5 100%)",
         position: "relative",
+        overflow: "hidden",
       }}
     >
-      <Box
+      {/* Decoración de fondo sutil: Texto gigante de agua */}
+      <Typography
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: 120,
-          height: "1px",
-          background: "linear-gradient(90deg, #E040A0, transparent)",
+          top: "10%",
+          right: "-5%",
+          fontSize: "20vw",
+          fontWeight: 900,
+          fontFamily: "'Syne', sans-serif",
+          color: "rgba(236, 72, 153, 0.03)",
+          lineHeight: 1,
+          userSelect: "none",
+          zIndex: 0,
         }}
-      />
-      <Container maxWidth={false}>
+      >
+        BEAUTY
+      </Typography>
+
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: 10,
+            gridTemplateColumns: { xs: "1fr", lg: "1fr 1.1fr" },
+            gap: { xs: 8, lg: 15 },
             alignItems: "center",
           }}
         >
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Typography variant='overline' display='block' sx={{ mb: 2 }}>
-              Sobre el evento
-            </Typography>
-            <Typography
-              variant='h2'
-              sx={{
-                fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
-                color: "#F5F0E8",
-                mb: 1,
-              }}
+          {/* Lado Izquierdo: Contenido Editorial */}
+          <Box>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
             >
-              Donde la industria
-            </Typography>
-            <Typography
-              variant='h2'
-              sx={{
-                fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
-                background:
-                  "linear-gradient(135deg, #E040A0, #E8C96A, #E040A0)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                mb: 3,
-              }}
-            >
-              se encuentra
-            </Typography>
-            <Box
-              sx={{
-                width: 60,
-                height: 3,
-                background: "linear-gradient(90deg, #E040A0, #E8407A)",
-                mb: 4,
-              }}
-            />
-            <Typography variant='body1' sx={{ mb: 2 }}>
-              Expo Beauty & Barber Emprende reúne a{" "}
-              <Box component='span' sx={{ color: "#F5F0E8", fontWeight: 600 }}>
-                marcas, emprendedores y profesionales
-              </Box>{" "}
-              del sector belleza para generar relaciones comerciales,
-              posicionamiento de marca y nuevas oportunidades de negocio.
-            </Typography>
-            <Typography variant='body2' sx={{ color: "#777" }}>
-              Organizado por{" "}
-              <Box component='span' sx={{ color: "#ABABAB" }}>
-                Publicidad Mahur
-              </Box>
-              , empresa con más de{" "}
-              <Box component='span' sx={{ color: "#E040A0" }}>
-                15 años de experiencia
-              </Box>{" "}
-              en la organización de exposiciones comerciales.
-            </Typography>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: "relative" }}
-          >
-            <Box
-              sx={{
-                aspectRatio: "4/3",
-                overflow: "hidden",
-                position: "relative",
-                background: "#1A1A1A",
-              }}
-            >
-              <Box
-                component='img'
-                src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=80'
-                alt='Expo'
+              <Typography
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  opacity: 0.75,
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "0.7rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.4em",
+                  color: "#BE185D",
+                  textTransform: "uppercase",
+                  mb: 3,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
                 }}
-              />
+              >
+                LA EXPERIENCIA
+              </Typography>
+
+              <Typography
+                variant='h2'
+                sx={{
+                  fontFamily: "'Syne', sans-serif",
+                  fontSize: { xs: "3rem", md: "4.5rem" },
+                  fontWeight: 800,
+                  lineHeight: 1.1,
+                  color: "#2D0A1A",
+                  mb: 4,
+                }}
+              >
+                Donde la <br />
+                <span
+                  className='reveal-text'
+                  style={{ fontStyle: "italic", fontWeight: 400 }}
+                >
+                  industria brilla
+                </span>
+              </Typography>
+
+              <Stack spacing={4} sx={{ maxWidth: 540 }}>
+                <Typography
+                  variant='body1'
+                  sx={{
+                    fontSize: "1.2rem",
+                    lineHeight: 1.8,
+                    color: "#552F3F",
+                    fontWeight: 300,
+                  }}
+                >
+                  Expo Beauty & Barber Emprende es el epicentro donde{" "}
+                  <strong style={{ fontWeight: 600, color: "#2D0A1A" }}>
+                    el prestigio y la innovación
+                  </strong>{" "}
+                  convergen para redefinir el futuro de la estética en México.
+                </Typography>
+
+                <Box sx={{ pl: 3, borderLeft: "2px solid #EC4899" }}>
+                  <Typography
+                    variant='body2'
+                    sx={{
+                      fontSize: "1rem",
+                      color: "#7D4A5F",
+                      lineHeight: 1.7,
+                      mb: 2,
+                    }}
+                  >
+                    Bajo la curaduría de{" "}
+                    <strong style={{ color: "#2D0A1A" }}>
+                      Publicidad Mahur
+                    </strong>
+                    , garantizamos un entorno de networking de alto nivel con
+                    más de 15 años de liderazgo en el sector.
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Syne'",
+                      fontSize: "0.8rem",
+                      fontWeight: 700,
+                      color: "#BE185D",
+                    }}
+                  >
+                    +15 AÑOS DE EXCELENCIA PROFESIONAL
+                  </Typography>
+                </Box>
+              </Stack>
+            </motion.div>
+          </Box>
+
+          {/* Lado Derecho: Composición Visual Premium */}
+          <Box sx={{ position: "relative" }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              {/* Imagen Principal con marco de diseño */}
+              <Box
+                className='glass-card'
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  p: 2,
+                  borderRadius: "24px",
+                  overflow: "hidden",
+                }}
+              >
+                <Box
+                  component='img'
+                  src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                  alt='The Experience'
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "16px",
+                    filter: "grayscale(20%) contrast(1.1)",
+                  }}
+                />
+              </Box>
+
+              {/* Elementos Flotantes de Lujo */}
+              {/* <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  position: "absolute",
+                  top: "-20px",
+                  right: "-20px",
+                  zIndex: 3,
+                }}
+              >
+                <Box
+                  sx={{
+                    bgcolor: "#2D0A1A",
+                    color: "#FFF",
+                    p: 4,
+                    borderRadius: "50%",
+                    width: "140px",
+                    height: "140px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: "'Syne'",
+                      fontSize: "1.5rem",
+                      fontWeight: 800,
+                      lineHeight: 1,
+                    }}
+                  >
+                    TOP
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: "0.6rem", letterSpacing: "0.2em" }}
+                  >
+                    BRANDS
+                  </Typography>
+                </Box>
+              </motion.div> */}
+
+              {/* Marco decorativo de línea fina */}
               <Box
                 sx={{
                   position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(to top right, rgba(10,10,10,0.6), transparent)",
+                  inset: "-20px",
+                  border: "1px solid #EC4899",
+                  zIndex: 1,
+                  borderRadius: "30px",
+                  opacity: 0.3,
                 }}
               />
-            </Box>
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: -12,
-                right: -12,
-                width: 80,
-                height: 80,
-                border: "2px solid rgba(201,168,76,0.25)",
-                zIndex: -1,
-              }}
-            />
-            <Box
-              sx={{
-                position: "absolute",
-                top: -12,
-                left: -12,
-                width: 56,
-                height: 56,
-                border: "1px solid rgba(232,64,122,0.2)",
-                zIndex: -1,
-              }}
-            />
-          </motion.div>
+            </motion.div>
+          </Box>
         </Box>
       </Container>
     </Box>
