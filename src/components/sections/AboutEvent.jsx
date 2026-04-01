@@ -116,12 +116,12 @@ export default function AboutEvent() {
                       mb: 2,
                     }}
                   >
-                    Bajo la curaduría de{" "}
+                    Con el respaldo y la sólida infraestructura de{" "}
                     <strong style={{ color: "#2D0A1A" }}>
                       Publicidad Mahur
                     </strong>
-                    , garantizamos un entorno de networking de alto nivel con
-                    más de 15 años de liderazgo en el sector.
+                    , integramos más de 15 años de experiencia en la creación de
+                    eventos de gran impacto a nivel nacional.
                   </Typography>
                   <Typography
                     sx={{
@@ -129,9 +129,10 @@ export default function AboutEvent() {
                       fontSize: "0.8rem",
                       fontWeight: 700,
                       color: "#BE185D",
+                      letterSpacing: "0.05em",
                     }}
                   >
-                    +15 AÑOS DE EXCELENCIA PROFESIONAL
+                    MÁS DE 15 AÑOS PRODUCIENDO EXPERIENCIAS
                   </Typography>
                 </Box>
               </Stack>

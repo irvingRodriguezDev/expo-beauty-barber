@@ -24,22 +24,21 @@ export default function App() {
           <Stats />
           <MapSection />
         </section>
-
         {/* VISITANTES */}
         <section id='visitantes'>
           <Visitors />
+        </section>
+        <section id='register'>
           <Register />
         </section>
-
-        {/* EXPOSITORES */}
+        {/* EXPOSITORES
         <section id='expositores'>
           <Exhibitors />
-        </section>
-
+        </section> */}
         {/* CONTACTO */}
-        <section id='contacto'>
+        {/* <section id='contacto'>
           <Contact />
-        </section>
+        </section> */}
       </main>
       <Footer />
     </div>

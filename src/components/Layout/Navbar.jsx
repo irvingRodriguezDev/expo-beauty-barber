@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AppBar, Box, Container, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/logolargorosa.png";
+import Logo from "../../assets/LogoRosa.png";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
   { label: "Visitantes", to: "visitantes" },
-  { label: "Expositores", to: "expositores" },
-  { label: "Contacto", to: "contacto" },
+  // { label: "Expositores", to: "expositores" },
+  // { label: "Contacto", to: "contacto" },
 ];
 
 const scrollTo = (id) =>
@@ -78,6 +78,7 @@ export default function Navbar() {
                     height: { xs: 40, md: 70 },
                     width: "100%",
                     objectFit: "contain",
+                    padding: "10px",
                   }}
                 />
               </Box>
@@ -131,6 +132,7 @@ export default function Navbar() {
 
                 <Box
                   component='button'
+                  onClick={() => scrollTo("register")}
                   sx={{
                     background: "transparent",
                     border: "1.5px solid #EC4899",
@@ -147,7 +149,7 @@ export default function Navbar() {
                     },
                   }}
                 >
-                  QUIERO EXPONER
+                  QUIERO ASISTIR
                 </Box>
               </Box>
 

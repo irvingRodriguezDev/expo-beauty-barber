@@ -11,25 +11,30 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/logolargorosa.png";
+import Logo from "../../assets/LogoRosa.png";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const navLinks = [
+    { name: "INICIO", id: "hero" },
+    { name: "VISITANTES", id: "visitantes" },
+    { name: "REGISTRO", id: "register" },
+  ];
 
   return (
     <Box
       component='footer'
       sx={{
-        // CAMBIO A FONDO CLARO CON GRADIENTE SUTIL
-        background: "linear-gradient(180deg, #FFFFFF 0%, #FFF5F9 100%)",
-        pt: { xs: 10, md: 15 },
-        pb: 4,
+        background: "linear-gradient(180deg, #FFFFFF 0%, #FDF2F8 100%)",
+        pt: { xs: 10, md: 12 },
+        pb: 6,
         position: "relative",
-        borderTop: "1px solid rgba(236, 72, 153, 0.1)",
+        borderTop: "1px solid rgba(236, 72, 153, 0.15)",
       }}
     >
       <Container maxWidth='xl'>
-        <Grid container spacing={8}>
+        <Grid container spacing={{ xs: 6, md: 4 }}>
           {/* Columna 1: Brand Identity */}
           <Grid item xs={12} md={4}>
             <Box
@@ -37,39 +42,43 @@ export default function Footer() {
               src={Logo}
               alt='Expo Beauty & Barber'
               sx={{
-                height: 70,
-                width: "100%",
-                mb: 4,
-                // Quitamos el filtro de brillo para que luzca su color original
+                height: { xs: 45, md: 55 },
+                width: "auto",
+                mb: 3,
+                filter: "grayscale(0) contrast(1.2)", // Efecto editorial
+                transition: "0.4s",
+                "&:hover": { filter: "grayscale(0)" },
               }}
             />
             <Typography
               sx={{
                 color: "#552F3F",
                 lineHeight: 1.8,
-                maxWidth: 320,
+                maxWidth: 340,
                 fontFamily: "'DM Sans'",
-                fontSize: "0.95rem",
-                opacity: 0.7,
+                fontSize: "0.9rem",
+                opacity: 0.8,
+                mb: 4,
               }}
             >
-              Transformando la industria de la belleza a través de la conexión,
-              la educación y los negocios de alto impacto.
+              El punto de encuentro definitivo donde la maestría técnica se
+              fusiona con la visión empresarial del sector belleza en México.
             </Typography>
 
-            <Stack direction='row' spacing={1} sx={{ mt: 4 }}>
+            <Stack direction='row' spacing={1.5}>
               {[InstagramIcon, FacebookIcon, LinkedInIcon].map((Icon, i) => (
                 <IconButton
                   key={i}
                   sx={{
                     color: "#2D0A1A",
-                    bgcolor: "rgba(236, 72, 153, 0.05)",
+                    border: "1px solid rgba(45, 10, 26, 0.1)",
                     borderRadius: 0,
-                    transition: "0.4s",
+                    transition: "0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     "&:hover": {
-                      bgcolor: "#EC4899",
+                      bgcolor: "#2D0A1A",
                       color: "#FFF",
-                      transform: "translateY(-5px) rotate(8deg)",
+                      transform: "translateY(-5px)",
+                      borderColor: "#2D0A1A",
                     },
                   }}
                 >
@@ -79,7 +88,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          {/* Columna 2: Navegación */}
+          {/* Columna 2: Navegación Estilizada */}
           <Grid item xs={6} md={2}>
             <Typography
               sx={{
@@ -87,36 +96,49 @@ export default function Footer() {
                 fontFamily: "'Syne'",
                 fontWeight: 800,
                 mb: 4,
-                fontSize: "0.75rem",
-                letterSpacing: "0.2em",
+                fontSize: "0.7rem",
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
               }}
             >
-              EXPLORAR
+              Navegación
             </Typography>
-            <Stack spacing={2}>
-              {["CONFERENCIAS", "EXPOSITORES", "BOLETOS", "CONTACTO"].map(
-                (link) => (
-                  <Typography
-                    key={link}
-                    component='a'
-                    href={`#${link.toLowerCase()}`}
-                    sx={{
-                      color: "#552F3F",
-                      textDecoration: "none",
-                      fontSize: "0.8rem",
-                      fontWeight: 600,
+            <Stack spacing={2.5}>
+              {navLinks.map((link) => (
+                <Typography
+                  key={link.name}
+                  component='a'
+                  href={`#${link.id}`}
+                  sx={{
+                    color: "#552F3F",
+                    textDecoration: "none",
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    transition: "0.3s",
+                    display: "flex",
+                    alignItems: "center",
+                    "&::before": {
+                      content: '""',
+                      width: 0,
+                      height: "1px",
+                      bgcolor: "#EC4899",
+                      mr: 0,
                       transition: "0.3s",
-                      "&:hover": { color: "#EC4899", letterSpacing: "0.1em" },
-                    }}
-                  >
-                    {link}
-                  </Typography>
-                ),
-              )}
+                    },
+                    "&:hover": {
+                      color: "#EC4899",
+                      "&::before": { width: 15, mr: 1.5 },
+                    },
+                  }}
+                >
+                  {link.name}
+                </Typography>
+              ))}
             </Stack>
           </Grid>
 
-          {/* Columna 3: Sede */}
+          {/* Columna 3: Sede con Iconografía Visual */}
           <Grid item xs={6} md={3}>
             <Typography
               sx={{
@@ -124,82 +146,103 @@ export default function Footer() {
                 fontFamily: "'Syne'",
                 fontWeight: 800,
                 mb: 4,
-                fontSize: "0.75rem",
-                letterSpacing: "0.2em",
+                fontSize: "0.7rem",
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
               }}
             >
-              UBICACIÓN
+              La Sede
             </Typography>
             <Typography
               sx={{
                 color: "#552F3F",
-                fontSize: "0.9rem",
+                fontSize: "0.85rem",
                 lineHeight: 2,
-                mb: 2,
+                mb: 3,
                 fontWeight: 500,
+                opacity: 0.9,
               }}
             >
-              WTC Ciudad de México <br />
-              Montecito 38, Nápoles <br />
-              03810, CDMX.
+              <strong style={{ color: "#2D0A1A" }}>WTC Ciudad de México</strong>{" "}
+              <br />
+              Montecito 38, Col. Nápoles <br />
+              CP 03810, CDMX.
             </Typography>
             <Typography
+              component='a'
+              href='https://maps.google.com'
+              target='_blank'
               sx={{
                 color: "#EC4899",
                 fontWeight: 800,
-                fontSize: "0.8rem",
-                letterSpacing: "0.1em",
-                cursor: "pointer",
-                textDecoration: "underline",
+                fontSize: "0.7rem",
+                letterSpacing: "0.2em",
+                textDecoration: "none",
+                borderBottom: "2px solid #EC4899",
+                pb: 0.5,
+                transition: "0.3s",
+                "&:hover": {
+                  bgcolor: "#EC4899",
+                  color: "#FFF",
+                  px: 1,
+                },
               }}
             >
-              COMO LLEGAR
+              GOOGLE MAPS →
             </Typography>
           </Grid>
 
-          {/* Columna 4: Fecha Estilo Editorial */}
+          {/* Columna 4: Data Visual & Scroll */}
           <Grid
             item
             xs={12}
             md={3}
-            sx={{ textAlign: { xs: "left", md: "right" } }}
+            sx={{
+              textAlign: { xs: "left", md: "right" },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: { xs: "flex-start", md: "flex-end" },
+            }}
           >
-            <Typography
-              sx={{
-                fontFamily: "'Syne'",
-                fontWeight: 900,
-                fontSize: { xs: "3.5rem", md: "5.5rem" },
-                color: "rgba(236, 72, 153, 0.08)", // Rosa muy clarito de fondo
-                lineHeight: 0.8,
-                mb: -1,
-              }}
-            >
-              MARZO
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: "'Syne'",
-                fontWeight: 800,
-                fontSize: "1.8rem",
-                color: "#2D0A1A",
-                mb: 3,
-              }}
-            >
-              14 <span style={{ color: "#EC4899" }}>•</span> 16
-            </Typography>
+            <Box sx={{ position: "relative", mb: 4 }}>
+              <Typography
+                sx={{
+                  fontFamily: "'Syne'",
+                  fontWeight: 900,
+                  fontSize: { xs: "4rem", md: "5.5rem" },
+                  color: "rgba(236, 72, 153, 0.08)",
+                  lineHeight: 0.7,
+                }}
+              >
+                2027
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "'Syne'",
+                  fontWeight: 800,
+                  fontSize: "1.8rem",
+                  color: "#2D0A1A",
+                  mt: -2,
+                }}
+              >
+                5 <span style={{ color: "#EC4899" }}>.</span> 6 FEB
+              </Typography>
+            </Box>
+
             <IconButton
               onClick={scrollToTop}
               sx={{
                 border: "1px solid #2D0A1A",
                 color: "#2D0A1A",
-                borderRadius: 0,
-                width: 45,
-                height: 45,
-                transition: "0.4s",
+                borderRadius: "50%",
+                width: 50,
+                height: 50,
+                mt: "auto",
+                transition: "0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 "&:hover": {
                   bgcolor: "#2D0A1A",
                   color: "#FFF",
-                  transform: "scale(1.1)",
+                  transform: "rotate(-45deg)",
                 },
               }}
             >
@@ -209,39 +252,42 @@ export default function Footer() {
         </Grid>
 
         <Divider
-          sx={{ borderColor: "rgba(45, 10, 26, 0.06)", mt: 10, mb: 4 }}
+          sx={{ borderColor: "rgba(45, 10, 26, 0.08)", mt: 10, mb: 4 }}
         />
 
+        {/* Bottom Bar */}
         <Stack
           direction={{ xs: "column", md: "row" }}
           justifyContent='space-between'
           alignItems='center'
-          spacing={2}
+          spacing={3}
         >
           <Typography
             sx={{
               color: "#552F3F",
-              fontSize: "0.7rem",
-              opacity: 0.5,
-              fontWeight: 600,
+              fontSize: "0.65rem",
+              opacity: 0.6,
+              fontWeight: 700,
+              letterSpacing: "0.1em",
             }}
           >
-            © 2027 EXPO BEAUTY & BARBER | CDMX
+            © 2027 EXPO BELLEZA & BARBERÍAS | POWERED BY FR
           </Typography>
 
           <Stack direction='row' spacing={4}>
-            {["PRIVACIDAD", "TÉRMINOS"].map((item) => (
+            {["PRIVACIDAD", "TÉRMINOS", "CONTACTO"].map((item) => (
               <Typography
                 key={item}
                 component='a'
                 href='#'
                 sx={{
-                  color: "#552F3F",
-                  fontSize: "0.7rem",
+                  color: "#2D0A1A",
+                  fontSize: "0.65rem",
                   textDecoration: "none",
-                  fontWeight: 600,
-                  opacity: 0.5,
-                  "&:hover": { opacity: 1, color: "#EC4899" },
+                  fontWeight: 800,
+                  letterSpacing: "0.1em",
+                  transition: "0.3s",
+                  "&:hover": { color: "#EC4899" },
                 }}
               >
                 {item}

@@ -108,9 +108,9 @@ export default function Hero() {
                   className='gradient-text'
                   style={{ fontStyle: "italic", fontWeight: 400 }}
                 >
-                  BEAUTY
+                  BELLEZA
                 </span>
-                <br /> & BARBER
+                <br /> & BARBERÍAS
               </Typography>
             </Box>
 
@@ -130,8 +130,9 @@ export default function Hero() {
                   fontWeight: 300,
                 }}
               >
-                Donde el arte de la estética se encuentra con la visión
-                empresarial. Sé parte del evento más prestigioso de México.
+                Donde la pasión por el estilo se convierte en legado
+                empresarial. Sé protagonista del inicio de una nueva era en Expo
+                Belleza & Barberías.
               </Typography>
             </motion.div>
 
@@ -142,7 +143,7 @@ export default function Hero() {
               sx={{ mb: 6 }}
             >
               {[
-                { icon: <CalendarMonthIcon />, text: "14–16 Marzo, 2027" },
+                { icon: <CalendarMonthIcon />, text: "5–6 Febrero, 2027" },
                 { icon: <LocationOnIcon />, text: "WTC Ciudad de México" },
               ].map((item, i) => (
                 <Box
@@ -179,7 +180,7 @@ export default function Hero() {
             <Box sx={{ display: "flex", gap: 3 }}>
               <Button
                 variant='contained'
-                onClick={() => scrollTo("expositores")}
+                onClick={() => scrollTo("register")}
                 sx={{
                   bgcolor: "#2D0A1A",
                   color: "#FFF",
@@ -189,9 +190,9 @@ export default function Hero() {
                   "&:hover": { bgcolor: "#BE185D" },
                 }}
               >
-                QUIERO EXPONER
+                QUIERO ASISTIR
               </Button>
-              <Button
+              {/* <Button
                 variant='text'
                 onClick={() => scrollTo("visitantes")}
                 sx={{
@@ -202,7 +203,7 @@ export default function Hero() {
                 }}
               >
                 QUIERO ASISTIR —
-              </Button>
+              </Button> */}
             </Box>
           </Box>
 
@@ -221,8 +222,8 @@ export default function Hero() {
             >
               <Box
                 sx={{
-                  width: { xs: "300px", md: "450px" },
-                  height: { xs: "400px", md: "700px" },
+                  width: { xs: "300px", md: "auto" },
+                  height: { xs: "400px", md: "auto" },
                   borderRadius: "200px 200px 0 0", // Forma de arco de salón de belleza
                   overflow: "hidden",
                   // border: "12px solid rgba(195, 23, 23, 0.5)",
@@ -236,14 +237,14 @@ export default function Hero() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    mt: "30px",
+                    mt: "100px",
                   }}
                 />
               </Box>
             </motion.div>
 
             {/* Floating Element: El logo u objeto destacado */}
-            <motion.div
+            {/* <motion.div
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               style={{ position: "absolute", bottom: "10%", left: "-5%" }}
@@ -263,10 +264,10 @@ export default function Hero() {
                     color: "#BE185D",
                   }}
                 >
-                  EDICIÓN <br /> LIMITADA
+                  EDICIÓN <br /> 2027
                 </Typography>
               </Box>
-            </motion.div>
+            </motion.div> */}
           </Box>
         </Box>
       </Container>

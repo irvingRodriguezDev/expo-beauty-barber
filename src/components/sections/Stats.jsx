@@ -46,7 +46,7 @@ function Counter({ to, suffix = "" }) {
 
 const stats = [
   { value: 5000, suffix: "+", label: "AUDIENCIA \n ESTIMADA" },
-  { value: 3, suffix: "DÍAS", label: "EXPERIENCIA \n CURADA" },
+  { value: 2, suffix: "DÍAS", label: "EXPERIENCIA \n CURADA" },
   { value: 50, suffix: "+", label: "MARCAS \n EXHIBIDORAS" },
   { value: 20, suffix: "+", label: "PONENTES \n INTERNACIONALES" },
 ];
