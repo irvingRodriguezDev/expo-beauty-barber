@@ -27,36 +27,33 @@ export default function Footer() {
       component='footer'
       sx={{
         background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
-        pt: { xs: 10, md: 12 },
+        pt: { xs: 8, md: 12 },
         pb: 6,
-        position: "relative",
-        // borderTop: "1px solid rgba(236, 72, 153, 0.15)",
+        width: "100%",
       }}
     >
       <Container maxWidth='xl'>
         <Grid container spacing={{ xs: 6, md: 4 }}>
           {/* Columna 1: Brand Identity */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Box
               component='img'
               src={Logo}
               alt='Expo Beauty & Barber'
               sx={{
-                height: { xs: 45, md: 100 },
+                height: { xs: 60, md: 100 },
                 width: "auto",
                 mb: 3,
-                filter: "grayscale(0) contrast(1.2)", // Efecto editorial
-                transition: "0.4s",
-                "&:hover": { filter: "grayscale(0)" },
+                display: "block",
               }}
             />
             <Typography
               sx={{
                 color: "#552F3F",
                 lineHeight: 1.8,
-                maxWidth: 340,
+                maxWidth: { xs: "100%", sm: 340 },
                 fontFamily: "'DM Sans'",
-                fontSize: "1.04rem",
+                fontSize: "1rem",
                 opacity: 0.8,
                 mb: 4,
               }}
@@ -65,7 +62,11 @@ export default function Footer() {
               fusiona con la visión empresarial del sector belleza en México.
             </Typography>
 
-            <Stack direction='row' spacing={1.5}>
+            <Stack
+              direction='row'
+              spacing={1.5}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               {[InstagramIcon, FacebookIcon, LinkedInIcon].map((Icon, i) => (
                 <IconButton
                   key={i}
@@ -73,12 +74,10 @@ export default function Footer() {
                     color: "#2D0A1A",
                     border: "1px solid rgba(45, 10, 26, 0.1)",
                     borderRadius: 0,
-                    transition: "0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     "&:hover": {
                       bgcolor: "#2D0A1A",
                       color: "#FFF",
                       transform: "translateY(-5px)",
-                      borderColor: "#2D0A1A",
                     },
                   }}
                 >
@@ -88,8 +87,8 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          {/* Columna 2: Navegación Estilizada */}
-          <Grid item xs={6} md={2}>
+          {/* Columna 2: Navegación */}
+          <Grid item xs={6} sm={6} md={2}>
             <Typography
               sx={{
                 color: "#2D0A1A",
@@ -103,7 +102,7 @@ export default function Footer() {
             >
               Navegación
             </Typography>
-            <Stack spacing={2.5}>
+            <Stack spacing={2}>
               {navLinks.map((link) => (
                 <Typography
                   key={link.name}
@@ -112,24 +111,10 @@ export default function Footer() {
                   sx={{
                     color: "#552F3F",
                     textDecoration: "none",
-                    fontSize: "0.75rem",
+                    fontSize: "0.8rem",
                     fontWeight: 700,
-                    letterSpacing: "0.1em",
                     transition: "0.3s",
-                    display: "flex",
-                    alignItems: "center",
-                    "&::before": {
-                      content: '""',
-                      width: 0,
-                      height: "1px",
-                      bgcolor: "#EC4899",
-                      mr: 0,
-                      transition: "0.3s",
-                    },
-                    "&:hover": {
-                      color: "#EC4899",
-                      "&::before": { width: 15, mr: 1.5 },
-                    },
+                    "&:hover": { color: "#EC4899" },
                   }}
                 >
                   {link.name}
@@ -138,8 +123,8 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          {/* Columna 3: Sede con Iconografía Visual */}
-          <Grid item xs={6} md={3}>
+          {/* Columna 3: Sede */}
+          <Grid item xs={6} sm={6} md={3}>
             <Typography
               sx={{
                 color: "#2D0A1A",
@@ -160,7 +145,6 @@ export default function Footer() {
                 lineHeight: 2,
                 mb: 3,
                 fontWeight: 500,
-                opacity: 0.9,
               }}
             >
               <strong style={{ color: "#2D0A1A" }}>WTC Ciudad de México</strong>{" "}
@@ -179,32 +163,33 @@ export default function Footer() {
                 letterSpacing: "0.2em",
                 textDecoration: "none",
                 borderBottom: "2px solid #EC4899",
-                pb: 0.5,
-                transition: "0.3s",
-                "&:hover": {
-                  bgcolor: "#EC4899",
-                  color: "#FFF",
-                  px: 1,
-                },
+                "&:hover": { bgcolor: "#EC4899", color: "#FFF", px: 1 },
               }}
             >
               GOOGLE MAPS →
             </Typography>
           </Grid>
 
-          {/* Columna 4: Data Visual & Scroll */}
+          {/* Columna 4: Fecha & Scroll */}
           <Grid
             item
             xs={12}
+            sm={6}
             md={3}
             sx={{
               textAlign: { xs: "left", md: "right" },
               display: "flex",
               flexDirection: "column",
-              alignItems: { xs: "flex-start", md: "flex-end" },
+              alignItems: { xs: "center", md: "flex-end" },
             }}
           >
-            <Box sx={{ position: "relative", mb: 4 }}>
+            <Box
+              sx={{
+                position: "relative",
+                mb: { xs: 4, md: 0 },
+                mt: { xs: 2, md: 0 },
+              }}
+            >
               <Typography
                 sx={{
                   fontFamily: "'Syne'",
@@ -237,13 +222,8 @@ export default function Footer() {
                 borderRadius: "50%",
                 width: 50,
                 height: 50,
-                mt: "auto",
-                transition: "0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                "&:hover": {
-                  bgcolor: "#2D0A1A",
-                  color: "#FFF",
-                  transform: "rotate(-45deg)",
-                },
+                mt: { md: "auto" },
+                "&:hover": { bgcolor: "#2D0A1A", color: "#FFF" },
               }}
             >
               <ArrowUpwardIcon fontSize='small' />
@@ -252,12 +232,16 @@ export default function Footer() {
         </Grid>
 
         <Divider
-          sx={{ borderColor: "rgba(45, 10, 26, 0.08)", mt: 10, mb: 4 }}
+          sx={{
+            borderColor: "rgba(45, 10, 26, 0.08)",
+            mt: { xs: 8, md: 10 },
+            mb: 4,
+          }}
         />
 
         {/* Bottom Bar */}
         <Stack
-          direction={{ xs: "column", md: "row" }}
+          direction={{ xs: "column-reverse", md: "row" }}
           justifyContent='space-between'
           alignItems='center'
           spacing={3}
@@ -269,12 +253,13 @@ export default function Footer() {
               opacity: 0.6,
               fontWeight: 700,
               letterSpacing: "0.1em",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             © 2027 EXPO BELLEZA & BARBERÍAS | POWERED BY FR
           </Typography>
 
-          <Stack direction='row' spacing={4}>
+          <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
             {["PRIVACIDAD", "TÉRMINOS", "CONTACTO"].map((item) => (
               <Typography
                 key={item}
@@ -286,7 +271,6 @@ export default function Footer() {
                   textDecoration: "none",
                   fontWeight: 800,
                   letterSpacing: "0.1em",
-                  transition: "0.3s",
                   "&:hover": { color: "#EC4899" },
                 }}
               >

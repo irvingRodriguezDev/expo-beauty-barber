@@ -150,7 +150,7 @@ export default function Register() {
                   background: "rgba(255, 255, 255, 0.7)",
                   backdropFilter: "blur(20px)",
                   border: "1px solid rgba(236, 72, 153, 0.2)",
-                  borderRadius: 0, // Estética minimalista
+                  borderRadius: 4, // Estética minimalista
                   boxShadow: "0 40px 100px rgba(45, 10, 26, 0.08)",
                 }}
               >
@@ -263,7 +263,7 @@ export default function Register() {
                       py: 2.5,
                       bgcolor: "#2D0A1A",
                       color: "#FFF",
-                      borderRadius: 0,
+                      borderRadius: 4,
                       fontWeight: 800,
                       fontFamily: "'Syne'",
                       letterSpacing: "0.2em",

@@ -204,7 +204,7 @@ export default function Visitors() {
         {/* ÁREA DE REGISTRO E INVITACIÓN */}
         <Box sx={{ position: "relative" }}>
           <Grid container justifyContent='center'>
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} md={10} sx={{ borderRadius: "12px" }}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -214,6 +214,7 @@ export default function Visitors() {
                   sx={{
                     background: "#2D0A1A",
                     color: "#FFF",
+                    borderRadius: "12px",
                     p: { xs: 4, md: 10 },
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
@@ -317,7 +318,7 @@ export default function Visitors() {
                       sx={{
                         bgcolor: "#EC4899",
                         color: "#FFF",
-                        borderRadius: 0,
+                        borderRadius: 4,
                         py: 2.5,
                         fontWeight: 800,
                         fontFamily: "'Syne'",

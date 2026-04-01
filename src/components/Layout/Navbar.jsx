@@ -75,7 +75,7 @@ export default function Navbar() {
                   src={Logo}
                   alt='Expo Beauty & Barber Emprende 2027'
                   sx={{
-                    height: { xs: 40, md: 85 },
+                    height: { xs: 80, md: 85 },
                     width: "100%",
                     objectFit: "contain",
                     padding: "10px",

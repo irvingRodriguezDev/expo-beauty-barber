@@ -12,23 +12,25 @@ export default function AboutEvent() {
       component='section'
       id='visitantes'
       sx={{
-        py: { xs: 12, md: 20 },
-        minHeight: "100vh",
+        py: { xs: 8, md: 20 },
+        minHeight: { xs: "auto", md: "100vh" },
+        display: "flex",
+        alignItems: "center",
         background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Decoración de fondo sutil: Texto gigante de agua */}
+      {/* Texto de fondo responsivo */}
       <Typography
         sx={{
           position: "absolute",
-          top: "10%",
-          right: "50%",
-          fontSize: "20vw",
+          top: { xs: "5%", md: "10%" },
+          right: { xs: "10%", md: "50%" },
+          fontSize: { xs: "40vw", md: "20vw" },
           fontWeight: 900,
           fontFamily: "'Syne', sans-serif",
-          color: "rgba(236, 72, 154, 0.21)",
+          color: "rgba(236, 72, 154, 0.12)", // Bajé un poco la opacidad para mejor lectura en móvil
           lineHeight: 1,
           userSelect: "none",
           zIndex: 0,
@@ -42,12 +44,12 @@ export default function AboutEvent() {
           sx={{
             display: "grid",
             gridTemplateColumns: { xs: "1fr", lg: "1fr 1.1fr" },
-            gap: { xs: 8, lg: 15 },
+            gap: { xs: 6, lg: 15 },
             alignItems: "center",
           }}
         >
           {/* Lado Izquierdo: Contenido Editorial */}
-          <Box>
+          <Box sx={{ textAlign: { xs: "center", lg: "left" } }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -64,6 +66,7 @@ export default function AboutEvent() {
                   mb: 3,
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: { xs: "center", lg: "flex-start" },
                   gap: 2,
                 }}
               >
@@ -74,27 +77,27 @@ export default function AboutEvent() {
                 variant='h2'
                 sx={{
                   fontFamily: "'Syne', sans-serif",
-                  fontSize: { xs: "3rem", md: "4.5rem" },
+                  fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.5rem" },
                   fontWeight: 800,
-                  lineHeight: 1.1,
+                  lineHeight: { xs: 1.2, md: 1.1 },
                   color: "#2D0A1A",
                   mb: 4,
                 }}
               >
                 Donde la <br />
-                <span
-                  className='reveal-text'
-                  style={{ fontStyle: "italic", fontWeight: 400 }}
-                >
+                <span style={{ fontStyle: "italic", fontWeight: 400 }}>
                   industria brilla
                 </span>
               </Typography>
 
-              <Stack spacing={4} sx={{ maxWidth: 540 }}>
+              <Stack
+                spacing={4}
+                sx={{ maxWidth: { xs: "100%", lg: 540 }, mx: "auto" }}
+              >
                 <Typography
                   variant='body1'
                   sx={{
-                    fontSize: "1.2rem",
+                    fontSize: { xs: "1.1rem", md: "1.2rem" },
                     lineHeight: 1.8,
                     color: "#552F3F",
                     fontWeight: 300,
@@ -107,7 +110,17 @@ export default function AboutEvent() {
                   convergen para redefinir el futuro de la estética en México.
                 </Typography>
 
-                <Box sx={{ pl: 3, borderLeft: "2px solid #EC4899" }}>
+                <Box
+                  sx={{
+                    pl: { xs: 0, md: 3 },
+                    borderLeft: { xs: "none", md: "2px solid #EC4899" },
+                    borderTop: {
+                      xs: "1px solid rgba(236, 72, 153, 0.3)",
+                      md: "none",
+                    },
+                    pt: { xs: 4, md: 0 },
+                  }}
+                >
                   <Typography
                     variant='body2'
                     sx={{
@@ -122,7 +135,7 @@ export default function AboutEvent() {
                       Publicidad Mahur
                     </strong>
                     , integramos más de 15 años de experiencia en la creación de
-                    eventos de gran impacto a nivel nacional.
+                    eventos.
                   </Typography>
                   <Typography
                     sx={{
@@ -140,96 +153,56 @@ export default function AboutEvent() {
             </motion.div>
           </Box>
 
-          {/* Lado Derecho: Composición Visual Premium */}
-          <Box sx={{ position: "relative" }}>
+          {/* Lado Derecho: Composición Visual */}
+          <Box
+            sx={{
+              position: "relative",
+              mt: { xs: 4, lg: 0 },
+              px: { xs: 2, md: 0 },
+            }}
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, ease: "easeOut" }}
             >
-              {/* Imagen Principal con marco de diseño */}
+              {/* Imagen Principal */}
               <Box
-                className='glass-card'
                 sx={{
                   position: "relative",
                   zIndex: 2,
-                  p: 2,
+                  p: { xs: 1, md: 2 },
+                  bgcolor: "rgba(255,255,255,0.3)",
+                  backdropFilter: "blur(10px)",
                   borderRadius: "24px",
-                  overflow: "hidden",
+                  boxShadow: "0 30px 60px rgba(45,10,26,0.12)",
                 }}
               >
                 <Box
                   component='img'
-                  src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                  src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1170&auto=format&fit=crop'
                   alt='The Experience'
                   sx={{
                     width: "100%",
-                    height: "100%",
+                    height: { xs: "300px", md: "500px" },
                     objectFit: "cover",
                     borderRadius: "16px",
-                    filter: "grayscale(20%) contrast(1.1)",
+                    filter: "grayscale(10%) contrast(1.1)",
+                    display: "block",
                   }}
                 />
               </Box>
 
-              {/* Elementos Flotantes de Lujo */}
-              {/* <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                style={{
-                  position: "absolute",
-                  top: "-20px",
-                  right: "-20px",
-                  zIndex: 3,
-                }}
-              >
-                <Box
-                  sx={{
-                    bgcolor: "#2D0A1A",
-                    color: "#FFF",
-                    p: 4,
-                    borderRadius: "50%",
-                    width: "140px",
-                    height: "140px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontFamily: "'Syne'",
-                      fontSize: "1.5rem",
-                      fontWeight: 800,
-                      lineHeight: 1,
-                    }}
-                  >
-                    TOP
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: "0.6rem", letterSpacing: "0.2em" }}
-                  >
-                    BRANDS
-                  </Typography>
-                </Box>
-              </motion.div> */}
-
-              {/* Marco decorativo de línea fina */}
+              {/* Marco decorativo - Ajustado para no causar scroll horizontal */}
               <Box
                 sx={{
                   position: "absolute",
-                  inset: "-20px",
+                  inset: { xs: "-10px", md: "-20px" },
                   border: "1px solid #EC4899",
                   zIndex: 1,
-                  borderRadius: "30px",
+                  borderRadius: { xs: "20px", md: "30px" },
                   opacity: 0.3,
+                  pointerEvents: "none",
                 }}
               />
             </motion.div>

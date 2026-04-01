@@ -107,7 +107,7 @@ export default function MapSection() {
               variant='outlined'
               endIcon={<OpenInNewIcon />}
               sx={{
-                borderRadius: 0,
+                borderRadius: 4,
                 borderColor: "#2D0A1A",
                 color: "#2D0A1A",
                 px: 4,
@@ -137,6 +137,7 @@ export default function MapSection() {
                 zIndex: 2,
                 p: { xs: 1, md: 2 },
                 bgcolor: "#FFF",
+                borderRadius: 4,
                 boxShadow: "0 50px 100px rgba(131, 24, 67, 0.1)",
               }}
             >
@@ -144,6 +145,7 @@ export default function MapSection() {
                 sx={{
                   aspectRatio: { xs: "1/1", md: "16/9" },
                   overflow: "hidden",
+                  borderRadius: 4,
                   // Filtro para que el mapa se vea más "estético" y rosado sutil
                   filter:
                     "grayscale(0.2) contrast(1.1) brightness(1.05) sepia(0.1)",

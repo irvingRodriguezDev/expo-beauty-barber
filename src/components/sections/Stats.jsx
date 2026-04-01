@@ -80,15 +80,16 @@ export default function Stats() {
       ref={ref}
       component='section'
       sx={{
-        height: "100vh",
+        minHeight: "100vh", // Usamos minHeight para evitar cortes en móviles
         display: "flex",
         alignItems: "center",
         background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
         position: "relative",
         overflow: "hidden",
+        py: { xs: 10, md: 0 },
       }}
     >
-      {/* TÍTULO DE FONDO GIGANTE CON GRADIENTE */}
+      {/* TÍTULO DE FONDO GIGANTE - Escala responsiva */}
       <Typography
         sx={{
           position: "absolute",
@@ -96,7 +97,7 @@ export default function Stats() {
           left: "50%",
           transform: "translate(-50%, -50%)",
           fontFamily: "'Syne'",
-          fontSize: { xs: "12rem", md: "25rem" },
+          fontSize: { xs: "8rem", sm: "15rem", md: "25rem" },
           fontWeight: 900,
           background:
             "linear-gradient(180deg, rgba(45, 10, 26, 0.05) 0%, transparent 100%)",
@@ -111,22 +112,24 @@ export default function Stats() {
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
-        {/* CABECERA EDITORIAL DE SECCIÓN */}
-        <Grid container sx={{ mb: { xs: 8, md: 15 } }} alignItems='flex-start'>
-          <Grid item xs={12} md={12}>
+        {/* CABECERA EDITORIAL */}
+        <Grid container sx={{ mb: { xs: 6, md: 12 } }} spacing={2}>
+          <Grid item xs={12}>
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1 }}
             >
               <Typography
                 sx={{
                   fontFamily: "'Syne'",
-                  fontSize: "3.7rem",
-                  letterSpacing: "0.5em",
+                  fontSize: { xs: "1.5rem", sm: "2.5rem", md: "3.7rem" },
+                  letterSpacing: { xs: "0.2em", md: "0.5em" },
                   color: "#BE185D",
                   fontWeight: 800,
                   mb: 2,
+                  lineHeight: 1.2,
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
                 PROYECCIÓN E IMPACTO
@@ -137,9 +140,10 @@ export default function Stats() {
                   fontFamily: "'Syne'",
                   fontWeight: 800,
                   color: "#2D0A1A",
-                  maxWidth: "500px",
+                  maxWidth: { xs: "100%", md: "500px" },
                   lineHeight: 1.1,
-                  fontSize: { xs: "2rem", md: "3rem" },
+                  fontSize: { xs: "1.8rem", md: "3rem" },
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
                 Donde los números <br />
@@ -151,8 +155,7 @@ export default function Stats() {
           <Grid
             item
             xs={12}
-            md={12}
-            sx={{ textAlign: { md: "right" }, mt: { xs: 4, md: 0 } }}
+            sx={{ textAlign: { md: "right" }, mt: { xs: 2, md: 0 } }}
           >
             <Typography
               sx={{
@@ -163,6 +166,7 @@ export default function Stats() {
                 maxWidth: { md: "300px" },
                 ml: { md: "auto" },
                 lineHeight: 1.8,
+                textAlign: { xs: "center", md: "right" },
               }}
             >
               Analizamos cada métrica para garantizar que tu presencia tenga el
@@ -172,7 +176,7 @@ export default function Stats() {
         </Grid>
 
         {/* GRID DE ESTADÍSTICAS */}
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 4, md: 4 }}>
           {stats.map((stat, i) => (
             <Grid item xs={12} sm={6} md={3} key={i}>
               <motion.div
@@ -183,17 +187,20 @@ export default function Stats() {
                 <Box
                   sx={{
                     position: "relative",
-                    p: 4,
-                    // BORDES DE ESQUINA (EFECTO PREMIUM)
+                    p: { xs: 3, md: 4 },
+                    textAlign: { xs: "center", md: "left" },
+                    // BORDES DE ESQUINA
                     "&::before": {
                       content: '""',
                       position: "absolute",
                       top: 0,
-                      left: 0,
+                      left: { xs: "50%", md: 0 },
+                      transform: { xs: "translateX(-50%)", md: "none" },
                       width: "20px",
                       height: "20px",
                       borderTop: "2px solid #2D0A1A",
                       borderLeft: "2px solid #2D0A1A",
+                      display: { xs: "none", md: "block" }, // Los bordes se ven mejor en desktop
                     },
                     "&:hover::before": {
                       borderColor: "#EC4899",
@@ -201,13 +208,18 @@ export default function Stats() {
                       height: "100%",
                       transition: "0.6s ease",
                     },
+                    borderBottom: {
+                      xs: "1px solid rgba(45,10,26,0.05)",
+                      md: "none",
+                    },
+                    pb: { xs: 4, md: 4 },
                   }}
                 >
                   <Typography
                     sx={{
                       fontFamily: "'Syne'",
                       fontWeight: 900,
-                      fontSize: { xs: "4rem", md: "5.5rem" },
+                      fontSize: { xs: "3.5rem", sm: "4rem", md: "5.5rem" },
                       lineHeight: 1,
                       color: "#2D0A1A",
                       mb: 1,
@@ -225,6 +237,7 @@ export default function Stats() {
                       color: "#BE185D",
                       letterSpacing: "0.3em",
                       mb: 1,
+                      whiteSpace: "pre-line",
                     }}
                   >
                     {stat.label}
@@ -246,32 +259,15 @@ export default function Stats() {
           ))}
         </Grid>
 
-        {/* FOOTER DE SECCIÓN (RELLENO VISUAL) */}
+        {/* FOOTER DE SECCIÓN */}
         <Stack
           direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ mt: 10, pt: 4, borderTop: "1px solid rgba(45, 10, 26, 0.1)" }}
-        >
-          <Typography
-            sx={{
-              fontFamily: "monospace",
-              fontSize: "0.7rem",
-              color: "#2D0A1A",
-              opacity: 0.4,
-            }}
-          ></Typography>
-          <Typography
-            sx={{
-              fontFamily: "monospace",
-              fontSize: "0.7rem",
-              color: "#2D0A1A",
-              opacity: 0.4,
-            }}
-          >
-            {/* CDMX • MÉXICO */}
-          </Typography>
-        </Stack>
+          sx={{
+            mt: { xs: 6, md: 10 },
+            pt: 4,
+            borderTop: "1px solid rgba(45, 10, 26, 0.1)",
+          }}
+        />
       </Container>
     </Box>
   );
