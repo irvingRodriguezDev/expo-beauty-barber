@@ -72,7 +72,7 @@ export default function Register() {
       id='registro'
       sx={{
         py: { xs: 12, md: 20 },
-        background: "linear-gradient(180deg, #FAF8F5 0%, #FCE7F3 100%)",
+        background: "linear-gradient(180deg, #F9A8D4 0%, #FAF8F5 100%)",
         position: "relative",
         overflow: "hidden",
       }}

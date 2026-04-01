@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AppBar, Box, Container, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/LogoRosa.png";
+import Logo from "../../assets/LogoNegro.png";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
   { label: "Visitantes", to: "visitantes" },
@@ -75,7 +75,7 @@ export default function Navbar() {
                   src={Logo}
                   alt='Expo Beauty & Barber Emprende 2027'
                   sx={{
-                    height: { xs: 40, md: 70 },
+                    height: { xs: 40, md: 85 },
                     width: "100%",
                     objectFit: "contain",
                     padding: "10px",

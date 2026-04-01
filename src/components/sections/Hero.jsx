@@ -17,8 +17,7 @@ export default function Hero() {
         display: "flex",
         alignItems: "center",
         /* Fondo Premium: Degradado de seda rosada */
-        background:
-          "radial-gradient(circle at 20% 30%, #FFF5F7 0%, #FCE7F3 40%, #F9A8D4 120%)",
+        background: "linear-gradient(180deg, #F9A8D4 0%, #FAF8F5 100%)",
         overflow: "hidden",
       }}
     >
@@ -75,10 +74,12 @@ export default function Hero() {
                   letterSpacing: "0.5em",
                   color: "#BE185D",
                   textTransform: "uppercase",
-                  mb: 3,
+                  mb: 2,
+                  mt: 4,
                   display: "flex",
                   alignItems: "center",
                   gap: 2,
+
                   "&::after": {
                     content: '""',
                     width: "60px",
@@ -105,12 +106,12 @@ export default function Hero() {
               >
                 EXPO <br />
                 <span
-                  className='gradient-text'
+                  className='reveal-text'
                   style={{ fontStyle: "italic", fontWeight: 400 }}
                 >
-                  BELLEZA
+                  BELLEZA &
                 </span>
-                <br /> & BARBERÍAS
+                <br /> <span className='reveal-text'> BARBERÍAS</span>
               </Typography>
             </Box>
 
@@ -184,7 +185,7 @@ export default function Hero() {
                 sx={{
                   bgcolor: "#2D0A1A",
                   color: "#FFF",
-                  borderRadius: "0px", // Corte recto para look más arquitectónico/premium
+                  borderRadius: "30px", // Corte recto para look más arquitectónico/premium
                   px: 5,
                   py: 2,
                   "&:hover": { bgcolor: "#BE185D" },

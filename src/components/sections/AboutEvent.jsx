@@ -13,7 +13,8 @@ export default function AboutEvent() {
       id='visitantes'
       sx={{
         py: { xs: 12, md: 20 },
-        background: "linear-gradient(180deg, #FCE7F3 0%, #FAF8F5 100%)",
+        minHeight: "100vh",
+        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -23,17 +24,17 @@ export default function AboutEvent() {
         sx={{
           position: "absolute",
           top: "10%",
-          right: "-5%",
+          right: "50%",
           fontSize: "20vw",
           fontWeight: 900,
           fontFamily: "'Syne', sans-serif",
-          color: "rgba(236, 72, 153, 0.03)",
+          color: "rgba(236, 72, 154, 0.21)",
           lineHeight: 1,
           userSelect: "none",
           zIndex: 0,
         }}
       >
-        BEAUTY
+        EBB
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
@@ -99,7 +100,7 @@ export default function AboutEvent() {
                     fontWeight: 300,
                   }}
                 >
-                  Expo Beauty & Barber Emprende es el epicentro donde{" "}
+                  Expo Belleza & Barberías es el epicentro donde{" "}
                   <strong style={{ fontWeight: 600, color: "#2D0A1A" }}>
                     el prestigio y la innovación
                   </strong>{" "}

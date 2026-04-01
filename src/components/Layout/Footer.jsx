@@ -11,7 +11,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/LogoRosa.png";
+import Logo from "../../assets/LogoNegro.png";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -26,11 +26,11 @@ export default function Footer() {
     <Box
       component='footer'
       sx={{
-        background: "linear-gradient(180deg, #FFFFFF 0%, #FDF2F8 100%)",
+        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
         pt: { xs: 10, md: 12 },
         pb: 6,
         position: "relative",
-        borderTop: "1px solid rgba(236, 72, 153, 0.15)",
+        // borderTop: "1px solid rgba(236, 72, 153, 0.15)",
       }}
     >
       <Container maxWidth='xl'>
@@ -42,7 +42,7 @@ export default function Footer() {
               src={Logo}
               alt='Expo Beauty & Barber'
               sx={{
-                height: { xs: 45, md: 55 },
+                height: { xs: 45, md: 100 },
                 width: "auto",
                 mb: 3,
                 filter: "grayscale(0) contrast(1.2)", // Efecto editorial
@@ -56,7 +56,7 @@ export default function Footer() {
                 lineHeight: 1.8,
                 maxWidth: 340,
                 fontFamily: "'DM Sans'",
-                fontSize: "0.9rem",
+                fontSize: "1.04rem",
                 opacity: 0.8,
                 mb: 4,
               }}

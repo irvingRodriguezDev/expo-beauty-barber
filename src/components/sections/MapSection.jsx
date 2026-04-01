@@ -14,7 +14,7 @@ export default function MapSection() {
       component='section'
       sx={{
         py: { xs: 12, md: 20 },
-        background: "linear-gradient(180deg, #FCE7F3 0%, #FAF8F5 100%)",
+        background: "linear-gradient(180deg, #F9A8D4 0%, #FAF8F5 100%)",
         position: "relative",
       }}
     >

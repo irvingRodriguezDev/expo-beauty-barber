@@ -5,11 +5,11 @@ import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 const perks = [
   {
-    label: "Barber Shows",
+    label: "Shows de Barberia",
     description: "Espectáculos en vivo con referentes de la barbería mundial.",
   },
   {
-    label: "Makeup Zone",
+    label: "Zona de Maquillaje",
     description: "Espacios de vanguardia dedicados a la alta cosmética.",
   },
   {
@@ -17,15 +17,15 @@ const perks = [
     description: "Capacitación técnica de alto nivel para profesionales.",
   },
   {
-    label: "Exclusive Deals",
+    label: "Ofertas Exclusivas",
     description: "Acceso privilegiado a lanzamientos y precios de expo.",
   },
   {
-    label: "Creator Spot",
+    label: "Lugar para Creadores",
     description: "Zonas diseñadas para la creación de contenido digital.",
   },
   {
-    label: "Networking",
+    label: "Relaciones Comerciales",
     description: "Conecta con dueños de negocio y líderes del sector.",
   },
 ];
@@ -50,7 +50,7 @@ export default function Visitors() {
       id='visitantes'
       sx={{
         py: { xs: 10, md: 15 },
-        background: "linear-gradient(180deg, #FFF5F8 0%, #FCE7F3 100%)",
+        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -130,6 +130,7 @@ export default function Visitors() {
                     backgroundColor: "rgba(255, 255, 255, 0.4)",
                     border: "1px solid rgba(236, 72, 153, 0.1)",
                     backdropFilter: "blur(10px)",
+                    borderRadius: "12px",
                     position: "relative",
                     overflow: "hidden",
                     transition: "all 0.4s ease",
