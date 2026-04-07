@@ -16,21 +16,23 @@ export default function AboutEvent() {
         minHeight: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
-        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
+        // CAMBIO: Gradiente Esmeralda a Salvia (Inmersivo)
+        background: "linear-gradient(0deg, #062C22 0%, #668678 100%)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Texto de fondo responsivo */}
+      {/* Texto de fondo - Marca de agua elegante */}
       <Typography
         sx={{
           position: "absolute",
           top: { xs: "5%", md: "10%" },
           right: { xs: "10%", md: "50%" },
-          fontSize: { xs: "40vw", md: "20vw" },
+          fontSize: { xs: "40vw", md: "25vw" },
           fontWeight: 900,
           fontFamily: "'Syne', sans-serif",
-          color: "rgba(236, 72, 154, 0.12)", // Bajé un poco la opacidad para mejor lectura en móvil
+          // CAMBIO: Dorado con muy baja opacidad
+          color: "rgba(212, 175, 55, 0.15)",
           lineHeight: 1,
           userSelect: "none",
           zIndex: 0,
@@ -60,8 +62,8 @@ export default function AboutEvent() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.7rem",
                   fontWeight: 800,
-                  letterSpacing: "0.4em",
-                  color: "#BE185D",
+                  letterSpacing: "0.5em",
+                  color: "#D4AF37", // CAMBIO: Dorado Mate
                   textTransform: "uppercase",
                   mb: 3,
                   display: "flex",
@@ -80,12 +82,18 @@ export default function AboutEvent() {
                   fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.5rem" },
                   fontWeight: 800,
                   lineHeight: { xs: 1.2, md: 1.1 },
-                  color: "#2D0A1A",
+                  color: "#FFFFFF", // CAMBIO: Blanco para contraste
                   mb: 4,
                 }}
               >
                 Donde la <br />
-                <span style={{ fontStyle: "italic", fontWeight: 400 }}>
+                <span
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                    color: "#D4AF37",
+                  }}
+                >
                   industria brilla
                 </span>
               </Typography>
@@ -99,12 +107,12 @@ export default function AboutEvent() {
                   sx={{
                     fontSize: { xs: "1.1rem", md: "1.2rem" },
                     lineHeight: 1.8,
-                    color: "#552F3F",
+                    color: "rgba(255, 255, 255, 0.8)", // Blanco seda
                     fontWeight: 300,
                   }}
                 >
                   Expo Belleza & Barberías es el epicentro donde{" "}
-                  <strong style={{ fontWeight: 600, color: "#2D0A1A" }}>
+                  <strong style={{ fontWeight: 600, color: "#D4AF37" }}>
                     el prestigio y la innovación
                   </strong>{" "}
                   convergen para redefinir el futuro de la estética en México.
@@ -113,9 +121,10 @@ export default function AboutEvent() {
                 <Box
                   sx={{
                     pl: { xs: 0, md: 3 },
-                    borderLeft: { xs: "none", md: "2px solid #EC4899" },
+                    // CAMBIO: Borde Dorado
+                    borderLeft: { xs: "none", md: "2px solid #D4AF37" },
                     borderTop: {
-                      xs: "1px solid rgba(236, 72, 153, 0.3)",
+                      xs: "1px solid rgba(212, 175, 55, 0.3)",
                       md: "none",
                     },
                     pt: { xs: 4, md: 0 },
@@ -125,16 +134,14 @@ export default function AboutEvent() {
                     variant='body2'
                     sx={{
                       fontSize: "1rem",
-                      color: "#7D4A5F",
+                      color: "rgba(255, 255, 255, 0.6)",
                       lineHeight: 1.7,
                       mb: 2,
                     }}
                   >
                     Con el respaldo y la sólida infraestructura de{" "}
-                    <strong style={{ color: "#2D0A1A" }}>
-                      Publicidad Mahur
-                    </strong>
-                    , integramos más de 15 años de experiencia en la creación de
+                    <strong style={{ color: "#FFF" }}>Publicidad Mahur</strong>,
+                    integramos más de 15 años de experiencia en la creación de
                     eventos.
                   </Typography>
                   <Typography
@@ -142,11 +149,11 @@ export default function AboutEvent() {
                       fontFamily: "'Syne'",
                       fontSize: "0.8rem",
                       fontWeight: 700,
-                      color: "#BE185D",
-                      letterSpacing: "0.05em",
+                      color: "#D4AF37",
+                      letterSpacing: "0.1em",
                     }}
                   >
-                    MÁS DE 15 AÑOS PRODUCIENDO EXPERIENCIAS
+                    LIDERANDO LA PRODUCCIÓN DE EXPERIENCIAS B2B
                   </Typography>
                 </Box>
               </Stack>
@@ -166,16 +173,16 @@ export default function AboutEvent() {
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, ease: "easeOut" }}
             >
-              {/* Imagen Principal */}
+              {/* Imagen Principal con Marco Industrial/Lujo */}
               <Box
                 sx={{
                   position: "relative",
                   zIndex: 2,
-                  p: { xs: 1, md: 2 },
-                  bgcolor: "rgba(255,255,255,0.3)",
+                  p: { xs: 1, md: 1 },
+                  bgcolor: "rgba(212, 175, 55, 0.1)", // Glow dorado muy tenue
                   backdropFilter: "blur(10px)",
-                  borderRadius: "24px",
-                  boxShadow: "0 30px 60px rgba(45,10,26,0.12)",
+                  borderRadius: "2px", // Look más recto y serio para barbería
+                  border: "1px solid rgba(212, 175, 55, 0.2)",
                 }}
               >
                 <Box
@@ -184,24 +191,25 @@ export default function AboutEvent() {
                   alt='The Experience'
                   sx={{
                     width: "100%",
-                    height: { xs: "300px", md: "500px" },
+                    height: { xs: "350px", md: "550px" },
                     objectFit: "cover",
-                    borderRadius: "16px",
-                    filter: "grayscale(10%) contrast(1.1)",
+                    borderRadius: "0px",
+                    // Filtro más dramático para encajar con el verde
+                    filter: "contrast(1.1) brightness(0.9)",
                     display: "block",
                   }}
                 />
               </Box>
 
-              {/* Marco decorativo - Ajustado para no causar scroll horizontal */}
+              {/* Marco decorativo - Dorado sutil */}
               <Box
                 sx={{
                   position: "absolute",
-                  inset: { xs: "-10px", md: "-20px" },
-                  border: "1px solid #EC4899",
+                  inset: { xs: "-10px", md: "-30px" },
+                  border: "1px solid #D4AF37",
                   zIndex: 1,
-                  borderRadius: { xs: "20px", md: "30px" },
-                  opacity: 0.3,
+                  borderRadius: "2px",
+                  opacity: 0.2,
                   pointerEvents: "none",
                 }}
               />

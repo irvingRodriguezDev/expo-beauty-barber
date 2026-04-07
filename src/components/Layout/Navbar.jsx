@@ -1,18 +1,29 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AppBar, Box, Container, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/LogoNegro.png";
+import Logo from "../../assets/LogoNegro.png"; // Asegúrate de tener una versión clara si es necesario
+
 const navLinks = [
   { label: "Inicio", to: "inicio" },
-  { label: "Visitantes", to: "visitantes" },
-  // { label: "Expositores", to: "expositores" },
-  // { label: "Contacto", to: "contacto" },
+  { label: "Experiencia", to: "experiencia" }, // Agregué la galería
+  { label: "Quiero Exponer", to: "expositores" },
+  { label: "Quiero Asistir", to: "register" },
 ];
 
-const scrollTo = (id) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+const scrollTo = (id) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,10 +32,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 50);
       const sections = navLinks.map((l) => document.getElementById(l.to));
       const current = sections.findLast(
-        (s) => s && s.getBoundingClientRect().top <= 100,
+        (s) => s && s.getBoundingClientRect().top <= 120,
       );
       if (current) setActive(current.id);
     };
@@ -34,185 +45,220 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.div
-        initial={{ y: -80 }}
+      <AppBar
+        component={motion.nav}
+        initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1100 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        position='fixed'
+        elevation={0}
+        sx={{
+          top: scrolled ? 0 : { xs: 0, md: 20 },
+          left: 0,
+          right: 0,
+          mx: "auto",
+          width: scrolled ? "100%" : { xs: "100%", md: "90%" },
+          background: scrolled
+            ? "rgba(6, 44, 34, 0.95)" // Verde esmeralda con transparencia
+            : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(212, 175, 55, 0.2)" : "none",
+          borderRadius: scrolled ? 0 : { xs: 0, md: "2px" },
+          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+          zIndex: 1200,
+        }}
       >
-        <AppBar
-          position='static'
-          sx={{
-            mx: "auto",
-            mt: scrolled ? 0 : 2,
-            width: scrolled ? "100%" : "95%",
-            borderRadius: scrolled ? 0 : "100px",
-            transition: "all 0.5s ease",
-            // Glassmorphism
-            background: scrolled ? "rgba(255, 245, 247, 0.85)" : "transparent",
-            boxShadow: scrolled ? "0 10px 30px rgba(0,0,0,0.05)" : "none",
-          }}
-        >
-          <Container maxWidth={false}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              {/* Logo */}
-              <Box
-                onClick={() => scrollTo("inicio")}
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Box
-                  component='img'
-                  src={Logo}
-                  alt='Expo Beauty & Barber Emprende 2027'
-                  sx={{
-                    height: { xs: 80, md: 85 },
-                    width: "100%",
-                    objectFit: "contain",
-                    padding: "10px",
-                  }}
-                />
-              </Box>
-
-              {/* Desktop nav */}
-              <Box
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  gap: 4,
-                  alignItems: "center",
-                }}
-              >
-                {navLinks.map((link) => (
-                  <Box key={link.to} sx={{ position: "relative", pb: 0.5 }}>
-                    <Box
-                      component='button'
-                      onClick={() => scrollTo(link.to)}
-                      sx={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: "0.75rem",
-                        fontWeight: 500,
-                        letterSpacing: "0.12em",
-                        textTransform: "uppercase",
-                        color: active === link.to ? "#EC4899" : "#555",
-                        transition: "color 0.2s",
-                        p: 0,
-                        "&:hover": { color: "#BE185D" },
-                      }}
-                    >
-                      {link.label}
-                    </Box>
-                    {active === link.to && (
-                      <motion.div
-                        layoutId='nav-indicator'
-                        style={{
-                          position: "absolute",
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          height: "2px",
-                          background:
-                            "linear-gradient(90deg, #F9A8D4, #BE185D)",
-                        }}
-                      />
-                    )}
-                  </Box>
-                ))}
-
-                <Box
-                  component='button'
-                  onClick={() => scrollTo("register")}
-                  sx={{
-                    background: "transparent",
-                    border: "1.5px solid #EC4899",
-                    color: "#EC4899",
-                    borderRadius: "50px",
-                    px: 4,
-                    py: 1,
-                    fontSize: "0.65rem",
-                    fontWeight: 700,
-                    "&:hover": {
-                      background: "linear-gradient(135deg, #F9A8D4, #EC4899)",
-                      color: "#fff",
-                      borderColor: "transparent",
-                    },
-                  }}
-                >
-                  QUIERO ASISTIR
-                </Box>
-              </Box>
-
-              <IconButton
-                onClick={() => setMenuOpen(!menuOpen)}
-                sx={{ display: { md: "none" }, color: "#1A1A1A" }}
-              >
-                {menuOpen ? <CloseIcon /> : <MenuIcon />}
-              </IconButton>
-            </Box>
-          </Container>
-        </AppBar>
-      </motion.div>
-
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 1090,
-              background: "rgba(250,248,245,0.98)",
+        <Container maxWidth='xl'>
+          <Box
+            sx={{
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
-              gap: 32,
+              justifyContent: "space-between",
+              height: { xs: 70, md: 90 },
             }}
           >
-            {navLinks.map((link, i) => (
-              <motion.div
-                key={link.to}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-              >
+            {/* Logo con filtro para visibilidad */}
+            <Box
+              onClick={() => scrollTo("inicio")}
+              sx={{
+                cursor: "pointer",
+                transition: "0.3s",
+                "&:hover": { opacity: 0.8 },
+                filter: scrolled
+                  ? "brightness(0) invert(1)"
+                  : "brightness(0) invert(1)", // Si el logo es negro, lo invierte a blanco al hacer scroll
+              }}
+            >
+              <Box
+                component='img'
+                src={Logo}
+                alt='Logo EBB'
+                sx={{
+                  height: { xs: 50, md: 60 },
+                  width: "auto",
+                  objectFit: "contain",
+                }}
+              />
+            </Box>
+
+            {/* Desktop Navigation */}
+            <Stack
+              direction='row'
+              spacing={5}
+              alignItems='center'
+              sx={{ display: { xs: "none", md: "flex" } }}
+            >
+              {navLinks.map((link) => (
                 <Box
+                  key={link.to}
                   component='button'
+                  onClick={() => scrollTo(link.to)}
+                  sx={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    fontFamily: "'DM Sans'",
+                    fontSize: "0.7rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color:
+                      active === link.to
+                        ? "#D4AF37"
+                        : scrolled
+                          ? "#FFF"
+                          : "#ffffffff",
+                    position: "relative",
+                    transition: "0.3s",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -4,
+                      left: 0,
+                      width: active === link.to ? "100%" : "0%",
+                      height: "1px",
+                      bgcolor: "#D4AF37",
+                      transition: "0.3s",
+                    },
+                    "&:hover": { color: "#D4AF37" },
+                  }}
+                >
+                  {link.label}
+                </Box>
+              ))}
+
+              {/* Botón Call to Action Premium */}
+              <Button
+                variant='contained'
+                onClick={() => scrollTo("expositores")}
+                sx={{
+                  bgcolor: "#fff",
+                  color: "#062C22",
+                  borderRadius: 0,
+                  px: 4,
+                  py: 1,
+                  fontSize: "0.65rem",
+                  fontWeight: 900,
+                  fontFamily: "'Syne'",
+                  letterSpacing: "0.1em",
+                  "&:hover": { bgcolor: "#D4AF37", color: "#fff" },
+                }}
+              >
+                QUIERO EXPONER
+              </Button>
+              <Button
+                variant='contained'
+                onClick={() => scrollTo("register")}
+                sx={{
+                  bgcolor: "#D4AF37",
+                  color: "#062C22",
+                  borderRadius: 0,
+                  px: 4,
+                  py: 1,
+                  fontSize: "0.65rem",
+                  fontWeight: 900,
+                  fontFamily: "'Syne'",
+                  letterSpacing: "0.1em",
+                  "&:hover": { bgcolor: "#FFF", color: "#062C22" },
+                }}
+              >
+                QUIERO ASISTIR
+              </Button>
+            </Stack>
+
+            {/* Mobile Toggle */}
+            <IconButton
+              onClick={() => setMenuOpen(!menuOpen)}
+              sx={{
+                display: { md: "none" },
+                color: scrolled ? "#D4AF37" : "#FFF",
+              }}
+            >
+              {menuOpen ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+          </Box>
+        </Container>
+      </AppBar>
+
+      {/* Fullscreen Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <Box
+            component={motion.div}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            sx={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 1150,
+              background: "#062C22",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              p: 6,
+            }}
+          >
+            <Stack spacing={4}>
+              {navLinks.map((link, i) => (
+                <Typography
+                  key={link.to}
+                  component={motion.div}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
                   onClick={() => {
                     scrollTo(link.to);
                     setMenuOpen(false);
                   }}
                   sx={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    fontFamily: "'Syne', sans-serif",
-                    fontSize: "2.5rem",
+                    fontFamily: "'Syne'",
+                    fontSize: "3rem",
                     fontWeight: 800,
-                    color: "#1A1A1A",
-                    "&:hover": { color: "#EC4899" },
-                    transition: "color 0.2s",
-                    display: "block",
+                    color: active === link.to ? "#D4AF37" : "#FFF",
+                    cursor: "pointer",
+                    lineHeight: 1,
                   }}
                 >
                   {link.label}
-                </Box>
-              </motion.div>
-            ))}
-          </motion.div>
+                </Typography>
+              ))}
+
+              <Box sx={{ pt: 4, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                <Typography
+                  sx={{
+                    color: "#D4AF37",
+                    letterSpacing: "0.3em",
+                    fontSize: "0.7rem",
+                    fontWeight: 800,
+                  }}
+                >
+                  WTC CIUDAD DE MÉXICO
+                </Typography>
+              </Box>
+            </Stack>
+          </Box>
         )}
       </AnimatePresence>
     </>

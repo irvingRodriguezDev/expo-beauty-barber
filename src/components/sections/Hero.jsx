@@ -16,23 +16,24 @@ export default function Hero() {
         minHeight: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
-        background: "linear-gradient(180deg, #F9A8D4 0%, #FAF8F5 100%)",
+        // NUEVO GRADIENTE: Esmeralda profundo a Champagne Hueso
+        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
         overflow: "hidden",
         pt: { xs: 12, md: 0 },
         pb: { xs: 8, md: 0 },
       }}
     >
-      {/* Elementos Decorativos */}
+      {/* Elementos Decorativos Refinados */}
       <Box
         sx={{
           position: "absolute",
-          top: "-15%",
-          right: "-10%",
-          width: { xs: "100vw", md: "70vw" },
-          height: { xs: "100vw", md: "70vw" },
+          top: "-10%",
+          right: "-5%",
+          width: { xs: "100vw", md: "60vw" },
+          height: { xs: "100vw", md: "60vw" },
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 60%)",
-          filter: "blur(100px)",
+            "radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%)", // Destello Dorado sutil
+          filter: "blur(80px)",
           pointerEvents: "none",
         }}
       />
@@ -42,61 +43,68 @@ export default function Hero() {
           sx={{
             display: "grid",
             gridTemplateColumns: { xs: "1fr", lg: "1.2fr 0.8fr" },
-            gap: { xs: 4, lg: 2 },
+            gap: { xs: 6, lg: 2 },
             alignItems: "center",
           }}
         >
           {/* Contenido Izquierdo */}
           <Box sx={{ textAlign: { xs: "center", lg: "left" } }}>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
               <Typography
                 sx={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: { xs: "0.65rem", md: "0.75rem" },
-                  fontWeight: 700,
+                  fontSize: { xs: "0.7rem", md: "0.8rem" },
+                  fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "#BE185D",
+                  color: "#D4AF37", // DORADO: Sustituye al rosa para barbería
                   textTransform: "uppercase",
-                  mb: 2,
+                  mb: 3,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: { xs: "center", lg: "flex-start" },
                   gap: 2,
                   "&::after": {
                     content: '""',
-                    width: { xs: "30px", md: "60px" },
+                    width: "40px",
                     height: "1px",
-                    bgcolor: "#BE185D",
+                    bgcolor: "#D4AF37",
                   },
                 }}
               >
-                Edición 2027
+                EDICIÓN 2027
               </Typography>
             </motion.div>
 
-            <Box sx={{ mb: 3 }}>
+            <Box sx={{ mb: 4 }}>
               <Typography
                 variant='h1'
                 sx={{
                   fontSize: {
-                    xs: "3rem",
-                    sm: "4.5rem",
-                    md: "6rem",
+                    xs: "3.2rem",
+                    sm: "5rem",
+                    md: "7rem",
                     lg: "8.5rem",
                   },
-                  lineHeight: { xs: 0.9, md: 0.85 },
-                  fontWeight: 800,
+                  lineHeight: { xs: 0.9, md: 0.8 },
+                  fontWeight: 900,
                   fontFamily: "'Syne', sans-serif",
-                  color: "#2D0A1A",
+                  color: "#FFFFFF", // BLANCO: Para contraste sobre el verde oscuro
                   mb: 1,
+                  textShadow: "0 10px 30px rgba(0,0,0,0.2)",
                 }}
               >
                 EXPO <br />
-                <span style={{ fontStyle: "italic", fontWeight: 400 }}>
+                <span
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                    color: "#D4AF37", // DORADO: En la palabra clave
+                  }}
+                >
                   BELLEZA &
                 </span>
                 <br /> <span>BARBERÍAS</span>
@@ -110,36 +118,37 @@ export default function Hero() {
             >
               <Typography
                 sx={{
-                  fontSize: { xs: "1rem", md: "1.1rem" },
-                  maxWidth: { xs: "100%", lg: 500 },
+                  fontSize: { xs: "1.1rem", md: "1.25rem" },
+                  maxWidth: { xs: "100%", lg: 550 },
                   mx: { xs: "auto", lg: 0 },
-                  mb: 4,
-                  color: "#7D4A5F",
-                  lineHeight: 1.8,
+                  mb: 5,
+                  color: "rgba(255,255,255,0.8)", // Blanco suave para lectura
+                  lineHeight: 1.7,
                   fontWeight: 300,
                 }}
               >
-                Donde la pasión por el estilo se convierte en legado
-                empresarial. Sé protagonista del inicio de una nueva era.
+                El epicentro donde la maestría técnica y el arte visual se
+                fusionan. Eleva tu negocio en el evento más exclusivo de
+                Latinoamérica.
               </Typography>
             </motion.div>
 
-            {/* Info Badges */}
+            {/* Info Badges Premium */}
             <Stack
               direction={{ xs: "column", sm: "row" }}
               justifyContent={{ xs: "center", lg: "flex-start" }}
               alignItems='center'
               gap={2}
-              sx={{ mb: 5 }}
+              sx={{ mb: 6 }}
             >
               {[
                 {
                   icon: <CalendarMonthIcon fontSize='small' />,
-                  text: "5–6 Feb, 2027",
+                  text: "5–6 FEB, 2027",
                 },
                 {
                   icon: <LocationOnIcon fontSize='small' />,
-                  text: "WTC Ciudad de México",
+                  text: "WTC CIUDAD DE MÉXICO",
                 },
               ].map((item, i) => (
                 <Box
@@ -149,22 +158,23 @@ export default function Hero() {
                     alignItems: "center",
                     gap: 1.5,
                     px: 3,
-                    py: 1.2,
-                    bgcolor: "rgba(255, 255, 255, 0.4)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.6)",
-                    borderRadius: "100px",
-                    width: { xs: "fit-content", sm: "auto" },
+                    py: 1.5,
+                    bgcolor: "rgba(255, 255, 255, 0.05)",
+                    backdropFilter: "blur(15px)",
+                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                    borderRadius: "2px", // Look rectangular para barbería
+                    width: { xs: "100%", sm: "auto" },
                   }}
                 >
-                  <Box sx={{ color: "#EC4899", display: "flex" }}>
+                  <Box sx={{ color: "#D4AF37", display: "flex" }}>
                     {item.icon}
                   </Box>
                   <Typography
                     sx={{
-                      fontWeight: 700,
-                      fontSize: "0.8rem",
-                      color: "#2D0A1A",
+                      fontWeight: 800,
+                      fontSize: "0.75rem",
+                      color: "#FFFFFF",
+                      letterSpacing: "0.1em",
                     }}
                   >
                     {item.text}
@@ -173,58 +183,85 @@ export default function Hero() {
               ))}
             </Stack>
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "center", lg: "flex-start" },
-              }}
+            {/* Acciones de Alto Contraste */}
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={2}
+              justifyContent={{ xs: "center", lg: "flex-start" }}
             >
               <Button
                 variant='contained'
                 onClick={() => scrollTo("register")}
                 sx={{
-                  bgcolor: "#2D0A1A",
-                  color: "#FFF",
-                  borderRadius: "30px",
-                  px: { xs: 4, md: 6 },
-                  py: 2,
-                  fontSize: "0.9rem",
-                  fontWeight: 700,
-                  "&:hover": { bgcolor: "#BE185D", transform: "scale(1.05)" },
-                  transition: "0.3s",
+                  bgcolor: "#D4AF37", // DORADO
+                  color: "#062C22", // TEXTO VERDE OSCURO
+                  borderRadius: "0px", // Cambio a 0 para look arquitectónico/premium
+                  px: 6,
+                  py: 2.2,
+                  fontSize: "0.85rem",
+                  fontWeight: 900,
+                  fontFamily: "'Syne'",
+                  letterSpacing: "0.15em",
+                  "&:hover": {
+                    bgcolor: "#FFFFFF",
+                    transform: "translateY(-5px)",
+                  },
+                  transition: "0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
                 }}
               >
-                QUIERO ASISTIR
+                ADQUIRIR ACCESO
               </Button>
-            </Box>
+              <Button
+                variant='outlined'
+                onClick={() => scrollTo("expositores")}
+                sx={{
+                  borderColor: "rgba(255,255,255,0.3)",
+                  color: "#FFFFFF",
+                  borderRadius: "0px",
+                  px: 6,
+                  py: 2.2,
+                  fontSize: "0.85rem",
+                  fontWeight: 900,
+                  fontFamily: "'Syne'",
+                  letterSpacing: "0.15em",
+                  backdropFilter: "blur(10px)",
+                  "&:hover": {
+                    borderColor: "#D4AF37",
+                    color: "#D4AF37",
+                    transform: "translateY(-5px)",
+                  },
+                  transition: "0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+                }}
+              >
+                QUIERO EXPONER
+              </Button>
+            </Stack>
           </Box>
 
-          {/* Imagen Derecha */}
+          {/* Imagen Derecha con Arco Arquitectónico */}
           <Box
             sx={{
               position: "relative",
               display: "flex",
               justifyContent: "center",
-              mt: { xs: 2, lg: 0 },
+              mt: { xs: 4, lg: 0 },
             }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
             >
               <Box
                 sx={{
-                  width: { xs: "260px", sm: "350px", md: "450px", lg: "100%" },
-                  maxWidth: "550px",
+                  width: { xs: "280px", sm: "400px", lg: "480px" },
                   aspectRatio: "4/5",
-                  borderRadius: {
-                    xs: "150px 150px 0 0",
-                    md: "200px 200px 0 0",
-                  },
+                  // ARCO TIPO "PORTAL" (Muy de tendencia en diseño de interiores de lujo)
+                  borderRadius: "240px 240px 0 0",
                   overflow: "hidden",
                   position: "relative",
-                  boxShadow: "0 20px 40px rgba(45,10,26,0.1)",
+                  border: "1px solid rgba(212, 175, 55, 0.3)",
+                  p: 1, // Espacio para que el borde se vea como un marco
                 }}
               >
                 <Box
@@ -235,22 +272,36 @@ export default function Hero() {
                     height: "100%",
                     objectFit: "cover",
                     objectPosition: "top",
-                    // Ajuste para que la imagen respire en el arco
-                    pt: { xs: 4, md: 8 },
+                    borderRadius: "230px 230px 0 0",
+                    filter: "contrast(1.05) brightness(1.02)",
                   }}
                 />
               </Box>
             </motion.div>
+
+            {/* Elemento decorativo detrás de la imagen */}
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: -20,
+                right: -20,
+                width: "100%",
+                height: "100%",
+                border: "1px solid rgba(212, 175, 55, 0.1)",
+                borderRadius: "240px 240px 0 0",
+                zIndex: -1,
+              }}
+            />
           </Box>
         </Box>
       </Container>
 
-      {/* Scroll Down - Oculto en móviles muy pequeños para evitar ruido visual */}
+      {/* Scroll Down INDICATOR */}
       <Box
         onClick={() => scrollTo("visitantes")}
         sx={{
           position: "absolute",
-          bottom: 20,
+          bottom: 30,
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",
@@ -258,10 +309,12 @@ export default function Hero() {
         }}
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5 }}
         >
-          <KeyboardArrowDownIcon sx={{ color: "#BE185D", fontSize: 30 }} />
+          <KeyboardArrowDownIcon
+            sx={{ color: "#D4AF37", fontSize: 40, opacity: 0.6 }}
+          />
         </motion.div>
       </Box>
     </Box>

@@ -1,408 +1,112 @@
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import {
-  Box,
-  Container,
-  Typography,
-  TextField,
-  Button,
-  MenuItem,
-  Paper,
-  Divider,
-  IconButton,
-  Tooltip,
-  Stack,
-} from "@mui/material";
-import { useForm } from "react-hook-form";
-import { QRCodeSVG } from "qrcode.react";
-import DownloadIcon from "@mui/icons-material/Download";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import LocalActivityIcon from "@mui/icons-material/LocalActivity";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Container, Typography } from "@mui/material";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { PassSelection } from "./PassSelection";
+import { RegistrationForm } from "./RegistrationForm";
+import { SuccessTicket } from "./SuccessTicket";
 
-const visitorTypes = [
-  "Profesional de la Belleza",
-  "Barbero / Hair Stylist",
-  "Maquillador Profesional",
-  "Estudiante de Academia",
-  "Dueño de Salón / Spa",
-  "Distribuidor / Mayorista",
-  "Emprendedor",
-];
-
-function generateCode() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "EBB-";
-  for (let i = 0; i < 6; i++)
-    code += chars[Math.floor(Math.random() * chars.length)];
-  return code;
-}
+// Importa tus nuevos componentes aquí
+// import { PassSelection } from "./PassSelection"; ...
 
 export default function Register() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // idle | form | success
+  const [selectedPass, setSelectedPass] = useState(null);
   const [registration, setRegistration] = useState(null);
-  const [copied, setCopied] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const onSubmit = (data) => {
-    const code = generateCode();
-    setRegistration({ ...data, code });
+  const handleOnSubmit = (data) => {
+    const code = "EBB-" + Math.random().toString(36).substr(2, 6).toUpperCase();
+    setRegistration({ ...data, code, passTitle: selectedPass.title });
     setStatus("success");
   };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(registration.code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const passOptions = [
+    {
+      id: "general_access",
+      title: "PROFESSIONAL PASS",
+      price: 150,
+      desc: "Acceso total de un día a la zona de exposición, shows en plataforma principal y área de networking.",
+      color: "#D4AF37", // Acento Dorado
+    },
+    {
+      id: "full_experience",
+      title: "ELITE FULL PASS",
+      price: 200,
+      desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
+      color: "#FFFFFF", // Acento Blanco
+    },
+  ];
 
   return (
     <Box
       ref={ref}
       component='section'
-      id='registro'
+      id='register'
       sx={{
-        py: { xs: 12, md: 20 },
-        background: "linear-gradient(180deg, #F9A8D4 0%, #FAF8F5 100%)",
-        position: "relative",
-        overflow: "hidden",
+        py: { xs: 8, md: 15 },
+        background: "linear-gradient(180deg, #668678 0%, #062C22 100%)",
+        minHeight: "100vh",
       }}
     >
-      <Container maxWidth='lg' sx={{ position: "relative", zIndex: 1 }}>
-        <Box sx={{ textAlign: "center", mb: { xs: 6, md: 10 } }}>
+      <Container maxWidth='lg'>
+        <Box sx={{ textAlign: "center", mb: 6 }}>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           >
             <Typography
               sx={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.75rem",
+                fontFamily: "'DM Sans'",
+                fontSize: "0.7rem",
                 fontWeight: 800,
                 letterSpacing: "0.4em",
-                color: "#BE185D",
-                textTransform: "uppercase",
+                color: "#D4AF37",
                 mb: 2,
               }}
             >
-              ACCESO EXCLUSIVO
+              REGISTRO EDICIÓN 2027
             </Typography>
             <Typography
               variant='h2'
               sx={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: { xs: "2.8rem", md: "4.5rem" },
+                fontFamily: "'Syne'",
+                fontSize: { xs: "2.5rem", md: "4rem" },
                 fontWeight: 800,
-                color: "#2D0A1A",
-                mb: 2,
+                color: "#FFFFFF",
               }}
             >
-              Obtén tu{" "}
-              <span
-                className='gradient-text'
-                style={{ fontStyle: "italic", fontWeight: 500 }}
-              >
-                Pase Digital
-              </span>
-            </Typography>
-            <Typography
-              variant='body1'
-              sx={{
-                maxWidth: 600,
-                mx: "auto",
-                color: "#7D4A5F",
-                fontSize: "1.1rem",
-              }}
-            >
-              El registro es gratuito por tiempo limitado. Asegura tu lugar en
-              el evento más importante de la industria.
+              {status === "idle"
+                ? "Selecciona tu Acceso"
+                : "Completa tu Registro"}
             </Typography>
           </motion.div>
         </Box>
 
         <AnimatePresence mode='wait'>
-          {status === "idle" ? (
-            <motion.div
-              key='form'
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Paper
-                elevation={0}
-                component='form'
-                onSubmit={handleSubmit(onSubmit)}
-                sx={{
-                  maxWidth: 600,
-                  mx: "auto",
-                  p: { xs: 4, md: 8 },
-                  background: "rgba(255, 255, 255, 0.7)",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid rgba(236, 72, 153, 0.2)",
-                  borderRadius: 4, // Estética minimalista
-                  boxShadow: "0 40px 100px rgba(45, 10, 26, 0.08)",
-                }}
-              >
-                <Stack spacing={3}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                      mb: 2,
-                    }}
-                  >
-                    <LocalActivityIcon sx={{ color: "#EC4899" }} />
-                    <Typography
-                      sx={{
-                        fontFamily: "'Syne'",
-                        fontWeight: 700,
-                        letterSpacing: "0.1em",
-                      }}
-                    >
-                      FORMULARIO DE REGISTRO
-                    </Typography>
-                  </Box>
+          {status === "idle" && (
+            <PassSelection
+              options={passOptions}
+              onSelect={(pass) => {
+                setSelectedPass(pass);
+                setStatus("form");
+              }}
+            />
+          )}
 
-                  <TextField
-                    variant='standard'
-                    label='NOMBRE COMPLETO'
-                    fullWidth
-                    error={!!errors.nombre}
-                    {...register("nombre", { required: true })}
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        fontSize: "0.7rem",
-                        letterSpacing: "0.2em",
-                      },
-                    }}
-                  />
+          {status === "form" && (
+            <RegistrationForm
+              selectedPass={selectedPass}
+              onBack={() => setStatus("idle")}
+              onSubmit={handleOnSubmit}
+              visitorTypes={visitorTypes}
+              inputStyles={inputStyles}
+            />
+          )}
 
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                      gap: 3,
-                    }}
-                  >
-                    <TextField
-                      variant='standard'
-                      label='EMAIL CORPORATIVO'
-                      type='email'
-                      fullWidth
-                      error={!!errors.email}
-                      {...register("email", {
-                        required: true,
-                        pattern: /^\S+@\S+\.\S+$/,
-                      })}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          fontSize: "0.7rem",
-                          letterSpacing: "0.2em",
-                        },
-                      }}
-                    />
-                    <TextField
-                      variant='standard'
-                      label='TELÉFONO'
-                      fullWidth
-                      error={!!errors.telefono}
-                      {...register("telefono", { required: true })}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          fontSize: "0.7rem",
-                          letterSpacing: "0.2em",
-                        },
-                      }}
-                    />
-                  </Box>
-
-                  <TextField
-                    select
-                    variant='standard'
-                    label='PERFIL PROFESIONAL'
-                    fullWidth
-                    defaultValue=''
-                    error={!!errors.tipo}
-                    {...register("tipo", { required: true })}
-                    sx={{
-                      "& .MuiInputLabel-root": {
-                        fontSize: "0.7rem",
-                        letterSpacing: "0.2em",
-                      },
-                    }}
-                  >
-                    {visitorTypes.map((t) => (
-                      <MenuItem
-                        key={t}
-                        value={t}
-                        sx={{ fontSize: "0.9rem", fontFamily: "Syne" }}
-                      >
-                        {t}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-
-                  <Button
-                    type='submit'
-                    variant='contained'
-                    fullWidth
-                    sx={{
-                      mt: 4,
-                      py: 2.5,
-                      bgcolor: "#2D0A1A",
-                      color: "#FFF",
-                      borderRadius: 4,
-                      fontWeight: 800,
-                      fontFamily: "'Syne'",
-                      letterSpacing: "0.2em",
-                      "&:hover": { bgcolor: "#BE185D" },
-                    }}
-                  >
-                    GENERAR MI BOLETO
-                  </Button>
-                </Stack>
-              </Paper>
-            </motion.div>
-          ) : (
-            /* ── SUCCESS: TICKET LOOK ── */
-            <motion.div
-              key='success'
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Box sx={{ maxWidth: 500, mx: "auto" }}>
-                <Paper
-                  elevation={0}
-                  sx={{
-                    background: "#371022f4",
-                    color: "#FFF",
-                    p: 0,
-                    borderRadius: 0,
-                    overflow: "hidden",
-                    position: "relative",
-                  }}
-                >
-                  {/* Ticket Header */}
-                  <Box
-                    sx={{
-                      p: 4,
-                      textAlign: "center",
-                      borderBottom: "1px dashed rgba(255,255,255,0.2)",
-                    }}
-                  >
-                    <CheckCircleOutlineIcon
-                      sx={{ color: "#EC4899", fontSize: 40, mb: 2 }}
-                    />
-                    <Typography
-                      sx={{
-                        fontFamily: "'Syne'",
-                        fontWeight: 800,
-                        fontSize: "1.5rem",
-                      }}
-                    >
-                      REGISTRO CONFIRMADO
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: "0.8rem",
-                        opacity: 0.6,
-                        letterSpacing: "0.1em",
-                      }}
-                    >
-                      BIENVENIDO/A, {registration.nombre.toUpperCase()}
-                    </Typography>
-                  </Box>
-
-                  {/* Ticket Body */}
-                  <Box sx={{ p: 6, textAlign: "center" }}>
-                    <Box
-                      sx={{
-                        background: "#FFF",
-                        p: 3,
-                        display: "inline-block",
-                        mb: 4,
-                      }}
-                    >
-                      <QRCodeSVG
-                        value={`EBB-2026-${registration.code}`}
-                        size={180}
-                        level='H'
-                      />
-                    </Box>
-
-                    <Typography
-                      sx={{
-                        fontFamily: "'Syne'",
-                        fontSize: "2rem",
-                        fontWeight: 800,
-                        color: "#F9A8D4",
-                        mb: 1,
-                      }}
-                    >
-                      {registration.code}
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontSize: "0.75rem",
-                        opacity: 0.5,
-                        letterSpacing: "0.2em",
-                        mb: 4,
-                      }}
-                    >
-                      PRESENTA ESTE CÓDIGO AL INGRESAR
-                    </Typography>
-
-                    <Stack spacing={2}>
-                      <Button
-                        variant='outlined'
-                        fullWidth
-                        startIcon={<DownloadIcon />}
-                        sx={{
-                          color: "#FFF",
-                          borderColor: "rgba(255,255,255,0.3)",
-                          borderRadius: 0,
-                        }}
-                      >
-                        GUARDAR EN DISPOSITIVO
-                      </Button>
-                      <Button
-                        variant='text'
-                        onClick={() => setStatus("idle")}
-                        startIcon={<ArrowBackIcon />}
-                        sx={{
-                          color: "rgba(255,255,255,0.4)",
-                          fontSize: "0.7rem",
-                        }}
-                      >
-                        REALIZAR OTRO REGISTRO
-                      </Button>
-                    </Stack>
-                  </Box>
-
-                  {/* Ticket Footer Decor */}
-                  <Box
-                    sx={{
-                      height: 10,
-                      background: "linear-gradient(90deg, #F9A8D4, #BE185D)",
-                    }}
-                  />
-                </Paper>
-              </Box>
-            </motion.div>
+          {status === "success" && (
+            <SuccessTicket
+              registration={registration}
+              onReset={() => setStatus("idle")}
+            />
           )}
         </AnimatePresence>
       </Container>

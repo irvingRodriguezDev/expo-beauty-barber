@@ -32,25 +32,25 @@ export default function Highlights() {
       ref={ref}
       component='section'
       sx={{
-        // En móvil permitimos que crezca si el contenido lo requiere para no romper el layout
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        background: "linear-gradient(180deg, #F9A8D4 0%, #FAF8F5 100%)",
+        // CAMBIO: Gradiente Esmeralda a Salvia
+        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
         overflow: "hidden",
         position: "relative",
-        py: { xs: 8, md: 0 }, // Espaciado en móvil
+        py: { xs: 8, md: 0 },
       }}
     >
-      {/* 1. MARQUEES DE FONDO (TEXTURAS DINÁMICAS) */}
+      {/* 1. MARQUEES DE FONDO (TEXTURAS DORADAS SUTILES) */}
       <Box
         sx={{
           position: "absolute",
           width: "120%",
           left: "-10%",
           top: { xs: "-2%", md: "1%" },
-          opacity: 0.1,
+          opacity: 0.2, // Casi imperceptible, muy elegante
           pointerEvents: "none",
         }}
       >
@@ -58,9 +58,9 @@ export default function Highlights() {
           <Typography
             sx={{
               fontFamily: "'Syne'",
-              fontSize: { xs: "5rem", md: "12rem" }, // Tamaño reducido en móvil
+              fontSize: { xs: "5rem", md: "12rem" },
               fontWeight: 900,
-              color: "#2D0A1A",
+              color: "#D4AF37", // CAMBIO: Dorado
               whiteSpace: "nowrap",
             }}
           >
@@ -75,7 +75,7 @@ export default function Highlights() {
           width: "120%",
           left: "-10%",
           bottom: { xs: "5%", md: "2%" },
-          opacity: 0.05,
+          opacity: 0.25,
           pointerEvents: "none",
         }}
       >
@@ -85,7 +85,8 @@ export default function Highlights() {
               fontFamily: "'Syne'",
               fontSize: { xs: "4rem", md: "10rem" },
               fontWeight: 900,
-              WebkitTextStroke: { xs: "1px #2D0A1A", md: "2px #2D0A1A" },
+              // CAMBIO: Contorno en Dorado
+              WebkitTextStroke: { xs: "1px #D4AF37", md: "2px #D4AF37" },
               color: "transparent",
               whiteSpace: "nowrap",
             }}
@@ -111,7 +112,7 @@ export default function Highlights() {
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "#BE185D",
+                  color: "#D4AF37", // CAMBIO: Dorado
                   mb: 3,
                   textAlign: { xs: "center", md: "left" },
                 }}
@@ -123,7 +124,7 @@ export default function Highlights() {
                 sx={{
                   fontFamily: "'Syne'",
                   fontSize: { xs: "2.2rem", sm: "3.5rem", md: "5rem" },
-                  color: "#2D0A1A",
+                  color: "#FFFFFF", // CAMBIO: Blanco para contraste
                   lineHeight: { xs: 1.1, md: 0.9 },
                   mb: 4,
                   fontWeight: 900,
@@ -131,22 +132,30 @@ export default function Highlights() {
                 }}
               >
                 MÁS QUE UNA EXPO, <br />
-                <span style={{ color: "#EC4899" }}>UN LEGADO.</span>
+                <span
+                  style={{
+                    color: "#D4AF37",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                  }}
+                >
+                  UN LEGADO.
+                </span>
               </Typography>
               <Typography
                 sx={{
                   fontFamily: "'DM Sans'",
                   fontSize: "1.1rem",
-                  color: "#552F3F",
+                  color: "rgba(255, 255, 255, 0.7)", // Blanco suave
                   maxWidth: { xs: "100%", md: "480px" },
                   lineHeight: 1.8,
-                  opacity: 0.8,
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                Diseñamos un entorno donde la creatividad no tiene límites.
-                Desde pasarelas de alta costura hasta talleres técnicos de
-                precisión.
+                Donde la técnica se convierte en legado. Un espacio diseñado
+                para profesionales que buscan dominar las tendencias globales en
+                estilismo, estética avanzada y la arquitectura del corte
+                masculino.
               </Typography>
             </motion.div>
           </Grid>
@@ -164,16 +173,17 @@ export default function Highlights() {
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: { xs: "column", sm: "row" }, // Columna en móviles pequeños
+                      flexDirection: { xs: "column", sm: "row" },
                       alignItems: { xs: "center", sm: "flex-start" },
                       textAlign: { xs: "center", sm: "left" },
                       gap: { xs: 2, sm: 4 },
                       p: 3,
-                      borderBottom: "1px solid rgba(45,10,26,0.1)",
+                      // CAMBIO: Borde en blanco con baja opacidad
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                       transition: "0.4s",
                       "&:hover": {
-                        bgcolor: "rgba(236,72,153,0.05)",
-                        transform: { xs: "none", md: "translateX(20px)" }, // Solo animar en desktop
+                        bgcolor: "rgba(212, 175, 55, 0.05)", // Hover dorado tenue
+                        transform: { xs: "none", md: "translateX(20px)" },
                       },
                     }}
                   >
@@ -182,7 +192,7 @@ export default function Highlights() {
                         fontFamily: "'Syne'",
                         fontSize: "1.5rem",
                         fontWeight: 900,
-                        color: "#EC4899",
+                        color: "#D4AF37", // CAMBIO: Dorado
                         minWidth: { sm: "40px" },
                       }}
                     >
@@ -194,7 +204,7 @@ export default function Highlights() {
                           fontFamily: "'Syne'",
                           fontWeight: 800,
                           fontSize: "1.2rem",
-                          color: "#2D0A1A",
+                          color: "#FFFFFF", // CAMBIO: Blanco
                           letterSpacing: "0.1em",
                         }}
                       >
@@ -203,8 +213,7 @@ export default function Highlights() {
                       <Typography
                         sx={{
                           fontFamily: "'DM Sans'",
-                          color: "#552F3F",
-                          opacity: 0.7,
+                          color: "rgba(255, 255, 255, 0.6)",
                           fontSize: "0.95rem",
                         }}
                       >
@@ -219,19 +228,20 @@ export default function Highlights() {
         </Grid>
       </Container>
 
-      {/* 3. MARQUEE CENTRAL DE ALTO IMPACTO (ACCENT) */}
+      {/* 3. MARQUEE CENTRAL (EL ACENTO DE AUTORIDAD) */}
       <Box
         sx={{
-          position: { xs: "relative", md: "absolute" }, // Relativo en móvil para que no flote sobre el texto
+          position: { xs: "relative", md: "absolute" },
           width: "110%",
           bottom: { md: "28%" },
-          my: { xs: 6, md: 0 }, // Espacio extra en móvil
+          my: { xs: 6, md: 0 },
           left: "-5%",
-          background: "#2D0A1A",
+          background: "#041C16", // Verde aún más oscuro para el Marquee
           py: 2,
-          transform: { xs: "rotate(0deg)", md: "rotate(-2deg)" }, // Menos rotación en móvil
+          transform: { xs: "rotate(0deg)", md: "rotate(-1.5deg)" },
           zIndex: 1,
-          boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+          borderY: "1px solid rgba(212, 175, 55, 0.3)", // Bordes dorados
+          boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
         }}
       >
         <Marquee speed={60} gradient={false}>
@@ -250,14 +260,14 @@ export default function Highlights() {
               sx={{ mx: { xs: 2, md: 4 } }}
             >
               <AutoAwesomeIcon
-                sx={{ color: "#EC4899", mr: 2, fontSize: { xs: 16, md: 20 } }}
+                sx={{ color: "#D4AF37", mr: 2, fontSize: { xs: 16, md: 20 } }} // Icono Dorado
               />
               <Typography
                 sx={{
                   fontFamily: "'Syne'",
                   fontWeight: 800,
-                  color: "#FAF8F5",
-                  fontSize: { xs: "0.9rem", md: "1.2rem" },
+                  color: "#FFFFFF",
+                  fontSize: { xs: "0.9rem", md: "1.1rem" },
                   letterSpacing: "0.2em",
                 }}
               >
@@ -268,7 +278,7 @@ export default function Highlights() {
         </Marquee>
       </Box>
 
-      {/* FOOTER DE SECCIÓN: DETALLE TÉCNICO */}
+      {/* FOOTER DE SECCIÓN: DETALLE TÉCNICO DORADO */}
       <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
@@ -277,32 +287,33 @@ export default function Highlights() {
           width: "100%",
           px: 4,
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" }, // Stack en móvil
+          flexDirection: { xs: "column", sm: "row" },
           justifyContent: "space-between",
           alignItems: "center",
           gap: 2,
-          opacity: 0.3,
+          opacity: 0.4,
         }}
       >
         <Typography
           sx={{
             fontFamily: "monospace",
             fontSize: "0.6rem",
-            color: "#2D0A1A",
+            color: "#D4AF37",
             textAlign: "center",
+            letterSpacing: "0.2em",
           }}
         >
-          EXPO BELLEZA Y BARBERÍA 2027
+          PRODUCTION BY PUBLICIDAD MAHUR
         </Typography>
         <Typography
           sx={{
             fontFamily: "monospace",
             fontSize: "0.6rem",
-            color: "#2D0A1A",
+            color: "#FFFFFF",
             display: { xs: "none", sm: "block" },
           }}
         >
-          SCROLL TO EXPLORE ↓
+          2027 • WTC MEXICO CITY ↓
         </Typography>
       </Box>
     </Box>

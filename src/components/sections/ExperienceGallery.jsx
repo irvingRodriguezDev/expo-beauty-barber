@@ -1,0 +1,221 @@
+import { useRef } from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  ImageList,
+  ImageListItem,
+} from "@mui/material";
+import { motion, useInView } from "framer-motion";
+
+const galleryData = [
+  {
+    img: "https://images.pexels.com/photos/35138560/pexels-photo-35138560.jpeg",
+    cols: 2,
+    rows: 2,
+    title: "MASTERCLASSES",
+  },
+  {
+    img: "https://images.pexels.com/photos/1115128/pexels-photo-1115128.jpeg",
+    cols: 1,
+    rows: 1,
+    title: "MAKEUP ART",
+  },
+  {
+    img: "https://images.pexels.com/photos/36150765/pexels-photo-36150765.jpeg",
+    cols: 1,
+    rows: 1,
+    title: "BARBER SKILLS",
+  },
+  {
+    img: "https://images.pexels.com/photos/19392549/pexels-photo-19392549.jpeg",
+    cols: 1,
+    rows: 2,
+    title: "NETWORKING",
+  },
+  {
+    img: "https://images.pexels.com/photos/18439584/pexels-photo-18439584.jpeg",
+    cols: 1,
+    rows: 2,
+    title: "WTC CDMX",
+  },
+  {
+    img: "https://images.pexels.com/photos/7697641/pexels-photo-7697641.jpeg",
+    cols: 2,
+    rows: 1,
+    title: "EXHIBITORS",
+  },
+];
+
+export default function ExperienceGallery() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <Box
+      ref={ref}
+      id='experiencia'
+      sx={{
+        py: { xs: 10, md: 15 },
+        // CAMBIO: Gradiente Salvia a Esmeralda para profundidad
+        background: "linear-gradient(0deg, #062C22 0%, #668678 100%)",
+        overflow: "hidden",
+      }}
+    >
+      <Container maxWidth='xl'>
+        <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
+          <Typography
+            sx={{
+              fontFamily: "'Syne'",
+              fontWeight: 900,
+              fontSize: { xs: "2.5rem", md: "4rem" },
+              lineHeight: 1,
+              color: "#FFFFFF", // CAMBIO: Blanco puro
+            }}
+          >
+            VIVE LA{" "}
+            <span
+              style={{ color: "#D4AF37", fontStyle: "italic", fontWeight: 400 }}
+            >
+              EXPERIENCIA
+            </span>{" "}
+            EBB
+          </Typography>
+          {/* Subtítulo dorado sutil */}
+          <Typography
+            sx={{
+              fontFamily: "'DM Sans'",
+              fontSize: "0.7rem",
+              fontWeight: 800,
+              letterSpacing: "0.5em",
+              color: "#D4AF37",
+              mt: 2,
+              textTransform: "uppercase",
+            }}
+          >
+            Curaduría Visual 2027
+          </Typography>
+        </Box>
+
+        <ImageList
+          variant='quilted'
+          cols={4}
+          rowHeight={300}
+          gap={20}
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr) !important",
+              md: "repeat(4, 1fr) !important",
+            },
+          }}
+        >
+          {galleryData.map((item, index) => (
+            <ImageListItem
+              key={index}
+              cols={item.cols || 1}
+              rows={item.rows || 1}
+              component={motion.div}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              sx={{
+                position: "relative",
+                overflow: "hidden",
+                borderRadius: "0px", // CAMBIO: Bordes rectos (Premium/Architectural)
+                cursor: "pointer",
+                border: "1px solid rgba(212, 175, 55, 0.1)", // Marco dorado casi invisible
+                "&:hover .gallery-overlay": { opacity: 1 },
+                "&:hover img": {
+                  transform: "scale(1.08)",
+                  filter: "grayscale(0%) brightness(1)",
+                },
+              }}
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                loading='lazy'
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  // Filtro inicial más serio
+                  filter: "grayscale(40%) brightness(0.8)",
+                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+              />
+
+              {/* Overlay con Texto (Efecto Galería de Arte) */}
+              <Box
+                className='gallery-overlay'
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  // CAMBIO: Overlay Verde Esmeralda Profundo
+                  bgcolor: "rgba(6, 44, 34, 0.7)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0,
+                  transition: "0.4s",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "'Syne'",
+                    color: "#D4AF37", // Texto en Dorado
+                    fontWeight: 800,
+                    fontSize: "0.8rem",
+                    letterSpacing: "0.4em",
+                    border: "1px solid #D4AF37",
+                    px: 3,
+                    py: 1.5,
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {item.title}
+                </Typography>
+              </Box>
+            </ImageListItem>
+          ))}
+        </ImageList>
+
+        {/* Decoración sutil inferior en Dorado/Blanco */}
+        <Box
+          sx={{
+            mt: 8,
+            display: "flex",
+            justifyContent: "center",
+            gap: 6,
+            opacity: 0.6,
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "'DM Sans'",
+              fontSize: "0.6rem",
+              fontWeight: 700,
+              letterSpacing: "0.3em",
+              color: "#D4AF37",
+            }}
+          >
+            1RA EDICIÓN
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "'DM Sans'",
+              fontSize: "0.6rem",
+              fontWeight: 700,
+              letterSpacing: "0.3em",
+              color: "#FFF",
+            }}
+          >
+            WTC MÉXICO
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
+  );
+}

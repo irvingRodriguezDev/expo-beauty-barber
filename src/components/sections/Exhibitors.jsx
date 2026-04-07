@@ -1,43 +1,39 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Box, Container, Typography, Card, Stack, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  Stack,
+  Button,
+  Grid,
+} from "@mui/material";
 import Marquee from "react-fast-marquee";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import ShareIcon from "@mui/icons-material/Share";
-import HandshakeIcon from "@mui/icons-material/Handshake";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const benefits = [
   {
-    Icon: TrendingUpIcon,
     title: "VENTAS DIRECTAS",
     desc: "Contacto inmediato con profesionales y dueños de salones listos para invertir.",
   },
   {
-    Icon: StorefrontIcon,
     title: "CANALES B2B",
     desc: "La plataforma perfecta para expandir tu red de distribución a nivel nacional.",
   },
   {
-    Icon: EmojiEventsIcon,
     title: "BRAND AWARENESS",
     desc: "Posiciona tu marca en el 'top of mind' de la industria de la belleza en México.",
   },
   {
-    Icon: OndemandVideoIcon,
     title: "LIVE DEMOS",
     desc: "Escenarios equipados para mostrar la eficacia de tus productos en tiempo real.",
   },
   {
-    Icon: ShareIcon,
     title: "IMPACTO DIGITAL",
     desc: "Presencia en contenido capturado por influencers y medios especializados.",
   },
   {
-    Icon: HandshakeIcon,
     title: "NETWORKING ELITE",
     desc: "Acceso exclusivo a la zona VIP para cerrar alianzas estratégicas de alto nivel.",
   },
@@ -64,314 +60,369 @@ export default function Exhibitors() {
       ref={ref}
       component='section'
       id='expositores'
-      sx={{ background: "#FFFFFF", overflow: "hidden" }}
+      sx={{
+        // CAMBIO: Gradiente Esmeralda profundo para coherencia
+        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
+        overflow: "hidden",
+      }}
     >
-      {/* Header Section: Editorial Style */}
-      <Container maxWidth='xl' sx={{ py: { xs: 10, md: 15 } }}>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 0.8fr" },
-            gap: 6,
-            alignItems: "end",
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <Typography
-              sx={{
-                fontFamily: "'DM Sans'",
-                fontSize: "0.75rem",
-                fontWeight: 800,
-                letterSpacing: "0.4em",
-                color: "#BE185D",
-                mb: 2,
-              }}
+      {/* 1. HEADER SECTION: EDITORIAL STYLE */}
+      <Container maxWidth='xl' sx={{ py: { xs: 8, md: 15 } }}>
+        <Grid container spacing={{ xs: 4, lg: 10 }} alignItems='flex-end'>
+          <Grid item xs={12} lg={7}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
             >
-              PARTNERSHIPS 2027
-            </Typography>
-            <Typography
-              variant='h2'
-              sx={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: { xs: "3rem", md: "5rem" },
-                fontWeight: 800,
-                color: "#2D0A1A",
-                lineHeight: 0.9,
-                mb: 4,
-              }}
-            >
-              Impulsa tu <br />
-              <span className='gradient-text'>crecimiento B2B</span>
-            </Typography>
-          </motion.div>
+              <Typography
+                sx={{
+                  fontFamily: "'DM Sans'",
+                  fontSize: "0.75rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.5em",
+                  color: "#D4AF37", // CAMBIO: Dorado
+                  mb: 3,
+                  textAlign: { xs: "center", lg: "left" },
+                }}
+              >
+                PARTNERSHIPS 2027
+              </Typography>
+              <Typography
+                variant='h2'
+                sx={{
+                  fontFamily: "'Syne', sans-serif",
+                  fontSize: { xs: "2.8rem", sm: "4rem", md: "5.5rem" },
+                  fontWeight: 900,
+                  color: "#FFFFFF",
+                  lineHeight: { xs: 1.1, md: 0.9 },
+                  mb: { xs: 4, lg: 0 },
+                  textAlign: { xs: "center", lg: "left" },
+                }}
+              >
+                IMPULSA TU <br />
+                <span
+                  style={{
+                    color: "#D4AF37",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                  }}
+                >
+                  CRECIMIENTO B2B
+                </span>
+              </Typography>
+            </motion.div>
+          </Grid>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-          >
-            <Typography
-              sx={{
-                fontSize: "1.2rem",
-                color: "#552F3F",
-                mb: 4,
-                borderLeft: "4px solid #EC4899",
-                pl: 3,
-              }}
+          <Grid item xs={12} lg={5}>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Convertimos el recinto en el epicentro de negocios más vibrante de
-              Latinoamérica. No solo expones, conectas con el futuro de tu
-              industria.
-            </Typography>
-            <Button
-              endIcon={<ArrowForwardIcon />}
-              sx={{
-                fontFamily: "'Syne'",
-                fontWeight: 800,
-                color: "#EC4899",
-                letterSpacing: "0.1em",
-              }}
-            >
-              DESCARGAR BROCHURE COMERCIAL
-            </Button>
-          </motion.div>
-        </Box>
+              <Box
+                sx={{
+                  borderLeft: { xs: "none", lg: "4px solid #D4AF37" },
+                  borderTop: {
+                    xs: "1px solid rgba(212,175,55,0.3)",
+                    lg: "none",
+                  },
+                  pl: { lg: 4 },
+                  pt: { xs: 4, lg: 0 },
+                  textAlign: { xs: "center", lg: "left" },
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "1.15rem",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    mb: 4,
+                    lineHeight: 1.7,
+                    fontWeight: 300,
+                  }}
+                >
+                  Convertimos el WTC en el epicentro de negocios más vibrante de
+                  Latinoamérica. Asegura tu lugar frente a los tomadores de
+                  decisión.
+                </Typography>
+                <Button
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{
+                    fontFamily: "'Syne'",
+                    fontWeight: 800,
+                    color: "#D4AF37",
+                    letterSpacing: "0.1em",
+                    "&:hover": {
+                      bgcolor: "transparent",
+                      color: "#FFFFFF",
+                      transform: "translateX(10px)",
+                    },
+                    transition: "0.3s",
+                  }}
+                >
+                  DESCARGAR BROCHURE COMERCIAL
+                </Button>
+              </Box>
+            </motion.div>
+          </Grid>
+        </Grid>
       </Container>
 
-      {/* Marquee de Marcas - Estética Minimalista */}
-      <Box sx={{ bgcolor: "#FBE8F3", py: 4 }}>
-        <Marquee speed={50} gradient gradientColor={[45, 10, 26]}>
+      {/* 2. MARQUEE DE MARCAS (SUTILEZA PREMIUM) */}
+      <Box
+        sx={{
+          bgcolor: "#041C16", // Negro Esmeralda
+          py: { xs: 3, md: 5 },
+          transform: "rotate(-1deg) scale(1.02)",
+          my: 4,
+          borderY: "1px solid rgba(212, 175, 55, 0.2)",
+        }}
+      >
+        <Marquee speed={60} gradient={false}>
           {brandItems.concat(brandItems).map((brand, i) => (
             <Typography
               key={i}
               sx={{
                 fontFamily: "'Syne'",
-                fontSize: { xs: "1.5rem", md: "2.5rem" },
+                fontSize: { xs: "1.2rem", md: "2.2rem" },
                 fontWeight: 800,
-                color: "#EC4899",
-                mx: 6,
+                color: "#D4AF37",
+                mx: { xs: 4, md: 8 },
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
+                letterSpacing: "0.2em",
+                opacity: 0.6,
+                "&:hover": { opacity: 1, color: "#FFFFFF" },
                 transition: "0.3s",
-                "&:hover": { color: "#EC4899" },
               }}
             >
-              {brand}
+              {brand} •
             </Typography>
           ))}
         </Marquee>
       </Box>
 
-      {/* Benefits Grid: Glassmorphism / Clean Style */}
-      <Box
-        sx={{
-          py: 15,
-          background: "linear-gradient(180deg, #FAF8F5 0%, #FFFFFF 100%)",
-        }}
-      >
+      {/* 3. BENEFITS GRID: MODERN CARDS */}
+      <Box sx={{ py: { xs: 10, md: 15 } }}>
         <Container maxWidth='xl'>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "repeat(2, 1fr)",
-                lg: "repeat(3, 1fr)",
-              },
-              gap: 4,
-            }}
-          >
+          <Grid container spacing={4}>
             {benefits.map((b, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Card
-                  elevation={0}
-                  sx={{
-                    height: "100%",
-                    p: 4,
-                    bgcolor: "transparent",
-                    border: "1px solid rgba(0,0,0,0.05)",
-                    borderRadius: 0,
-                    transition: "0.4s",
-                    "&:hover": {
-                      bgcolor: "#FFF",
-                      boxShadow: "0 30px 60px rgba(45,10,26,0.08)",
-                      borderColor: "#F9A8D4",
-                      transform: "translateY(-10px)",
-                    },
-                  }}
+              <Grid item xs={12} sm={6} lg={4} key={i}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: i * 0.1 }}
                 >
-                  <Box
+                  <Card
+                    elevation={0}
                     sx={{
-                      mb: 4,
-                      display: "inline-flex",
-                      p: 1.5,
-                      bgcolor: "#FCE7F3",
-                      color: "#BE185D",
+                      height: "100%",
+                      p: { xs: 4, md: 6 },
+                      bgcolor: "rgba(255, 255, 255, 0.03)",
+                      backdropFilter: "blur(10px)",
+                      border: "1px solid rgba(212, 175, 55, 0.1)",
+                      borderRadius: 0, // Corte recto Premium
+                      position: "relative",
+                      overflow: "hidden",
+                      transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+                      display: "flex",
+                      flexDirection: "column",
+
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "2px",
+                        background: "#D4AF37",
+                        transform: "scaleX(0)",
+                        transformOrigin: "left",
+                        transition: "transform 0.5s ease",
+                      },
+
+                      "&:hover": {
+                        bgcolor: "rgba(255, 255, 255, 0.07)",
+                        transform: "translateY(-15px)",
+                        "&::before": { transform: "scaleX(1)" },
+                        "& .benefit-number": {
+                          opacity: 0.08,
+                          transform: "translateX(-10px)",
+                        },
+                      },
                     }}
                   >
-                    <b.Icon />
-                  </Box>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Syne'",
-                      fontWeight: 800,
-                      fontSize: "1rem",
-                      letterSpacing: "0.1em",
-                      color: "#2D0A1A",
-                      mb: 2,
-                    }}
-                  >
-                    {b.title}
-                  </Typography>
-                  <Typography
-                    variant='body2'
-                    sx={{ color: "#7D4A5F", lineHeight: 1.8 }}
-                  >
-                    {b.desc}
-                  </Typography>
-                </Card>
-              </motion.div>
+                    <Typography
+                      className='benefit-number'
+                      sx={{
+                        position: "absolute",
+                        top: -10,
+                        right: 20,
+                        fontSize: "8rem",
+                        fontWeight: 900,
+                        fontFamily: "'Syne'",
+                        color: "#D4AF37",
+                        opacity: 0.03,
+                        lineHeight: 1,
+                        transition: "0.6s ease",
+                        pointerEvents: "none",
+                        zIndex: 0,
+                      }}
+                    >
+                      0{i + 1}
+                    </Typography>
+
+                    <Box sx={{ position: "relative", zIndex: 1 }}>
+                      <Typography
+                        sx={{
+                          fontFamily: "'Syne'",
+                          fontWeight: 900,
+                          fontSize: "1.25rem",
+                          letterSpacing: "0.05em",
+                          color: "#FFFFFF",
+                          mb: 3,
+                          "&::after": {
+                            content: '""',
+                            position: "absolute",
+                            bottom: -8,
+                            left: 0,
+                            width: "30px",
+                            height: "2px",
+                            bgcolor: "#D4AF37",
+                          },
+                        }}
+                      >
+                        {b.title}
+                      </Typography>
+
+                      <Typography
+                        variant='body1'
+                        sx={{
+                          color: "rgba(255, 255, 255, 0.6)",
+                          lineHeight: 1.9,
+                          fontWeight: 300,
+                          fontSize: "1rem",
+                          mt: 2,
+                        }}
+                      >
+                        {b.desc}
+                      </Typography>
+                    </Box>
+                  </Card>
+                </motion.div>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Container>
       </Box>
 
-      {/* CTA Final para Expositores */}
-      <Container maxWidth='lg' sx={{ pb: 15, position: "relative" }}>
-        {/* Decoración de fondo para dar profundidad */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "100%",
-            height: "100%",
-            background:
-              "radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%)",
-            zIndex: 0,
-            pointerEvents: "none",
-          }}
-        />
-
-        <Box
-          sx={{
-            p: { xs: 6, md: 10 },
-            // FONRO ROSA ULTRA-LIGHT CON CRISTAL
-            background: "rgba(255, 255, 255, 0.6)",
-            backdropFilter: "blur(10px)",
-            textAlign: "center",
-            // BORDE ROSA VIBRANTE
-            border: "1px solid rgba(236, 72, 153, 0.3)",
-            position: "relative",
-            zIndex: 1,
-            // SOMBRA ELEVADA
-            boxShadow: "0 40px 100px rgba(190, 24, 93, 0.08)",
-          }}
+      {/* 4. CTA FINAL: GLASS BOX REFINADO */}
+      <Container maxWidth='lg' sx={{ pb: { xs: 10, md: 20 } }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
         >
-          <Typography
+          <Box
             sx={{
-              fontFamily: "'DM Sans'",
-              fontSize: "0.7rem",
-              fontWeight: 900,
-              letterSpacing: "0.4em",
-              color: "#BE185D",
-              mb: 2,
-              textTransform: "uppercase",
+              p: { xs: 5, md: 8 },
+              background: "#041C16",
+              textAlign: "center",
+              border: "1px solid rgba(212, 175, 55, 0.3)",
+              borderRadius: 0,
+              boxShadow: "0 50px 100px rgba(0,0,0,0.5)",
             }}
           >
-            OPORTUNIDAD COMERCIAL
-          </Typography>
-
-          <Typography
-            variant='h4'
-            sx={{
-              fontFamily: "'Syne'",
-              fontWeight: 800,
-              mb: 3,
-              color: "#2D0A1A",
-              fontSize: { xs: "2rem", md: "3rem" },
-              lineHeight: 1,
-            }}
-          >
-            ¿LISTO PARA <span style={{ color: "#EC4899" }}>LIDERAR</span> EL
-            MERCADO?
-          </Typography>
-
-          <Typography
-            sx={{
-              mb: 6,
-              maxWidth: 600,
-              mx: "auto",
-              color: "#552F3F",
-              fontSize: "1.1rem",
-              lineHeight: 1.6,
-            }}
-          >
-            Quedan pocos espacios disponibles para la edición 2027. Solicita una
-            cotización personalizada de stand hoy mismo.
-          </Typography>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={3}
-            justifyContent='center'
-          >
-            <Button
-              variant='contained'
-              disableElevation
+            <Typography
               sx={{
-                bgcolor: "#2D0A1A",
-                color: "#FFF",
-                px: 6,
-                py: 2.5,
-                borderRadius: 0,
-                fontFamily: "'Syne'",
-                fontWeight: 800,
-                letterSpacing: "0.1em",
-                transition: "0.4s",
-                "&:hover": {
-                  bgcolor: "#EC4899",
-                  transform: "translateY(-5px)",
-                  boxShadow: "0 15px 30px rgba(236, 72, 153, 0.3)",
-                },
+                fontFamily: "'DM Sans'",
+                fontSize: "0.75rem",
+                fontWeight: 900,
+                letterSpacing: "0.5em",
+                color: "#D4AF37",
+                mb: 3,
               }}
             >
-              CONTACTAR VENTAS
-            </Button>
+              OPORTUNIDAD COMERCIAL
+            </Typography>
 
-            <Button
-              variant='outlined'
+            <Typography
+              variant='h3'
               sx={{
-                borderColor: "#2D0A1A",
-                color: "#2D0A1A",
-                px: 6,
-                py: 2.5,
-                borderRadius: 0,
                 fontFamily: "'Syne'",
-                fontWeight: 800,
-                letterSpacing: "0.1em",
-                transition: "0.4s",
-                "&:hover": {
-                  borderColor: "#EC4899",
-                  color: "#EC4899",
-                  transform: "translateY(-5px)",
-                },
+                fontWeight: 900,
+                mb: 3,
+                color: "#FFFFFF",
+                fontSize: { xs: "2rem", md: "3.5rem" },
+                lineHeight: 1,
               }}
             >
-              VER PLANO DEL EVENTO
-            </Button>
-          </Stack>
-        </Box>
+              ¿LISTO PARA{" "}
+              <span style={{ color: "#D4AF37", fontStyle: "italic" }}>
+                LIDERAR
+              </span>{" "}
+              EL SECTOR?
+            </Typography>
+
+            <Typography
+              sx={{
+                mb: 6,
+                maxWidth: 600,
+                mx: "auto",
+                color: "rgba(255, 255, 255, 0.6)",
+                fontSize: { xs: "1rem", md: "1.1rem" },
+                lineHeight: 1.8,
+              }}
+            >
+              Quedan pocos espacios disponibles para la edición 2027 en el WTC.
+              Asegura tu presencia en el evento élite de la industria.
+            </Typography>
+
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={3}
+              justifyContent='center'
+            >
+              <Button
+                variant='contained'
+                sx={{
+                  bgcolor: "#D4AF37",
+                  color: "#041C16",
+                  px: { xs: 4, md: 6 },
+                  py: 2,
+                  borderRadius: 0,
+                  fontFamily: "'Syne'",
+                  fontWeight: 900,
+                  letterSpacing: "0.2em",
+                  "&:hover": {
+                    bgcolor: "#FFFFFF",
+                    transform: "translateY(-5px)",
+                  },
+                  transition: "0.3s",
+                }}
+              >
+                CONTACTAR VENTAS
+              </Button>
+
+              <Button
+                variant='outlined'
+                sx={{
+                  borderColor: "#D4AF37",
+                  color: "#D4AF37",
+                  px: { xs: 4, md: 6 },
+                  py: 2,
+                  borderRadius: 0,
+                  fontFamily: "'Syne'",
+                  fontWeight: 800,
+                  letterSpacing: "0.2em",
+                  "&:hover": { borderColor: "#FFFFFF", color: "#FFFFFF" },
+                  transition: "0.3s",
+                }}
+              >
+                VER PLANO
+              </Button>
+            </Stack>
+          </Box>
+        </motion.div>
       </Container>
     </Box>
   );

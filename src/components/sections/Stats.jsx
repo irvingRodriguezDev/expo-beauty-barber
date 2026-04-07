@@ -31,7 +31,7 @@ function Counter({ to, suffix = "" }) {
       <Typography
         component='span'
         sx={{
-          color: "#EC4899",
+          color: "#D4AF37", // CAMBIO: Dorado para el sufijo (+, DÍAS, etc)
           ml: 1,
           fontSize: "0.25em",
           fontWeight: 900,
@@ -66,8 +66,8 @@ const stats = [
   {
     value: 20,
     suffix: "+",
-    label: "PONENTES\nINTERNACIONALES",
-    desc: "Maestría técnica global.",
+    label: "SESIONES DE\nALTA MAESTRÍA", // O "EXPERIENCIAS\nEDUCATIVAS"
+    desc: "Conferencias, talleres y demostraciones en vivo.",
   },
 ];
 
@@ -80,16 +80,17 @@ export default function Stats() {
       ref={ref}
       component='section'
       sx={{
-        minHeight: "100vh", // Usamos minHeight para evitar cortes en móviles
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
+        // CAMBIO: Gradiente inverso para conectar con la sección anterior (Salvia a Esmeralda)
+        background: "linear-gradient(0deg, #062C22 0%, #668678 100%)",
         position: "relative",
         overflow: "hidden",
         py: { xs: 10, md: 0 },
       }}
     >
-      {/* TÍTULO DE FONDO GIGANTE - Escala responsiva */}
+      {/* TÍTULO DE FONDO GIGANTE - Escala responsiva en Dorado sutil */}
       <Typography
         sx={{
           position: "absolute",
@@ -100,7 +101,7 @@ export default function Stats() {
           fontSize: { xs: "8rem", sm: "15rem", md: "25rem" },
           fontWeight: 900,
           background:
-            "linear-gradient(180deg, rgba(45, 10, 26, 0.05) 0%, transparent 100%)",
+            "linear-gradient(180deg, rgba(212, 175, 55, 0.28) 0%, transparent 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           whiteSpace: "nowrap",
@@ -125,7 +126,7 @@ export default function Stats() {
                   fontFamily: "'Syne'",
                   fontSize: { xs: "1.5rem", sm: "2.5rem", md: "3.7rem" },
                   letterSpacing: { xs: "0.2em", md: "0.5em" },
-                  color: "#BE185D",
+                  color: "#D4AF37", // CAMBIO: Dorado
                   fontWeight: 800,
                   mb: 2,
                   lineHeight: 1.2,
@@ -139,7 +140,7 @@ export default function Stats() {
                 sx={{
                   fontFamily: "'Syne'",
                   fontWeight: 800,
-                  color: "#2D0A1A",
+                  color: "#FFFFFF", // CAMBIO: Blanco para legibilidad sobre verde
                   maxWidth: { xs: "100%", md: "500px" },
                   lineHeight: 1.1,
                   fontSize: { xs: "1.8rem", md: "3rem" },
@@ -147,7 +148,15 @@ export default function Stats() {
                 }}
               >
                 Donde los números <br />
-                <span style={{ color: "#EC4899" }}>se vuelven arte.</span>
+                <span
+                  style={{
+                    color: "#D4AF37",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                  }}
+                >
+                  se vuelven arte.
+                </span>
               </Typography>
             </motion.div>
           </Grid>
@@ -155,22 +164,21 @@ export default function Stats() {
           <Grid
             item
             xs={12}
-            sx={{ textAlign: { md: "right" }, mt: { xs: 2, md: 0 } }}
+            sx={{ textAlign: { md: "right" }, mt: { xs: 2, md: -15 } }}
           >
             <Typography
               sx={{
                 fontFamily: "'DM Sans'",
-                fontSize: "0.9rem",
-                color: "#552F3F",
-                opacity: 0.7,
-                maxWidth: { md: "300px" },
+                fontSize: "1.2rem",
+                color: "rgba(255, 255, 255, 0.7)", // CAMBIO: Blanco suave
+                maxWidth: { md: "550px" },
                 ml: { md: "auto" },
                 lineHeight: 1.8,
                 textAlign: { xs: "center", md: "right" },
               }}
             >
               Analizamos cada métrica para garantizar que tu presencia tenga el
-              retorno de inversión que tu marca merece.
+              retorno de inversión que la industria de alto nivel exige.
             </Typography>
           </Grid>
         </Grid>
@@ -189,7 +197,7 @@ export default function Stats() {
                     position: "relative",
                     p: { xs: 3, md: 4 },
                     textAlign: { xs: "center", md: "left" },
-                    // BORDES DE ESQUINA
+                    // BORDES DE ESQUINA - Estilo arquitectónico en blanco/dorado
                     "&::before": {
                       content: '""',
                       position: "absolute",
@@ -198,18 +206,18 @@ export default function Stats() {
                       transform: { xs: "translateX(-50%)", md: "none" },
                       width: "20px",
                       height: "20px",
-                      borderTop: "2px solid #2D0A1A",
-                      borderLeft: "2px solid #2D0A1A",
-                      display: { xs: "none", md: "block" }, // Los bordes se ven mejor en desktop
+                      borderTop: "2px solid rgba(255, 255, 255, 0.2)",
+                      borderLeft: "2px solid rgba(255, 255, 255, 0.2)",
+                      display: { xs: "none", md: "block" },
                     },
                     "&:hover::before": {
-                      borderColor: "#EC4899",
+                      borderColor: "#D4AF37",
                       width: "100%",
                       height: "100%",
                       transition: "0.6s ease",
                     },
                     borderBottom: {
-                      xs: "1px solid rgba(45,10,26,0.05)",
+                      xs: "1px solid rgba(255, 255, 255, 0.1)",
                       md: "none",
                     },
                     pb: { xs: 4, md: 4 },
@@ -221,7 +229,7 @@ export default function Stats() {
                       fontWeight: 900,
                       fontSize: { xs: "3.5rem", sm: "4rem", md: "5.5rem" },
                       lineHeight: 1,
-                      color: "#2D0A1A",
+                      color: "#FFFFFF", // CAMBIO: Blanco puro para los números
                       mb: 1,
                       letterSpacing: "-0.05em",
                     }}
@@ -234,7 +242,7 @@ export default function Stats() {
                       fontFamily: "'Syne'",
                       fontSize: "0.75rem",
                       fontWeight: 800,
-                      color: "#BE185D",
+                      color: "#D4AF37", // CAMBIO: Dorado
                       letterSpacing: "0.3em",
                       mb: 1,
                       whiteSpace: "pre-line",
@@ -246,9 +254,8 @@ export default function Stats() {
                   <Typography
                     sx={{
                       fontFamily: "'DM Sans'",
-                      fontSize: "0.8rem",
-                      color: "#552F3F",
-                      opacity: 0.6,
+                      fontSize: "0.99rem",
+                      color: "rgba(255, 255, 255, 0.9)", // CAMBIO: Blanco tenue
                     }}
                   >
                     {stat.desc}
@@ -265,7 +272,7 @@ export default function Stats() {
           sx={{
             mt: { xs: 6, md: 10 },
             pt: 4,
-            borderTop: "1px solid rgba(45, 10, 26, 0.1)",
+            borderTop: "1px solid rgba(212, 175, 55, 0.2)",
           }}
         />
       </Container>

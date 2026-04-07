@@ -251,7 +251,7 @@ export default function Contact() {
                     <Button
                       onClick={() => setStatus("idle")}
                       sx={{
-                        color: "#F9A8D4",
+                        color: "#062C22",
                         fontFamily: "'Syne'",
                         fontWeight: 800,
                         letterSpacing: "0.2em",

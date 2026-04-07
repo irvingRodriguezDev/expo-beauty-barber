@@ -50,7 +50,8 @@ export default function Visitors() {
       id='visitantes'
       sx={{
         py: { xs: 10, md: 15 },
-        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
+        // CAMBIO: Gradiente Esmeralda a Salvia
+        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -70,7 +71,7 @@ export default function Visitors() {
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "#BE185D",
+                  color: "#D4AF37", // CAMBIO: Dorado
                   mb: 3,
                   textTransform: "uppercase",
                 }}
@@ -83,24 +84,33 @@ export default function Visitors() {
                   fontFamily: "'Syne'",
                   fontSize: { xs: "3.5rem", md: "6rem" },
                   fontWeight: 800,
-                  color: "#2D0A1A",
+                  color: "#FFFFFF", // CAMBIO: Blanco
                   lineHeight: 0.9,
                   letterSpacing: "-0.04em",
                 }}
               >
                 La cima del <br />
-                <span style={{ color: "#EC4899" }}>arte técnico</span>
+                <span
+                  style={{
+                    color: "#D4AF37",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                  }}
+                >
+                  arte técnico
+                </span>
               </Typography>
             </motion.div>
           </Grid>
           <Grid item xs={12} md={5}>
             <Typography
               sx={{
-                color: "#7D4A5F",
+                color: "rgba(255, 255, 255, 0.7)", // Blanco suave
                 fontSize: "1.1rem",
                 lineHeight: 1.8,
                 maxWidth: "450px",
-                borderLeft: "2px solid #EC4899",
+                // CAMBIO: Borde Dorado
+                borderLeft: "2px solid #D4AF37",
                 pl: 3,
               }}
             >
@@ -127,20 +137,21 @@ export default function Visitors() {
                     flexDirection: "column",
                     justifyContent: "center",
                     p: 4,
-                    backgroundColor: "rgba(255, 255, 255, 0.4)",
-                    border: "1px solid rgba(236, 72, 153, 0.1)",
+                    // CAMBIO: Fondo oscuro translúcido (Glassmorphism esmeralda)
+                    backgroundColor: "rgba(6, 44, 34, 0.4)",
+                    border: "1px solid rgba(212, 175, 55, 0.1)",
                     backdropFilter: "blur(10px)",
-                    borderRadius: "12px",
+                    borderRadius: "2px", // Esquinas rectas
                     position: "relative",
                     overflow: "hidden",
                     transition: "all 0.4s ease",
                     "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.8)",
+                      backgroundColor: "rgba(6, 44, 34, 0.8)",
                       transform: "translateY(-10px)",
-                      borderColor: "#EC4899",
+                      borderColor: "#D4AF37", // Hover Dorado
                     },
                     "&:hover .bg-text": {
-                      opacity: 0.05,
+                      opacity: 0.08,
                       transform: "scale(1.1)",
                     },
                   }}
@@ -152,8 +163,8 @@ export default function Visitors() {
                       fontFamily: "'Syne'",
                       fontSize: "6rem",
                       fontWeight: 900,
-                      color: "#2D0A1A",
-                      opacity: 0.02,
+                      color: "#D4AF37", // Texto de fondo Dorado
+                      opacity: 0.03,
                       right: -20,
                       bottom: -20,
                       transition: "0.8s ease",
@@ -163,23 +174,12 @@ export default function Visitors() {
                     {p.label.split(" ")[0]}
                   </Typography>
 
-                  {/* <Typography
-                    sx={{
-                      color: "#EC4899",
-                      fontFamily: "monospace",
-                      fontWeight: 700,
-                      mb: 2,
-                      fontSize: "0.7rem",
-                    }}
-                  >
-                    [ 0{i + 1} ]
-                  </Typography> */}
                   <Typography
                     sx={{
                       fontFamily: "'Syne'",
                       fontWeight: 800,
                       fontSize: "1.5rem",
-                      color: "#2D0A1A",
+                      color: "#FFFFFF",
                       mb: 1,
                     }}
                   >
@@ -188,7 +188,7 @@ export default function Visitors() {
                   <Typography
                     sx={{
                       fontSize: "0.9rem",
-                      color: "#7D4A5F",
+                      color: "rgba(255, 255, 255, 0.6)",
                       lineHeight: 1.6,
                       zIndex: 1,
                     }}
@@ -204,37 +204,39 @@ export default function Visitors() {
         {/* ÁREA DE REGISTRO E INVITACIÓN */}
         <Box sx={{ position: "relative" }}>
           <Grid container justifyContent='center'>
-            <Grid item xs={12} md={10} sx={{ borderRadius: "12px" }}>
+            <Grid item xs={12} md={11} sx={{ borderRadius: "0px" }}>
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
               >
                 <Box
                   sx={{
-                    background: "#2D0A1A",
+                    // CAMBIO: Fondo Negro Esmeralda Profundo
+                    background: "#041C16",
                     color: "#FFF",
-                    borderRadius: "12px",
-                    p: { xs: 4, md: 10 },
+                    borderRadius: "0px",
+                    p: { xs: 4, md: 8 },
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
                     alignItems: "center",
                     gap: 6,
                     position: "relative",
                     overflow: "hidden",
+                    border: "1px solid rgba(212, 175, 55, 0.3)",
                   }}
                 >
-                  {/* Decoración de fondo sutil */}
+                  {/* Decoración de fondo sutil Dorado */}
                   <Box
                     sx={{
                       position: "absolute",
                       top: -50,
                       right: -50,
-                      width: 300,
-                      height: 300,
+                      width: 400,
+                      height: 400,
                       borderRadius: "50%",
                       background:
-                        "radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%)",
+                        "radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)",
                     }}
                   />
 
@@ -248,19 +250,20 @@ export default function Visitors() {
                         fontWeight: 800,
                         lineHeight: 1,
                         mb: 2,
+                        color: "#FFFFFF",
                       }}
                     >
                       5-6{" "}
-                      <span style={{ color: "#EC4899", fontSize: "0.5em" }}>
+                      <span style={{ color: "#D4AF37", fontSize: "0.5em" }}>
                         FEB
                       </span>
                     </Typography>
                     <Typography
                       sx={{
-                        letterSpacing: "0.4em",
+                        letterSpacing: "0.5em",
                         fontWeight: 700,
                         fontSize: "0.9rem",
-                        color: "#EC4899",
+                        color: "#D4AF37", // Dorado
                       }}
                     >
                       WTC • CIUDAD DE MÉXICO
@@ -270,11 +273,11 @@ export default function Visitors() {
                   <Box sx={{ flex: 1, width: "100%" }}>
                     <Typography
                       sx={{
-                        fontSize: "0.9rem",
+                        fontSize: "0.8rem",
                         fontWeight: 700,
                         mb: 3,
-                        letterSpacing: "0.2em",
-                        opacity: 0.8,
+                        letterSpacing: "0.3em",
+                        color: "rgba(255, 255, 255, 0.5)",
                         textAlign: "center",
                       }}
                     >
@@ -284,7 +287,7 @@ export default function Visitors() {
                       sx={{
                         display: "flex",
                         flexWrap: "wrap",
-                        gap: 1,
+                        gap: 1.5,
                         justifyContent: "center",
                         mb: 5,
                       }}
@@ -295,10 +298,12 @@ export default function Visitors() {
                           sx={{
                             px: 2,
                             py: 0.5,
-                            borderRadius: "12px",
-                            fontSize: "0.85rem",
-                            border: "1px solid rgba(255,255,255,0.2)",
+                            borderRadius: "0px",
+                            fontSize: "0.75rem",
+                            border: "1px solid rgba(212, 175, 55, 0.2)",
+                            color: "#D4AF37",
                             fontFamily: "'Syne'",
+                            letterSpacing: "0.1em",
                           }}
                         >
                           {p.toUpperCase()}
@@ -316,18 +321,23 @@ export default function Visitors() {
                       }}
                       startIcon={<ConfirmationNumberIcon />}
                       sx={{
-                        bgcolor: "#EC4899",
-                        color: "#FFF",
-                        borderRadius: 4,
+                        // CAMBIO: Botón Dorado con texto Negro
+                        bgcolor: "#D4AF37",
+                        color: "#041C16",
+                        borderRadius: 0,
                         py: 2.5,
-                        fontWeight: 800,
+                        fontWeight: 900,
                         fontFamily: "'Syne'",
-                        letterSpacing: "0.2em",
+                        letterSpacing: "0.3em",
                         transition: "0.4s",
-                        "&:hover": { bgcolor: "#FFF", color: "#2D0A1A" },
+                        "&:hover": {
+                          bgcolor: "#FFFFFF",
+                          color: "#041C16",
+                          transform: "scale(1.02)",
+                        },
                       }}
                     >
-                      REGISTRO GRATUITO
+                      REGÍSTRATE AQUÍ
                     </Button>
                   </Box>
                 </Box>

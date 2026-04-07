@@ -10,6 +10,7 @@ import Visitors from "./components/sections/Visitors";
 import Exhibitors from "./components/sections/Exhibitors";
 import Contact from "./components/sections/Contact";
 import Register from "./components/sections/Register";
+import ExperienceGallery from "./components/sections/ExperienceGallery";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Highlights />
           <Stats />
           <MapSection />
+          <ExperienceGallery />
         </section>
         {/* VISITANTES */}
         <section id='visitantes'>
@@ -31,10 +33,10 @@ export default function App() {
         <section id='register'>
           <Register />
         </section>
-        {/* EXPOSITORES
+        {/* EXPOSITORES */}
         <section id='expositores'>
           <Exhibitors />
-        </section> */}
+        </section>
         {/* CONTACTO */}
         {/* <section id='contacto'>
           <Contact />

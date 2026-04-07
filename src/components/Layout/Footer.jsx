@@ -11,6 +11,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+// Asegúrate de que el logo sea una versión clara/blanca si el fondo es muy oscuro
 import Logo from "../../assets/LogoNegro.png";
 
 export default function Footer() {
@@ -26,10 +27,12 @@ export default function Footer() {
     <Box
       component='footer'
       sx={{
-        background: "linear-gradient(0deg, #F9A8D4 0%, #FAF8F5 100%)",
+        // CAMBIO: Gradiente que termina en el esmeralda más profundo
+        background: "linear-gradient(0deg, #041C16 0%, #668678 100%)",
         pt: { xs: 8, md: 12 },
         pb: 6,
         width: "100%",
+        color: "#FFF",
       }}
     >
       <Container maxWidth='xl'>
@@ -41,20 +44,20 @@ export default function Footer() {
               src={Logo}
               alt='Expo Beauty & Barber'
               sx={{
-                height: { xs: 60, md: 100 },
+                height: { xs: 60, md: 80 },
                 width: "auto",
                 mb: 3,
                 display: "block",
+                filter: "brightness(0) invert(1)", // Volvemos el logo blanco para el fondo oscuro
               }}
             />
             <Typography
               sx={{
-                color: "#552F3F",
+                color: "rgba(255, 255, 255, 0.7)",
                 lineHeight: 1.8,
                 maxWidth: { xs: "100%", sm: 340 },
                 fontFamily: "'DM Sans'",
-                fontSize: "1rem",
-                opacity: 0.8,
+                fontSize: "0.95rem",
                 mb: 4,
               }}
             >
@@ -65,18 +68,21 @@ export default function Footer() {
             <Stack
               direction='row'
               spacing={1.5}
-              sx={{ display: "flex", justifyContent: "center" }}
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", md: "flex-start" },
+              }}
             >
               {[InstagramIcon, FacebookIcon, LinkedInIcon].map((Icon, i) => (
                 <IconButton
                   key={i}
                   sx={{
-                    color: "#2D0A1A",
-                    border: "1px solid rgba(45, 10, 26, 0.1)",
-                    borderRadius: 0,
+                    color: "#D4AF37",
+                    border: "1px solid rgba(212, 175, 55, 0.3)",
+                    borderRadius: 0, // Consistencia con bordes rectos
                     "&:hover": {
-                      bgcolor: "#2D0A1A",
-                      color: "#FFF",
+                      bgcolor: "#D4AF37",
+                      color: "#041C16",
                       transform: "translateY(-5px)",
                     },
                   }}
@@ -91,7 +97,7 @@ export default function Footer() {
           <Grid item xs={6} sm={6} md={2}>
             <Typography
               sx={{
-                color: "#2D0A1A",
+                color: "#D4AF37",
                 fontFamily: "'Syne'",
                 fontWeight: 800,
                 mb: 4,
@@ -109,12 +115,13 @@ export default function Footer() {
                   component='a'
                   href={`#${link.id}`}
                   sx={{
-                    color: "#552F3F",
+                    color: "rgba(255, 255, 255, 0.8)",
                     textDecoration: "none",
                     fontSize: "0.8rem",
                     fontWeight: 700,
                     transition: "0.3s",
-                    "&:hover": { color: "#EC4899" },
+                    letterSpacing: "0.1em",
+                    "&:hover": { color: "#D4AF37", pl: 1 },
                   }}
                 >
                   {link.name}
@@ -127,7 +134,7 @@ export default function Footer() {
           <Grid item xs={6} sm={6} md={3}>
             <Typography
               sx={{
-                color: "#2D0A1A",
+                color: "#D4AF37",
                 fontFamily: "'Syne'",
                 fontWeight: 800,
                 mb: 4,
@@ -140,30 +147,31 @@ export default function Footer() {
             </Typography>
             <Typography
               sx={{
-                color: "#552F3F",
+                color: "rgba(255, 255, 255, 0.8)",
                 fontSize: "0.85rem",
                 lineHeight: 2,
                 mb: 3,
                 fontWeight: 500,
               }}
             >
-              <strong style={{ color: "#2D0A1A" }}>WTC Ciudad de México</strong>{" "}
+              <strong style={{ color: "#FFF" }}>WTC Ciudad de México</strong>{" "}
               <br />
               Montecito 38, Col. Nápoles <br />
               CP 03810, CDMX.
             </Typography>
             <Typography
               component='a'
-              href='https://maps.google.com'
+              href='#'
               target='_blank'
               sx={{
-                color: "#EC4899",
+                color: "#D4AF37",
                 fontWeight: 800,
                 fontSize: "0.7rem",
                 letterSpacing: "0.2em",
                 textDecoration: "none",
-                borderBottom: "2px solid #EC4899",
-                "&:hover": { bgcolor: "#EC4899", color: "#FFF", px: 1 },
+                borderBottom: "1px solid #D4AF37",
+                pb: 0.5,
+                "&:hover": { color: "#FFF", borderColor: "#FFF" },
               }}
             >
               GOOGLE MAPS →
@@ -177,7 +185,7 @@ export default function Footer() {
             sm={6}
             md={3}
             sx={{
-              textAlign: { xs: "left", md: "right" },
+              textAlign: { xs: "center", md: "right" },
               display: "flex",
               flexDirection: "column",
               alignItems: { xs: "center", md: "flex-end" },
@@ -186,8 +194,7 @@ export default function Footer() {
             <Box
               sx={{
                 position: "relative",
-                mb: { xs: 4, md: 0 },
-                mt: { xs: 2, md: 0 },
+                mb: { xs: 4, md: 4 },
               }}
             >
               <Typography
@@ -195,7 +202,7 @@ export default function Footer() {
                   fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: { xs: "4rem", md: "5.5rem" },
-                  color: "rgba(236, 72, 153, 0.08)",
+                  color: "rgba(212, 175, 55, 0.1)", // Dorado muy sutil
                   lineHeight: 0.7,
                 }}
               >
@@ -206,24 +213,23 @@ export default function Footer() {
                   fontFamily: "'Syne'",
                   fontWeight: 800,
                   fontSize: "1.8rem",
-                  color: "#2D0A1A",
+                  color: "#FFFFFF",
                   mt: -2,
                 }}
               >
-                5 <span style={{ color: "#EC4899" }}>.</span> 6 FEB
+                5 <span style={{ color: "#D4AF37" }}>.</span> 6 FEB
               </Typography>
             </Box>
 
             <IconButton
               onClick={scrollToTop}
               sx={{
-                border: "1px solid #2D0A1A",
-                color: "#2D0A1A",
-                borderRadius: "50%",
+                border: "1px solid #D4AF37",
+                color: "#D4AF37",
+                borderRadius: 0,
                 width: 50,
                 height: 50,
-                mt: { md: "auto" },
-                "&:hover": { bgcolor: "#2D0A1A", color: "#FFF" },
+                "&:hover": { bgcolor: "#D4AF37", color: "#041C16" },
               }}
             >
               <ArrowUpwardIcon fontSize='small' />
@@ -233,7 +239,7 @@ export default function Footer() {
 
         <Divider
           sx={{
-            borderColor: "rgba(45, 10, 26, 0.08)",
+            borderColor: "rgba(212, 175, 55, 0.2)",
             mt: { xs: 8, md: 10 },
             mb: 4,
           }}
@@ -248,15 +254,14 @@ export default function Footer() {
         >
           <Typography
             sx={{
-              color: "#552F3F",
-              fontSize: "0.65rem",
-              opacity: 0.6,
+              color: "rgba(255, 255, 255, 0.4)",
+              fontSize: "0.6rem",
               fontWeight: 700,
-              letterSpacing: "0.1em",
+              letterSpacing: "0.15em",
               textAlign: { xs: "center", md: "left" },
             }}
           >
-            © 2027 EXPO BELLEZA & BARBERÍAS | POWERED BY FR
+            © 2027 EXPO BELLEZA & BARBERÍAS | POWERED BY PUBLICIDAD MAHUR
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
@@ -266,12 +271,12 @@ export default function Footer() {
                 component='a'
                 href='#'
                 sx={{
-                  color: "#2D0A1A",
+                  color: "rgba(255, 255, 255, 0.6)",
                   fontSize: "0.65rem",
                   textDecoration: "none",
                   fontWeight: 800,
                   letterSpacing: "0.1em",
-                  "&:hover": { color: "#EC4899" },
+                  "&:hover": { color: "#D4AF37" },
                 }}
               >
                 {item}
