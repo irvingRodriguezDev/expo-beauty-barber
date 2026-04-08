@@ -1,37 +1,39 @@
 body {
   margin: 0;
-  /* CAMBIO: Fondo "Emerald Deep" - Gradiente sofisticado */
+  /* Fondo Midnight Petroleum: Profundidad absoluta con un foco de luz cian */
   background: radial-gradient(
-    circle at top right,
-    #062c22 0%,
-    /* Esmeralda principal */ #041c16 60%,
-    /* Negro Esmeralda profundo */ #020e0b 100% /* Sombra final */
+    circle at 20% 30%,
+    #064e57 0%,
+    #02181b 70%,
+    #010c0d 100%
   );
   background-attachment: fixed;
-  /* CAMBIO: Texto base en un blanco roto para no cansar la vista */
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
   font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Efecto de Vidrio Esmeralda Premium */
+/* Efecto de Vidrio "Petroleum Glass" */
 .glass-card {
-  /* CAMBIO: Vidrio oscuro con tinte esmeralda */
-  background: rgba(6, 44, 34, 0.3) !important;
-  backdrop-filter: blur(20px);
-  /* CAMBIO: Borde sutil en Dorado en lugar de rosa */
-  border: 1px solid rgba(212, 175, 55, 0.2) !important;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* Borde de luz Cian Eléctrico sutil */
+  border: 1px solid rgba(114, 248, 255, 0.1) !important;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Animación de entrada para elementos de lujo (Brillo Dorado) */
+/* Animación de texto "Electric Flow" (Cian a Blanco) */
 .reveal-text {
-  /* CAMBIO: Gradiente de Dorado a Blanco a Dorado */
-  background: linear-gradient(90deg, #d4af37 0%, #ffffff 50%, #d4af37 100%);
+  background: linear-gradient(90deg, #72f8ff 0%, #ffffff 50%, #72f8ff 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: shine 6s linear infinite;
+  font-weight: 900;
+  animation: shine 8s ease-in-out infinite;
 }
 
 @keyframes shine {
@@ -40,22 +42,37 @@ body {
   }
 }
 
-/* Scrollbar personalizada para que no rompa el diseño */
+/* Scrollbar Minimalista y Tecnológica */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #041c16;
+  background: #02181b; /* Fondo petróleo oscuro */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4af37;
+  background: #72f8ff; /* Color cian para el indicador */
   border-radius: 0px;
+  box-shadow: 0 0 10px rgba(114, 248, 255, 0.5);
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+/* Selección de texto personalizada */
+::selection {
+  background-color: rgba(114, 248, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Utilidad para bordes neón sutiles */
+.border-glow {
+  position: relative;
+}
+
+.border-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #72f8ff;
+  opacity: 0.2;
+  pointer-events: none;
 }

@@ -2,24 +2,27 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    // CAMBIO: Modo oscuro para que los textos contrasten con el Esmeralda
     mode: "dark",
     primary: {
-      main: "#D4AF37", // Oro / Dorado
-      dark: "#B8860B", // Dorado oscuro para estados activos
-      contrastText: "#041C16", // El texto sobre botones dorados será verde oscuro
+      main: "#72F8FF", // Cian Eléctrico (Acento Neón)
+      dark: "#00E5FF", // Cian más saturado para interacción
+      contrastText: "#02181B", // Texto oscuro sobre fondos cian
+    },
+    secondary: {
+      main: "#FFFFFF",
+      contrastText: "#02181B",
     },
     background: {
-      // El color base del sitio (Negro Esmeralda Profundo)
-      default: "#041C16",
-      // Las tarjetas y papeles tendrán un tinte esmeralda translúcido
-      paper: "rgba(6, 44, 34, 0.8)",
+      // Midnight Petroleum: El color base ultra-profundo
+      default: "#02181B",
+      // Papel con transparencia para efectos de cristal ahumado
+      paper: "rgba(6, 78, 87, 0.05)",
     },
     text: {
       primary: "#FFFFFF",
-      secondary: "rgba(255, 255, 255, 0.7)", // Blanco con opacidad para jerarquía
+      secondary: "rgba(255, 255, 255, 0.6)", // Para descripciones y leyendas
     },
-    divider: "rgba(212, 175, 55, 0.2)", // Divisores con tinte dorado
+    divider: "rgba(114, 248, 255, 0.1)", // Divisores con tinte cian sutil
   },
   typography: {
     fontFamily: "'DM Sans', sans-serif",
@@ -31,16 +34,21 @@ const theme = createTheme({
     },
     h2: {
       fontFamily: "'Syne', sans-serif",
-      fontWeight: 800,
-      letterSpacing: "0.02em",
+      fontWeight: 900,
+      letterSpacing: "0.05em",
+      textTransform: "uppercase",
     },
     h3: {
       fontFamily: "'Syne', sans-serif",
       fontWeight: 800,
     },
+    body1: {
+      fontFamily: "'DM Sans', sans-serif",
+      lineHeight: 1.8,
+    },
     button: {
       fontFamily: "'Syne', sans-serif",
-      letterSpacing: "0.2em",
+      letterSpacing: "0.25em",
       fontWeight: 800,
       textTransform: "uppercase",
     },
@@ -49,28 +57,28 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          // CAMBIO: Eliminamos el redondeado (40px) por bordes rectos (0px)
-          borderRadius: "0px",
-          padding: "12px 35px",
-          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          borderRadius: "0px", // Identidad de cortes rectos y arquitectónicos
+          padding: "14px 40px",
+          transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
           boxShadow: "none",
           "&:hover": {
             transform: "translateY(-4px)",
-            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4)",
-            backgroundColor: "#D4AF37",
+            boxShadow: "0 15px 30px rgba(0, 0, 0, 0.5)",
           },
         },
         containedPrimary: {
+          boxShadow: "0 10px 20px rgba(114, 248, 255, 0.2)",
           "&:hover": {
             backgroundColor: "#FFFFFF",
-            color: "#041C16",
+            color: "#02181B",
+            boxShadow: "0 15px 30px rgba(255, 255, 255, 0.2)",
           },
         },
         outlined: {
-          borderColor: "#D4AF37",
+          borderColor: "rgba(114, 248, 255, 0.5)",
           "&:hover": {
-            borderColor: "#FFFFFF",
-            backgroundColor: "rgba(255,255,255,0.05)",
+            borderColor: "#72F8FF",
+            backgroundColor: "rgba(114, 248, 255, 0.05)",
           },
         },
       },
@@ -78,10 +86,9 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          // Navegación estilo "Glassmorphism" oscuro
-          background: "rgba(4, 28, 22, 0.8)",
+          background: "transparent",
           backdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(212, 175, 55, 0.2)",
+          borderBottom: "1px solid rgba(114, 248, 255, 0.1)",
           boxShadow: "none",
         },
       },
@@ -89,24 +96,48 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: "0px", // Todas las tarjetas MUI ahora son de corte recto
-          backgroundImage: "none", // Quitamos el overlay grisáceo de MUI Dark Mode
+          borderRadius: "0px",
+          backgroundImage: "none",
+          backgroundColor: "rgba(255, 255, 255, 0.02)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(114, 248, 255, 0.1)",
         },
       },
     },
     MuiTextField: {
       styleOverrides: {
         root: {
-          // Estilo para inputs que encajen con el Dorado
-          "& label.Mui-focused": { color: "#D4AF37" },
-          "& .MuiInput-underline:after": { borderBottomColor: "#D4AF37" },
+          "& label": {
+            color: "rgba(255, 255, 255, 0.4)",
+            fontFamily: "'Syne'",
+            fontSize: "0.75rem",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+          },
+          "& label.Mui-focused": { color: "#72F8FF" },
           "& .MuiOutlinedInput-root": {
+            color: "#FFFFFF",
             "& fieldset": {
-              borderColor: "rgba(212, 175, 55, 0.3)",
+              borderColor: "rgba(114, 248, 255, 0.2)",
               borderRadius: "0px",
             },
-            "&:hover fieldset": { borderColor: "#D4AF37" },
-            "&.Mui-focused fieldset": { borderColor: "#D4AF37" },
+            "&:hover fieldset": { borderColor: "rgba(114, 248, 255, 0.5)" },
+            "&.Mui-focused fieldset": { borderColor: "#72F8FF" },
+          },
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: "'DM Sans'",
+          fontSize: "0.9rem",
+          "&.Mui-selected": {
+            backgroundColor: "rgba(114, 248, 255, 0.1)",
+            color: "#72F8FF",
+            "&:hover": {
+              backgroundColor: "rgba(114, 248, 255, 0.2)",
+            },
           },
         },
       },

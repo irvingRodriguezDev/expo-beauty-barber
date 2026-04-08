@@ -11,13 +11,13 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/LogoNegro.png"; // Asegúrate de tener una versión clara si es necesario
+import Logo from "../../assets/LogoNegro.png";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },
-  { label: "Experiencia", to: "experiencia" }, // Agregué la galería
-  { label: "Quiero Exponer", to: "expositores" },
-  { label: "Quiero Asistir", to: "register" },
+  { label: "Experiencia", to: "experiencia" },
+  { label: "Expositores", to: "expositores" },
+  { label: "Registro", to: "register" },
 ];
 
 const scrollTo = (id) => {
@@ -29,6 +29,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("inicio");
+
+  const brandCyan = "#72F8FF";
+  const darkPetroleum = "#02181B"; // El fondo más profundo
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,17 +56,17 @@ export default function Navbar() {
         position='fixed'
         elevation={0}
         sx={{
-          top: scrolled ? 0 : { xs: 0, md: 20 },
+          top: 0,
           left: 0,
           right: 0,
-          mx: "auto",
-          width: scrolled ? "100%" : { xs: "100%", md: "90%" },
+          width: "100%",
           background: scrolled
-            ? "rgba(6, 44, 34, 0.95)" // Verde esmeralda con transparencia
+            ? "rgba(2, 24, 27, 0.85)" // Petróleo profundo con transparencia
             : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(212, 175, 55, 0.2)" : "none",
-          borderRadius: scrolled ? 0 : { xs: 0, md: "2px" },
+          borderBottom: scrolled
+            ? `1px solid rgba(114, 248, 255, 0.1)`
+            : "none",
           transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           zIndex: 1200,
         }}
@@ -77,16 +80,14 @@ export default function Navbar() {
               height: { xs: 70, md: 90 },
             }}
           >
-            {/* Logo con filtro para visibilidad */}
+            {/* Logo */}
             <Box
               onClick={() => scrollTo("inicio")}
               sx={{
                 cursor: "pointer",
+                filter: "brightness(0) invert(1)",
                 transition: "0.3s",
-                "&:hover": { opacity: 0.8 },
-                filter: scrolled
-                  ? "brightness(0) invert(1)"
-                  : "brightness(0) invert(1)", // Si el logo es negro, lo invierte a blanco al hacer scroll
+                "&:hover": { transform: "scale(1.05)" },
               }}
             >
               <Box
@@ -94,7 +95,7 @@ export default function Navbar() {
                 src={Logo}
                 alt='Logo EBB'
                 sx={{
-                  height: { xs: 50, md: 60 },
+                  height: { xs: 40, md: 50 },
                   width: "auto",
                   objectFit: "contain",
                 }}
@@ -108,82 +109,71 @@ export default function Navbar() {
               alignItems='center'
               sx={{ display: { xs: "none", md: "flex" } }}
             >
-              {navLinks.map((link) => (
-                <Box
-                  key={link.to}
-                  component='button'
-                  onClick={() => scrollTo(link.to)}
-                  sx={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    fontFamily: "'DM Sans'",
-                    fontSize: "0.7rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color:
-                      active === link.to
-                        ? "#D4AF37"
-                        : scrolled
-                          ? "#FFF"
-                          : "#ffffffff",
-                    position: "relative",
-                    transition: "0.3s",
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: -4,
-                      left: 0,
-                      width: active === link.to ? "100%" : "0%",
-                      height: "1px",
-                      bgcolor: "#D4AF37",
+              <Stack direction='row' spacing={4}>
+                {navLinks.map((link) => (
+                  <Box
+                    key={link.to}
+                    component='button'
+                    onClick={() => scrollTo(link.to)}
+                    sx={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontFamily: "'Syne'",
+                      fontSize: "0.7rem",
+                      fontWeight: 800,
+                      letterSpacing: "0.25em",
+                      textTransform: "uppercase",
+                      color:
+                        active === link.to
+                          ? brandCyan
+                          : "rgba(255,255,255,0.6)",
+                      position: "relative",
                       transition: "0.3s",
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: -6,
+                        left: 0,
+                        width: active === link.to ? "100%" : "0%",
+                        height: "1px",
+                        bgcolor: brandCyan,
+                        transition: "0.3s ease",
+                      },
+                      "&:hover": { color: "#FFF" },
+                    }}
+                  >
+                    {link.label}
+                  </Box>
+                ))}
+              </Stack>
+
+              <Stack direction='row' spacing={2} sx={{ ml: 4 }}>
+                <Button
+                  variant='contained'
+                  onClick={() => scrollTo("register")}
+                  sx={{
+                    bgcolor: brandCyan,
+                    color: darkPetroleum,
+                    borderRadius: 0,
+                    px: 4,
+                    py: 1.2,
+                    fontSize: "0.75rem",
+                    fontWeight: 900,
+                    fontFamily: "'Syne'",
+                    letterSpacing: "0.1em",
+                    boxShadow: `0 10px 20px rgba(114, 248, 255, 0.2)`,
+                    "&:hover": {
+                      bgcolor: "#FFF",
+                      color: darkPetroleum,
+                      transform: "translateY(-2px)",
                     },
-                    "&:hover": { color: "#D4AF37" },
+                    transition: "all 0.3s ease",
                   }}
                 >
-                  {link.label}
-                </Box>
-              ))}
-
-              {/* Botón Call to Action Premium */}
-              <Button
-                variant='contained'
-                onClick={() => scrollTo("expositores")}
-                sx={{
-                  bgcolor: "#fff",
-                  color: "#062C22",
-                  borderRadius: 0,
-                  px: 4,
-                  py: 1,
-                  fontSize: "0.65rem",
-                  fontWeight: 900,
-                  fontFamily: "'Syne'",
-                  letterSpacing: "0.1em",
-                  "&:hover": { bgcolor: "#D4AF37", color: "#fff" },
-                }}
-              >
-                QUIERO EXPONER
-              </Button>
-              <Button
-                variant='contained'
-                onClick={() => scrollTo("register")}
-                sx={{
-                  bgcolor: "#D4AF37",
-                  color: "#062C22",
-                  borderRadius: 0,
-                  px: 4,
-                  py: 1,
-                  fontSize: "0.65rem",
-                  fontWeight: 900,
-                  fontFamily: "'Syne'",
-                  letterSpacing: "0.1em",
-                  "&:hover": { bgcolor: "#FFF", color: "#062C22" },
-                }}
-              >
-                QUIERO ASISTIR
-              </Button>
+                  BOLETOS
+                </Button>
+              </Stack>
             </Stack>
 
             {/* Mobile Toggle */}
@@ -191,7 +181,9 @@ export default function Navbar() {
               onClick={() => setMenuOpen(!menuOpen)}
               sx={{
                 display: { md: "none" },
-                color: scrolled ? "#D4AF37" : "#FFF",
+                color: brandCyan,
+                bgcolor: "rgba(114, 248, 255, 0.05)",
+                borderRadius: 0,
               }}
             >
               {menuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -213,20 +205,35 @@ export default function Navbar() {
               position: "fixed",
               inset: 0,
               zIndex: 1150,
-              background: "#062C22",
+              background: darkPetroleum,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              alignItems: "center",
               p: 6,
             }}
           >
-            <Stack spacing={4}>
+            {/* Fondo decorativo en el menu mobile */}
+            <Typography
+              sx={{
+                position: "absolute",
+                fontSize: "30vw",
+                fontWeight: 900,
+                color: "rgba(114, 248, 255, 0.03)",
+                zIndex: 0,
+                fontFamily: "'Syne'",
+              }}
+            >
+              MENU
+            </Typography>
+
+            <Stack spacing={6} sx={{ zIndex: 1, textAlign: "center" }}>
               {navLinks.map((link, i) => (
                 <Typography
                   key={link.to}
                   component={motion.div}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                   onClick={() => {
                     scrollTo(link.to);
@@ -234,29 +241,38 @@ export default function Navbar() {
                   }}
                   sx={{
                     fontFamily: "'Syne'",
-                    fontSize: "3rem",
-                    fontWeight: 800,
-                    color: active === link.to ? "#D4AF37" : "#FFF",
+                    fontSize: "2.2rem",
+                    fontWeight: 900,
+                    color: active === link.to ? brandCyan : "#FFF",
                     cursor: "pointer",
-                    lineHeight: 1,
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    "&:hover": { color: brandCyan },
                   }}
                 >
                   {link.label}
                 </Typography>
               ))}
 
-              <Box sx={{ pt: 4, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-                <Typography
-                  sx={{
-                    color: "#D4AF37",
-                    letterSpacing: "0.3em",
-                    fontSize: "0.7rem",
-                    fontWeight: 800,
-                  }}
-                >
-                  WTC CIUDAD DE MÉXICO
-                </Typography>
-              </Box>
+              <Button
+                variant='contained'
+                onClick={() => {
+                  scrollTo("register");
+                  setMenuOpen(false);
+                }}
+                sx={{
+                  bgcolor: brandCyan,
+                  color: darkPetroleum,
+                  borderRadius: 0,
+                  py: 2,
+                  px: 6,
+                  fontWeight: 900,
+                  fontFamily: "'Syne'",
+                  fontSize: "1rem",
+                }}
+              >
+                COMPRAR TICKET
+              </Button>
             </Stack>
           </Box>
         )}

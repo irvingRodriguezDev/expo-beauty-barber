@@ -51,14 +51,18 @@ export default function ExperienceGallery() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Paleta High-Tech
+  const brandCyan = "#72F8FF";
+  const darkPetroleum = "#02181B"; // El tono más oscuro para el cierre
+
   return (
     <Box
       ref={ref}
       id='experiencia'
       sx={{
         py: { xs: 10, md: 15 },
-        // CAMBIO: Gradiente Salvia a Esmeralda para profundidad
-        background: "linear-gradient(0deg, #062C22 0%, #668678 100%)",
+        // GRADIENTE: Del petróleo profundo al negro casi total
+        background: `linear-gradient(180deg, #042F35 0%, ${darkPetroleum} 100%)`,
         overflow: "hidden",
       }}
     >
@@ -70,27 +74,27 @@ export default function ExperienceGallery() {
               fontWeight: 900,
               fontSize: { xs: "2.5rem", md: "4rem" },
               lineHeight: 1,
-              color: "#FFFFFF", // CAMBIO: Blanco puro
+              color: "#FFFFFF",
             }}
           >
             VIVE LA{" "}
             <span
-              style={{ color: "#D4AF37", fontStyle: "italic", fontWeight: 400 }}
+              style={{ color: brandCyan, fontStyle: "italic", fontWeight: 400 }}
             >
               EXPERIENCIA
             </span>{" "}
             EBB
           </Typography>
-          {/* Subtítulo dorado sutil */}
           <Typography
             sx={{
               fontFamily: "'DM Sans'",
-              fontSize: "0.7rem",
+              fontSize: "0.75rem",
               fontWeight: 800,
               letterSpacing: "0.5em",
-              color: "#D4AF37",
+              color: brandCyan,
               mt: 2,
               textTransform: "uppercase",
+              opacity: 0.8,
             }}
           >
             Curaduría Visual 2027
@@ -121,13 +125,13 @@ export default function ExperienceGallery() {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                borderRadius: "0px", // CAMBIO: Bordes rectos (Premium/Architectural)
+                borderRadius: "0px",
                 cursor: "pointer",
-                border: "1px solid rgba(212, 175, 55, 0.1)", // Marco dorado casi invisible
+                border: "1px solid rgba(255, 255, 255, 0.05)",
                 "&:hover .gallery-overlay": { opacity: 1 },
                 "&:hover img": {
-                  transform: "scale(1.08)",
-                  filter: "grayscale(0%) brightness(1)",
+                  transform: "scale(1.1)",
+                  filter: "grayscale(0%) brightness(1.1)",
                 },
               }}
             >
@@ -139,40 +143,39 @@ export default function ExperienceGallery() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  // Filtro inicial más serio
-                  filter: "grayscale(40%) brightness(0.8)",
-                  transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                  filter: "grayscale(80%) brightness(0.7)", // Más dramático inicialmente
+                  transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
               />
 
-              {/* Overlay con Texto (Efecto Galería de Arte) */}
+              {/* Overlay: Glassmorphism Cian */}
               <Box
                 className='gallery-overlay'
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  // CAMBIO: Overlay Verde Esmeralda Profundo
-                  bgcolor: "rgba(6, 44, 34, 0.7)",
+                  bgcolor: "rgba(4, 47, 53, 0.6)", // Tono petróleo con transparencia
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   opacity: 0,
-                  transition: "0.4s",
-                  backdropFilter: "blur(8px)",
+                  transition: "0.5s ease",
+                  backdropFilter: "blur(12px)",
                 }}
               >
                 <Typography
                   sx={{
                     fontFamily: "'Syne'",
-                    color: "#D4AF37", // Texto en Dorado
+                    color: brandCyan,
                     fontWeight: 800,
-                    fontSize: "0.8rem",
-                    letterSpacing: "0.4em",
-                    border: "1px solid #D4AF37",
+                    fontSize: "0.85rem",
+                    letterSpacing: "0.3em",
+                    border: `1.5px solid ${brandCyan}`,
                     px: 3,
                     py: 1.5,
                     textAlign: "center",
                     textTransform: "uppercase",
+                    boxShadow: `0 0 20px rgba(114, 248, 255, 0.2)`,
                   }}
                 >
                   {item.title}
@@ -182,23 +185,23 @@ export default function ExperienceGallery() {
           ))}
         </ImageList>
 
-        {/* Decoración sutil inferior en Dorado/Blanco */}
+        {/* Decoración inferior */}
         <Box
           sx={{
             mt: 8,
             display: "flex",
             justifyContent: "center",
             gap: 6,
-            opacity: 0.6,
+            opacity: 0.4,
           }}
         >
           <Typography
             sx={{
               fontFamily: "'DM Sans'",
-              fontSize: "0.6rem",
+              fontSize: "0.65rem",
               fontWeight: 700,
-              letterSpacing: "0.3em",
-              color: "#D4AF37",
+              letterSpacing: "0.4em",
+              color: brandCyan,
             }}
           >
             1RA EDICIÓN
@@ -206,9 +209,9 @@ export default function ExperienceGallery() {
           <Typography
             sx={{
               fontFamily: "'DM Sans'",
-              fontSize: "0.6rem",
+              fontSize: "0.65rem",
               fontWeight: 700,
-              letterSpacing: "0.3em",
+              letterSpacing: "0.4em",
               color: "#FFF",
             }}
           >

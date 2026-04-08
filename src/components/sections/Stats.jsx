@@ -14,6 +14,9 @@ function Counter({ to, suffix = "" }) {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (v) => Math.round(v).toLocaleString());
 
+  // Color de acento
+  const brandCyan = "#72F8FF";
+
   useEffect(() => {
     if (inView) {
       const c = animate(count, to, { duration: 3.5, ease: [0.19, 1, 0.22, 1] });
@@ -31,7 +34,7 @@ function Counter({ to, suffix = "" }) {
       <Typography
         component='span'
         sx={{
-          color: "#D4AF37", // CAMBIO: Dorado para el sufijo (+, DÍAS, etc)
+          color: brandCyan, // Acento en Cian
           ml: 1,
           fontSize: "0.25em",
           fontWeight: 900,
@@ -66,7 +69,7 @@ const stats = [
   {
     value: 20,
     suffix: "+",
-    label: "SESIONES DE\nALTA MAESTRÍA", // O "EXPERIENCIAS\nEDUCATIVAS"
+    label: "SESIONES DE\nALTA MAESTRÍA",
     desc: "Conferencias, talleres y demostraciones en vivo.",
   },
 ];
@@ -74,6 +77,8 @@ const stats = [
 export default function Stats() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const brandCyan = "#72F8FF";
 
   return (
     <Box
@@ -83,14 +88,14 @@ export default function Stats() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        // CAMBIO: Gradiente inverso para conectar con la sección anterior (Salvia a Esmeralda)
-        background: "linear-gradient(0deg, #062C22 0%, #668678 100%)",
+        // GRADIENTE: De petróleo medio a petróleo profundo
+        background: "linear-gradient(180deg, #064E57 0%, #042F35 100%)",
         position: "relative",
         overflow: "hidden",
         py: { xs: 10, md: 0 },
       }}
     >
-      {/* TÍTULO DE FONDO GIGANTE - Escala responsiva en Dorado sutil */}
+      {/* TÍTULO DE FONDO GIGANTE - Efecto Cristal en Cian */}
       <Typography
         sx={{
           position: "absolute",
@@ -100,8 +105,7 @@ export default function Stats() {
           fontFamily: "'Syne'",
           fontSize: { xs: "8rem", sm: "15rem", md: "25rem" },
           fontWeight: 900,
-          background:
-            "linear-gradient(180deg, rgba(212, 175, 55, 0.28) 0%, transparent 100%)",
+          background: `linear-gradient(180deg, rgba(114, 248, 255, 0.1) 0%, transparent 100%)`,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           whiteSpace: "nowrap",
@@ -126,7 +130,7 @@ export default function Stats() {
                   fontFamily: "'Syne'",
                   fontSize: { xs: "1.5rem", sm: "2.5rem", md: "3.7rem" },
                   letterSpacing: { xs: "0.2em", md: "0.5em" },
-                  color: "#D4AF37", // CAMBIO: Dorado
+                  color: brandCyan,
                   fontWeight: 800,
                   mb: 2,
                   lineHeight: 1.2,
@@ -140,7 +144,7 @@ export default function Stats() {
                 sx={{
                   fontFamily: "'Syne'",
                   fontWeight: 800,
-                  color: "#FFFFFF", // CAMBIO: Blanco para legibilidad sobre verde
+                  color: "#FFFFFF",
                   maxWidth: { xs: "100%", md: "500px" },
                   lineHeight: 1.1,
                   fontSize: { xs: "1.8rem", md: "3rem" },
@@ -150,7 +154,7 @@ export default function Stats() {
                 Donde los números <br />
                 <span
                   style={{
-                    color: "#D4AF37",
+                    color: brandCyan,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -170,7 +174,7 @@ export default function Stats() {
               sx={{
                 fontFamily: "'DM Sans'",
                 fontSize: "1.2rem",
-                color: "rgba(255, 255, 255, 0.7)", // CAMBIO: Blanco suave
+                color: "rgba(255, 255, 255, 0.7)",
                 maxWidth: { md: "550px" },
                 ml: { md: "auto" },
                 lineHeight: 1.8,
@@ -197,7 +201,7 @@ export default function Stats() {
                     position: "relative",
                     p: { xs: 3, md: 4 },
                     textAlign: { xs: "center", md: "left" },
-                    // BORDES DE ESQUINA - Estilo arquitectónico en blanco/dorado
+                    // BORDES DE ESQUINA - Estilo Tech/Moderno
                     "&::before": {
                       content: '""',
                       position: "absolute",
@@ -206,12 +210,12 @@ export default function Stats() {
                       transform: { xs: "translateX(-50%)", md: "none" },
                       width: "20px",
                       height: "20px",
-                      borderTop: "2px solid rgba(255, 255, 255, 0.2)",
-                      borderLeft: "2px solid rgba(255, 255, 255, 0.2)",
+                      borderTop: "1px solid rgba(255, 255, 255, 0.2)",
+                      borderLeft: "1px solid rgba(255, 255, 255, 0.2)",
                       display: { xs: "none", md: "block" },
                     },
                     "&:hover::before": {
-                      borderColor: "#D4AF37",
+                      borderColor: brandCyan,
                       width: "100%",
                       height: "100%",
                       transition: "0.6s ease",
@@ -221,6 +225,7 @@ export default function Stats() {
                       md: "none",
                     },
                     pb: { xs: 4, md: 4 },
+                    transition: "0.3s",
                   }}
                 >
                   <Typography
@@ -229,7 +234,7 @@ export default function Stats() {
                       fontWeight: 900,
                       fontSize: { xs: "3.5rem", sm: "4rem", md: "5.5rem" },
                       lineHeight: 1,
-                      color: "#FFFFFF", // CAMBIO: Blanco puro para los números
+                      color: "#FFFFFF",
                       mb: 1,
                       letterSpacing: "-0.05em",
                     }}
@@ -242,7 +247,7 @@ export default function Stats() {
                       fontFamily: "'Syne'",
                       fontSize: "0.75rem",
                       fontWeight: 800,
-                      color: "#D4AF37", // CAMBIO: Dorado
+                      color: brandCyan,
                       letterSpacing: "0.3em",
                       mb: 1,
                       whiteSpace: "pre-line",
@@ -255,7 +260,7 @@ export default function Stats() {
                     sx={{
                       fontFamily: "'DM Sans'",
                       fontSize: "0.99rem",
-                      color: "rgba(255, 255, 255, 0.9)", // CAMBIO: Blanco tenue
+                      color: "rgba(255, 255, 255, 0.6)",
                     }}
                   >
                     {stat.desc}
@@ -272,7 +277,7 @@ export default function Stats() {
           sx={{
             mt: { xs: 6, md: 10 },
             pt: 4,
-            borderTop: "1px solid rgba(212, 175, 55, 0.2)",
+            borderTop: `1px solid rgba(114, 248, 255, 0.1)`,
           }}
         />
       </Container>

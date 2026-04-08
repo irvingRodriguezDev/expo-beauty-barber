@@ -6,6 +6,7 @@ import {
   TextField,
   MenuItem,
   Grid,
+  Box,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -24,33 +25,54 @@ export const RegistrationForm = ({
     formState: { errors },
   } = useForm();
 
+  const brandCyan = "#72F8FF";
+  const darkPetroleum = "#02181B";
+
   return (
     <motion.div
       key='form'
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Paper
         elevation={0}
         sx={{
-          maxWidth: 600,
+          maxWidth: 650,
           mx: "auto",
-          p: { xs: 4, md: 6 },
-          background: "#FFFFFF",
+          p: { xs: 4, md: 8 },
+          // Fondo de cristal oscuro
+          background: "rgba(255, 255, 255, 0.02)",
+          backdropFilter: "blur(20px)",
           borderRadius: 0,
-          border: "1px solid #D4AF37",
+          border: `1px solid rgba(114, 248, 255, 0.1)`,
+          position: "relative",
+          overflow: "hidden",
         }}
       >
+        {/* Línea de acento superior estilo terminal */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "2px",
+            background: `linear-gradient(90deg, transparent, ${brandCyan}, transparent)`,
+          }}
+        />
+
         <Button
           startIcon={<ArrowBackIcon />}
           onClick={onBack}
           sx={{
-            color: "#062C22",
-            mb: 4,
+            color: brandCyan,
+            mb: 5,
             fontSize: "0.7rem",
             fontWeight: 800,
-            letterSpacing: "0.1em",
+            letterSpacing: "0.2em",
+            "&:hover": { bgcolor: "transparent", color: "#FFF", pl: 0 },
           }}
         >
           CAMBIAR TIPO DE PASE
@@ -58,29 +80,59 @@ export const RegistrationForm = ({
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={4}>
-            <Typography
-              sx={{
-                fontFamily: "'Syne'",
-                fontWeight: 800,
-                fontSize: "0.9rem",
-                color: "#D4AF37",
-                borderBottom: "1px solid rgba(0,0,0,0.1)",
-                pb: 1,
-                letterSpacing: "0.2em",
-              }}
-            >
-              DATOS DEL ASISTENTE • {selectedPass.title}
-            </Typography>
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: "'Syne'",
+                  fontWeight: 800,
+                  fontSize: "0.85rem",
+                  color: brandCyan,
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  mb: 1,
+                }}
+              >
+                Inscripción de Profesional
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "'Syne'",
+                  fontWeight: 900,
+                  fontSize: "1.5rem",
+                  color: "#FFFFFF",
+                  borderBottom: `1px solid rgba(114, 248, 255, 0.1)`,
+                  pb: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                {selectedPass.title}
+                <Box
+                  sx={{
+                    px: 1.5,
+                    py: 0.5,
+                    bgcolor: "rgba(114, 248, 255, 0.1)",
+                    color: brandCyan,
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  CONFIRMADO
+                </Box>
+              </Typography>
+            </Box>
 
             <TextField
               label='NOMBRE COMPLETO'
               fullWidth
+              variant='outlined'
               {...register("nombre", { required: true })}
               error={!!errors.nombre}
               sx={inputStyles}
             />
 
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label='EMAIL'
@@ -108,10 +160,26 @@ export const RegistrationForm = ({
               {...register("tipo", { required: true })}
               error={!!errors.tipo}
               sx={inputStyles}
+              SelectProps={{
+                MenuProps: {
+                  PaperProps: {
+                    sx: {
+                      bgcolor: "#064E57",
+                      color: "#FFF",
+                      borderRadius: 0,
+                      "& .MuiMenuItem-root": {
+                        fontFamily: "'DM Sans'",
+                        fontSize: "0.9rem",
+                        "&:hover": { bgcolor: brandCyan, color: darkPetroleum },
+                      },
+                    },
+                  },
+                },
+              }}
             >
               {visitorTypes.map((t) => (
                 <MenuItem key={t} value={t}>
-                  {t}
+                  {t.toUpperCase()}
                 </MenuItem>
               ))}
             </TextField>
@@ -121,17 +189,24 @@ export const RegistrationForm = ({
               variant='contained'
               fullWidth
               sx={{
-                py: 2,
-                bgcolor: "#062C22",
-                color: "#fff",
+                py: 2.5,
+                bgcolor: brandCyan,
+                color: darkPetroleum,
                 borderRadius: 0,
-                fontWeight: 800,
+                fontWeight: 900,
                 fontFamily: "'Syne'",
-                letterSpacing: "0.2em",
-                "&:hover": { bgcolor: "#D4AF37", color: "#062C22" },
+                letterSpacing: "0.3em",
+                boxShadow: `0 10px 30px rgba(114, 248, 255, 0.2)`,
+                "&:hover": {
+                  bgcolor: "#FFFFFF",
+                  color: darkPetroleum,
+                  transform: "translateY(-3px)",
+                  boxShadow: `0 15px 40px rgba(114, 248, 255, 0.3)`,
+                },
+                transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
               }}
             >
-              CONFIRMAR REGISTRO (${selectedPass.price} MXN)
+              FINALIZAR REGISTRO • ${selectedPass.price} MXN
             </Button>
           </Stack>
         </form>

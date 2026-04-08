@@ -55,18 +55,20 @@ export default function Exhibitors() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const brandCyan = "#72F8FF";
+  const deepPetroleum = "#02181B";
+
   return (
     <Box
       ref={ref}
       component='section'
       id='expositores'
       sx={{
-        // CAMBIO: Gradiente Esmeralda profundo para coherencia
-        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
+        background: `linear-gradient(180deg, #042F35 0%, ${deepPetroleum} 100%)`,
         overflow: "hidden",
       }}
     >
-      {/* 1. HEADER SECTION: EDITORIAL STYLE */}
+      {/* 1. HEADER SECTION */}
       <Container maxWidth='xl' sx={{ py: { xs: 8, md: 15 } }}>
         <Grid container spacing={{ xs: 4, lg: 10 }} alignItems='flex-end'>
           <Grid item xs={12} lg={7}>
@@ -81,7 +83,7 @@ export default function Exhibitors() {
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "#D4AF37", // CAMBIO: Dorado
+                  color: brandCyan,
                   mb: 3,
                   textAlign: { xs: "center", lg: "left" },
                 }}
@@ -103,7 +105,7 @@ export default function Exhibitors() {
                 IMPULSA TU <br />
                 <span
                   style={{
-                    color: "#D4AF37",
+                    color: brandCyan,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -122,9 +124,9 @@ export default function Exhibitors() {
             >
               <Box
                 sx={{
-                  borderLeft: { xs: "none", lg: "4px solid #D4AF37" },
+                  borderLeft: { xs: "none", lg: `4px solid ${brandCyan}` },
                   borderTop: {
-                    xs: "1px solid rgba(212,175,55,0.3)",
+                    xs: `1px solid rgba(114, 248, 255, 0.3)`,
                     lg: "none",
                   },
                   pl: { lg: 4 },
@@ -150,7 +152,7 @@ export default function Exhibitors() {
                   sx={{
                     fontFamily: "'Syne'",
                     fontWeight: 800,
-                    color: "#D4AF37",
+                    color: brandCyan,
                     letterSpacing: "0.1em",
                     "&:hover": {
                       bgcolor: "transparent",
@@ -168,14 +170,14 @@ export default function Exhibitors() {
         </Grid>
       </Container>
 
-      {/* 2. MARQUEE DE MARCAS (SUTILEZA PREMIUM) */}
+      {/* 2. MARQUEE DE MARCAS */}
       <Box
         sx={{
-          bgcolor: "#041C16", // Negro Esmeralda
+          bgcolor: "#02181B",
           py: { xs: 3, md: 5 },
           transform: "rotate(-1deg) scale(1.02)",
           my: 4,
-          borderY: "1px solid rgba(212, 175, 55, 0.2)",
+          borderY: `1px solid rgba(114, 248, 255, 0.1)`,
         }}
       >
         <Marquee speed={60} gradient={false}>
@@ -186,11 +188,11 @@ export default function Exhibitors() {
                 fontFamily: "'Syne'",
                 fontSize: { xs: "1.2rem", md: "2.2rem" },
                 fontWeight: 800,
-                color: "#D4AF37",
+                color: brandCyan,
                 mx: { xs: 4, md: 8 },
                 textTransform: "uppercase",
                 letterSpacing: "0.2em",
-                opacity: 0.6,
+                opacity: 0.4,
                 "&:hover": { opacity: 1, color: "#FFFFFF" },
                 transition: "0.3s",
               }}
@@ -201,7 +203,7 @@ export default function Exhibitors() {
         </Marquee>
       </Box>
 
-      {/* 3. BENEFITS GRID: MODERN CARDS */}
+      {/* 3. BENEFITS GRID */}
       <Box sx={{ py: { xs: 10, md: 15 } }}>
         <Container maxWidth='xl'>
           <Grid container spacing={4}>
@@ -217,10 +219,10 @@ export default function Exhibitors() {
                     sx={{
                       height: "100%",
                       p: { xs: 4, md: 6 },
-                      bgcolor: "rgba(255, 255, 255, 0.03)",
+                      bgcolor: "rgba(255, 255, 255, 0.02)",
                       backdropFilter: "blur(10px)",
-                      border: "1px solid rgba(212, 175, 55, 0.1)",
-                      borderRadius: 0, // Corte recto Premium
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      borderRadius: 0,
                       position: "relative",
                       overflow: "hidden",
                       transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -234,19 +236,20 @@ export default function Exhibitors() {
                         left: 0,
                         width: "100%",
                         height: "2px",
-                        background: "#D4AF37",
+                        background: brandCyan,
                         transform: "scaleX(0)",
                         transformOrigin: "left",
                         transition: "transform 0.5s ease",
                       },
 
                       "&:hover": {
-                        bgcolor: "rgba(255, 255, 255, 0.07)",
+                        bgcolor: "rgba(114, 248, 255, 0.04)",
                         transform: "translateY(-15px)",
+                        borderColor: "rgba(114, 248, 255, 0.3)",
                         "&::before": { transform: "scaleX(1)" },
                         "& .benefit-number": {
-                          opacity: 0.08,
-                          transform: "translateX(-10px)",
+                          opacity: 0.1,
+                          transform: "translateX(-15px)",
                         },
                       },
                     }}
@@ -260,7 +263,7 @@ export default function Exhibitors() {
                         fontSize: "8rem",
                         fontWeight: 900,
                         fontFamily: "'Syne'",
-                        color: "#D4AF37",
+                        color: brandCyan,
                         opacity: 0.03,
                         lineHeight: 1,
                         transition: "0.6s ease",
@@ -287,7 +290,7 @@ export default function Exhibitors() {
                             left: 0,
                             width: "30px",
                             height: "2px",
-                            bgcolor: "#D4AF37",
+                            bgcolor: brandCyan,
                           },
                         }}
                       >
@@ -297,7 +300,7 @@ export default function Exhibitors() {
                       <Typography
                         variant='body1'
                         sx={{
-                          color: "rgba(255, 255, 255, 0.6)",
+                          color: "rgba(255, 255, 255, 0.5)",
                           lineHeight: 1.9,
                           fontWeight: 300,
                           fontSize: "1rem",
@@ -315,7 +318,7 @@ export default function Exhibitors() {
         </Container>
       </Box>
 
-      {/* 4. CTA FINAL: GLASS BOX REFINADO */}
+      {/* 4. CTA FINAL */}
       <Container maxWidth='lg' sx={{ pb: { xs: 10, md: 20 } }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
@@ -325,20 +328,34 @@ export default function Exhibitors() {
           <Box
             sx={{
               p: { xs: 5, md: 8 },
-              background: "#041C16",
+              background: "#02181B",
               textAlign: "center",
-              border: "1px solid rgba(212, 175, 55, 0.3)",
+              border: `1px solid rgba(114, 248, 255, 0.2)`,
               borderRadius: 0,
-              boxShadow: "0 50px 100px rgba(0,0,0,0.5)",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
+            {/* Glow decorativo de fondo */}
+            <Box
+              sx={{
+                position: "absolute",
+                top: "-50%",
+                left: "-50%",
+                width: "200%",
+                height: "200%",
+                background: `radial-gradient(circle, rgba(114, 248, 255, 0.03) 0%, transparent 50%)`,
+                pointerEvents: "none",
+              }}
+            />
+
             <Typography
               sx={{
                 fontFamily: "'DM Sans'",
                 fontSize: "0.75rem",
                 fontWeight: 900,
                 letterSpacing: "0.5em",
-                color: "#D4AF37",
+                color: brandCyan,
                 mb: 3,
               }}
             >
@@ -357,7 +374,7 @@ export default function Exhibitors() {
               }}
             >
               ¿LISTO PARA{" "}
-              <span style={{ color: "#D4AF37", fontStyle: "italic" }}>
+              <span style={{ color: brandCyan, fontStyle: "italic" }}>
                 LIDERAR
               </span>{" "}
               EL SECTOR?
@@ -368,7 +385,7 @@ export default function Exhibitors() {
                 mb: 6,
                 maxWidth: 600,
                 mx: "auto",
-                color: "rgba(255, 255, 255, 0.6)",
+                color: "rgba(255, 255, 255, 0.5)",
                 fontSize: { xs: "1rem", md: "1.1rem" },
                 lineHeight: 1.8,
               }}
@@ -385,8 +402,8 @@ export default function Exhibitors() {
               <Button
                 variant='contained'
                 sx={{
-                  bgcolor: "#D4AF37",
-                  color: "#041C16",
+                  bgcolor: brandCyan,
+                  color: "#02181B",
                   px: { xs: 4, md: 6 },
                   py: 2,
                   borderRadius: 0,
@@ -396,6 +413,7 @@ export default function Exhibitors() {
                   "&:hover": {
                     bgcolor: "#FFFFFF",
                     transform: "translateY(-5px)",
+                    boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
                   },
                   transition: "0.3s",
                 }}
@@ -406,15 +424,15 @@ export default function Exhibitors() {
               <Button
                 variant='outlined'
                 sx={{
-                  borderColor: "#D4AF37",
-                  color: "#D4AF37",
+                  borderColor: "rgba(255, 255, 255, 0.3)",
+                  color: "#FFFFFF",
                   px: { xs: 4, md: 6 },
                   py: 2,
                   borderRadius: 0,
                   fontFamily: "'Syne'",
                   fontWeight: 800,
                   letterSpacing: "0.2em",
-                  "&:hover": { borderColor: "#FFFFFF", color: "#FFFFFF" },
+                  "&:hover": { borderColor: brandCyan, color: brandCyan },
                   transition: "0.3s",
                 }}
               >

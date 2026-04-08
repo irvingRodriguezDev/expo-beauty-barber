@@ -12,6 +12,10 @@ export default function Highlights() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Paleta High-Tech
+  const brandCyan = "#72F8FF";
+  const darkPetroleum = "#042F35";
+
   const benefits = [
     {
       title: "NEGOCIO",
@@ -36,21 +40,21 @@ export default function Highlights() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        // CAMBIO: Gradiente Esmeralda a Salvia
-        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
+        // GRADIENTE: Continuidad del petróleo profundo
+        background: `linear-gradient(180deg, #042F35 0%, #064E57 100%)`,
         overflow: "hidden",
         position: "relative",
         py: { xs: 8, md: 0 },
       }}
     >
-      {/* 1. MARQUEES DE FONDO (TEXTURAS DORADAS SUTILES) */}
+      {/* 1. MARQUEES DE FONDO (TEXTURAS CIAN SUTILES) */}
       <Box
         sx={{
           position: "absolute",
           width: "120%",
           left: "-10%",
           top: { xs: "-2%", md: "1%" },
-          opacity: 0.2, // Casi imperceptible, muy elegante
+          opacity: 0.1, // Muy tenue, como un reflejo en agua
           pointerEvents: "none",
         }}
       >
@@ -60,7 +64,7 @@ export default function Highlights() {
               fontFamily: "'Syne'",
               fontSize: { xs: "5rem", md: "12rem" },
               fontWeight: 900,
-              color: "#D4AF37", // CAMBIO: Dorado
+              color: brandCyan,
               whiteSpace: "nowrap",
             }}
           >
@@ -75,7 +79,7 @@ export default function Highlights() {
           width: "120%",
           left: "-10%",
           bottom: { xs: "5%", md: "2%" },
-          opacity: 0.25,
+          opacity: 0.15,
           pointerEvents: "none",
         }}
       >
@@ -85,8 +89,11 @@ export default function Highlights() {
               fontFamily: "'Syne'",
               fontSize: { xs: "4rem", md: "10rem" },
               fontWeight: 900,
-              // CAMBIO: Contorno en Dorado
-              WebkitTextStroke: { xs: "1px #D4AF37", md: "2px #D4AF37" },
+              // Contorno en Blanco para limpieza
+              WebkitTextStroke: {
+                xs: "1px rgba(255,255,255,0.3)",
+                md: "2px rgba(255,255,255,0.3)",
+              },
               color: "transparent",
               whiteSpace: "nowrap",
             }}
@@ -112,7 +119,7 @@ export default function Highlights() {
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "#D4AF37", // CAMBIO: Dorado
+                  color: brandCyan,
                   mb: 3,
                   textAlign: { xs: "center", md: "left" },
                 }}
@@ -124,7 +131,7 @@ export default function Highlights() {
                 sx={{
                   fontFamily: "'Syne'",
                   fontSize: { xs: "2.2rem", sm: "3.5rem", md: "5rem" },
-                  color: "#FFFFFF", // CAMBIO: Blanco para contraste
+                  color: "#FFFFFF",
                   lineHeight: { xs: 1.1, md: 0.9 },
                   mb: 4,
                   fontWeight: 900,
@@ -134,7 +141,7 @@ export default function Highlights() {
                 MÁS QUE UNA EXPO, <br />
                 <span
                   style={{
-                    color: "#D4AF37",
+                    color: brandCyan,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -146,7 +153,7 @@ export default function Highlights() {
                 sx={{
                   fontFamily: "'DM Sans'",
                   fontSize: "1.1rem",
-                  color: "rgba(255, 255, 255, 0.7)", // Blanco suave
+                  color: "rgba(255, 255, 255, 0.8)",
                   maxWidth: { xs: "100%", md: "480px" },
                   lineHeight: 1.8,
                   textAlign: { xs: "center", md: "left" },
@@ -160,7 +167,7 @@ export default function Highlights() {
             </motion.div>
           </Grid>
 
-          {/* Lado Derecho: Beneficios / Pilares */}
+          {/* Lado Derecho: Pilares */}
           <Grid item xs={12} md={6} sx={{ mt: { xs: 0, md: -12 } }}>
             <Stack spacing={{ xs: 2, md: 4 }}>
               {benefits.map((benefit, i) => (
@@ -178,11 +185,10 @@ export default function Highlights() {
                       textAlign: { xs: "center", sm: "left" },
                       gap: { xs: 2, sm: 4 },
                       p: 3,
-                      // CAMBIO: Borde en blanco con baja opacidad
                       borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                       transition: "0.4s",
                       "&:hover": {
-                        bgcolor: "rgba(212, 175, 55, 0.05)", // Hover dorado tenue
+                        bgcolor: "rgba(114, 248, 255, 0.05)", // Hover Cian tenue
                         transform: { xs: "none", md: "translateX(20px)" },
                       },
                     }}
@@ -192,7 +198,7 @@ export default function Highlights() {
                         fontFamily: "'Syne'",
                         fontSize: "1.5rem",
                         fontWeight: 900,
-                        color: "#D4AF37", // CAMBIO: Dorado
+                        color: brandCyan,
                         minWidth: { sm: "40px" },
                       }}
                     >
@@ -204,7 +210,7 @@ export default function Highlights() {
                           fontFamily: "'Syne'",
                           fontWeight: 800,
                           fontSize: "1.2rem",
-                          color: "#FFFFFF", // CAMBIO: Blanco
+                          color: "#FFFFFF",
                           letterSpacing: "0.1em",
                         }}
                       >
@@ -228,20 +234,21 @@ export default function Highlights() {
         </Grid>
       </Container>
 
-      {/* 3. MARQUEE CENTRAL (EL ACENTO DE AUTORIDAD) */}
+      {/* 3. MARQUEE CENTRAL (EL CINTURÓN DE AUTORIDAD) */}
       <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
           width: "110%",
-          bottom: { md: "28%" },
+          bottom: { md: "25%" },
           my: { xs: 6, md: 0 },
           left: "-5%",
-          background: "#041C16", // Verde aún más oscuro para el Marquee
-          py: 2,
+          background: "rgba(255, 255, 255, 0.05)", // Casi transparente
+          backdropFilter: "blur(10px)",
+          py: 3,
           transform: { xs: "rotate(0deg)", md: "rotate(-1.5deg)" },
           zIndex: 1,
-          borderY: "1px solid rgba(212, 175, 55, 0.3)", // Bordes dorados
-          boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+          borderY: `1px solid rgba(114, 248, 255, 0.2)`,
+          boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
         }}
       >
         <Marquee speed={60} gradient={false}>
@@ -260,7 +267,7 @@ export default function Highlights() {
               sx={{ mx: { xs: 2, md: 4 } }}
             >
               <AutoAwesomeIcon
-                sx={{ color: "#D4AF37", mr: 2, fontSize: { xs: 16, md: 20 } }} // Icono Dorado
+                sx={{ color: brandCyan, mr: 2, fontSize: { xs: 16, md: 20 } }}
               />
               <Typography
                 sx={{
@@ -278,7 +285,7 @@ export default function Highlights() {
         </Marquee>
       </Box>
 
-      {/* FOOTER DE SECCIÓN: DETALLE TÉCNICO DORADO */}
+      {/* FOOTER DE SECCIÓN */}
       <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
@@ -291,14 +298,14 @@ export default function Highlights() {
           justifyContent: "space-between",
           alignItems: "center",
           gap: 2,
-          opacity: 0.4,
+          opacity: 0.5,
         }}
       >
         <Typography
           sx={{
             fontFamily: "monospace",
             fontSize: "0.6rem",
-            color: "#D4AF37",
+            color: brandCyan,
             textAlign: "center",
             letterSpacing: "0.2em",
           }}

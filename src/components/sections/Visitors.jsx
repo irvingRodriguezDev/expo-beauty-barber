@@ -43,6 +43,9 @@ export default function Visitors() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const brandCyan = "#72F8FF";
+  const darkPetroleum = "#042F35";
+
   return (
     <Box
       ref={ref}
@@ -50,8 +53,8 @@ export default function Visitors() {
       id='visitantes'
       sx={{
         py: { xs: 10, md: 15 },
-        // CAMBIO: Gradiente Esmeralda a Salvia
-        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
+        // GRADIENTE: Transición de petróleo profundo
+        background: `linear-gradient(180deg, #02181B 0%, ${darkPetroleum} 100%)`,
         position: "relative",
         overflow: "hidden",
       }}
@@ -71,7 +74,7 @@ export default function Visitors() {
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "#D4AF37", // CAMBIO: Dorado
+                  color: brandCyan, // Acento Cian
                   mb: 3,
                   textTransform: "uppercase",
                 }}
@@ -84,7 +87,7 @@ export default function Visitors() {
                   fontFamily: "'Syne'",
                   fontSize: { xs: "3.5rem", md: "6rem" },
                   fontWeight: 800,
-                  color: "#FFFFFF", // CAMBIO: Blanco
+                  color: "#FFFFFF",
                   lineHeight: 0.9,
                   letterSpacing: "-0.04em",
                 }}
@@ -92,7 +95,7 @@ export default function Visitors() {
                 La cima del <br />
                 <span
                   style={{
-                    color: "#D4AF37",
+                    color: brandCyan,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -105,12 +108,11 @@ export default function Visitors() {
           <Grid item xs={12} md={5}>
             <Typography
               sx={{
-                color: "rgba(255, 255, 255, 0.7)", // Blanco suave
+                color: "rgba(255, 255, 255, 0.7)",
                 fontSize: "1.1rem",
                 lineHeight: 1.8,
                 maxWidth: "450px",
-                // CAMBIO: Borde Dorado
-                borderLeft: "2px solid #D4AF37",
+                borderLeft: `2px solid ${brandCyan}`, // Borde Cian
                 pl: 3,
               }}
             >
@@ -137,22 +139,22 @@ export default function Visitors() {
                     flexDirection: "column",
                     justifyContent: "center",
                     p: 4,
-                    // CAMBIO: Fondo oscuro translúcido (Glassmorphism esmeralda)
-                    backgroundColor: "rgba(6, 44, 34, 0.4)",
-                    border: "1px solid rgba(212, 175, 55, 0.1)",
-                    backdropFilter: "blur(10px)",
-                    borderRadius: "2px", // Esquinas rectas
+                    // Fondo Glassmorphism Dark Petroleum
+                    backgroundColor: "rgba(255, 255, 255, 0.03)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(15px)",
+                    borderRadius: "2px",
                     position: "relative",
                     overflow: "hidden",
-                    transition: "all 0.4s ease",
+                    transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
                     "&:hover": {
-                      backgroundColor: "rgba(6, 44, 34, 0.8)",
+                      backgroundColor: "rgba(114, 248, 255, 0.05)",
                       transform: "translateY(-10px)",
-                      borderColor: "#D4AF37", // Hover Dorado
+                      borderColor: brandCyan,
                     },
                     "&:hover .bg-text": {
-                      opacity: 0.08,
-                      transform: "scale(1.1)",
+                      opacity: 0.1,
+                      transform: "scale(1.1) translateX(-10%)",
                     },
                   }}
                 >
@@ -163,9 +165,9 @@ export default function Visitors() {
                       fontFamily: "'Syne'",
                       fontSize: "6rem",
                       fontWeight: 900,
-                      color: "#D4AF37", // Texto de fondo Dorado
+                      color: brandCyan,
                       opacity: 0.03,
-                      right: -20,
+                      right: -10,
                       bottom: -20,
                       transition: "0.8s ease",
                       pointerEvents: "none",
@@ -204,7 +206,7 @@ export default function Visitors() {
         {/* ÁREA DE REGISTRO E INVITACIÓN */}
         <Box sx={{ position: "relative" }}>
           <Grid container justifyContent='center'>
-            <Grid item xs={12} md={11} sx={{ borderRadius: "0px" }}>
+            <Grid item xs={12} md={11}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -212,8 +214,8 @@ export default function Visitors() {
               >
                 <Box
                   sx={{
-                    // CAMBIO: Fondo Negro Esmeralda Profundo
-                    background: "#041C16",
+                    // Fondo Petróleo más profundo para el call-out
+                    background: "#02181B",
                     color: "#FFF",
                     borderRadius: "0px",
                     p: { xs: 4, md: 8 },
@@ -223,25 +225,28 @@ export default function Visitors() {
                     gap: 6,
                     position: "relative",
                     overflow: "hidden",
-                    border: "1px solid rgba(212, 175, 55, 0.3)",
+                    border: `1px solid rgba(114, 248, 255, 0.2)`,
                   }}
                 >
-                  {/* Decoración de fondo sutil Dorado */}
+                  {/* Glow Radial en Cian */}
                   <Box
                     sx={{
                       position: "absolute",
-                      top: -50,
-                      right: -50,
+                      bottom: -150,
+                      left: -150,
                       width: 400,
                       height: 400,
                       borderRadius: "50%",
-                      background:
-                        "radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)",
+                      background: `radial-gradient(circle, rgba(114,248,255,0.08) 0%, transparent 70%)`,
                     }}
                   />
 
                   <Box
-                    sx={{ flex: 1, textAlign: { xs: "center", md: "left" } }}
+                    sx={{
+                      flex: 1,
+                      textAlign: { xs: "center", md: "left" },
+                      zIndex: 1,
+                    }}
                   >
                     <Typography
                       sx={{
@@ -254,7 +259,7 @@ export default function Visitors() {
                       }}
                     >
                       5-6{" "}
-                      <span style={{ color: "#D4AF37", fontSize: "0.5em" }}>
+                      <span style={{ color: brandCyan, fontSize: "0.5em" }}>
                         FEB
                       </span>
                     </Typography>
@@ -263,14 +268,14 @@ export default function Visitors() {
                         letterSpacing: "0.5em",
                         fontWeight: 700,
                         fontSize: "0.9rem",
-                        color: "#D4AF37", // Dorado
+                        color: brandCyan,
                       }}
                     >
                       WTC • CIUDAD DE MÉXICO
                     </Typography>
                   </Box>
 
-                  <Box sx={{ flex: 1, width: "100%" }}>
+                  <Box sx={{ flex: 1, width: "100%", zIndex: 1 }}>
                     <Typography
                       sx={{
                         fontSize: "0.8rem",
@@ -298,12 +303,12 @@ export default function Visitors() {
                           sx={{
                             px: 2,
                             py: 0.5,
-                            borderRadius: "0px",
                             fontSize: "0.75rem",
-                            border: "1px solid rgba(212, 175, 55, 0.2)",
-                            color: "#D4AF37",
+                            border: `1px solid rgba(114, 248, 255, 0.3)`,
+                            color: brandCyan,
                             fontFamily: "'Syne'",
                             letterSpacing: "0.1em",
+                            backgroundColor: "rgba(114, 248, 255, 0.05)",
                           }}
                         >
                           {p.toUpperCase()}
@@ -321,9 +326,9 @@ export default function Visitors() {
                       }}
                       startIcon={<ConfirmationNumberIcon />}
                       sx={{
-                        // CAMBIO: Botón Dorado con texto Negro
-                        bgcolor: "#D4AF37",
-                        color: "#041C16",
+                        // Botón Cian Eléctrico
+                        bgcolor: brandCyan,
+                        color: "#02181B",
                         borderRadius: 0,
                         py: 2.5,
                         fontWeight: 900,
@@ -332,8 +337,9 @@ export default function Visitors() {
                         transition: "0.4s",
                         "&:hover": {
                           bgcolor: "#FFFFFF",
-                          color: "#041C16",
-                          transform: "scale(1.02)",
+                          color: "#02181B",
+                          transform: "translateY(-5px)",
+                          boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
                         },
                       }}
                     >

@@ -8,14 +8,18 @@ export default function MapSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Colores de la nueva identidad
+  const brandCyan = "#72F8FF";
+  const darkPetroleum = "#042F35";
+
   return (
     <Box
       ref={ref}
       component='section'
       sx={{
         py: { xs: 12, md: 20 },
-        // CAMBIO: Gradiente Esmeralda a Salvia
-        background: "linear-gradient(180deg, #062C22 0%, #668678 100%)",
+        // GRADIENTE: Terminamos en el petróleo más profundo
+        background: "linear-gradient(180deg, #042F35 0%, #02181B 100%)",
         position: "relative",
       }}
     >
@@ -28,7 +32,7 @@ export default function MapSection() {
             alignItems: "center",
           }}
         >
-          {/* Texto Informativo Estilo Concierge */}
+          {/* Texto Informativo */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -37,10 +41,10 @@ export default function MapSection() {
             <Typography
               sx={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.7rem",
+                fontSize: "0.75rem",
                 fontWeight: 800,
                 letterSpacing: "0.4em",
-                color: "#D4AF37", // CAMBIO: Dorado
+                color: brandCyan, // Acento Cian
                 textTransform: "uppercase",
                 mb: 3,
               }}
@@ -52,7 +56,7 @@ export default function MapSection() {
               sx={{
                 fontFamily: "'Syne', sans-serif",
                 fontSize: { xs: "2.5rem", md: "4rem" },
-                color: "#FFFFFF", // CAMBIO: Blanco
+                color: "#FFFFFF",
                 lineHeight: 1.1,
                 mb: 3,
               }}
@@ -62,7 +66,7 @@ export default function MapSection() {
                 style={{
                   fontStyle: "italic",
                   fontWeight: 400,
-                  color: "#D4AF37",
+                  color: brandCyan, // Itálica en Cian
                 }}
               >
                 Ciudad de México
@@ -72,7 +76,7 @@ export default function MapSection() {
             <Typography
               variant='body1'
               sx={{
-                color: "rgba(255, 255, 255, 0.7)", // Blanco suave
+                color: "rgba(255, 255, 255, 0.75)",
                 fontSize: "1.1rem",
                 mb: 4,
                 lineHeight: 1.8,
@@ -86,7 +90,7 @@ export default function MapSection() {
             <Box
               sx={{ display: "flex", alignItems: "flex-start", gap: 2, mb: 5 }}
             >
-              <LocationOnIcon sx={{ color: "#D4AF37", mt: 0.5 }} />
+              <LocationOnIcon sx={{ color: brandCyan, mt: 0.5 }} />
               <Box>
                 <Typography
                   sx={{
@@ -109,31 +113,33 @@ export default function MapSection() {
 
             <Button
               component='a'
-              href='https://maps.google.com'
+              href='https://maps.google.com' // Ajustar a tu link real
               target='_blank'
               variant='outlined'
               endIcon={<OpenInNewIcon />}
               sx={{
-                borderRadius: 0, // Bordes rectos para mayor seriedad
-                borderColor: "#D4AF37",
-                color: "#D4AF37",
+                borderRadius: 0,
+                borderColor: "rgba(255, 255, 255, 0.3)",
+                color: "#FFFFFF",
                 px: 4,
                 py: 1.5,
                 fontWeight: 700,
                 fontFamily: "'Syne'",
-                letterSpacing: "0.1em",
+                letterSpacing: "0.15em",
                 "&:hover": {
-                  borderColor: "#FFFFFF",
-                  color: "#FFFFFF",
-                  bgcolor: "rgba(255, 255, 255, 0.05)",
+                  borderColor: brandCyan,
+                  color: brandCyan,
+                  bgcolor: "rgba(114, 248, 255, 0.05)",
+                  transform: "translateY(-3px)",
                 },
+                transition: "0.3s",
               }}
             >
               CÓMO LLEGAR
             </Button>
           </motion.div>
 
-          {/* El Mapa con Frame de Diseño Premium */}
+          {/* El Mapa con Frame de Diseño Tech */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -144,10 +150,11 @@ export default function MapSection() {
               sx={{
                 position: "relative",
                 zIndex: 2,
-                p: { xs: 0.5, md: 1 },
-                bgcolor: "rgba(212, 175, 55, 0.2)", // Borde dorado tenue
-                borderRadius: 1,
-                boxShadow: "0 50px 100px rgba(0, 0, 0, 0.4)",
+                p: { xs: 0.5, md: 0.8 },
+                bgcolor: "rgba(255, 255, 255, 0.05)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                boxShadow: "0 50px 100px rgba(0, 0, 0, 0.6)",
               }}
             >
               <Box
@@ -155,14 +162,14 @@ export default function MapSection() {
                   aspectRatio: { xs: "1/1", md: "16/9" },
                   overflow: "hidden",
                   borderRadius: 0,
-                  // CAMBIO: Filtro para que el mapa se vea oscuro y minimalista
+                  // FILTRO: Ahora el mapa se ve en tonos azules/oscuros para encajar
                   filter:
-                    "grayscale(1) contrast(1.2) invert(0.9) brightness(0.8)",
+                    "grayscale(1) contrast(1.2) invert(0.9) brightness(0.7) sepia(0.3) hue-rotate(150deg)",
                 }}
               >
                 <iframe
                   title='WTC Ciudad de México'
-                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155462526553!2d-99.17474412391035!3d19.394145981878496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff719e782633%3A0x63a3560647f3f6e5!2sWorld%20Trade%20Center%20Ciudad%20de%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1712431234567!5m2!1ses-419!2smx'
+                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.153163351945!2d-99.1748245239556!3d19.394132841852533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff716d80e145%3A0x6335e390c529ec2e!2sWorld%20Trade%20Center%20Ciudad%20de%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1712580000000!5m2!1ses-419!2smx'
                   width='100%'
                   height='100%'
                   style={{ border: 0, display: "block" }}
@@ -172,16 +179,17 @@ export default function MapSection() {
               </Box>
             </Box>
 
-            {/* Elemento Decorativo: Marco Dorado Flotante */}
+            {/* Elemento Decorativo: Marco Cian Sutil */}
             <Box
               sx={{
                 position: "absolute",
-                top: "-20px",
-                right: "-20px",
-                width: "100%",
-                height: "100%",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                zIndex: 1,
+                top: "-15px",
+                right: "-15px",
+                width: "60px",
+                height: "60px",
+                borderTop: `2px solid ${brandCyan}`,
+                borderRight: `2px solid ${brandCyan}`,
+                zIndex: 3,
                 pointerEvents: "none",
               }}
             />
