@@ -119,7 +119,7 @@ export default function Navbar() {
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontSize: "0.7rem",
                       fontWeight: 800,
                       letterSpacing: "0.25em",
@@ -160,7 +160,7 @@ export default function Navbar() {
                     py: 1.2,
                     fontSize: "0.75rem",
                     fontWeight: 900,
-                    fontFamily: "'Syne'",
+                    // fontFamily: "'Syne'",
                     letterSpacing: "0.1em",
                     boxShadow: `0 10px 20px rgba(114, 248, 255, 0.2)`,
                     "&:hover": {

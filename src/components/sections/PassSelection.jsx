@@ -74,7 +74,7 @@ export const PassSelection = ({ options, onSelect }) => {
 
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: "1.4rem",
                   mb: 1,
@@ -99,7 +99,7 @@ export const PassSelection = ({ options, onSelect }) => {
               <Typography
                 className='price'
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: "3rem",
                   color: "#FFF",

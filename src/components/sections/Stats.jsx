@@ -172,7 +172,7 @@ export default function Stats() {
           >
             <Typography
               sx={{
-                fontFamily: "'DM Sans'",
+                // fontFamily: "'DM Sans'",
                 fontSize: "1.2rem",
                 color: "rgba(255, 255, 255, 0.7)",
                 maxWidth: { md: "550px" },
@@ -230,7 +230,7 @@ export default function Stats() {
                 >
                   <Typography
                     sx={{
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontWeight: 900,
                       fontSize: { xs: "3.5rem", sm: "4rem", md: "5.5rem" },
                       lineHeight: 1,
@@ -244,7 +244,7 @@ export default function Stats() {
 
                   <Typography
                     sx={{
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontSize: "0.75rem",
                       fontWeight: 800,
                       color: brandCyan,
@@ -258,7 +258,7 @@ export default function Stats() {
 
                   <Typography
                     sx={{
-                      fontFamily: "'DM Sans'",
+                      // fontFamily: "'DM Sans'",
                       fontSize: "0.99rem",
                       color: "rgba(255, 255, 255, 0.6)",
                     }}

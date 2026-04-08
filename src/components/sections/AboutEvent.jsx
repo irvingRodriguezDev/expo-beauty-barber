@@ -29,13 +29,13 @@ export default function AboutEvent() {
       <Typography
         sx={{
           position: "absolute",
-          bottom: { xs: "5%", md: "-5%" },
-          right: { xs: "-5%", md: "2%" },
-          fontSize: { xs: "35vw", md: "22vw" },
+          bottom: { xs: "5%", md: "70%" },
+          right: { xs: "-5%", md: "45%" },
+          fontSize: { xs: "35vw", md: "15vw" },
           fontWeight: 900,
-          fontFamily: "'Syne', sans-serif",
+          // fontFamily: "'Syne', sans-serif",
           color: "transparent",
-          WebkitTextStroke: "1px rgba(114, 248, 255, 0.04)",
+          WebkitTextStroke: "1px rgba(114, 248, 255, 0.29)",
           lineHeight: 1,
           userSelect: "none",
           zIndex: 0,
@@ -136,7 +136,7 @@ export default function AboutEvent() {
                       color: "rgba(255, 255, 255, 0.5)",
                       lineHeight: 1.8,
                       mb: 3,
-                      fontFamily: "'DM Sans'",
+                      // fontFamily: "'DM Sans'",
                     }}
                   >
                     Con el respaldo de <strong>Publicidad Mahur</strong>,
@@ -145,7 +145,7 @@ export default function AboutEvent() {
                   </Typography>
                   <Typography
                     sx={{
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontSize: "0.75rem",
                       fontWeight: 800,
                       color: brandCyan,
@@ -153,7 +153,7 @@ export default function AboutEvent() {
                       textTransform: "uppercase",
                     }}
                   >
-                    #THEEXPERIENCE2027
+                    #EBB2027
                   </Typography>
                 </Box>
               </Stack>
@@ -208,7 +208,7 @@ export default function AboutEvent() {
                 </Box>
 
                 {/* Badge Flotante en la imagen */}
-                <Box
+                {/* <Box
                   sx={{
                     position: "absolute",
                     bottom: -20,
@@ -241,7 +241,7 @@ export default function AboutEvent() {
                   >
                     AÑOS DE ÉXITO
                   </Typography>
-                </Box>
+                </Box> */}
               </Box>
 
               {/* Elemento decorativo de fondo */}

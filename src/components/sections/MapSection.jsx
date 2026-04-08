@@ -96,7 +96,7 @@ export default function MapSection() {
                   sx={{
                     fontWeight: 700,
                     color: "#FFFFFF",
-                    fontFamily: "'Syne'",
+                    // fontFamily: "'Syne'",
                     letterSpacing: "0.05em",
                   }}
                 >
@@ -124,7 +124,7 @@ export default function MapSection() {
                 px: 4,
                 py: 1.5,
                 fontWeight: 700,
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 letterSpacing: "0.15em",
                 "&:hover": {
                   borderColor: brandCyan,

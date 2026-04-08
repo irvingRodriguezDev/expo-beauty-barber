@@ -87,7 +87,7 @@ export default function ExperienceGallery() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "'DM Sans'",
+              // fontFamily: "'DM Sans'",
               fontSize: "0.75rem",
               fontWeight: 800,
               letterSpacing: "0.5em",
@@ -165,7 +165,7 @@ export default function ExperienceGallery() {
               >
                 <Typography
                   sx={{
-                    fontFamily: "'Syne'",
+                    // fontFamily: "'Syne'",
                     color: brandCyan,
                     fontWeight: 800,
                     fontSize: "0.85rem",
@@ -197,7 +197,7 @@ export default function ExperienceGallery() {
         >
           <Typography
             sx={{
-              fontFamily: "'DM Sans'",
+              // fontFamily: "'DM Sans'",
               fontSize: "0.65rem",
               fontWeight: 700,
               letterSpacing: "0.4em",
@@ -208,7 +208,7 @@ export default function ExperienceGallery() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "'DM Sans'",
+              // fontFamily: "'DM Sans'",
               fontSize: "0.65rem",
               fontWeight: 700,
               letterSpacing: "0.4em",

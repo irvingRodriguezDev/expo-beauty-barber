@@ -59,7 +59,7 @@ export default function Footer() {
                 color: "rgba(255, 255, 255, 0.6)",
                 lineHeight: 1.8,
                 maxWidth: { xs: "100%", sm: 340 },
-                fontFamily: "'DM Sans'",
+                // fontFamily: "'DM Sans'",
                 fontSize: "0.95rem",
                 mb: 4,
               }}
@@ -103,7 +103,7 @@ export default function Footer() {
             <Typography
               sx={{
                 color: brandCyan,
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 fontWeight: 800,
                 mb: 4,
                 fontSize: "0.75rem",
@@ -140,7 +140,7 @@ export default function Footer() {
             <Typography
               sx={{
                 color: brandCyan,
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 fontWeight: 800,
                 mb: 4,
                 fontSize: "0.75rem",
@@ -200,7 +200,7 @@ export default function Footer() {
             <Box sx={{ position: "relative", mb: 4 }}>
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: { xs: "4rem", md: "5.5rem" },
                   color: "rgba(114, 248, 255, 0.05)", // Cian fantasma
@@ -211,7 +211,7 @@ export default function Footer() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 800,
                   fontSize: "1.8rem",
                   color: "#FFFFFF",

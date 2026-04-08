@@ -70,7 +70,7 @@ export default function Visitors() {
             >
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
@@ -162,7 +162,7 @@ export default function Visitors() {
                     className='bg-text'
                     sx={{
                       position: "absolute",
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontSize: "6rem",
                       fontWeight: 900,
                       color: brandCyan,
@@ -178,7 +178,7 @@ export default function Visitors() {
 
                   <Typography
                     sx={{
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontWeight: 800,
                       fontSize: "1.5rem",
                       color: "#FFFFFF",
@@ -250,7 +250,7 @@ export default function Visitors() {
                   >
                     <Typography
                       sx={{
-                        fontFamily: "'Syne'",
+                        // fontFamily: "'Syne'",
                         fontSize: { xs: "4rem", md: "7rem" },
                         fontWeight: 800,
                         lineHeight: 1,
@@ -306,7 +306,7 @@ export default function Visitors() {
                             fontSize: "0.75rem",
                             border: `1px solid rgba(114, 248, 255, 0.3)`,
                             color: brandCyan,
-                            fontFamily: "'Syne'",
+                            // fontFamily: "'Syne'",
                             letterSpacing: "0.1em",
                             backgroundColor: "rgba(114, 248, 255, 0.05)",
                           }}
@@ -332,7 +332,7 @@ export default function Visitors() {
                         borderRadius: 0,
                         py: 2.5,
                         fontWeight: 900,
-                        fontFamily: "'Syne'",
+                        // fontFamily: "'Syne'",
                         letterSpacing: "0.3em",
                         transition: "0.4s",
                         "&:hover": {

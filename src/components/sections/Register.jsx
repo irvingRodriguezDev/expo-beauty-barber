@@ -131,7 +131,7 @@ export default function Register() {
           >
             <Typography
               sx={{
-                fontFamily: "'DM Sans'",
+                // fontFamily: "'DM Sans'",
                 fontSize: "0.75rem",
                 fontWeight: 800,
                 letterSpacing: "0.5em",
@@ -144,7 +144,7 @@ export default function Register() {
             <Typography
               variant='h2'
               sx={{
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 fontSize: { xs: "2.5rem", md: "4rem" },
                 fontWeight: 900,
                 color: "#FFFFFF",

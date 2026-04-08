@@ -79,7 +79,7 @@ export default function Exhibitors() {
             >
               <Typography
                 sx={{
-                  fontFamily: "'DM Sans'",
+                  // fontFamily: "'DM Sans'",
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
@@ -147,10 +147,10 @@ export default function Exhibitors() {
                   Latinoamérica. Asegura tu lugar frente a los tomadores de
                   decisión.
                 </Typography>
-                <Button
+                {/* <Button
                   endIcon={<ArrowForwardIcon />}
                   sx={{
-                    fontFamily: "'Syne'",
+                    // fontFamily: "'Syne'",
                     fontWeight: 800,
                     color: brandCyan,
                     letterSpacing: "0.1em",
@@ -163,7 +163,7 @@ export default function Exhibitors() {
                   }}
                 >
                   DESCARGAR BROCHURE COMERCIAL
-                </Button>
+                </Button> */}
               </Box>
             </motion.div>
           </Grid>
@@ -185,7 +185,7 @@ export default function Exhibitors() {
             <Typography
               key={i}
               sx={{
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 fontSize: { xs: "1.2rem", md: "2.2rem" },
                 fontWeight: 800,
                 color: brandCyan,
@@ -262,7 +262,7 @@ export default function Exhibitors() {
                         right: 20,
                         fontSize: "8rem",
                         fontWeight: 900,
-                        fontFamily: "'Syne'",
+                        // fontFamily: "'Syne'",
                         color: brandCyan,
                         opacity: 0.03,
                         lineHeight: 1,
@@ -277,7 +277,7 @@ export default function Exhibitors() {
                     <Box sx={{ position: "relative", zIndex: 1 }}>
                       <Typography
                         sx={{
-                          fontFamily: "'Syne'",
+                          // fontFamily: "'Syne'",
                           fontWeight: 900,
                           fontSize: "1.25rem",
                           letterSpacing: "0.05em",
@@ -351,7 +351,7 @@ export default function Exhibitors() {
 
             <Typography
               sx={{
-                fontFamily: "'DM Sans'",
+                // fontFamily: "'DM Sans'",
                 fontSize: "0.75rem",
                 fontWeight: 900,
                 letterSpacing: "0.5em",
@@ -407,7 +407,7 @@ export default function Exhibitors() {
                   px: { xs: 4, md: 6 },
                   py: 2,
                   borderRadius: 0,
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   letterSpacing: "0.2em",
                   "&:hover": {
@@ -429,7 +429,7 @@ export default function Exhibitors() {
                   px: { xs: 4, md: 6 },
                   py: 2,
                   borderRadius: 0,
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 800,
                   letterSpacing: "0.2em",
                   "&:hover": { borderColor: brandCyan, color: brandCyan },

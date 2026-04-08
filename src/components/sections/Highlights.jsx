@@ -61,7 +61,7 @@ export default function Highlights() {
         <Marquee speed={80} gradient={false}>
           <Typography
             sx={{
-              fontFamily: "'Syne'",
+              // fontFamily: "'Syne'",
               fontSize: { xs: "5rem", md: "12rem" },
               fontWeight: 900,
               color: brandCyan,
@@ -86,7 +86,7 @@ export default function Highlights() {
         <Marquee speed={40} direction='right' gradient={false}>
           <Typography
             sx={{
-              fontFamily: "'Syne'",
+              // fontFamily: "'Syne'",
               fontSize: { xs: "4rem", md: "10rem" },
               fontWeight: 900,
               // Contorno en Blanco para limpieza
@@ -115,7 +115,7 @@ export default function Highlights() {
             >
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
@@ -151,7 +151,7 @@ export default function Highlights() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "'DM Sans'",
+                  // fontFamily: "'DM Sans'",
                   fontSize: "1.1rem",
                   color: "rgba(255, 255, 255, 0.8)",
                   maxWidth: { xs: "100%", md: "480px" },
@@ -195,7 +195,7 @@ export default function Highlights() {
                   >
                     <Typography
                       sx={{
-                        fontFamily: "'Syne'",
+                        // fontFamily: "'Syne'",
                         fontSize: "1.5rem",
                         fontWeight: 900,
                         color: brandCyan,
@@ -207,7 +207,7 @@ export default function Highlights() {
                     <Box>
                       <Typography
                         sx={{
-                          fontFamily: "'Syne'",
+                          // fontFamily: "'Syne'",
                           fontWeight: 800,
                           fontSize: "1.2rem",
                           color: "#FFFFFF",
@@ -271,7 +271,7 @@ export default function Highlights() {
               />
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 800,
                   color: "#FFFFFF",
                   fontSize: { xs: "0.9rem", md: "1.1rem" },
@@ -310,7 +310,7 @@ export default function Highlights() {
             letterSpacing: "0.2em",
           }}
         >
-          PRODUCTION BY PUBLICIDAD MAHUR
+          PRODUCTION EBB2027
         </Typography>
         <Typography
           sx={{

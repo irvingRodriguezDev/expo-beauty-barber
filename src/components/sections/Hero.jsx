@@ -163,7 +163,7 @@ export default function Hero() {
                       fontSize: "0.8rem",
                       letterSpacing: "0.2em",
                       color: "#FFF",
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                     }}
                   >
                     {item.text}
@@ -187,7 +187,7 @@ export default function Hero() {
                   px: 6,
                   py: 2.5,
                   fontWeight: 900,
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   letterSpacing: "0.2em",
                   boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
                   "&:hover": { bgcolor: "#FFF", transform: "translateY(-5px)" },

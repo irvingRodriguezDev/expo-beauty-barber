@@ -83,7 +83,7 @@ export const RegistrationForm = ({
             <Box>
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 800,
                   fontSize: "0.85rem",
                   color: brandCyan,
@@ -96,7 +96,7 @@ export const RegistrationForm = ({
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
+                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: "1.5rem",
                   color: "#FFFFFF",
@@ -194,7 +194,7 @@ export const RegistrationForm = ({
                 color: darkPetroleum,
                 borderRadius: 0,
                 fontWeight: 900,
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 letterSpacing: "0.3em",
                 boxShadow: `0 10px 30px rgba(114, 248, 255, 0.2)`,
                 "&:hover": {
