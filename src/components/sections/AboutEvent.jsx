@@ -168,12 +168,13 @@ export default function AboutEvent() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Contenedor de Imagen con Frame Flotante */}
-              <Box sx={{ position: "relative", zIndex: 2 }}>
+              <Box sx={{ position: "relative", zIndex: 2, borderRadius: 4 }}>
                 <Box
                   sx={{
                     width: "100%",
                     height: { xs: "400px", md: "650px" },
                     overflow: "hidden",
+                    borderRadius: 4,
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     position: "relative",
                   }}
@@ -200,6 +201,7 @@ export default function AboutEvent() {
                       position: "absolute",
                       bottom: 0,
                       left: 0,
+                      borderRadius: 4,
                       width: "100%",
                       height: "30%",
                       background: `linear-gradient(to top, ${darkPetroleum}, transparent)`,
@@ -252,6 +254,7 @@ export default function AboutEvent() {
                   left: -40,
                   width: "100%",
                   height: "100%",
+                  borderRadius: 4,
                   border: `1px solid rgba(114, 248, 255, 0.1)`,
                   zIndex: 1,
                   pointerEvents: "none",

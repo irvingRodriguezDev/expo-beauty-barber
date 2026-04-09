@@ -82,7 +82,7 @@ export default function Footer() {
                   sx={{
                     color: brandCyan,
                     border: `1px solid rgba(114, 248, 255, 0.2)`,
-                    borderRadius: 0,
+                    borderRadius: 2,
                     "&:hover": {
                       bgcolor: brandCyan,
                       color: darkPetroleum,
@@ -227,7 +227,7 @@ export default function Footer() {
               sx={{
                 border: `1px solid ${brandCyan}`,
                 color: brandCyan,
-                borderRadius: 0,
+                borderRadius: 2,
                 width: 50,
                 height: 50,
                 transition: "0.3s",

@@ -143,6 +143,7 @@ export default function Hero() {
                     gap: 2,
                     px: 3,
                     py: 1.5,
+                    borderRadius: 4,
                     bgcolor: "rgba(255, 255, 255, 0.03)",
                     border: "1px solid rgba(114, 248, 255, 0.15)",
                     backdropFilter: "blur(10px)",
@@ -183,7 +184,7 @@ export default function Hero() {
                 sx={{
                   bgcolor: brandCyan,
                   color: darkPetroleum,
-                  borderRadius: 0,
+                  borderRadius: 4,
                   px: 6,
                   py: 2.5,
                   fontWeight: 900,
@@ -202,7 +203,7 @@ export default function Hero() {
                 sx={{
                   borderColor: "rgba(255,255,255,0.2)",
                   color: "#FFF",
-                  borderRadius: 0,
+                  borderRadius: 4,
                   px: 6,
                   py: 2.5,
                   fontWeight: 800,
@@ -222,6 +223,7 @@ export default function Hero() {
               position: "relative",
               display: "flex",
               justifyContent: { xs: "center", lg: "flex-end" },
+              mt: 10,
             }}
           >
             <motion.div
@@ -229,7 +231,7 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 1.2 }}
             >
-              <Box
+              {/* <Box
                 sx={{
                   width: { xs: "280px", md: "450px" },
                   aspectRatio: "4/5",
@@ -247,21 +249,22 @@ export default function Hero() {
                     zIndex: -1,
                   },
                 }}
-              >
-                <Box
-                  component='img'
-                  src={WomenEbb}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    borderRadius: 0,
-                    filter: "grayscale(20%) contrast(1.1)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  }}
-                />
-                {/* Overlay de color sutil sobre la imagen */}
-                <Box
+              > */}
+              <Box
+                component='img'
+                src={WomenEbb}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectViewBox: "inset(1%)",
+                  borderRadius: 0,
+                  filter: "grayscale(20%) contrast(1.1)",
+                  // border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              />
+              {/* Overlay de color sutil sobre la imagen */}
+              {/* <Box
                   sx={{
                     position: "absolute",
                     top: 0,
@@ -271,8 +274,8 @@ export default function Hero() {
                     background: `linear-gradient(to top, ${darkPetroleum}, transparent)`,
                     opacity: 0.4,
                   }}
-                />
-              </Box>
+                /> */}
+              {/* </Box> */}
             </motion.div>
           </Box>
         </Box>

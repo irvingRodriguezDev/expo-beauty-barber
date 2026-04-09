@@ -19,7 +19,7 @@ const darkPetroleum = "#042F35";
 const inputStyles = {
   mb: 3,
   "& .MuiOutlinedInput-root": {
-    borderRadius: "0px",
+    borderRadius: 4,
     backgroundColor: "rgba(255, 255, 255, 0.03)", // Fondo ultra tenue para integración total
     backdropFilter: "blur(10px)",
     transition: "all 0.3s ease-in-out",
@@ -27,16 +27,19 @@ const inputStyles = {
     "& fieldset": {
       borderColor: "rgba(114, 248, 255, 0.2)", // Borde Cian sutil
       borderWidth: "1px",
+      borderRadius: 4,
     },
 
     "&:hover fieldset": {
       borderColor: `${brandCyan} !important`, // Cian fuerte al pasar el mouse
+      borderRadius: 4,
     },
 
     "&.Mui-focused fieldset": {
       borderColor: `${brandCyan} !important`,
       borderWidth: "2px",
       boxShadow: `0 0 20px rgba(114, 248, 255, 0.15)`,
+      borderRadius: 4,
     },
   },
 

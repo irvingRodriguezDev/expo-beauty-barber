@@ -146,6 +146,7 @@ export default function Visitors() {
                     borderRadius: "2px",
                     position: "relative",
                     overflow: "hidden",
+                    borderRadius: 4,
                     transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
                     "&:hover": {
                       backgroundColor: "rgba(114, 248, 255, 0.05)",
@@ -217,7 +218,7 @@ export default function Visitors() {
                     // Fondo Petróleo más profundo para el call-out
                     background: "#02181B",
                     color: "#FFF",
-                    borderRadius: "0px",
+                    borderRadius: 4,
                     p: { xs: 4, md: 8 },
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
@@ -237,6 +238,7 @@ export default function Visitors() {
                       width: 400,
                       height: 400,
                       borderRadius: "50%",
+
                       background: `radial-gradient(circle, rgba(114,248,255,0.08) 0%, transparent 70%)`,
                     }}
                   />
@@ -306,6 +308,7 @@ export default function Visitors() {
                             fontSize: "0.75rem",
                             border: `1px solid rgba(114, 248, 255, 0.3)`,
                             color: brandCyan,
+                            borderRadius: 4,
                             // fontFamily: "'Syne'",
                             letterSpacing: "0.1em",
                             backgroundColor: "rgba(114, 248, 255, 0.05)",
@@ -329,7 +332,7 @@ export default function Visitors() {
                         // Botón Cian Eléctrico
                         bgcolor: brandCyan,
                         color: "#02181B",
-                        borderRadius: 0,
+                        borderRadius: 4,
                         py: 2.5,
                         fontWeight: 900,
                         // fontFamily: "'Syne'",

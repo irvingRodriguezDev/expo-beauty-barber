@@ -118,7 +118,7 @@ export default function MapSection() {
               variant='outlined'
               endIcon={<OpenInNewIcon />}
               sx={{
-                borderRadius: 0,
+                borderRadius: 4,
                 borderColor: "rgba(255, 255, 255, 0.3)",
                 color: "#FFFFFF",
                 px: 4,
@@ -155,13 +155,14 @@ export default function MapSection() {
                 backdropFilter: "blur(10px)",
                 border: "1px solid rgba(255, 255, 255, 0.15)",
                 boxShadow: "0 50px 100px rgba(0, 0, 0, 0.6)",
+                borderRadius: 4,
               }}
             >
               <Box
                 sx={{
                   aspectRatio: { xs: "1/1", md: "16/9" },
                   overflow: "hidden",
-                  borderRadius: 0,
+                  borderRadius: 4,
                   // FILTRO: Ahora el mapa se ve en tonos azules/oscuros para encajar
                   filter:
                     "grayscale(1) contrast(1.2) invert(0.9) brightness(0.7) sepia(0.3) hue-rotate(150deg)",
@@ -187,6 +188,7 @@ export default function MapSection() {
                 right: "-15px",
                 width: "60px",
                 height: "60px",
+                borderTopRightRadius: 12,
                 borderTop: `2px solid ${brandCyan}`,
                 borderRight: `2px solid ${brandCyan}`,
                 zIndex: 3,

@@ -125,7 +125,7 @@ export default function ExperienceGallery() {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                borderRadius: "0px",
+                borderRadius: 4,
                 cursor: "pointer",
                 border: "1px solid rgba(255, 255, 255, 0.05)",
                 "&:hover .gallery-overlay": { opacity: 1 },
@@ -159,6 +159,7 @@ export default function ExperienceGallery() {
                   alignItems: "center",
                   justifyContent: "center",
                   opacity: 0,
+                  borderRadius: 4,
                   transition: "0.5s ease",
                   backdropFilter: "blur(12px)",
                 }}
@@ -173,6 +174,7 @@ export default function ExperienceGallery() {
                     border: `1.5px solid ${brandCyan}`,
                     px: 3,
                     py: 1.5,
+                    borderRadius: 4,
                     textAlign: "center",
                     textTransform: "uppercase",
                     boxShadow: `0 0 20px rgba(114, 248, 255, 0.2)`,

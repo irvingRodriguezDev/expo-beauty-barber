@@ -213,6 +213,7 @@ export default function Stats() {
                       borderTop: "1px solid rgba(255, 255, 255, 0.2)",
                       borderLeft: "1px solid rgba(255, 255, 255, 0.2)",
                       display: { xs: "none", md: "block" },
+                      borderRadius: 4,
                     },
                     "&:hover::before": {
                       borderColor: brandCyan,

@@ -45,7 +45,7 @@ export const RegistrationForm = ({
           // Fondo de cristal oscuro
           background: "rgba(255, 255, 255, 0.02)",
           backdropFilter: "blur(20px)",
-          borderRadius: 0,
+          borderRadius: 4,
           border: `1px solid rgba(114, 248, 255, 0.1)`,
           position: "relative",
           overflow: "hidden",
@@ -71,6 +71,7 @@ export const RegistrationForm = ({
             mb: 5,
             fontSize: "0.7rem",
             fontWeight: 800,
+            borderRadius: 4,
             letterSpacing: "0.2em",
             "&:hover": { bgcolor: "transparent", color: "#FFF", pl: 0 },
           }}
@@ -83,7 +84,6 @@ export const RegistrationForm = ({
             <Box>
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 800,
                   fontSize: "0.85rem",
                   color: brandCyan,
@@ -96,7 +96,6 @@ export const RegistrationForm = ({
               </Typography>
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: "1.5rem",
                   color: "#FFFFFF",
@@ -112,6 +111,7 @@ export const RegistrationForm = ({
                   sx={{
                     px: 1.5,
                     py: 0.5,
+                    borderRadius: 4,
                     bgcolor: "rgba(114, 248, 255, 0.1)",
                     color: brandCyan,
                     fontSize: "0.7rem",
@@ -166,9 +166,8 @@ export const RegistrationForm = ({
                     sx: {
                       bgcolor: "#064E57",
                       color: "#FFF",
-                      borderRadius: 0,
+                      borderRadius: 4,
                       "& .MuiMenuItem-root": {
-                        fontFamily: "'DM Sans'",
                         fontSize: "0.9rem",
                         "&:hover": { bgcolor: brandCyan, color: darkPetroleum },
                       },
@@ -178,7 +177,7 @@ export const RegistrationForm = ({
               }}
             >
               {visitorTypes.map((t) => (
-                <MenuItem key={t} value={t}>
+                <MenuItem key={t} value={t} sx={{ borderRadius: 4 }}>
                   {t.toUpperCase()}
                 </MenuItem>
               ))}
@@ -192,9 +191,8 @@ export const RegistrationForm = ({
                 py: 2.5,
                 bgcolor: brandCyan,
                 color: darkPetroleum,
-                borderRadius: 0,
+                borderRadius: 4,
                 fontWeight: 900,
-                // fontFamily: "'Syne'",
                 letterSpacing: "0.3em",
                 boxShadow: `0 10px 30px rgba(114, 248, 255, 0.2)`,
                 "&:hover": {

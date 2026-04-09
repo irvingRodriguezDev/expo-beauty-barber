@@ -155,7 +155,7 @@ export default function Navbar() {
                   sx={{
                     bgcolor: brandCyan,
                     color: darkPetroleum,
-                    borderRadius: 0,
+                    borderRadius: 4,
                     px: 4,
                     py: 1.2,
                     fontSize: "0.75rem",
