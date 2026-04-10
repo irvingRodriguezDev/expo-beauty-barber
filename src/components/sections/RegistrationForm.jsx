@@ -7,6 +7,7 @@ import {
   MenuItem,
   Grid,
   Box,
+  CircularProgress,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -18,6 +19,7 @@ export const RegistrationForm = ({
   onSubmit,
   visitorTypes,
   inputStyles,
+  isSubmitting,
 }) => {
   const {
     register,
@@ -127,38 +129,52 @@ export const RegistrationForm = ({
               label='NOMBRE COMPLETO'
               fullWidth
               variant='outlined'
-              {...register("nombre", { required: true })}
-              error={!!errors.nombre}
+              autoComplete='off'
+              name='fullname'
+              {...register("fullname", { required: true })}
+              error={!!errors.fullname}
               sx={inputStyles}
             />
 
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label='EMAIL'
-                  fullWidth
-                  {...register("email", { required: true })}
-                  error={!!errors.email}
-                  sx={inputStyles}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label='WHATSAPP'
-                  fullWidth
-                  {...register("telefono", { required: true })}
-                  error={!!errors.telefono}
-                  sx={inputStyles}
-                />
-              </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label='EMAIL'
+                fullWidth
+                autoComplete='off'
+                {...register("email", { required: true })}
+                error={!!errors.email}
+                sx={inputStyles}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label='Empresa, Escuela, Academia, etc. '
+                fullWidth
+                type='text'
+                autoComplete='off'
+                {...register("businessName", { required: true })}
+                error={!!errors.businessName}
+                sx={inputStyles}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label='WHATSAPP'
+                fullWidth
+                name='phone'
+                autoComplete='off'
+                {...register("phone", { required: true })}
+                error={!!errors.phone}
+                sx={inputStyles}
+              />
             </Grid>
 
             <TextField
               select
               label='PERFIL PROFESIONAL'
               fullWidth
-              {...register("tipo", { required: true })}
-              error={!!errors.tipo}
+              {...register("profile", { required: true })}
+              error={!!errors.profile}
               sx={inputStyles}
               SelectProps={{
                 MenuProps: {
@@ -187,6 +203,7 @@ export const RegistrationForm = ({
               type='submit'
               variant='contained'
               fullWidth
+              disabled={isSubmitting} // Bloquea el botón mientras carga
               sx={{
                 py: 2.5,
                 bgcolor: brandCyan,
@@ -197,14 +214,21 @@ export const RegistrationForm = ({
                 boxShadow: `0 10px 30px rgba(114, 248, 255, 0.2)`,
                 "&:hover": {
                   bgcolor: "#FFFFFF",
-                  color: darkPetroleum,
-                  transform: "translateY(-3px)",
-                  boxShadow: `0 15px 40px rgba(114, 248, 255, 0.3)`,
+                  transform: isSubmitting ? "none" : "translateY(-3px)",
                 },
-                transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+                transition: "all 0.4s ease",
               }}
             >
-              FINALIZAR REGISTRO • ${selectedPass.price} MXN
+              {isSubmitting ? (
+                <Stack direction='row' spacing={2} alignItems='center'>
+                  <CircularProgress size={20} sx={{ color: darkPetroleum }} />
+                  <Typography sx={{ fontWeight: 900, fontSize: "0.9rem" }}>
+                    REDIRECCIONANDO AL PAGO...
+                  </Typography>
+                </Stack>
+              ) : (
+                `PROCEDER AL PAGO • $${selectedPass.price} MXN`
+              )}
             </Button>
           </Stack>
         </form>

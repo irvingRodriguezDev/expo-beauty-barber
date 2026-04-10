@@ -332,7 +332,7 @@ export default function Visitors() {
                         // Botón Cian Eléctrico
                         bgcolor: brandCyan,
                         color: "#02181B",
-                        borderRadius: 4,
+                        // borderRadius: 4,
                         py: 2.5,
                         fontWeight: 900,
                         // fontFamily: "'Syne'",

@@ -86,8 +86,37 @@ export default function Register() {
   const [status, setStatus] = useState("idle");
   const [selectedPass, setSelectedPass] = useState(null);
   const [registration, setRegistration] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const urlRegister = import.meta.env.VITE_BACKEND_URL_REGISTER;
+  const handleOnSubmit = async (data) => {
+    setLoading(true);
+    const dataForm = {
+      fullname: data.fullname,
+      email: data.email,
+      phone: data.phone,
+      profile: data.profile,
+      businessName: data.businessName,
+      accessType: selectedPass.id,
+    };
 
-  const handleOnSubmit = (data) => {
+    try {
+      const response = await fetch(urlRegister, {
+        method: "POST",
+        body: JSON.stringify(dataForm),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        const resData = await response.json();
+
+        window.location.href = resData.url;
+      } else {
+        setLoading(false); // Si hay error del server, liberamos el botón
+        alert("Error al procesar el registro. Intenta de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error en el registro", error);
+      setLoading(false);
+    }
     const code = "EBB-" + Math.random().toString(36).substr(2, 6).toUpperCase();
     setRegistration({ ...data, code, passTitle: selectedPass.title });
     setStatus("success");
@@ -95,16 +124,30 @@ export default function Register() {
 
   const passOptions = [
     {
-      id: "general_access",
-      title: "PROFESSIONAL PASS",
+      id: "SINGLE_DAY",
+      title: "ACCESO INDIVIDUAL 1 DIA",
       price: 150,
-      desc: "Acceso total de un día a la zona de exposición, shows en plataforma principal y área de networking.",
+      desc: "Obten tu acceso individual, con acceso completo por 1 dia",
       color: brandCyan, // Ahora es el acento principal
     },
     {
-      id: "full_experience",
-      title: "ELITE FULL PASS",
+      id: "TWO_DAYS",
+      title: "ACCESO INDIVIDUAL 2 DIAS",
       price: 200,
+      desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
+      color: "#FFFFFF",
+    },
+    {
+      id: "GROUP_SINGLE",
+      title: "ACCESO GRUPAL 1 DIA (obten 11 boletos)",
+      price: 1500,
+      desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
+      color: "#FFFFFF",
+    },
+    {
+      id: "GROUP_TWO",
+      title: "ACCESO GRUPAL 2 DIA (obten 11 boletos) ",
+      price: 2000,
       desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
       color: "#FFFFFF",
     },
@@ -194,6 +237,7 @@ export default function Register() {
                 onSubmit={handleOnSubmit}
                 visitorTypes={visitorOptions}
                 inputStyles={inputStyles}
+                isSubmitting={loading}
               />
             </motion.div>
           )}
