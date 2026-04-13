@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Marquee from "react-fast-marquee";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Link } from "react-router-dom";
 
 const benefits = [
   {
@@ -50,6 +51,8 @@ const brandItems = [
   "Nioxin",
   "OPI",
 ];
+const message =
+  "Me interesa ser expositor, en la expo Belleza y Barberias 2027, me podrias brindar más detalles, sobre los stands para expositores, costos, etc.";
 
 export default function Exhibitors() {
   const ref = useRef(null);
@@ -171,7 +174,7 @@ export default function Exhibitors() {
       </Container>
 
       {/* 2. MARQUEE DE MARCAS */}
-      <Box
+      {/* <Box
         sx={{
           bgcolor: "#02181B",
           py: { xs: 3, md: 5 },
@@ -201,7 +204,7 @@ export default function Exhibitors() {
             </Typography>
           ))}
         </Marquee>
-      </Box>
+      </Box> */}
 
       {/* 3. BENEFITS GRID */}
       <Box sx={{ py: { xs: 10, md: 15 } }}>
@@ -399,45 +402,32 @@ export default function Exhibitors() {
               spacing={3}
               justifyContent='center'
             >
-              <Button
-                variant='contained'
-                sx={{
-                  bgcolor: brandCyan,
-                  color: "#02181B",
-                  px: { xs: 4, md: 6 },
-                  py: 2,
-                  borderRadius: 4,
-                  // fontFamily: "'Syne'",
-                  fontWeight: 900,
-                  letterSpacing: "0.2em",
-                  "&:hover": {
-                    bgcolor: "#FFFFFF",
-                    transform: "translateY(-5px)",
-                    boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
-                  },
-                  transition: "0.3s",
-                }}
+              <Link
+                to={`https://wa.me/+525546184541?text=${message}`}
+                target='__blank'
               >
-                CONTACTAR VENTAS
-              </Button>
-
-              <Button
-                variant='outlined'
-                sx={{
-                  borderColor: "rgba(255, 255, 255, 0.3)",
-                  color: "#FFFFFF",
-                  px: { xs: 4, md: 6 },
-                  py: 2,
-                  borderRadius: 4,
-                  // fontFamily: "'Syne'",
-                  fontWeight: 800,
-                  letterSpacing: "0.2em",
-                  "&:hover": { borderColor: brandCyan, color: brandCyan },
-                  transition: "0.3s",
-                }}
-              >
-                VER PLANO
-              </Button>
+                <Button
+                  variant='contained'
+                  sx={{
+                    bgcolor: brandCyan,
+                    color: "#02181B",
+                    px: { xs: 4, md: 6 },
+                    py: 2,
+                    borderRadius: 4,
+                    // fontFamily: "'Syne'",
+                    fontWeight: 900,
+                    letterSpacing: "0.2em",
+                    "&:hover": {
+                      bgcolor: "#FFFFFF",
+                      transform: "translateY(-5px)",
+                      boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
+                    },
+                    transition: "0.3s",
+                  }}
+                >
+                  CONTACTAR VENTAS
+                </Button>
+              </Link>
             </Stack>
           </Box>
         </motion.div>

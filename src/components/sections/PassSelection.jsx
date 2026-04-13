@@ -16,7 +16,7 @@ export const PassSelection = ({ options, onSelect }) => {
     >
       <Grid container spacing={3} justifyContent='center'>
         {options.map((pass) => (
-          <Grid item xs={12} sm={6} key={pass.id}>
+          <Grid item xs={12} sm={6} lg={3} key={pass.id}>
             <Box
               onClick={() => onSelect(pass)}
               sx={{

@@ -76,7 +76,7 @@ const ScannerView = () => {
 
       try {
         const response = await fetch(
-          "https://8liprdhku8.execute-api.us-east-2.amazonaws.com/Prod/check-in/",
+          "https://api.expobellezaybarberias.com/check-in/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

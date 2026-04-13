@@ -195,7 +195,7 @@ export const RegistrationForm = ({
             >
               {visitorTypes.map((t) => (
                 <MenuItem key={t} value={t} sx={{ borderRadius: 4 }}>
-                  {t.toUpperCase()}
+                  {t}
                 </MenuItem>
               ))}
             </TextField>

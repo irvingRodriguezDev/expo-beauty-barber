@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { PassSelection } from "./PassSelection";
 import { RegistrationForm } from "./RegistrationForm";
 import { SuccessTicket } from "./SuccessTicket";
+import Swal from "sweetalert2";
 
 const visitorOptions = [
   "Barberos",
@@ -88,6 +89,7 @@ export default function Register() {
   const [registration, setRegistration] = useState(null);
   const [loading, setLoading] = useState(false);
   const urlRegister = import.meta.env.VITE_BACKEND_URL_REGISTER;
+
   const handleOnSubmit = async (data) => {
     setLoading(true);
     const dataForm = {
@@ -111,13 +113,19 @@ export default function Register() {
         window.location.href = resData.url;
       } else {
         setLoading(false); // Si hay error del server, liberamos el botón
-        alert("Error al procesar el registro. Intenta de nuevo.");
+        Swal.fire({
+          title: "Ocurrio un problema",
+          text: "Ocurrio un problema al realizar el registro",
+          icon: "error",
+          timer: 2500,
+          showConfirmButton: false,
+        });
       }
     } catch (error) {
       console.error("Error en el registro", error);
       setLoading(false);
     }
-    const code = "EBB-" + Math.random().toString(36).substr(2, 6).toUpperCase();
+    const code = "EBB-" + Math.random().toString(36).substr(2, 6);
     setRegistration({ ...data, code, passTitle: selectedPass.title });
     setStatus("success");
   };
@@ -168,7 +176,7 @@ export default function Register() {
         justifyContent: "center",
       }}
     >
-      <Container maxWidth='lg'>
+      <Container maxWidth='xl'>
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -238,19 +246,6 @@ export default function Register() {
                 visitorTypes={visitorOptions}
                 inputStyles={inputStyles}
                 isSubmitting={loading}
-              />
-            </motion.div>
-          )}
-
-          {status === "success" && (
-            <motion.div
-              key='success'
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <SuccessTicket
-                registration={registration}
-                onReset={() => setStatus("idle")}
               />
             </motion.div>
           )}

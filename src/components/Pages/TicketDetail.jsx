@@ -38,7 +38,7 @@ const TicketView = () => {
     const fetchTicket = async () => {
       try {
         const response = await fetch(
-          `https://3jjwno3km4.execute-api.us-east-2.amazonaws.com/Prod/ticket/${code}`,
+          `https://api.expobellezaybarberias.com/ticket/${code}`,
         );
         if (!response.ok) throw new Error("Ticket no encontrado");
         const data = await response.json();

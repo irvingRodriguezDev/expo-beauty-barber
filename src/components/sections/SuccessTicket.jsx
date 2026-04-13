@@ -139,7 +139,7 @@ export const SuccessTicket = ({ registration, onReset }) => {
               letterSpacing: "0.05em",
             }}
           >
-            {registration.nombre.toUpperCase()}
+            {registration.nombre}
           </Typography>
 
           <Stack spacing={2}>

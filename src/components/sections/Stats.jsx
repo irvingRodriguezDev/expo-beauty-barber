@@ -231,7 +231,6 @@ export default function Stats() {
                 >
                   <Typography
                     sx={{
-                      // fontFamily: "'Syne'",
                       fontWeight: 900,
                       fontSize: { xs: "3.5rem", sm: "4rem", md: "5.5rem" },
                       lineHeight: 1,

@@ -16,8 +16,8 @@ import Logo from "../../assets/LogoNegro.png";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
   { label: "Experiencia", to: "experiencia" },
-  { label: "Expositores", to: "expositores" },
-  { label: "Registro", to: "register" },
+  { label: "visitantes", to: "visitantes" },
+  { label: "¿Quiero Exponer?", to: "expositores" },
 ];
 
 const scrollTo = (id) => {
@@ -263,7 +263,7 @@ export default function Navbar() {
                 sx={{
                   bgcolor: brandCyan,
                   color: darkPetroleum,
-                  borderRadius: 0,
+                  borderRadius: 4,
                   py: 2,
                   px: 6,
                   fontWeight: 900,
@@ -271,7 +271,7 @@ export default function Navbar() {
                   fontSize: "1rem",
                 }}
               >
-                COMPRAR TICKET
+                BOLETOS
               </Button>
             </Stack>
           </Box>

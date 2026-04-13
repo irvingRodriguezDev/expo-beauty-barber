@@ -168,7 +168,7 @@ export default function Footer() {
             </Typography>
             <Typography
               component='a'
-              href='#'
+              href='https://maps.app.goo.gl/wivwSB7BNWbseU128'
               target='_blank'
               sx={{
                 color: brandCyan,
