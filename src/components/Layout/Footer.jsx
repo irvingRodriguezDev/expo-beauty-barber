@@ -12,10 +12,12 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import Logo from "../../assets/LogoNegro.png";
+import { useState } from "react";
+import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
+  const [openPolicy, setOpenPolicy] = useState(false);
   const brandCyan = "#72F8FF";
   const darkPetroleum = "#02181B";
 
@@ -271,17 +273,28 @@ export default function Footer() {
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
-            {["PRIVACIDAD", "TÉRMINOS", "CONTACTO"].map((item) => (
+            {["POLITICA DE PRIVACIDAD", "CONTACTO"].map((item) => (
               <Typography
                 key={item}
                 component='a'
-                href='#'
+                href={
+                  item === "CONTACTO"
+                    ? "mailto:contacto@expobellezaybarberias.com"
+                    : "#"
+                }
+                onClick={(e) => {
+                  if (item === "POLITICA DE PRIVACIDAD") {
+                    e.preventDefault(); // Evita el salto del '#'
+                    setOpenPolicy(true);
+                  }
+                }}
                 sx={{
                   color: "rgba(255, 255, 255, 0.5)",
                   fontSize: "0.7rem",
                   textDecoration: "none",
                   fontWeight: 800,
                   letterSpacing: "0.1em",
+                  cursor: "pointer", // Importante para la UX
                   transition: "0.3s",
                   "&:hover": { color: brandCyan },
                 }}
@@ -289,6 +302,12 @@ export default function Footer() {
                 {item}
               </Typography>
             ))}
+
+            {/* Inyectamos el Modal aquí al final del Stack o del componente */}
+            <PrivacyPolicyModal
+              open={openPolicy}
+              onClose={() => setOpenPolicy(false)}
+            />
           </Stack>
         </Stack>
       </Container>

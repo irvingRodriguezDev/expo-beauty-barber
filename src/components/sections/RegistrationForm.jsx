@@ -12,7 +12,8 @@ import {
 import { motion } from "framer-motion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useForm } from "react-hook-form";
-
+import { useState } from "react";
+import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
 export const RegistrationForm = ({
   selectedPass,
   onBack,
@@ -26,7 +27,7 @@ export const RegistrationForm = ({
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const [openPolicy, setOpenPolicy] = useState(false);
   const brandCyan = "#72F8FF";
   const darkPetroleum = "#02181B";
 
@@ -198,7 +199,22 @@ export const RegistrationForm = ({
                 </MenuItem>
               ))}
             </TextField>
-
+            <Typography
+              variant='caption'
+              sx={{ color: "rgba(255,255,255,0.5)", mt: 2, display: "block" }}
+            >
+              Al registrarte, aceptas nuestra{" "}
+              <span
+                style={{
+                  color: brandCyan,
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
+                onClick={() => setOpenPolicy(true)}
+              >
+                Política de Privacidad
+              </span>
+            </Typography>
             <Button
               type='submit'
               variant='contained'
@@ -232,6 +248,10 @@ export const RegistrationForm = ({
             </Button>
           </Stack>
         </form>
+        <PrivacyPolicyModal
+          open={openPolicy}
+          onClose={() => setOpenPolicy(false)}
+        />
       </Paper>
     </motion.div>
   );

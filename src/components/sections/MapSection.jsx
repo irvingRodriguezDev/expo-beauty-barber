@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Box, Container, Typography, Button } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-
+import EdificioWtc from "../../assets/images/EDIFICIOWTC.png";
 export default function MapSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -18,12 +18,30 @@ export default function MapSection() {
       component='section'
       sx={{
         py: { xs: 12, md: 20 },
-        // GRADIENTE: Terminamos en el petróleo más profundo
+        // El fondo base sigue siendo el petróleo oscuro
         background: "linear-gradient(180deg, #042F35 0%, #02181B 100%)",
         position: "relative",
+        overflow: "hidden", // Importante para que la imagen no se salga
+
+        // CAPA DE LA IMAGEN: Centrada y con blend mode
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: -130,
+          left: -200,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url(${EdificioWtc})`,
+          backgroundPosition: "center", // Centrado exacto
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "contain", // O "contain" si prefieres que se vea el edificio completo
+          opacity: 0.2, // Ajusta este valor (0.1 a 0.2) para que se vea sutil
+          mixBlendMode: "luminosity", // Hace que la foto adopte los tonos del fondo
+          zIndex: 0,
+        },
       }}
     >
-      <Container maxWidth='xl'>
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             display: "grid",

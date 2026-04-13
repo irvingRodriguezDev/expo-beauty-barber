@@ -97,7 +97,7 @@ const SuccessPage = () => {
                 fontSize: "1.1rem",
               }}
             >
-              Tu registro para la <b>Expo Belleza & Barber 2027</b> se ha
+              Tu registro para la <b>Expo Belleza & Barberia 2027</b> se ha
               procesado con éxito. En breve recibirás un correo electrónico con
               tus <b>accesos digitales y códigos QR</b>.
             </Typography>

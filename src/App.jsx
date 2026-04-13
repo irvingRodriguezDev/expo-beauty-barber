@@ -11,6 +11,7 @@ import Exhibitors from "./components/sections/Exhibitors";
 import Contact from "./components/sections/Contact";
 import Register from "./components/sections/Register";
 import ExperienceGallery from "./components/sections/ExperienceGallery";
+import { BrandAuthority } from "./components/sections/BrandAuthority";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Stats />
           <MapSection />
           <ExperienceGallery />
+          <BrandAuthority />
         </section>
         {/* VISITANTES */}
         <section id='visitantes'>

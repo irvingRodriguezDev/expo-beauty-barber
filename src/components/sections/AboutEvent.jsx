@@ -30,7 +30,7 @@ export default function AboutEvent() {
         sx={{
           position: "absolute",
           bottom: { xs: "5%", md: "70%" },
-          right: { xs: "-5%", md: "45%" },
+          right: { xs: "-5%", md: "30%" },
           fontSize: { xs: "35vw", md: "15vw" },
           fontWeight: 900,
           // fontFamily: "'Syne', sans-serif",
@@ -41,7 +41,7 @@ export default function AboutEvent() {
           zIndex: 0,
         }}
       >
-        EBB
+        EBB2027
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
@@ -130,19 +130,74 @@ export default function AboutEvent() {
                     position: "relative",
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: "1rem",
-                      color: "rgba(255, 255, 255, 0.5)",
-                      lineHeight: 1.8,
-                      mb: 3,
-                      // fontFamily: "'DM Sans'",
-                    }}
-                  >
-                    Con el respaldo de <strong>Publicidad Mahur</strong>,
-                    integramos más de 15 años de experiencia liderando la
-                    producción de experiencias B2B que transforman negocios.
-                  </Typography>
+                  <Box sx={{ mb: 4 }}>
+                    <Typography
+                      sx={{
+                        fontSize: "1.1rem",
+                        color: "#FFFFFF",
+                        fontWeight: 600,
+                        mb: 1,
+                        fontFamily: "'Syne', sans-serif",
+                      }}
+                    >
+                      RESPALDO Y EXPERIENCIA
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "1rem",
+                        color: "rgba(255, 255, 255, 0.7)",
+                        lineHeight: 1.7,
+                        mb: 3,
+                      }}
+                    >
+                      Organizado por <strong>Publicidad Mahur</strong>, líderes
+                      con más de 15 años proyectando negocios en el{" "}
+                      <strong>WTC CDMX</strong>. Nuestra trayectoria respalda la
+                      calidad y seguridad de cada edición.
+                    </Typography>
+
+                    <Typography
+                      variant='caption'
+                      sx={{
+                        color: brandCyan, // El cian que definimos antes
+                        fontWeight: 800,
+                        letterSpacing: "0.1em",
+                        display: "block",
+                        mb: 2,
+                      }}
+                    >
+                      CASOS DE ÉXITO PREVIOS:
+                    </Typography>
+
+                    <Stack
+                      direction='row'
+                      spacing={1}
+                      flexWrap='wrap'
+                      useFlexGap
+                    >
+                      {[
+                        "Expo Impresión",
+                        "PubliFest",
+                        "Mundo para la Mujer",
+                        "Industrias Creativas",
+                      ].map((evento) => (
+                        <Box
+                          key={evento}
+                          sx={{
+                            px: 1.5,
+                            py: 0.5,
+                            borderRadius: "4px",
+                            border: "1px solid rgba(114, 248, 255, 0.3)",
+                            color: "rgba(255,255,255,0.8)",
+                            fontSize: "0.8rem",
+                            mb: 1,
+                          }}
+                        >
+                          {evento}
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Box>
                   <Typography
                     sx={{
                       // fontFamily: "'Syne'",

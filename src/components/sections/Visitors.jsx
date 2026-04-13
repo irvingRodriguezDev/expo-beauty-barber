@@ -143,7 +143,6 @@ export default function Visitors() {
                     backgroundColor: "rgba(255, 255, 255, 0.03)",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     backdropFilter: "blur(15px)",
-                    borderRadius: "2px",
                     position: "relative",
                     overflow: "hidden",
                     borderRadius: 4,
@@ -332,7 +331,7 @@ export default function Visitors() {
                         // Botón Cian Eléctrico
                         bgcolor: brandCyan,
                         color: "#02181B",
-                        // borderRadius: 4,
+                        borderRadius: 4,
                         py: 2.5,
                         fontWeight: 900,
                         // fontFamily: "'Syne'",
