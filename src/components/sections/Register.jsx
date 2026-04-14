@@ -198,7 +198,6 @@ export default function Register() {
             <Typography
               variant='h2'
               sx={{
-                // fontFamily: "'Syne'",
                 fontSize: { xs: "2.5rem", md: "4rem" },
                 fontWeight: 900,
                 color: "#FFFFFF",
@@ -209,7 +208,7 @@ export default function Register() {
                 ? "Selecciona tu Acceso"
                 : status === "form"
                   ? "Datos del Profesional"
-                  : "¡Registro Exitoso!"}
+                  : "Redirigiendo al Pago..."}
             </Typography>
           </motion.div>
         </Box>

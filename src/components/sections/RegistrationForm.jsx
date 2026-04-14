@@ -8,16 +8,19 @@ import {
   Grid,
   Box,
   CircularProgress,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
+
 export const RegistrationForm = ({
   selectedPass,
   onBack,
-  onSubmit,
+  onSubmit, // Función que viene del padre para ir a Stripe
   visitorTypes,
   inputStyles,
   isSubmitting,
@@ -25,11 +28,29 @@ export const RegistrationForm = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+  });
+
   const [openPolicy, setOpenPolicy] = useState(false);
   const brandCyan = "#72F8FF";
   const darkPetroleum = "#02181B";
+
+  // Validaciones
+  const nameRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s[a-zA-ZÀ-ÿ\u00f1\u00d1]+)+$/;
+  const phoneRegex = /^\+?[0-9]{10,15}$/;
+
+  // Función interna para procesar antes de enviar al padre
+  const handleInternalSubmit = (data) => {
+    // Limpiamos el teléfono de espacios o guiones antes de enviar a Stripe/DB
+    const cleanData = {
+      ...data,
+      phone: data.phone.replace(/[\s-]/g, ""),
+    };
+    onSubmit(cleanData); // AQUÍ ejecutamos la redirección a Stripe
+  };
 
   return (
     <motion.div
@@ -45,7 +66,6 @@ export const RegistrationForm = ({
           maxWidth: 650,
           mx: "auto",
           p: { xs: 4, md: 8 },
-          // Fondo de cristal oscuro
           background: "rgba(255, 255, 255, 0.02)",
           backdropFilter: "blur(20px)",
           borderRadius: 4,
@@ -54,7 +74,6 @@ export const RegistrationForm = ({
           overflow: "hidden",
         }}
       >
-        {/* Línea de acento superior estilo terminal */}
         <Box
           sx={{
             position: "absolute",
@@ -76,13 +95,14 @@ export const RegistrationForm = ({
             fontWeight: 800,
             borderRadius: 4,
             letterSpacing: "0.2em",
-            "&:hover": { bgcolor: "transparent", color: "#FFF", pl: 0 },
+            "&:hover": { bgcolor: "transparent", color: "#FFF" },
           }}
         >
           CAMBIAR TIPO DE PASE
         </Button>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Cambiamos el onSubmit para que use nuestra función interna validada */}
+        <form onSubmit={handleSubmit(handleInternalSubmit)}>
           <Stack spacing={4}>
             <Box>
               <Typography
@@ -127,13 +147,18 @@ export const RegistrationForm = ({
             </Box>
 
             <TextField
-              label='NOMBRE COMPLETO'
+              label='NOMBRE COMPLETO (Nombre y Apellido)'
               fullWidth
-              variant='outlined'
-              autoComplete='off'
-              name='fullname'
-              {...register("fullname", { required: true })}
+              autoComplete='name'
+              {...register("fullname", {
+                required: "El nombre es obligatorio",
+                pattern: {
+                  value: nameRegex,
+                  message: "Ingresa nombre y al menos un apellido",
+                },
+              })}
               error={!!errors.fullname}
+              helperText={errors.fullname?.message}
               sx={inputStyles}
             />
 
@@ -141,20 +166,13 @@ export const RegistrationForm = ({
               <TextField
                 label='EMAIL'
                 fullWidth
-                autoComplete='off'
-                {...register("email", { required: true })}
+                autoComplete='email'
+                {...register("email", {
+                  required: "Email obligatorio",
+                  pattern: { value: /^\S+@\S+$/i, message: "Email inválido" },
+                })}
                 error={!!errors.email}
-                sx={inputStyles}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label='Empresa, Escuela, Academia, etc. '
-                fullWidth
-                type='text'
-                autoComplete='off'
-                {...register("businessName", { required: true })}
-                error={!!errors.businessName}
+                helperText={errors.email?.message}
                 sx={inputStyles}
               />
             </Grid>
@@ -162,19 +180,35 @@ export const RegistrationForm = ({
               <TextField
                 label='WHATSAPP'
                 fullWidth
-                name='phone'
-                autoComplete='off'
-                {...register("phone", { required: true })}
+                placeholder='+521234567890'
+                {...register("phone", {
+                  required: "Teléfono obligatorio",
+                  pattern: {
+                    value: phoneRegex,
+                    message: "Mín. 10 dígitos (solo números y +)",
+                  },
+                })}
                 error={!!errors.phone}
+                helperText={errors.phone?.message}
                 sx={inputStyles}
               />
             </Grid>
 
             <TextField
+              label='EMPRESA / ACADEMIA'
+              fullWidth
+              {...register("businessName", {
+                required: "Este campo es obligatorio",
+              })}
+              error={!!errors.businessName}
+              sx={inputStyles}
+            />
+
+            <TextField
               select
               label='PERFIL PROFESIONAL'
               fullWidth
-              {...register("profile", { required: true })}
+              {...register("profile", { required: "Selecciona tu perfil" })}
               error={!!errors.profile}
               sx={inputStyles}
               SelectProps={{
@@ -199,27 +233,65 @@ export const RegistrationForm = ({
                 </MenuItem>
               ))}
             </TextField>
-            <Typography
-              variant='caption'
-              sx={{ color: "rgba(255,255,255,0.5)", mt: 2, display: "block" }}
-            >
-              Al registrarte, aceptas nuestra{" "}
-              <span
-                style={{
-                  color: brandCyan,
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-                onClick={() => setOpenPolicy(true)}
-              >
-                Política de Privacidad
-              </span>
-            </Typography>
+
+            <Box>
+              <FormControlLabel
+                control={
+                  <Controller
+                    name='acceptTerms'
+                    control={control}
+                    rules={{ required: "Debes aceptar los términos" }}
+                    render={({ field: { onChange, value } }) => (
+                      <Checkbox
+                        checked={!!value}
+                        onChange={onChange}
+                        sx={{
+                          color: "rgba(255,255,255,0.3)",
+                          "&.Mui-checked": { color: brandCyan },
+                        }}
+                      />
+                    )}
+                  />
+                }
+                label={
+                  <Typography
+                    variant='caption'
+                    sx={{ color: "rgba(255,255,255,0.7)" }}
+                  >
+                    Acepto la{" "}
+                    <span
+                      style={{
+                        color: brandCyan,
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setOpenPolicy(true);
+                      }}
+                    >
+                      Política de Privacidad
+                    </span>{" "}
+                    y los términos de la Expo.
+                  </Typography>
+                }
+              />
+              {errors.acceptTerms && (
+                <Typography
+                  variant='caption'
+                  sx={{ color: "#ff4444", display: "block", ml: 4 }}
+                >
+                  {errors.acceptTerms.message}
+                </Typography>
+              )}
+            </Box>
+
             <Button
               type='submit'
               variant='contained'
               fullWidth
-              disabled={isSubmitting} // Bloquea el botón mientras carga
+              disabled={isSubmitting}
               sx={{
                 py: 2.5,
                 bgcolor: brandCyan,
@@ -239,7 +311,7 @@ export const RegistrationForm = ({
                 <Stack direction='row' spacing={2} alignItems='center'>
                   <CircularProgress size={20} sx={{ color: darkPetroleum }} />
                   <Typography sx={{ fontWeight: 900, fontSize: "0.9rem" }}>
-                    REDIRECCIONANDO AL PAGO...
+                    REDIRECCIONANDO...
                   </Typography>
                 </Stack>
               ) : (

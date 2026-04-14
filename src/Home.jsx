@@ -3,7 +3,7 @@ import TicketView from "./components/Pages/TicketDetail"; // El componente que c
 import App from "./App"; // Tu página de registro actual
 import ScannerView from "./components/Pages/ScannerView";
 import SuccessPage from "./components/Pages/SuccessPage";
-
+import MyTickets from "./components/Pages/MyTickets";
 function Home() {
   return (
     <Router>
@@ -13,6 +13,7 @@ function Home() {
         <Route path='/payment-success' element={<SuccessPage />} />
         {/* Ruta dinámica para el boleto digital */}
         <Route path='/ticket/:code' element={<TicketView />} />
+        <Route path='/mis-boletos' element={<MyTickets />} />
         {/* Ruta para realizar el check-in del boleto */}
         <Route path='/admin/check-in' element={<ScannerView />} />
         {/* Opcional: Ruta 404 */}
