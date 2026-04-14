@@ -7,40 +7,45 @@ import {
   ImageListItem,
 } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-
+import masterclasses from "../../assets/images/masterclasess.webp";
+import makeupartist from "../../assets/images/makeupartist.webp";
+import barberskills from "../../assets/images/barberskills.webp";
+import networking from "../../assets/images/networking.webp";
+import exibithors from "../../assets/images/exibithors.webp";
+import wtc from "../../assets/images/wtc.webp";
 const galleryData = [
   {
-    img: "https://images.pexels.com/photos/35138560/pexels-photo-35138560.jpeg",
+    img: masterclasses,
     cols: 2,
     rows: 2,
     title: "MASTERCLASSES",
   },
   {
-    img: "https://images.pexels.com/photos/1115128/pexels-photo-1115128.jpeg",
+    img: makeupartist,
     cols: 1,
     rows: 1,
     title: "MAKEUP ART",
   },
   {
-    img: "https://images.pexels.com/photos/36150765/pexels-photo-36150765.jpeg",
+    img: barberskills,
     cols: 1,
     rows: 1,
     title: "BARBER SKILLS",
   },
   {
-    img: "https://images.pexels.com/photos/19392549/pexels-photo-19392549.jpeg",
+    img: networking,
     cols: 1,
     rows: 2,
     title: "NETWORKING",
   },
   {
-    img: "https://images.pexels.com/photos/18439584/pexels-photo-18439584.jpeg",
+    img: wtc,
     cols: 1,
     rows: 2,
     title: "WTC CDMX",
   },
   {
-    img: "https://images.pexels.com/photos/7697641/pexels-photo-7697641.jpeg",
+    img: exibithors,
     cols: 2,
     rows: 1,
     title: "EXHIBITORS",

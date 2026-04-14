@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
-import Logo from "../../assets/images/LogoBlanco.png";
+import Logo from "../../assets/images/LogoBlanco.webp";
 
 const COLORS = {
   petrolBlue: "#004d4d",

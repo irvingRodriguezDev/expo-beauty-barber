@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/LogoNegro.png";
+import Logo from "../../assets/LogoNegro.webp";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },

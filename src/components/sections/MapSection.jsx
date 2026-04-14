@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Box, Container, Typography, Button } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import EdificioWtc from "../../assets/images/EDIFICIOWTC.png";
+import EdificioWtc from "../../assets/images/EDIFICIOWTC.webp";
 export default function MapSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });

@@ -3,30 +3,29 @@ import { Box, Container, Typography, Button, Stack } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import WomenEbb from "../../assets/images/WONDER EBB.png";
+import WomenEbb from "../../assets/images/WONDER EBB.webp";
 
 const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
 export default function Hero() {
   const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B"; // Oscuridad total del esquema Midnight
+  const darkPetroleum = "#02181B";
 
   return (
     <Box
+      component='section' // Semántica de sección para SEO
       sx={{
         position: "relative",
         minHeight: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
-        // Fondo base mucho más profundo y elegante
         background: `radial-gradient(circle at 20% 30%, #064E57 0%, ${darkPetroleum} 100%)`,
         overflow: "hidden",
-        pt: { xs: 12, md: 0 },
+        pt: { xs: 12, md: 12 },
         pb: { xs: 8, md: 0 },
       }}
     >
-      {/* Glow tecnológico de fondo */}
       <Box
         sx={{
           position: "absolute",
@@ -77,7 +76,9 @@ export default function Hero() {
             </motion.div>
 
             <Box sx={{ mb: 4 }}>
+              {/* CORRECCIÓN SEO: h1 con contenido semántico completo */}
               <Typography
+                component='h1' // Forzamos semántica h1 para Google
                 variant='h1'
                 sx={{
                   fontSize: { xs: "3.5rem", sm: "5.5rem", lg: "8.5rem" },
@@ -101,6 +102,10 @@ export default function Hero() {
                 </span>
                 <br /> BARBERÍAS
               </Typography>
+              {/* Subtítulo invisible para SEO que complementa el h1 con lugar y fecha */}
+              <Typography component='span' sx={{ display: "none" }}>
+                WTC CDMX 2027 - 5 y 6 de Febrero
+              </Typography>
             </Box>
 
             <motion.div
@@ -121,11 +126,10 @@ export default function Hero() {
               >
                 Donde la maestría técnica se encuentra con el networking de alto
                 nivel. Únete a la cumbre empresarial más influyente de la
-                industria.
+                industria en México.
               </Typography>
             </motion.div>
 
-            {/* Badges con Glassmorphism real */}
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={2}
@@ -164,7 +168,6 @@ export default function Hero() {
                       fontSize: "0.8rem",
                       letterSpacing: "0.2em",
                       color: "#FFF",
-                      // fontFamily: "'Syne'",
                     }}
                   >
                     {item.text}
@@ -188,7 +191,6 @@ export default function Hero() {
                   px: 6,
                   py: 2.5,
                   fontWeight: 900,
-                  // fontFamily: "'Syne'",
                   letterSpacing: "0.2em",
                   boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
                   "&:hover": { bgcolor: "#FFF", transform: "translateY(-5px)" },
@@ -223,7 +225,7 @@ export default function Hero() {
               position: "relative",
               display: "flex",
               justifyContent: { xs: "center", lg: "flex-end" },
-              mt: 10,
+              mt: { xs: 0, lg: 10 },
             }}
           >
             <motion.div
@@ -231,57 +233,26 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 1.2 }}
             >
-              {/* <Box
-                sx={{
-                  width: { xs: "280px", md: "450px" },
-                  aspectRatio: "4/5",
-                  position: "relative",
-                  "&::before": {
-                    // Marco decorativo tecnológico
-                    content: '""',
-                    position: "absolute",
-                    top: -20,
-                    left: 20,
-                    right: -20,
-                    bottom: 20,
-                    border: `1px solid ${brandCyan}`,
-                    opacity: 0.3,
-                    zIndex: -1,
-                  },
-                }}
-              > */}
               <Box
                 component='img'
                 src={WomenEbb}
+                loading='eager'
+                alt='Expo Belleza y Barberías 2027 WTC' // ALT fundamental para SEO
                 sx={{
                   width: "100%",
+                  // maxWidth: { xs: 400, lg: "100%" },
                   height: "100%",
                   objectFit: "cover",
                   objectViewBox: "inset(1%)",
                   borderRadius: 0,
                   filter: "grayscale(20%) contrast(1.1)",
-                  // border: "1px solid rgba(255,255,255,0.1)",
                 }}
               />
-              {/* Overlay de color sutil sobre la imagen */}
-              {/* <Box
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: `linear-gradient(to top, ${darkPetroleum}, transparent)`,
-                    opacity: 0.4,
-                  }}
-                /> */}
-              {/* </Box> */}
             </motion.div>
           </Box>
         </Box>
       </Container>
 
-      {/* Indicador Scroll */}
       <Box
         onClick={() => scrollTo("visitantes")}
         sx={{
