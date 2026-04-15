@@ -3,7 +3,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { PassSelection } from "./PassSelection";
 import { RegistrationForm } from "./RegistrationForm";
-import { SuccessTicket } from "./SuccessTicket";
+import { useCaptcha } from "../../hooks/useCaptcha";
 import Swal from "sweetalert2";
 
 const visitorOptions = [
@@ -89,9 +89,10 @@ export default function Register() {
   const [registration, setRegistration] = useState(null);
   const [loading, setLoading] = useState(false);
   const urlRegister = import.meta.env.VITE_BACKEND_URL_REGISTER;
-
+  const { getCaptchaToken } = useCaptcha();
   const handleOnSubmit = async (data) => {
     setLoading(true);
+    const token = await getCaptchaToken("formulario_registro");
     const dataForm = {
       fullname: data.fullname,
       email: data.email,
@@ -99,12 +100,12 @@ export default function Register() {
       profile: data.profile,
       businessName: data.businessName,
       accessType: selectedPass.id,
+      captcha: token,
     };
-
     try {
       const response = await fetch(urlRegister, {
         method: "POST",
-        body: JSON.stringify(dataForm),
+        body: JSON.stringify({ dataForm }),
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
@@ -113,6 +114,7 @@ export default function Register() {
         window.location.href = resData.url;
       } else {
         setLoading(false); // Si hay error del server, liberamos el botón
+        setStatus("idle");
         Swal.fire({
           title: "Ocurrio un problema",
           text: "Ocurrio un problema al realizar el registro",
@@ -124,6 +126,7 @@ export default function Register() {
     } catch (error) {
       console.error("Error en el registro", error);
       setLoading(false);
+      setStatus("idle");
     }
     const code = "EBB-" + Math.random().toString(36).substr(2, 6);
     setRegistration({ ...data, code, passTitle: selectedPass.title });

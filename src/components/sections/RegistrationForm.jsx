@@ -149,7 +149,7 @@ export const RegistrationForm = ({
             <TextField
               label='NOMBRE COMPLETO (Nombre y Apellido)'
               fullWidth
-              autoComplete='name'
+              autoComplete='off'
               {...register("fullname", {
                 required: "El nombre es obligatorio",
                 pattern: {
@@ -166,7 +166,7 @@ export const RegistrationForm = ({
               <TextField
                 label='EMAIL'
                 fullWidth
-                autoComplete='email'
+                autoComplete='off'
                 {...register("email", {
                   required: "Email obligatorio",
                   pattern: { value: /^\S+@\S+$/i, message: "Email inválido" },
@@ -180,6 +180,7 @@ export const RegistrationForm = ({
               <TextField
                 label='WHATSAPP'
                 fullWidth
+                autoComplete='off'
                 placeholder='+521234567890'
                 {...register("phone", {
                   required: "Teléfono obligatorio",
@@ -197,6 +198,7 @@ export const RegistrationForm = ({
             <TextField
               label='EMPRESA / ACADEMIA'
               fullWidth
+              autoComplete='off'
               {...register("businessName", {
                 required: "Este campo es obligatorio",
               })}
@@ -219,7 +221,6 @@ export const RegistrationForm = ({
                       color: "#FFF",
                       borderRadius: 4,
                       "& .MuiMenuItem-root": {
-                        fontSize: "0.9rem",
                         "&:hover": { bgcolor: brandCyan, color: darkPetroleum },
                       },
                     },

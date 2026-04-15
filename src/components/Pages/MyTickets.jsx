@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Box,
   Container,
@@ -15,46 +15,133 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { TicketModal } from "../Modal/TicketModal";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 const MyTickets = () => {
   const [email, setEmail] = useState("");
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState("");
-
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const brandCyan = "#72F8FF";
   const darkPetroleum = "#02181B";
 
-  const handleSearch = async (e) => {
+  // Función de búsqueda reutilizable
+  const fetchTickets = useCallback(
+    async (isSilent = false) => {
+      if (!email) return;
+      if (!executeRecaptcha) return;
+      if (!isSilent) {
+        setLoading(true);
+        setError("");
+      }
+
+      try {
+        const captchaToken = await executeRecaptcha("search_tickets");
+        const response = await axios.get(
+          `https://api.expobellezaybarberias.com/search-tickets`,
+          {
+            params: {
+              email: email.toLowerCase().trim(),
+              captchaToken: captchaToken,
+            },
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+
+        // Si el ticket que el usuario tiene abierto ya no está en la lista (fue usado), cerramos el modal
+        const newTickets = response.data.tickets || [];
+        if (
+          selectedTicket &&
+          !newTickets.find((t) => t.ticketCode === selectedTicket.ticketCode)
+        ) {
+          setModalOpen(false);
+        }
+
+        setTickets(newTickets);
+        setSearched(true);
+      } catch (err) {
+        console.error("Error fetching tickets:", err);
+        if (!isSilent) {
+          setError(
+            err.response?.data?.message ||
+              "No pudimos conectar con el servidor. Revisa tu conexión.",
+          );
+        }
+      } finally {
+        if (!isSilent) setLoading(false);
+      }
+    },
+    [email, selectedTicket],
+  );
+  const refreshTickets = useCallback(
+    async (silent = false) => {
+      try {
+        const response = await axios.get(
+          `https://api.expobellezaybarberias.com/search-tickets`,
+          { params: { email: email.toLowerCase().trim() } },
+        );
+
+        const newTickets = response.data.tickets || [];
+
+        // SOLO actualizamos el estado si hubo un cambio real en la cantidad o IDs
+        // Esto evita re-renders innecesarios cada 3 segundos
+        setTickets((prev) => {
+          if (JSON.stringify(prev) === JSON.stringify(newTickets)) return prev;
+          return newTickets;
+        });
+
+        // Si el ticket que estaba abierto ya no existe, cerramos el modal al instante
+        if (
+          selectedTicket &&
+          !newTickets.find((t) => t.ticketCode === selectedTicket.ticketCode)
+        ) {
+          setModalOpen(false);
+          setSelectedTicket(null);
+        }
+      } catch (e) {
+        console.error("Silent refresh failed");
+      }
+    },
+    [email, selectedTicket],
+  );
+  useEffect(() => {
+    if (!searched || tickets.length === 0) return;
+
+    // Si el modal está abierto, el usuario está en la entrada.
+    // Necesitamos velocidad máxima: cada 3 segundos.
+    // Si está cerrado, bajamos a 20 segundos para ahorrar batería/datos.
+    const intervalTime = modalOpen ? 3000 : 20000;
+
+    const interval = setInterval(() => {
+      refreshTickets(true);
+    }, intervalTime);
+
+    return () => clearInterval(interval);
+  }, [modalOpen, searched, tickets.length, refreshTickets]);
+  const handleSearch = (e) => {
     e.preventDefault();
-    if (!email) return;
-
-    setLoading(true);
-    setError("");
-    setSearched(false);
-
-    try {
-      // Reemplaza con tu URL real del API Gateway
-      const response = await axios.get(
-        `https://api.expobellezaybarberias.com/Prod/search-tickets`,
-        {
-          params: { email: email.toLowerCase().trim() },
-        },
-      );
-
-      setTickets(response.data.tickets || []);
-      setSearched(true);
-    } catch (err) {
-      console.error(err);
-      setError(
-        err.response?.data?.message ||
-          "Ocurrió un error al buscar tus boletos. Intenta de nuevo.",
-      );
-    } finally {
-      setLoading(false);
-    }
+    fetchTickets(false);
   };
+
+  const handleOpenTicket = (ticket) => {
+    setSelectedTicket(ticket);
+    setModalOpen(true);
+  };
+
+  // Lógica de Polling: Refresca la lista cada 30 segundos si hay boletos visibles
+  useEffect(() => {
+    let interval;
+    if (searched && tickets.length > 0) {
+      interval = setInterval(() => {
+        fetchTickets(true);
+      }, 30000); // 30 segundos para balancear UX y costos de DynamoDB
+    }
+    return () => clearInterval(interval);
+  }, [searched, tickets.length, fetchTickets]);
 
   return (
     <Container maxWidth='sm' sx={{ py: { xs: 8, md: 12 } }}>
@@ -80,7 +167,7 @@ const MyTickets = () => {
             Mis <span style={{ color: brandCyan }}>Boletos</span>
           </Typography>
           <Typography sx={{ color: "rgba(255,255,255,0.6)", mt: 2 }}>
-            Ingresa el correo electrónico que utilizaste al realizar tu compra.
+            Consulta y presenta tus accesos para el ingreso al evento.
           </Typography>
         </Box>
 
@@ -101,6 +188,7 @@ const MyTickets = () => {
                 label='CORREO ELECTRÓNICO'
                 variant='outlined'
                 type='email'
+                autoComplete='off'
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -192,12 +280,12 @@ const MyTickets = () => {
                   "&:hover": { bgcolor: "#FFF" },
                 }}
               >
-                {loading ? "BUSCANDO..." : "RECUPERAR ACCESOS"}
+                {loading ? "BUSCANDO..." : "BUSCAR MIS ACCESOS"}
               </Button>
             </Stack>
           </form>
 
-          <AnimatePresence>
+          <AnimatePresence mode='popLayout'>
             {error && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -228,7 +316,7 @@ const MyTickets = () => {
                     fontSize: "0.9rem",
                   }}
                 >
-                  No se encontraron boletos asociados a este correo.
+                  No se encontraron boletos activos asociados a este correo.
                 </Typography>
               </motion.div>
             )}
@@ -247,14 +335,21 @@ const MyTickets = () => {
                     letterSpacing: "0.1em",
                   }}
                 >
-                  RESULTADOS ENCONTRADOS ({tickets.length})
+                  TICKETS DISPONIBLES ({tickets.length})
                 </Typography>
+
                 <Stack spacing={2}>
                   {tickets.map((ticket) => (
                     <motion.div
                       key={ticket.ticketCode}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      layout // Animación de reordenamiento automática
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.5,
+                        transition: { duration: 0.3 },
+                      }}
                     >
                       <Paper
                         sx={{
@@ -266,15 +361,14 @@ const MyTickets = () => {
                           justifyContent: "space-between",
                           alignItems: "center",
                           cursor: "pointer",
-                          transition: "0.3s",
+                          transition: "all 0.3s ease",
                           "&:hover": {
                             bgcolor: "rgba(114, 248, 255, 0.08)",
                             borderColor: brandCyan,
+                            transform: "translateX(5px)",
                           },
                         }}
-                        onClick={() =>
-                          (window.location.href = `/ticket/${ticket.ticketCode}`)
-                        }
+                        onClick={() => handleOpenTicket(ticket)}
                       >
                         <Box>
                           <Typography
@@ -292,27 +386,54 @@ const MyTickets = () => {
                               fontSize: "0.75rem",
                             }}
                           >
-                            Código: {ticket.ticketCode}
+                            ID: {ticket.ticketCode}
                           </Typography>
                         </Box>
-                        <Typography
+                        <Button
+                          variant='contained'
+                          size='small'
                           sx={{
+                            bgcolor: "#021619",
                             color: brandCyan,
                             fontWeight: 900,
-                            fontSize: "0.7rem",
+                            fontSize: "0.65rem",
+                            borderRadius: 2,
+                            border: `1px solid ${brandCyan}`,
+                            "&:hover": {
+                              bgcolor: brandCyan,
+                              color: darkPetroleum,
+                            },
                           }}
                         >
-                          VER TICKET
-                        </Typography>
+                          ABRIR QR
+                        </Button>
                       </Paper>
                     </motion.div>
                   ))}
                 </Stack>
+                <Typography
+                  variant='caption'
+                  sx={{
+                    display: "block",
+                    mt: 4,
+                    textAlign: "center",
+                    color: "rgba(255,255,255,0.3)",
+                  }}
+                >
+                  La lista se actualiza automáticamente al ser escaneados los
+                  boletos.
+                </Typography>
               </Box>
             )}
           </AnimatePresence>
         </Paper>
       </motion.div>
+
+      <TicketModal
+        open={modalOpen}
+        handleClose={() => setModalOpen(false)}
+        ticket={selectedTicket}
+      />
     </Container>
   );
 };
