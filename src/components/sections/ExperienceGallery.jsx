@@ -18,7 +18,7 @@ const galleryData = [
     img: masterclasses,
     cols: 2,
     rows: 2,
-    title: "MASTERCLASSES",
+    title: "EXIBITORS",
   },
   {
     img: makeupartist,
@@ -48,7 +48,7 @@ const galleryData = [
     img: exibithors,
     cols: 2,
     rows: 1,
-    title: "EXHIBITORS",
+    title: "MASTERCLASSES",
   },
 ];
 

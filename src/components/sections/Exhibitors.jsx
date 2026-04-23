@@ -172,6 +172,116 @@ export default function Exhibitors() {
           </Grid>
         </Grid>
       </Container>
+      <Container maxWidth='lg' sx={{ pb: { xs: 10, md: 20 } }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Box
+            sx={{
+              p: { xs: 5, md: 8 },
+              background: "#02181B",
+              textAlign: "center",
+              border: `1px solid rgba(114, 248, 255, 0.2)`,
+              borderRadius: 4,
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Glow decorativo de fondo */}
+            <Box
+              sx={{
+                position: "absolute",
+                top: "-50%",
+                left: "-50%",
+                width: "200%",
+                height: "200%",
+                background: `radial-gradient(circle, rgba(114, 248, 255, 0.03) 0%, transparent 50%)`,
+                pointerEvents: "none",
+              }}
+            />
+
+            <Typography
+              sx={{
+                // fontFamily: "'DM Sans'",
+                fontSize: "0.75rem",
+                fontWeight: 900,
+                letterSpacing: "0.5em",
+                color: brandCyan,
+                mb: 3,
+              }}
+            >
+              {/* OPORTUNIDAD PROFESIONAL */}
+            </Typography>
+
+            <Typography
+              variant='h3'
+              sx={{
+                fontFamily: "'Syne'",
+                fontWeight: 900,
+                mb: 3,
+                color: "#FFFFFF",
+                fontSize: { xs: "2rem", md: "3.5rem" },
+                lineHeight: 1,
+              }}
+            >
+              ¿LISTO PARA{" "}
+              <span style={{ color: brandCyan, fontStyle: "italic" }}>
+                LIDERAR
+              </span>{" "}
+              EL SECTOR?
+            </Typography>
+
+            <Typography
+              sx={{
+                mb: 6,
+                maxWidth: 600,
+                mx: "auto",
+                color: "rgba(255, 255, 255, 0.5)",
+                fontSize: { xs: "1rem", md: "1.1rem" },
+                lineHeight: 1.8,
+              }}
+            >
+              Quedan pocos espacios disponibles para la edición 2027 en el WTC.
+              Asegura tu presencia en el evento élite de la industria.
+            </Typography>
+
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={3}
+              justifyContent='center'
+            >
+              <Link
+                to={`https://wa.me/+525651580683?text=${message}`}
+                target='__blank'
+              >
+                <Button
+                  variant='contained'
+                  sx={{
+                    bgcolor: brandCyan,
+                    color: "#02181B",
+                    px: { xs: 4, md: 6 },
+                    py: 2,
+                    borderRadius: 4,
+                    // fontFamily: "'Syne'",
+                    fontWeight: 900,
+                    letterSpacing: "0.2em",
+                    "&:hover": {
+                      bgcolor: "#FFFFFF",
+                      transform: "translateY(-5px)",
+                      boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
+                    },
+                    transition: "0.3s",
+                  }}
+                >
+                  CONTACTAR VENTAS
+                </Button>
+              </Link>
+            </Stack>
+          </Box>
+        </motion.div>
+      </Container>
 
       {/* 2. MARQUEE DE MARCAS */}
       {/* <Box
@@ -322,116 +432,6 @@ export default function Exhibitors() {
       </Box>
 
       {/* 4. CTA FINAL */}
-      <Container maxWidth='lg' sx={{ pb: { xs: 10, md: 20 } }}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <Box
-            sx={{
-              p: { xs: 5, md: 8 },
-              background: "#02181B",
-              textAlign: "center",
-              border: `1px solid rgba(114, 248, 255, 0.2)`,
-              borderRadius: 4,
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Glow decorativo de fondo */}
-            <Box
-              sx={{
-                position: "absolute",
-                top: "-50%",
-                left: "-50%",
-                width: "200%",
-                height: "200%",
-                background: `radial-gradient(circle, rgba(114, 248, 255, 0.03) 0%, transparent 50%)`,
-                pointerEvents: "none",
-              }}
-            />
-
-            <Typography
-              sx={{
-                // fontFamily: "'DM Sans'",
-                fontSize: "0.75rem",
-                fontWeight: 900,
-                letterSpacing: "0.5em",
-                color: brandCyan,
-                mb: 3,
-              }}
-            >
-              OPORTUNIDAD COMERCIAL
-            </Typography>
-
-            <Typography
-              variant='h3'
-              sx={{
-                fontFamily: "'Syne'",
-                fontWeight: 900,
-                mb: 3,
-                color: "#FFFFFF",
-                fontSize: { xs: "2rem", md: "3.5rem" },
-                lineHeight: 1,
-              }}
-            >
-              ¿LISTO PARA{" "}
-              <span style={{ color: brandCyan, fontStyle: "italic" }}>
-                LIDERAR
-              </span>{" "}
-              EL SECTOR?
-            </Typography>
-
-            <Typography
-              sx={{
-                mb: 6,
-                maxWidth: 600,
-                mx: "auto",
-                color: "rgba(255, 255, 255, 0.5)",
-                fontSize: { xs: "1rem", md: "1.1rem" },
-                lineHeight: 1.8,
-              }}
-            >
-              Quedan pocos espacios disponibles para la edición 2027 en el WTC.
-              Asegura tu presencia en el evento élite de la industria.
-            </Typography>
-
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={3}
-              justifyContent='center'
-            >
-              <Link
-                to={`https://wa.me/+525546184541?text=${message}`}
-                target='__blank'
-              >
-                <Button
-                  variant='contained'
-                  sx={{
-                    bgcolor: brandCyan,
-                    color: "#02181B",
-                    px: { xs: 4, md: 6 },
-                    py: 2,
-                    borderRadius: 4,
-                    // fontFamily: "'Syne'",
-                    fontWeight: 900,
-                    letterSpacing: "0.2em",
-                    "&:hover": {
-                      bgcolor: "#FFFFFF",
-                      transform: "translateY(-5px)",
-                      boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
-                    },
-                    transition: "0.3s",
-                  }}
-                >
-                  CONTACTAR VENTAS
-                </Button>
-              </Link>
-            </Stack>
-          </Box>
-        </motion.div>
-      </Container>
     </Box>
   );
 }
