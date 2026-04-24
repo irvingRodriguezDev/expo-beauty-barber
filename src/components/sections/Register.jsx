@@ -13,71 +13,70 @@ const visitorOptions = [
   "Dueños de Salón",
 ];
 
-// Configuración de colores para consistencia
-const brandCyan = "#72F8FF";
-const darkPetroleum = "#042F35";
+// --- PALETA COHERENTE ---
+const brandPink = "#ee6f97ff"; // Rosa pastel claro
+const deepText = "#3D2B2F"; // Texto oscuro cálido
+const lightBg = "#FFD9E2"; // Fondo crema rosado
+// -------------------------
 
 const inputStyles = {
   mb: 3,
   "& .MuiOutlinedInput-root": {
-    borderRadius: 4,
-    backgroundColor: "rgba(255, 255, 255, 0.03)", // Fondo ultra tenue para integración total
-    backdropFilter: "blur(10px)",
+    borderRadius: 1,
+    backgroundColor: "#FFFFFF",
     transition: "all 0.3s ease-in-out",
 
     "& fieldset": {
-      borderColor: "rgba(114, 248, 255, 0.2)", // Borde Cian sutil
+      borderColor: "rgba(255, 183, 206, 0.4)", // Borde Rosa sutil
       borderWidth: "1px",
-      borderRadius: 4,
+      borderRadius: 1,
     },
 
     "&:hover fieldset": {
-      borderColor: `${brandCyan} !important`, // Cian fuerte al pasar el mouse
-      borderRadius: 4,
+      borderColor: `${brandPink} !important`,
+      borderRadius: 1,
     },
 
     "&.Mui-focused fieldset": {
-      borderColor: `${brandCyan} !important`,
+      borderColor: `${brandPink} !important`,
       borderWidth: "2px",
-      boxShadow: `0 0 20px rgba(114, 248, 255, 0.15)`,
-      borderRadius: 4,
+      boxShadow: `0 0 20px rgba(255, 183, 206, 0.15)`,
+      borderRadius: 1,
     },
   },
 
   "& .MuiInputBase-input": {
-    color: "#FFFFFF", // Texto blanco para legibilidad en fondo oscuro
+    color: deepText,
     padding: "18px 20px",
-    fontFamily: "'DM Sans', sans-serif",
     fontSize: "15px",
     fontWeight: 500,
     "&::placeholder": {
-      color: "rgba(255, 255, 255, 0.4)",
+      color: "rgba(61, 43, 47, 0.4)",
     },
   },
 
   "& .MuiInputLabel-root": {
-    color: "rgba(255, 255, 255, 0.6)",
-    fontWeight: "700",
+    color: "rgba(61, 43, 47, 0.6)",
+    fontWeight: "800",
     fontSize: "13px",
-    fontFamily: "'Syne', sans-serif",
     letterSpacing: "0.15em",
     textTransform: "uppercase",
   },
 
   "& .MuiInputLabel-root.Mui-focused": {
-    color: brandCyan,
+    color: brandPink,
     opacity: 1,
   },
 
   "& .MuiFormHelperText-root": {
     fontSize: "12px",
-    color: brandCyan,
+    color: brandPink,
     fontWeight: 600,
     letterSpacing: "0.02em",
   },
 
   "& .MuiSelect-icon": {
-    color: brandCyan,
+    color: brandPink,
   },
 };
 
@@ -86,10 +85,11 @@ export default function Register() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [status, setStatus] = useState("idle");
   const [selectedPass, setSelectedPass] = useState(null);
-  const [registration, setRegistration] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const urlRegister = import.meta.env.VITE_BACKEND_URL_REGISTER;
   const { getCaptchaToken } = useCaptcha();
+
   const handleOnSubmit = async (data) => {
     setLoading(true);
     const token = await getCaptchaToken("formulario_registro");
@@ -110,17 +110,15 @@ export default function Register() {
       });
       if (response.ok) {
         const resData = await response.json();
-
         window.location.href = resData.url;
       } else {
-        setLoading(false); // Si hay error del server, liberamos el botón
+        setLoading(false);
         setStatus("idle");
         Swal.fire({
-          title: "Ocurrio un problema",
-          text: "Ocurrio un problema al realizar el registro",
+          title: "Ocurrió un problema",
+          text: "Hubo un error al procesar tu registro. Por favor, intenta de nuevo.",
           icon: "error",
-          timer: 2500,
-          showConfirmButton: false,
+          confirmButtonColor: deepText,
         });
       }
     } catch (error) {
@@ -128,39 +126,36 @@ export default function Register() {
       setLoading(false);
       setStatus("idle");
     }
-    const code = "EBB-" + Math.random().toString(36).substr(2, 6);
-    setRegistration({ ...data, code, passTitle: selectedPass.title });
-    setStatus("success");
   };
 
   const passOptions = [
     {
       id: "SINGLE_DAY",
-      title: "ACCESO INDIVIDUAL 1 DIA",
+      title: "ACCESO INDIVIDUAL 1 DÍA",
       price: 150,
-      desc: "Obten tu acceso individual, con acceso completo por 1 dia",
-      color: brandCyan, // Ahora es el acento principal
+      desc: "Acceso completo por 1 día a todas las áreas de exposición.",
+      color: brandPink,
     },
     {
       id: "TWO_DAYS",
-      title: "ACCESO INDIVIDUAL 2 DIAS",
+      title: "ACCESO INDIVIDUAL 2 DÍAS",
       price: 200,
-      desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
-      color: "#FFFFFF",
+      desc: "Inmersión total los dos días del evento con beneficios exclusivos.",
+      color: deepText,
     },
     {
       id: "GROUP_SINGLE",
-      title: "ACCESO GRUPAL 1 DIA (obten 11 boletos)",
+      title: "ACCESO GRUPAL 1 DÍA",
       price: 1500,
-      desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
-      color: "#FFFFFF",
+      desc: "Paquete corporativo (11 boletos) para un día de actualización.",
+      color: deepText,
     },
     {
       id: "GROUP_TWO",
-      title: "ACCESO GRUPAL 2 DIA (obten 11 boletos) ",
+      title: "ACCESO GRUPAL 2 DÍAS",
       price: 2000,
-      desc: "Acceso VIP los dos días del evento, lugares preferenciales en seminarios y kit de bienvenida exclusivo.",
-      color: "#FFFFFF",
+      desc: "La máxima experiencia grupal (11 boletos) para ambos días.",
+      color: deepText,
     },
   ];
 
@@ -171,8 +166,7 @@ export default function Register() {
       id='register'
       sx={{
         py: { xs: 8, md: 15 },
-        // Gradiente coherente: de petróleo medio a profundo
-        background: `linear-gradient(180deg, #064E57 0%, ${darkPetroleum} 100%)`,
+        background: lightBg,
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -188,12 +182,15 @@ export default function Register() {
           >
             <Typography
               sx={{
-                // fontFamily: "'DM Sans'",
                 fontSize: "0.75rem",
                 fontWeight: 800,
                 letterSpacing: "0.5em",
-                color: brandCyan,
+                color: "",
                 mb: 2,
+                textTransform: "uppercase",
+                bgcolor: "#FFCBDA",
+                width: "fit-content",
+                display: "inline-block",
               }}
             >
               REGISTRO EDICIÓN 2027
@@ -203,8 +200,9 @@ export default function Register() {
               sx={{
                 fontSize: { xs: "2.5rem", md: "4rem" },
                 fontWeight: 900,
-                color: "#FFFFFF",
+                color: deepText,
                 letterSpacing: "-0.02em",
+                fontFamily: "'Syne', sans-serif",
               }}
             >
               {status === "idle"

@@ -1,5 +1,5 @@
 import "./index.css";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Hero from "./components/sections/Hero";
 import AboutEvent from "./components/sections/AboutEvent";

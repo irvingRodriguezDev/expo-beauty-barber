@@ -3,15 +3,17 @@ import { motion } from "framer-motion";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 export const PassSelection = ({ options, onSelect }) => {
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B";
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  // -------------------------
 
   return (
     <motion.div
       key='selection'
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 1.1 }}
+      exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Grid container spacing={3} justifyContent='center'>
@@ -21,25 +23,24 @@ export const PassSelection = ({ options, onSelect }) => {
               onClick={() => onSelect(pass)}
               sx={{
                 p: { xs: 4, md: 6 },
-                bgcolor: "rgba(255, 255, 255, 0.02)",
-                backdropFilter: "blur(15px)",
-                border: "1px solid rgba(114, 248, 255, 0.1)",
+                bgcolor: "#FFFFFF",
+                border: `1px solid rgba(255, 183, 206, 0.3)`,
                 textAlign: "center",
                 cursor: "pointer",
                 transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
-                borderRadius: 4,
-                color: "#FFF",
+                borderRadius: 1,
+                color: deepText,
                 position: "relative",
                 overflow: "hidden",
+                boxShadow: "0 10px 30px rgba(61, 43, 47, 0.03)",
                 "&:hover": {
-                  bgcolor: "rgba(114, 248, 255, 0.05)",
-                  borderColor: brandCyan,
+                  borderColor: brandPink,
                   transform: "translateY(-10px)",
-                  boxShadow: `0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(114, 248, 255, 0.1)`,
-                  "& .price": { color: brandCyan },
+                  boxShadow: `0 20px 40px rgba(61, 43, 47, 0.08)`,
+                  "& .price": { color: brandPink },
                   "& .icon": {
-                    color: "#FFF",
-                    transform: "scale(1.1) rotate(5deg)",
+                    transform: "scale(1.1) rotate(-5deg)",
+                    color: brandPink,
                   },
                   "& .select-text": { opacity: 1, transform: "translateY(0)" },
                 },
@@ -54,7 +55,7 @@ export const PassSelection = ({ options, onSelect }) => {
                   left: 0,
                   width: "100%",
                   height: "100%",
-                  background: `radial-gradient(circle at center, rgba(114, 248, 255, 0.1) 0%, transparent 70%)`,
+                  background: `radial-gradient(circle at center, rgba(255, 183, 206, 0.1) 0%, transparent 70%)`,
                   opacity: 0,
                   transition: "0.4s",
                   pointerEvents: "none",
@@ -67,19 +68,19 @@ export const PassSelection = ({ options, onSelect }) => {
                 sx={{
                   fontSize: 50,
                   mb: 2,
-                  color: brandCyan,
+                  color: "rgba(255, 183, 206, 0.8)",
                   transition: "0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                 }}
               />
 
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 900,
-                  fontSize: "1.4rem",
+                  fontSize: "1.2rem",
                   mb: 1,
-                  letterSpacing: "0.15em",
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
+                  lineHeight: 1.2,
                 }}
               >
                 {pass.title}
@@ -87,10 +88,15 @@ export const PassSelection = ({ options, onSelect }) => {
 
               <Typography
                 sx={{
-                  fontSize: "0.9rem",
-                  color: "rgba(255, 255, 255, 0.5)",
+                  fontSize: "0.85rem",
+                  color: "rgba(61, 43, 47, 0.6)",
                   mb: 4,
-                  lineHeight: 1.6,
+                  lineHeight: 1.5,
+                  fontWeight: 500,
+                  minHeight: "4.5em", // Mantiene alineados los precios
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 {pass.desc}
@@ -99,25 +105,29 @@ export const PassSelection = ({ options, onSelect }) => {
               <Typography
                 className='price'
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 900,
-                  fontSize: "3rem",
-                  color: "#FFF",
+                  fontSize: "2.8rem",
+                  color: deepText,
                   transition: "0.3s",
-                  mb: 2,
+                  mb: 1,
                 }}
               >
-                ${pass.price}{" "}
-                <small style={{ fontSize: "1rem", opacity: 0.5 }}>MXN</small>
+                ${pass.price}
+                <Box
+                  component='span'
+                  sx={{ fontSize: "0.9rem", opacity: 0.5, ml: 1 }}
+                >
+                  MXN
+                </Box>
               </Typography>
 
               <Typography
                 className='select-text'
                 sx={{
-                  fontSize: "0.7rem",
+                  fontSize: "0.65rem",
                   fontWeight: 800,
                   letterSpacing: "0.3em",
-                  color: brandCyan,
+                  color: brandPink,
                   opacity: 0,
                   transform: "translateY(10px)",
                   transition: "0.3s",

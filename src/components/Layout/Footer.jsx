@@ -11,15 +11,20 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/LogoNegro.webp";
+import Logo from "../../assets/images/LOGO_VINO.png";
 import { useState } from "react";
 import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const [openPolicy, setOpenPolicy] = useState(false);
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B";
+
+  // --- PALETA LIGERA Y CLARA ---
+  const lightPinkBg = "#FFD9E2"; // Fondo crema rosado muy ligero
+  const softRose = "#FFB7CE"; // Rosa pastel para acentos
+  const deepText = "#3D2B2F"; // Gris cálido oscuro para textos legibles
+  const mediumRose = "#F2A7C0"; // Rosa un poco más intenso para hovers
+  // -----------------------------
 
   const navLinks = [
     { name: "INICIO", id: "hero" },
@@ -32,12 +37,12 @@ export default function Footer() {
     <Box
       component='footer'
       sx={{
-        // GRADIENTE: De petróleo medio a la oscuridad total
-        background: `linear-gradient(0deg, ${darkPetroleum} 0%, #042F35 100%)`,
+        bgcolor: lightPinkBg,
         pt: { xs: 8, md: 12 },
         pb: 6,
         width: "100%",
-        color: "#FFF",
+        color: deepText,
+        borderTop: `1px solid rgba(255, 183, 206, 0.3)`, // Línea sutil superior
       }}
     >
       <Container maxWidth='xl'>
@@ -49,19 +54,18 @@ export default function Footer() {
               src={Logo}
               alt='Expo Beauty & Barber'
               sx={{
-                height: { xs: 60, md: 80 },
+                height: { xs: 120, md: 100 },
                 width: "auto",
                 mb: 3,
                 display: "block",
-                filter: "brightness(0) invert(1)", // Logo blanco
+                // Quitamos el filtro invert ya que el fondo es claro
               }}
             />
             <Typography
               sx={{
-                color: "rgba(255, 255, 255, 0.6)",
+                color: "rgba(61, 43, 47, 0.7)",
                 lineHeight: 1.8,
                 maxWidth: { xs: "100%", sm: 340 },
-                // fontFamily: "'DM Sans'",
                 fontSize: "0.95rem",
                 mb: 4,
               }}
@@ -82,14 +86,14 @@ export default function Footer() {
                 <IconButton
                   key={i}
                   sx={{
-                    color: brandCyan,
-                    border: `1px solid rgba(114, 248, 255, 0.2)`,
+                    color: softRose,
+                    border: `1px solid ${softRose}`,
                     borderRadius: 2,
                     "&:hover": {
-                      bgcolor: brandCyan,
-                      color: darkPetroleum,
+                      bgcolor: softRose,
+                      color: "#FFF",
                       transform: "translateY(-5px)",
-                      boxShadow: `0 5px 15px rgba(114, 248, 255, 0.3)`,
+                      boxShadow: `0 5px 15px rgba(255, 183, 206, 0.4)`,
                     },
                     transition: "all 0.3s ease",
                   }}
@@ -104,13 +108,15 @@ export default function Footer() {
           <Grid item xs={6} sm={6} md={2}>
             <Typography
               sx={{
-                color: brandCyan,
-                // fontFamily: "'Syne'",
+                color: "",
                 fontWeight: 800,
+                bgcolor: "#FFCBDA",
                 mb: 4,
                 fontSize: "0.75rem",
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
+                width: "fit-content",
+                display: "inline-block",
               }}
             >
               Navegación
@@ -122,13 +128,13 @@ export default function Footer() {
                   component='a'
                   href={`#${link.id}`}
                   sx={{
-                    color: "rgba(255, 255, 255, 0.7)",
+                    color: deepText,
                     textDecoration: "none",
                     fontSize: "0.85rem",
                     fontWeight: 700,
                     transition: "0.3s",
                     letterSpacing: "0.1em",
-                    "&:hover": { color: brandCyan, pl: 1 },
+                    "&:hover": { color: softRose, pl: 1 },
                   }}
                 >
                   {link.name}
@@ -141,45 +147,50 @@ export default function Footer() {
           <Grid item xs={6} sm={6} md={3}>
             <Typography
               sx={{
-                color: brandCyan,
-                // fontFamily: "'Syne'",
+                color: "",
+                bgcolor: "#FFCBDA",
                 fontWeight: 800,
                 mb: 4,
                 fontSize: "0.75rem",
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
+                width: "fit-content",
+                display: "inline-block",
               }}
             >
               La Sede
             </Typography>
             <Typography
               sx={{
-                color: "rgba(255, 255, 255, 0.7)",
+                color: deepText,
                 fontSize: "0.85rem",
                 lineHeight: 2,
                 mb: 3,
                 fontWeight: 500,
               }}
             >
-              <strong style={{ color: "#FFF" }}>WTC Ciudad de México</strong>{" "}
+              <strong style={{ color: deepText }}>WTC Ciudad de México</strong>{" "}
               <br />
               Montecito 38, Col. Nápoles <br />
               CP 03810, CDMX.
             </Typography>
             <Typography
               component='a'
-              href='https://maps.app.goo.gl/wivwSB7BNWbseU128'
+              href='#'
               target='_blank'
               sx={{
-                color: brandCyan,
+                color: deepText,
                 fontWeight: 800,
                 fontSize: "0.7rem",
                 letterSpacing: "0.2em",
                 textDecoration: "none",
-                borderBottom: `1px solid ${brandCyan}`,
+                borderBottom: `2px solid ${softRose}`,
                 pb: 0.5,
-                "&:hover": { color: "#FFF", borderColor: "#FFF" },
+                "&:hover": { color: deepText, borderColor: deepText },
                 transition: "0.3s",
+                width: "fit-content",
+                display: "inline-block",
+                bgcolor: "#FFCBDA",
               }}
             >
               GOOGLE MAPS →
@@ -202,10 +213,9 @@ export default function Footer() {
             <Box sx={{ position: "relative", mb: 4 }}>
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 900,
                   fontSize: { xs: "4rem", md: "5.5rem" },
-                  color: "rgba(114, 248, 255, 0.05)", // Cian fantasma
+                  color: "rgba(238, 111, 151, 0.5)", // Rosa fantasma sobre fondo claro
                   lineHeight: 0.7,
                 }}
               >
@@ -213,30 +223,30 @@ export default function Footer() {
               </Typography>
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 800,
                   fontSize: "1.8rem",
-                  color: "#FFFFFF",
+                  color: deepText,
                   mt: -2,
                 }}
               >
-                5 <span style={{ color: brandCyan }}>.</span> 6 FEB
+                6 <span style={{ color: softRose }}>.</span> 7 FEB
               </Typography>
             </Box>
 
             <IconButton
               onClick={scrollToTop}
               sx={{
-                border: `1px solid ${brandCyan}`,
-                color: brandCyan,
+                bgcolor: "white",
+                border: `1px solid ${softRose}`,
+                color: softRose,
                 borderRadius: 2,
                 width: 50,
                 height: 50,
                 transition: "0.3s",
                 "&:hover": {
-                  bgcolor: brandCyan,
-                  color: darkPetroleum,
-                  boxShadow: `0 0 20px rgba(114, 248, 255, 0.4)`,
+                  bgcolor: softRose,
+                  color: "#FFF",
+                  boxShadow: `0 8px 20px rgba(255, 183, 206, 0.3)`,
                 },
               }}
             >
@@ -247,7 +257,7 @@ export default function Footer() {
 
         <Divider
           sx={{
-            borderColor: "rgba(255, 255, 255, 0.05)",
+            borderColor: "rgba(0, 0, 0, 0.05)",
             mt: { xs: 8, md: 10 },
             mb: 4,
           }}
@@ -262,14 +272,13 @@ export default function Footer() {
         >
           <Typography
             sx={{
-              color: "rgba(255, 255, 255, 0.3)",
+              color: "rgba(61, 43, 47, 0.4)",
               fontSize: "0.65rem",
               fontWeight: 700,
               letterSpacing: "0.15em",
-              textAlign: { xs: "center", md: "left" },
             }}
           >
-            © 2027 EXPO BELLEZA & BARBERÍAS | POWERED BY IRF
+            © 2027 BEAUTY WORLD MEXICO | POWERED BY IRF
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
@@ -284,33 +293,32 @@ export default function Footer() {
                 }
                 onClick={(e) => {
                   if (item === "POLITICA DE PRIVACIDAD") {
-                    e.preventDefault(); // Evita el salto del '#'
+                    e.preventDefault();
                     setOpenPolicy(true);
                   }
                 }}
                 sx={{
-                  color: "rgba(255, 255, 255, 0.5)",
+                  color: "rgba(61, 43, 47, 0.6)",
                   fontSize: "0.7rem",
                   textDecoration: "none",
                   fontWeight: 800,
                   letterSpacing: "0.1em",
-                  cursor: "pointer", // Importante para la UX
+                  cursor: "pointer",
                   transition: "0.3s",
-                  "&:hover": { color: brandCyan },
+                  "&:hover": { color: softRose },
                 }}
               >
                 {item}
               </Typography>
             ))}
-
-            {/* Inyectamos el Modal aquí al final del Stack o del componente */}
-            <PrivacyPolicyModal
-              open={openPolicy}
-              onClose={() => setOpenPolicy(false)}
-            />
           </Stack>
         </Stack>
       </Container>
+
+      <PrivacyPolicyModal
+        open={openPolicy}
+        onClose={() => setOpenPolicy(false)}
+      />
     </Box>
   );
 }

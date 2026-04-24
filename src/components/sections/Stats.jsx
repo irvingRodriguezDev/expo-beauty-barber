@@ -14,8 +14,8 @@ function Counter({ to, suffix = "" }) {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (v) => Math.round(v).toLocaleString());
 
-  // Color de acento
-  const brandCyan = "#72F8FF";
+  // Color de acento rosa boutique
+  const brandPink = "#ee6f97ff";
 
   useEffect(() => {
     if (inView) {
@@ -34,11 +34,10 @@ function Counter({ to, suffix = "" }) {
       <Typography
         component='span'
         sx={{
-          color: brandCyan, // Acento en Cian
+          color: brandPink,
           ml: 1,
           fontSize: "0.25em",
           fontWeight: 900,
-          fontFamily: "'Syne'",
         }}
       >
         {suffix}
@@ -78,7 +77,9 @@ export default function Stats() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const brandCyan = "#72F8FF";
+  const brandPink = "#ee6f97ff";
+  const deepText = "#3D2B2F";
+  const lightBg = "#FFD9E2";
 
   return (
     <Box
@@ -88,24 +89,22 @@ export default function Stats() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        // GRADIENTE: De petróleo medio a petróleo profundo
-        background: "linear-gradient(180deg, #064E57 0%, #042F35 100%)",
+        bgcolor: lightBg,
         position: "relative",
         overflow: "hidden",
         py: { xs: 10, md: 0 },
       }}
     >
-      {/* TÍTULO DE FONDO GIGANTE - Efecto Cristal en Cian */}
+      {/* TÍTULO DE FONDO GIGANTE - Efecto Sutil Boutique */}
       <Typography
         sx={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          fontFamily: "'Syne'",
-          fontSize: { xs: "8rem", sm: "15rem", md: "25rem" },
+          fontSize: { xs: "5rem", sm: "15rem", md: "25rem" },
           fontWeight: 900,
-          background: `linear-gradient(180deg, rgba(114, 248, 255, 0.1) 0%, transparent 100%)`,
+          background: `linear-gradient(180deg, rgba(225, 175, 186, 0.5) 0%, transparent 100%)`,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           whiteSpace: "nowrap",
@@ -113,7 +112,7 @@ export default function Stats() {
           pointerEvents: "none",
         }}
       >
-        EBB 2027
+        BWM 2027
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
@@ -127,14 +126,16 @@ export default function Stats() {
             >
               <Typography
                 sx={{
-                  fontFamily: "'Syne'",
                   fontSize: { xs: "1.5rem", sm: "2.5rem", md: "3.7rem" },
                   letterSpacing: { xs: "0.2em", md: "0.5em" },
-                  color: brandCyan,
+                  color: "",
                   fontWeight: 800,
                   mb: 2,
                   lineHeight: 1.2,
                   textAlign: { xs: "center", md: "left" },
+                  width: { xs: "100%", md: "fit-content" },
+                  display: "block",
+                  bgcolor: "#FFCBDA",
                 }}
               >
                 PROYECCIÓN E IMPACTO
@@ -142,9 +143,8 @@ export default function Stats() {
               <Typography
                 variant='h3'
                 sx={{
-                  fontFamily: "'Syne'",
                   fontWeight: 800,
-                  color: "#FFFFFF",
+                  color: deepText,
                   maxWidth: { xs: "100%", md: "500px" },
                   lineHeight: 1.1,
                   fontSize: { xs: "1.8rem", md: "3rem" },
@@ -154,7 +154,7 @@ export default function Stats() {
                 Donde los números <br />
                 <span
                   style={{
-                    color: brandCyan,
+                    color: brandPink,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -172,9 +172,8 @@ export default function Stats() {
           >
             <Typography
               sx={{
-                // fontFamily: "'DM Sans'",
                 fontSize: "1.2rem",
-                color: "rgba(255, 255, 255, 0.7)",
+                color: "rgba(61, 43, 47, 0.7)",
                 maxWidth: { md: "550px" },
                 ml: { md: "auto" },
                 lineHeight: 1.8,
@@ -201,7 +200,7 @@ export default function Stats() {
                     position: "relative",
                     p: { xs: 3, md: 4 },
                     textAlign: { xs: "center", md: "left" },
-                    // BORDES DE ESQUINA - Estilo Tech/Moderno
+                    // BORDES DE ESQUINA ROSA
                     "&::before": {
                       content: '""',
                       position: "absolute",
@@ -210,19 +209,19 @@ export default function Stats() {
                       transform: { xs: "translateX(-50%)", md: "none" },
                       width: "20px",
                       height: "20px",
-                      borderTop: "1px solid rgba(255, 255, 255, 0.2)",
-                      borderLeft: "1px solid rgba(255, 255, 255, 0.2)",
+                      borderTop: "1px solid rgba(0, 0, 0, 0.1)",
+                      borderLeft: "1px solid rgba(0, 0, 0, 0.1)",
                       display: { xs: "none", md: "block" },
-                      borderRadius: 4,
+                      borderRadius: 2,
                     },
                     "&:hover::before": {
-                      borderColor: brandCyan,
+                      borderColor: brandPink,
                       width: "100%",
                       height: "100%",
                       transition: "0.6s ease",
                     },
                     borderBottom: {
-                      xs: "1px solid rgba(255, 255, 255, 0.1)",
+                      xs: "1px solid rgba(0, 0, 0, 0.05)",
                       md: "none",
                     },
                     pb: { xs: 4, md: 4 },
@@ -234,7 +233,7 @@ export default function Stats() {
                       fontWeight: 900,
                       fontSize: { xs: "3.5rem", sm: "4rem", md: "5.5rem" },
                       lineHeight: 1,
-                      color: "#FFFFFF",
+                      color: deepText,
                       mb: 1,
                       letterSpacing: "-0.05em",
                     }}
@@ -244,13 +243,15 @@ export default function Stats() {
 
                   <Typography
                     sx={{
-                      // fontFamily: "'Syne'",
                       fontSize: "0.75rem",
                       fontWeight: 800,
-                      color: brandCyan,
+                      color: "",
                       letterSpacing: "0.3em",
                       mb: 1,
                       whiteSpace: "pre-line",
+                      bgcolor: "#FFCBDA",
+                      width: "fit-content",
+                      display: "inline-block",
                     }}
                   >
                     {stat.label}
@@ -258,9 +259,8 @@ export default function Stats() {
 
                   <Typography
                     sx={{
-                      // fontFamily: "'DM Sans'",
                       fontSize: "0.99rem",
-                      color: "rgba(255, 255, 255, 0.6)",
+                      color: "rgba(61, 43, 47, 0.6)",
                     }}
                   >
                     {stat.desc}
@@ -271,13 +271,13 @@ export default function Stats() {
           ))}
         </Grid>
 
-        {/* FOOTER DE SECCIÓN */}
+        {/* LÍNEA DE CIERRE */}
         <Stack
           direction='row'
           sx={{
             mt: { xs: 6, md: 10 },
             pt: 4,
-            borderTop: `1px solid rgba(114, 248, 255, 0.1)`,
+            borderTop: `1px solid rgba(255, 183, 206, 0.2)`,
           }}
         />
       </Container>

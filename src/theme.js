@@ -2,27 +2,28 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
-      main: "#72F8FF", // Cian Eléctrico (Acento Neón)
-      dark: "#00E5FF", // Cian más saturado para interacción
-      contrastText: "#02181B", // Texto oscuro sobre fondos cian
+      main: "#3D2B2F", // Deep Espresso (Texto y Botones principales)
+      light: "#5C464A",
+      dark: "#25191B",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#FFFFFF",
-      contrastText: "#02181B",
+      main: "#FFB7CE", // Rosa Sakura (Acentos y Detalles)
+      light: "#FFDDE8",
+      dark: "#E899B3",
+      contrastText: "#3D2B2F",
     },
     background: {
-      // Midnight Petroleum: El color base ultra-profundo
-      default: "#02181B",
-      // Papel con transparencia para efectos de cristal ahumado
-      paper: "rgba(6, 78, 87, 0.05)",
+      default: "#FFF5F7", // Fondo base ultra-suave
+      paper: "#FFFFFF", // Fondos de tarjetas
     },
     text: {
-      primary: "#FFFFFF",
-      secondary: "rgba(255, 255, 255, 0.6)", // Para descripciones y leyendas
+      primary: "#3D2B2F",
+      secondary: "rgba(61, 43, 47, 0.6)",
     },
-    divider: "rgba(114, 248, 255, 0.1)", // Divisores con tinte cian sutil
+    divider: "rgba(255, 183, 206, 0.3)",
   },
   typography: {
     fontFamily: "'DM Sans', sans-serif",
@@ -30,55 +31,86 @@ const theme = createTheme({
       fontFamily: "'Syne', sans-serif",
       fontWeight: 900,
       textTransform: "uppercase",
-      letterSpacing: "-0.02em",
+      letterSpacing: "-0.04em",
     },
     h2: {
       fontFamily: "'Syne', sans-serif",
       fontWeight: 900,
-      letterSpacing: "0.05em",
-      textTransform: "uppercase",
+      letterSpacing: "-0.02em",
     },
-    h3: {
+    h6: {
       fontFamily: "'Syne', sans-serif",
       fontWeight: 800,
-    },
-    body1: {
-      fontFamily: "'DM Sans', sans-serif",
-      lineHeight: 1.8,
+      letterSpacing: "0.05em",
     },
     button: {
       fontFamily: "'Syne', sans-serif",
-      letterSpacing: "0.25em",
+      letterSpacing: "0.15em",
       fontWeight: 800,
-      textTransform: "uppercase",
     },
+    body1: {
+      fontSize: "1rem",
+      lineHeight: 1.7,
+    },
+  },
+  shape: {
+    borderRadius: 24, // Curvatura Premium
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "0px", // Identidad de cortes rectos y arquitectónicos
-          padding: "14px 40px",
-          transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+          borderRadius: "16px",
+          padding: "12px 32px",
+          textTransform: "uppercase",
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           boxShadow: "none",
           "&:hover": {
-            transform: "translateY(-4px)",
-            boxShadow: "0 15px 30px rgba(0, 0, 0, 0.5)",
+            boxShadow: "0 12px 24px rgba(61, 43, 47, 0.12)",
+            transform: "translateY(-2px)",
           },
         },
         containedPrimary: {
-          boxShadow: "0 10px 20px rgba(114, 248, 255, 0.2)",
+          backgroundColor: "#3D2B2F",
           "&:hover": {
-            backgroundColor: "#FFFFFF",
-            color: "#02181B",
-            boxShadow: "0 15px 30px rgba(255, 255, 255, 0.2)",
+            backgroundColor: "#FFB7CE",
+            color: "#3D2B2F",
           },
         },
-        outlined: {
-          borderColor: "rgba(114, 248, 255, 0.5)",
-          "&:hover": {
-            borderColor: "#72F8FF",
-            backgroundColor: "rgba(114, 248, 255, 0.05)",
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: "0 20px 60px rgba(61, 43, 47, 0.05)",
+          border: "1px solid rgba(255, 183, 206, 0.2)",
+          backgroundImage: "none",
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            backgroundColor: "rgba(255, 183, 206, 0.05)",
+            "& fieldset": {
+              borderColor: "rgba(255, 183, 206, 0.3)",
+              transition: "border-color 0.2s ease-in-out",
+            },
+            "&:hover fieldset": {
+              borderColor: "#FFB7CE",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "#FFB7CE",
+              borderWidth: "2px",
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "rgba(61, 43, 47, 0.5)",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            fontSize: "0.75rem",
+            letterSpacing: "0.1em",
           },
         },
       },
@@ -86,59 +118,11 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          background: "transparent",
-          backdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(114, 248, 255, 0.1)",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(12px)",
+          color: "#3D2B2F",
+          borderBottom: "1px solid rgba(255, 183, 206, 0.2)",
           boxShadow: "none",
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          borderRadius: "0px",
-          backgroundImage: "none",
-          backgroundColor: "rgba(255, 255, 255, 0.02)",
-          backdropFilter: "blur(20px)",
-          border: "1px solid rgba(114, 248, 255, 0.1)",
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          "& label": {
-            color: "rgba(255, 255, 255, 0.4)",
-            fontFamily: "'Syne'",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-          },
-          "& label.Mui-focused": { color: "#72F8FF" },
-          "& .MuiOutlinedInput-root": {
-            color: "#FFFFFF",
-            "& fieldset": {
-              borderColor: "rgba(114, 248, 255, 0.2)",
-              borderRadius: "0px",
-            },
-            "&:hover fieldset": { borderColor: "rgba(114, 248, 255, 0.5)" },
-            "&.Mui-focused fieldset": { borderColor: "#72F8FF" },
-          },
-        },
-      },
-    },
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          fontFamily: "'DM Sans'",
-          fontSize: "0.9rem",
-          "&.Mui-selected": {
-            backgroundColor: "rgba(114, 248, 255, 0.1)",
-            color: "#72F8FF",
-            "&:hover": {
-              backgroundColor: "rgba(114, 248, 255, 0.2)",
-            },
-          },
         },
       },
     },

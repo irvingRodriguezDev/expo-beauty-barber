@@ -8,18 +8,22 @@ import {
   IconButton,
   Container,
   Divider,
+  Stack,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SecurityIcon from "@mui/icons-material/Security";
 import PaymentIcon from "@mui/icons-material/Payment";
+import GppGoodIcon from "@mui/icons-material/GppGood";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
 export const PrivacyPolicyModal = ({ open, onClose }) => {
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#042F35";
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97";
+  const deepText = "#3D2B2F";
+  const softBg = "#FFD9E2";
 
   return (
     <Dialog
@@ -29,99 +33,170 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
       TransitionComponent={Transition}
       PaperProps={{
         sx: {
-          bgcolor: darkPetroleum,
+          bgcolor: softBg,
           backgroundImage: "none",
-          color: "#FFF",
+          color: deepText,
         },
       }}
     >
-      {/* Header Fijo */}
+      {/* Header Estilo Galería */}
       <Box
         sx={{
           p: 3,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          borderBottom: "1px solid rgba(114, 248, 255, 0.2)",
+          borderBottom: "1px solid rgba(61, 43, 47, 0.08)",
           position: "sticky",
           top: 0,
-          bgcolor: darkPetroleum,
+          bgcolor: softBg,
+          backdropFilter: "blur(10px)",
           zIndex: 10,
         }}
       >
         <Typography
           variant='h6'
-          sx={{ fontWeight: 800, color: brandCyan, letterSpacing: 2 }}
+          sx={{
+            fontWeight: 900,
+            color: deepText,
+            letterSpacing: 3,
+            fontSize: "0.9rem",
+            textTransform: "uppercase",
+          }}
         >
-          AVISO DE PRIVACIDAD
+          Compromiso de Privacidad
         </Typography>
-        <IconButton onClick={onClose} sx={{ color: "#FFF" }}>
+        <IconButton onClick={onClose} sx={{ color: deepText }}>
           <CloseIcon />
         </IconButton>
       </Box>
 
-      <Container maxWidth='md' sx={{ py: 6 }}>
-        <Typography
-          variant='body1'
-          sx={{ mb: 4, lineHeight: 1.8, opacity: 0.9 }}
-        >
-          En cumplimiento con los términos de{" "}
-          <strong>Publicidad Mahur, S.A. de C.V.</strong> y
-          <strong> Expo Belleza y Barberías</strong>, informamos sobre el uso y
-          protección de los datos proporcionados en{" "}
-          <em>expobellezaybarberias.com</em>.
-        </Typography>
+      <Container maxWidth='md' sx={{ py: 8 }}>
+        {/* Intro */}
+        <Box sx={{ mb: 8, textAlign: "center" }}>
+          <GppGoodIcon
+            sx={{ fontSize: 60, color: brandPink, mb: 2, opacity: 0.8 }}
+          />
+          <Typography
+            variant='h4'
+            sx={{
+              fontWeight: 900,
+              mb: 3,
+              color: deepText,
+            }}
+          >
+            Tus datos, <span style={{ color: brandPink }}>seguros.</span>
+          </Typography>
+          <Typography
+            variant='body1'
+            sx={{
+              lineHeight: 1.8,
+              color: "rgba(61, 43, 47, 0.7)",
+              maxWidth: "600px",
+              mx: "auto",
+            }}
+          >
+            En cumplimiento con los términos de{" "}
+            <strong>Publicidad Mahur, S.A. de C.V.</strong> y
+            <strong> Beauty World Mexico</strong>, detallamos nuestra política
+            de protección de datos.
+          </Typography>
+        </Box>
 
-        <Box sx={{ display: "grid", gap: 5 }}>
+        <Box sx={{ display: "grid", gap: 6 }}>
           <section>
             <Typography
               variant='subtitle1'
               sx={{
-                color: brandCyan,
-                fontWeight: 700,
-                mb: 1,
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
+                color: brandPink,
+                fontWeight: 900,
+                mb: 2,
+                letterSpacing: 1.5,
+                fontSize: "0.75rem",
+                textTransform: "uppercase",
               }}
             >
-              1. INFORMACIÓN RECOGIDA
+              01. INFORMACIÓN RECOGIDA
             </Typography>
-            <Typography variant='body2' sx={{ opacity: 0.8, mb: 1 }}>
-              Nuestro sitio recoge datos personales como:{" "}
+            <Typography
+              variant='body2'
+              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
+            >
+              Recabamos datos personales esenciales para tu experiencia:{" "}
               <strong>
-                Nombre, correo electrónico e información demográfica.
-              </strong>
-              Asimismo, para el procesamiento de pedidos, facturación o
-              entregas, se podrá requerir información específica adicional.
+                Nombre completo, correo electrónico e información de perfil
+                profesional.
+              </strong>{" "}
+              Esta información se utiliza exclusivamente para la gestión de tus
+              accesos y comunicación del evento.
             </Typography>
           </section>
 
           <section>
-            <Typography
-              variant='subtitle1'
-              sx={{
-                color: brandCyan,
-                fontWeight: 700,
-                mb: 1,
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-              }}
+            <Stack
+              direction='row'
+              spacing={1}
+              alignItems='center'
+              sx={{ mb: 2 }}
             >
-              <PaymentIcon fontSize='small' /> 2. PAGOS Y SEGURIDAD BANCARIA
-              (STRIPE)
-            </Typography>
-            <Typography variant='body2' sx={{ opacity: 0.8 }}>
-              Para tu seguridad,{" "}
+              <PaymentIcon sx={{ color: brandPink, fontSize: 20 }} />
+              <Typography
+                variant='subtitle1'
+                sx={{
+                  color: brandPink,
+                  fontWeight: 900,
+                  letterSpacing: 1.5,
+                  fontSize: "0.75rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                02. PAGOS Y SEGURIDAD BANCARIA
+              </Typography>
+            </Stack>
+            <Typography
+              variant='body2'
+              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
+            >
+              Tu seguridad financiera es nuestra prioridad.{" "}
               <strong>
-                no almacenamos los datos de tu tarjeta en nuestros servidores
+                No almacenamos los datos de tus tarjetas en nuestros servidores
               </strong>
-              . Los pagos se procesan a través de
-              <strong> Stripe</strong>, una plataforma con certificación PCI de
-              nivel 1 (el estándar más alto). La conexión se realiza mediante
-              <strong> certificados SSL</strong> que cifran tu información desde
-              que la ingresas hasta que se procesa el pago.
+              . Todas las transacciones son procesadas mediante{" "}
+              <strong>Stripe</strong>, utilizando cifrado{" "}
+              <strong>SSL de grado bancario</strong> y cumpliendo con los
+              estándares PCI de nivel 1.
+            </Typography>
+          </section>
+
+          <section>
+            <Stack
+              direction='row'
+              spacing={1}
+              alignItems='center'
+              sx={{ mb: 2 }}
+            >
+              <SecurityIcon sx={{ color: brandPink, fontSize: 20 }} />
+              <Typography
+                variant='subtitle1'
+                sx={{
+                  color: brandPink,
+                  fontWeight: 900,
+                  letterSpacing: 1.5,
+                  fontSize: "0.75rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                03. INFRAESTRUCTURA DE SEGURIDAD
+              </Typography>
+            </Stack>
+            <Typography
+              variant='body2'
+              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
+            >
+              Implementamos protocolos avanzados de protección de datos en la
+              nube para asegurar que no exista ningún acceso no autorizado,
+              manteniendo la integridad de la base de datos de{" "}
+              <strong>Beauty World Mexico</strong>.
             </Typography>
           </section>
 
@@ -129,87 +204,62 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
             <Typography
               variant='subtitle1'
               sx={{
-                color: brandCyan,
-                fontWeight: 700,
-                mb: 1,
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
+                color: brandPink,
+                fontWeight: 900,
+                mb: 2,
+                letterSpacing: 1.5,
+                fontSize: "0.75rem",
+                textTransform: "uppercase",
               }}
             >
-              <SecurityIcon fontSize='small' /> 3. COMPROMISO DE SEGURIDAD
+              04. USO DE COOKIES Y ANALÍTICA
             </Typography>
-            <Typography variant='body2' sx={{ opacity: 0.8 }}>
-              Estamos altamente comprometidos con mantener su información
-              segura. Empleamos los sistemas más avanzados y los actualizamos
-              constantemente para asegurar que no exista ningún acceso no
-              autorizado.
-            </Typography>
-          </section>
-
-          <section>
             <Typography
-              variant='subtitle1'
-              sx={{ color: brandCyan, fontWeight: 700, mb: 1 }}
+              variant='body2'
+              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
             >
-              4. USO DE COOKIES
-            </Typography>
-            <Typography variant='body2' sx={{ opacity: 0.8 }}>
-              Empleamos cookies para identificar las páginas visitadas y su
-              frecuencia, con fines exclusivamente de
-              <strong> análisis estadístico</strong>, eliminando la información
-              de forma permanente tras su uso. Puedes aceptar, negar o
-              configurar el uso de cookies desde tu navegador en cualquier
-              momento.
-            </Typography>
-          </section>
-
-          <section>
-            <Typography
-              variant='subtitle1'
-              sx={{ color: brandCyan, fontWeight: 700, mb: 1 }}
-            >
-              5. CONTROL Y TERCEROS
-            </Typography>
-            <Typography variant='body2' sx={{ opacity: 0.8 }}>
-              • No vendemos, cedemos ni distribuimos tu información personal sin
-              tu consentimiento, salvo requerimiento legal por un juez con orden
-              judicial.
-              <br />
-              • Puedes cancelar suscripciones a correos publicitarios en
-              cualquier momento.
-              <br />• Enlaces a terceros: No somos responsables de la privacidad
-              en sitios externos fuera de nuestro dominio.
+              Utilizamos cookies técnicas para optimizar la velocidad de carga
+              de la plataforma y realizar análisis estadísticos anónimos que nos
+              ayuden a mejorar tu experiencia de navegación.
             </Typography>
           </section>
         </Box>
 
-        <Divider sx={{ my: 6, borderColor: "rgba(114, 248, 255, 0.1)" }} />
+        <Divider sx={{ my: 8, borderColor: "rgba(61, 43, 47, 0.08)" }} />
 
-        <Button
-          fullWidth
-          variant='contained'
-          onClick={onClose}
-          sx={{
-            py: 2,
-            bgcolor: brandCyan,
-            color: darkPetroleum,
-            fontWeight: 900,
-            borderRadius: 2,
-            fontSize: "1rem",
-            "&:hover": { bgcolor: "#FFF" },
-          }}
-        >
-          HE LEÍDO Y ACEPTO LOS TÉRMINOS
-        </Button>
+        <Stack alignItems='center' spacing={4}>
+          <Button
+            variant='contained'
+            onClick={onClose}
+            sx={{
+              py: 2.5,
+              px: 8,
+              bgcolor: deepText,
+              color: "#FFF",
+              fontWeight: 900,
+              borderRadius: 2,
+              fontSize: "0.85rem",
+              letterSpacing: 2,
+              boxShadow: "0 20px 40px rgba(61, 43, 47, 0.15)",
+              "&:hover": { bgcolor: brandPink, color: deepText },
+            }}
+          >
+            HE LEÍDO Y ACEPTO LOS TÉRMINOS
+          </Button>
 
-        <Typography
-          variant='caption'
-          sx={{ display: "block", mt: 2, textAlign: "center", opacity: 0.5 }}
-        >
-          Última actualización: Abril 2026. Nos reservamos el derecho de cambiar
-          los términos de esta política en cualquier momento[cite: 33].
-        </Typography>
+          <Typography
+            variant='caption'
+            sx={{
+              display: "block",
+              textAlign: "center",
+              color: "rgba(61, 43, 47, 0.4)",
+              fontWeight: 700,
+            }}
+          >
+            Última actualización: Abril 2026. <br />
+            Sujeto a cambios bajo las normativas legales vigentes.
+          </Typography>
+        </Stack>
       </Container>
     </Dialog>
   );

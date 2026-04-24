@@ -9,32 +9,37 @@ const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
 export default function Hero() {
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B";
+  // --- PALETA COHERENTE CON NAVBAR Y FOOTER ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  // --------------------------------------------
 
   return (
     <Box
-      component='section' // Semántica de sección para SEO
+      component='section'
       sx={{
         position: "relative",
         minHeight: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
-        background: `radial-gradient(circle at 20% 30%, #064E57 0%, ${darkPetroleum} 100%)`,
+        // Gradiente ligero y elegante
+        background: `#FFD9E2`,
         overflow: "hidden",
-        pt: { xs: 12, md: 12 },
+        pt: { xs: 15, md: 12 }, // Más padding arriba para no chocar con el navbar claro
         pb: { xs: 8, md: 0 },
       }}
     >
+      {/* Decoración sutil de fondo */}
       <Box
         sx={{
           position: "absolute",
           top: "10%",
           left: "10%",
-          width: "50vw",
-          height: "50vw",
-          background: `radial-gradient(circle, rgba(114, 248, 255, 0.05) 0%, transparent 70%)`,
-          filter: "blur(100px)",
+          width: "60vw",
+          height: "60vw",
+          background: `radial-gradient(circle, rgba(255, 183, 206, 0.12) 0%, transparent 70%)`,
+          filter: "blur(80px)",
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -58,16 +63,20 @@ export default function Hero() {
             >
               <Typography
                 sx={{
-                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.75rem",
                   fontWeight: 900,
                   letterSpacing: "0.6em",
-                  color: brandCyan,
+                  color: "#3D2B2F",
+                  bgcolor: "#FFCBDA", // Usando el rosa más oscuro que pidió el cliente
                   textTransform: "uppercase",
                   mb: 4,
-                  display: "flex",
+                  // --- CAMBIOS CLAVE ---
+                  display: "inline-block", // Esto hace que el fondo se ajuste al texto
+                  px: 1.5, // Padding lateral para que respire el resaltado
+                  py: 0.5, // Un poco de padding arriba/abajo
+                  width: "fit-content", // Asegura que no se estire
+                  // ---------------------
                   alignItems: "center",
-                  justifyContent: { xs: "center", lg: "flex-start" },
                   gap: 2,
                 }}
               >
@@ -76,35 +85,32 @@ export default function Hero() {
             </motion.div>
 
             <Box sx={{ mb: 4 }}>
-              {/* CORRECCIÓN SEO: h1 con contenido semántico completo */}
               <Typography
-                component='h1' // Forzamos semántica h1 para Google
+                component='h1'
                 variant='h1'
                 sx={{
                   fontSize: { xs: "3.5rem", sm: "5.5rem", lg: "8.5rem" },
                   lineHeight: 0.85,
                   fontWeight: 900,
-                  fontFamily: "'Syne', sans-serif",
-                  color: "#FFFFFF",
+                  // fontFamily: "'Syne', sans-serif",
+                  color: deepText, // Texto oscuro sobre fondo claro
                   letterSpacing: "-0.02em",
                   mb: 2,
                 }}
               >
-                EXPO <br />
+                {" "}
+                BEAUTY
+                <br />
                 <span
                   style={{
-                    color: brandCyan,
+                    color: brandPink,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
                 >
-                  BELLEZA
+                  WORLD
                 </span>
-                <br /> BARBERÍAS
-              </Typography>
-              {/* Subtítulo invisible para SEO que complementa el h1 con lugar y fecha */}
-              <Typography component='span' sx={{ display: "none" }}>
-                WTC CDMX 2027 - 5 y 6 de Febrero
+                <br /> MEXICO
               </Typography>
             </Box>
 
@@ -119,9 +125,9 @@ export default function Hero() {
                   maxWidth: 550,
                   mx: { xs: "auto", lg: 0 },
                   mb: 6,
-                  color: "rgba(255,255,255,0.6)",
+                  color: "rgba(61, 43, 47, 0.7)", // Texto descriptivo suave
                   lineHeight: 1.8,
-                  fontWeight: 300,
+                  fontWeight: 400,
                 }}
               >
                 Donde la maestría técnica se encuentra con el networking de alto
@@ -130,6 +136,7 @@ export default function Hero() {
               </Typography>
             </motion.div>
 
+            {/* Badges de Info */}
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={2}
@@ -147,15 +154,15 @@ export default function Hero() {
                     gap: 2,
                     px: 3,
                     py: 1.5,
-                    borderRadius: 4,
-                    bgcolor: "rgba(255, 255, 255, 0.03)",
-                    border: "1px solid rgba(114, 248, 255, 0.15)",
-                    backdropFilter: "blur(10px)",
+                    borderRadius: 2,
+                    bgcolor: "#FFF",
+                    border: `1px solid rgba(255, 183, 206, 0.3)`,
+                    boxShadow: "0 4px 15px rgba(255, 183, 206, 0.1)",
                   }}
                 >
                   <Box
                     sx={{
-                      color: brandCyan,
+                      color: brandPink,
                       display: "flex",
                       fontSize: "1.2rem",
                     }}
@@ -167,7 +174,7 @@ export default function Hero() {
                       fontWeight: 800,
                       fontSize: "0.8rem",
                       letterSpacing: "0.2em",
-                      color: "#FFF",
+                      color: deepText,
                     }}
                   >
                     {item.text}
@@ -176,6 +183,7 @@ export default function Hero() {
               ))}
             </Stack>
 
+            {/* Acciones */}
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={3}
@@ -185,15 +193,19 @@ export default function Hero() {
                 variant='contained'
                 onClick={() => scrollTo("register")}
                 sx={{
-                  bgcolor: brandCyan,
-                  color: darkPetroleum,
-                  borderRadius: 4,
+                  bgcolor: brandPink,
+                  color: "#FFF",
+                  borderRadius: 2,
                   px: 6,
                   py: 2.5,
                   fontWeight: 900,
                   letterSpacing: "0.2em",
-                  boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
-                  "&:hover": { bgcolor: "#FFF", transform: "translateY(-5px)" },
+                  boxShadow: `0 10px 30px rgba(255, 183, 206, 0.4)`,
+                  "&:hover": {
+                    bgcolor: deepText,
+                    color: "#FFF",
+                    transform: "translateY(-5px)",
+                  },
                   transition: "0.4s",
                 }}
               >
@@ -203,14 +215,18 @@ export default function Hero() {
                 variant='outlined'
                 onClick={() => scrollTo("expositores")}
                 sx={{
-                  borderColor: "rgba(255,255,255,0.2)",
-                  color: "#FFF",
-                  borderRadius: 4,
+                  borderColor: "rgba(61, 43, 47, 0.2)",
+                  color: deepText,
+                  borderRadius: 2,
                   px: 6,
                   py: 2.5,
                   fontWeight: 800,
                   letterSpacing: "0.2em",
-                  "&:hover": { borderColor: brandCyan, color: brandCyan },
+                  "&:hover": {
+                    borderColor: brandPink,
+                    color: brandPink,
+                    bgcolor: "rgba(255, 183, 206, 0.05)",
+                  },
                   transition: "0.4s",
                 }}
               >
@@ -219,7 +235,7 @@ export default function Hero() {
             </Stack>
           </Box>
 
-          {/* LADO DERECHO: IMAGEN ENMARCADA */}
+          {/* LADO DERECHO: IMAGEN */}
           <Box
             sx={{
               position: "relative",
@@ -229,23 +245,23 @@ export default function Hero() {
             }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2 }}
             >
               <Box
                 component='img'
                 src={WomenEbb}
                 loading='eager'
-                alt='Expo Belleza y Barberías 2027 WTC' // ALT fundamental para SEO
+                alt='BEAUTY WORLD MEXICO 2027 WTC'
                 sx={{
                   width: "100%",
-                  // maxWidth: { xs: 400, lg: "100%" },
-                  height: "100%",
+                  height: "auto",
+                  maxWidth: { xs: 500, lg: "100%" },
                   objectFit: "cover",
-                  objectViewBox: "inset(1%)",
-                  borderRadius: 0,
-                  filter: "grayscale(20%) contrast(1.1)",
+                  borderRadius: 2, // Un poco de redondeo suaviza la estética boutique
+                  filter: "contrast(1.05)",
+                  // boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
                 }}
               />
             </motion.div>
@@ -253,6 +269,7 @@ export default function Hero() {
         </Box>
       </Container>
 
+      {/* Indicador Scroll */}
       <Box
         onClick={() => scrollTo("visitantes")}
         sx={{
@@ -267,7 +284,7 @@ export default function Hero() {
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <KeyboardArrowDownIcon sx={{ color: brandCyan, fontSize: 40 }} />
+          <KeyboardArrowDownIcon sx={{ color: brandPink, fontSize: 40 }} />
         </motion.div>
       </Box>
     </Box>

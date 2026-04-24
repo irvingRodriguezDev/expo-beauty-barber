@@ -1,13 +1,14 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Box, Container, Typography, Button, Stack, Grid } from "@mui/material";
+import { Box, Container, Typography, Button, Grid } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 const perks = [
   {
-    label: "Shows de Barberia",
-    description: "Espectáculos en vivo con referentes de la barbería mundial.",
+    label: "Relaciones Comerciales",
+    description: "Conecta con dueños de negocio y líderes del sector.",
   },
+
   {
     label: "Zona de Maquillaje",
     description: "Espacios de vanguardia dedicados a la alta cosmética.",
@@ -25,8 +26,8 @@ const perks = [
     description: "Zonas diseñadas para la creación de contenido digital.",
   },
   {
-    label: "Relaciones Comerciales",
-    description: "Conecta con dueños de negocio y líderes del sector.",
+    label: "Shows de Barberia",
+    description: "Espectáculos en vivo con referentes de la barbería mundial.",
   },
 ];
 
@@ -43,8 +44,11 @@ export default function Visitors() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#042F35";
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  // -------------------------
 
   return (
     <Box
@@ -53,8 +57,7 @@ export default function Visitors() {
       id='visitantes'
       sx={{
         py: { xs: 10, md: 15 },
-        // GRADIENTE: Transición de petróleo profundo
-        background: `linear-gradient(180deg, #02181B 0%, ${darkPetroleum} 100%)`,
+        bgcolor: lightBg,
         position: "relative",
         overflow: "hidden",
       }}
@@ -70,13 +73,15 @@ export default function Visitors() {
             >
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: brandCyan, // Acento Cian
+                  color: "",
                   mb: 3,
                   textTransform: "uppercase",
+                  bgcolor: "#FFCBDA",
+                  width: "fit-content",
+                  display: "inline-block",
                 }}
               >
                 — Experiencia de Clase Mundial
@@ -84,10 +89,9 @@ export default function Visitors() {
               <Typography
                 variant='h2'
                 sx={{
-                  fontFamily: "'Syne'",
                   fontSize: { xs: "3.5rem", md: "6rem" },
                   fontWeight: 800,
-                  color: "#FFFFFF",
+                  color: deepText,
                   lineHeight: 0.9,
                   letterSpacing: "-0.04em",
                 }}
@@ -95,7 +99,7 @@ export default function Visitors() {
                 La cima del <br />
                 <span
                   style={{
-                    color: brandCyan,
+                    color: brandPink,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -108,12 +112,13 @@ export default function Visitors() {
           <Grid item xs={12} md={5}>
             <Typography
               sx={{
-                color: "rgba(255, 255, 255, 0.7)",
+                color: "rgba(61, 43, 47, 0.7)",
                 fontSize: "1.1rem",
                 lineHeight: 1.8,
                 maxWidth: "450px",
-                borderLeft: `2px solid ${brandCyan}`, // Borde Cian
+                borderLeft: `3px solid ${brandPink}`,
                 pl: 3,
+                fontWeight: 500,
               }}
             >
               Un ecosistema diseñado para elevar el estándar de la industria.
@@ -139,21 +144,20 @@ export default function Visitors() {
                     flexDirection: "column",
                     justifyContent: "center",
                     p: 4,
-                    // Fondo Glassmorphism Dark Petroleum
-                    backgroundColor: "rgba(255, 255, 255, 0.03)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    backdropFilter: "blur(15px)",
+                    backgroundColor: "#FFFFFF",
+                    border: "1px solid rgba(255, 183, 206, 0.2)",
                     position: "relative",
                     overflow: "hidden",
-                    borderRadius: 4,
+                    borderRadius: 1,
                     transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
+                    boxShadow: "0 10px 30px rgba(61, 43, 47, 0.03)",
                     "&:hover": {
-                      backgroundColor: "rgba(114, 248, 255, 0.05)",
                       transform: "translateY(-10px)",
-                      borderColor: brandCyan,
+                      borderColor: brandPink,
+                      boxShadow: "0 20px 40px rgba(255, 183, 206, 0.15)",
                     },
                     "&:hover .bg-text": {
-                      opacity: 0.1,
+                      opacity: 0.15,
                       transform: "scale(1.1) translateX(-10%)",
                     },
                   }}
@@ -162,11 +166,10 @@ export default function Visitors() {
                     className='bg-text'
                     sx={{
                       position: "absolute",
-                      // fontFamily: "'Syne'",
                       fontSize: "6rem",
                       fontWeight: 900,
-                      color: brandCyan,
-                      opacity: 0.03,
+                      color: brandPink,
+                      opacity: 0.06,
                       right: -10,
                       bottom: -20,
                       transition: "0.8s ease",
@@ -178,10 +181,9 @@ export default function Visitors() {
 
                   <Typography
                     sx={{
-                      // fontFamily: "'Syne'",
                       fontWeight: 800,
                       fontSize: "1.5rem",
-                      color: "#FFFFFF",
+                      color: deepText,
                       mb: 1,
                     }}
                   >
@@ -189,10 +191,11 @@ export default function Visitors() {
                   </Typography>
                   <Typography
                     sx={{
-                      fontSize: "0.9rem",
-                      color: "rgba(255, 255, 255, 0.6)",
+                      fontSize: "0.95rem",
+                      color: "rgba(61, 43, 47, 0.6)",
                       lineHeight: 1.6,
                       zIndex: 1,
+                      fontWeight: 500,
                     }}
                   >
                     {p.description}
@@ -214,10 +217,9 @@ export default function Visitors() {
               >
                 <Box
                   sx={{
-                    // Fondo Petróleo más profundo para el call-out
-                    background: "#02181B",
-                    color: "#FFF",
-                    borderRadius: 4,
+                    background: "#FFFFFF",
+                    color: deepText,
+                    borderRadius: 1,
                     p: { xs: 4, md: 8 },
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
@@ -225,20 +227,20 @@ export default function Visitors() {
                     gap: 6,
                     position: "relative",
                     overflow: "hidden",
-                    border: `1px solid rgba(114, 248, 255, 0.2)`,
+                    border: `1px solid rgba(255, 183, 206, 0.4)`,
+                    boxShadow: "0 40px 100px rgba(61, 43, 47, 0.08)",
                   }}
                 >
-                  {/* Glow Radial en Cian */}
+                  {/* Glow Radial en Rosa */}
                   <Box
                     sx={{
                       position: "absolute",
                       bottom: -150,
-                      left: -150,
+                      right: -150,
                       width: 400,
                       height: 400,
                       borderRadius: "50%",
-
-                      background: `radial-gradient(circle, rgba(114,248,255,0.08) 0%, transparent 70%)`,
+                      background: `radial-gradient(circle, rgba(255,183,206,0.2) 0%, transparent 70%)`,
                     }}
                   />
 
@@ -251,25 +253,24 @@ export default function Visitors() {
                   >
                     <Typography
                       sx={{
-                        // fontFamily: "'Syne'",
                         fontSize: { xs: "4rem", md: "7rem" },
-                        fontWeight: 800,
+                        fontWeight: 900,
                         lineHeight: 1,
                         mb: 2,
-                        color: "#FFFFFF",
+                        color: deepText,
                       }}
                     >
-                      5-6{" "}
-                      <span style={{ color: brandCyan, fontSize: "0.5em" }}>
+                      6-7{" "}
+                      <span style={{ color: brandPink, fontSize: "0.5em" }}>
                         FEB
                       </span>
                     </Typography>
                     <Typography
                       sx={{
                         letterSpacing: "0.5em",
-                        fontWeight: 700,
+                        fontWeight: 800,
                         fontSize: "0.9rem",
-                        color: brandCyan,
+                        color: brandPink,
                       }}
                     >
                       WTC • CIUDAD DE MÉXICO
@@ -280,11 +281,12 @@ export default function Visitors() {
                     <Typography
                       sx={{
                         fontSize: "0.8rem",
-                        fontWeight: 700,
+                        fontWeight: 800,
                         mb: 3,
                         letterSpacing: "0.3em",
-                        color: "rgba(255, 255, 255, 0.5)",
+                        color: "rgba(61, 43, 47, 0.4)",
                         textAlign: "center",
+                        textTransform: "uppercase",
                       }}
                     >
                       PERFILES CONVOCADOS
@@ -305,12 +307,12 @@ export default function Visitors() {
                             px: 2,
                             py: 0.5,
                             fontSize: "0.75rem",
-                            border: `1px solid rgba(114, 248, 255, 0.3)`,
-                            color: brandCyan,
-                            borderRadius: 4,
-                            // fontFamily: "'Syne'",
+                            border: `1px solid ${brandPink}`,
+                            color: brandPink,
+                            borderRadius: 2,
+                            fontWeight: 700,
                             letterSpacing: "0.1em",
-                            backgroundColor: "rgba(114, 248, 255, 0.05)",
+                            backgroundColor: "rgba(255, 183, 206, 0.05)",
                           }}
                         >
                           {p.toUpperCase()}
@@ -328,20 +330,18 @@ export default function Visitors() {
                       }}
                       startIcon={<ConfirmationNumberIcon />}
                       sx={{
-                        // Botón Cian Eléctrico
-                        bgcolor: brandCyan,
-                        color: "#02181B",
-                        borderRadius: 4,
+                        bgcolor: deepText,
+                        color: "#FFFFFF",
+                        borderRadius: 2,
                         py: 2.5,
-                        fontWeight: 900,
-                        // fontFamily: "'Syne'",
+                        fontWeight: 800,
                         letterSpacing: "0.3em",
                         transition: "0.4s",
                         "&:hover": {
-                          bgcolor: "#FFFFFF",
-                          color: "#02181B",
+                          bgcolor: brandPink,
+                          color: deepText,
                           transform: "translateY(-5px)",
-                          boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
+                          boxShadow: `0 10px 30px rgba(255, 183, 206, 0.4)`,
                         },
                       }}
                     >

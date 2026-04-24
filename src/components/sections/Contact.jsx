@@ -103,7 +103,7 @@ export default function Contact() {
           >
             <Typography
               sx={{
-                fontFamily: "'DM Sans'",
+                // fontFamily: "'DM Sans'",
                 fontSize: "0.75rem",
                 fontWeight: 900,
                 letterSpacing: "0.5em",
@@ -116,7 +116,7 @@ export default function Contact() {
             <Typography
               variant='h2'
               sx={{
-                fontFamily: "'Syne', sans-serif",
+                // fontFamily: "'Syne', sans-serif",
                 fontSize: { xs: "3.5rem", md: "5rem" },
                 fontWeight: 800,
                 color: "#2D0A1A",
@@ -168,7 +168,7 @@ export default function Contact() {
                   </Typography>
                   <Typography
                     sx={{
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontWeight: 800,
                       color: "#2D0A1A",
                     }}
@@ -202,7 +202,7 @@ export default function Contact() {
                   </Typography>
                   <Typography
                     sx={{
-                      fontFamily: "'Syne'",
+                      // fontFamily: "'Syne'",
                       fontWeight: 800,
                       color: "#2D0A1A",
                     }}
@@ -237,10 +237,7 @@ export default function Contact() {
                     <CheckCircleOutlineIcon
                       sx={{ color: "#EC4899", fontSize: 60, mb: 3 }}
                     />
-                    <Typography
-                      variant='h4'
-                      sx={{ fontFamily: "'Syne'", fontWeight: 800, mb: 2 }}
-                    >
+                    <Typography variant='h4' sx={{ fontWeight: 800, mb: 2 }}>
                       SOLICITUD ENVIADA
                     </Typography>
                     <Typography
@@ -252,7 +249,7 @@ export default function Contact() {
                       onClick={() => setStatus("idle")}
                       sx={{
                         color: "#062C22",
-                        fontFamily: "'Syne'",
+                        // fontFamily: "'Syne'",
                         fontWeight: 800,
                         letterSpacing: "0.2em",
                       }}
@@ -390,7 +387,7 @@ export default function Contact() {
                               <MenuItem
                                 key={t}
                                 value={t}
-                                sx={{ fontFamily: "'Syne'", fontWeight: 600 }}
+                                sx={{ fontWeight: 600 }}
                               >
                                 {t.toUpperCase()}
                               </MenuItem>
@@ -417,7 +414,7 @@ export default function Contact() {
                           borderRadius: 0,
                           py: 3,
                           fontWeight: 900,
-                          fontFamily: "'Syne'",
+                          // fontFamily: "'Syne'",
                           letterSpacing: "0.3em",
                           fontSize: "0.8rem",
                           "&:hover": {

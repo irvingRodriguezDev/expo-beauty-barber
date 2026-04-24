@@ -45,7 +45,6 @@ export const SuccessTicket = ({ registration, onReset }) => {
           />
           <Typography
             sx={{
-              fontFamily: "'Syne'",
               fontWeight: 900,
               fontSize: "1.8rem",
               letterSpacing: "0.1em",
@@ -86,7 +85,6 @@ export const SuccessTicket = ({ registration, onReset }) => {
               fontWeight: 900,
               mb: 4,
               letterSpacing: "0.3em",
-              fontFamily: "'Syne'",
               fontSize: "1rem",
               textTransform: "uppercase",
               border: `1px solid ${brandCyan}`,
@@ -108,7 +106,7 @@ export const SuccessTicket = ({ registration, onReset }) => {
             }}
           >
             <QRCodeSVG
-              value={`EBB-2027-${registration.code}`}
+              value={`BWM-2027-${registration.code}`}
               size={180}
               fgColor={darkPetroleum}
               level='H'
@@ -117,7 +115,6 @@ export const SuccessTicket = ({ registration, onReset }) => {
 
           <Typography
             sx={{
-              fontFamily: "'Syne'",
               fontSize: "3.5rem",
               fontWeight: 900,
               color: brandCyan,
@@ -135,7 +132,6 @@ export const SuccessTicket = ({ registration, onReset }) => {
               color: "rgba(255, 255, 255, 0.7)",
               mb: 5,
               fontWeight: 600,
-              fontFamily: "'DM Sans'",
               letterSpacing: "0.05em",
             }}
           >
@@ -152,7 +148,6 @@ export const SuccessTicket = ({ registration, onReset }) => {
                 borderRadius: 0,
                 fontWeight: 900,
                 py: 2,
-                fontFamily: "'Syne'",
                 letterSpacing: "0.2em",
                 "&:hover": { bgcolor: "#FFF", transform: "translateY(-3px)" },
                 transition: "0.3s",

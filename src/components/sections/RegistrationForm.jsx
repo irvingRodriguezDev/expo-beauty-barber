@@ -20,7 +20,7 @@ import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
 export const RegistrationForm = ({
   selectedPass,
   onBack,
-  onSubmit, // Función que viene del padre para ir a Stripe
+  onSubmit,
   visitorTypes,
   inputStyles,
   isSubmitting,
@@ -35,21 +35,21 @@ export const RegistrationForm = ({
   });
 
   const [openPolicy, setOpenPolicy] = useState(false);
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B";
 
-  // Validaciones
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  // -------------------------
+
   const nameRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s[a-zA-ZÀ-ÿ\u00f1\u00d1]+)+$/;
   const phoneRegex = /^\+?[0-9]{10,15}$/;
 
-  // Función interna para procesar antes de enviar al padre
   const handleInternalSubmit = (data) => {
-    // Limpiamos el teléfono de espacios o guiones antes de enviar a Stripe/DB
     const cleanData = {
       ...data,
       phone: data.phone.replace(/[\s-]/g, ""),
     };
-    onSubmit(cleanData); // AQUÍ ejecutamos la redirección a Stripe
+    onSubmit(cleanData);
   };
 
   return (
@@ -66,22 +66,23 @@ export const RegistrationForm = ({
           maxWidth: 650,
           mx: "auto",
           p: { xs: 4, md: 8 },
-          background: "rgba(255, 255, 255, 0.02)",
-          backdropFilter: "blur(20px)",
-          borderRadius: 4,
-          border: `1px solid rgba(114, 248, 255, 0.1)`,
+          background: "#FFFFFF",
+          borderRadius: 2,
+          border: `1px solid rgba(255, 183, 206, 0.3)`,
           position: "relative",
           overflow: "hidden",
+          boxShadow: "0 20px 60px rgba(61, 43, 47, 0.05)",
         }}
       >
+        {/* Línea decorativa superior en Rosa */}
         <Box
           sx={{
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
-            height: "2px",
-            background: `linear-gradient(90deg, transparent, ${brandCyan}, transparent)`,
+            height: "4px",
+            background: `linear-gradient(90deg, transparent, ${brandPink}, transparent)`,
           }}
         />
 
@@ -89,19 +90,21 @@ export const RegistrationForm = ({
           startIcon={<ArrowBackIcon />}
           onClick={onBack}
           sx={{
-            color: brandCyan,
+            color: brandPink,
             mb: 5,
-            fontSize: "0.7rem",
+            fontSize: "0.75rem",
             fontWeight: 800,
-            borderRadius: 4,
+            borderRadius: 2,
             letterSpacing: "0.2em",
-            "&:hover": { bgcolor: "transparent", color: "#FFF" },
+            "&:hover": {
+              bgcolor: "rgba(255, 183, 206, 0.05)",
+              color: deepText,
+            },
           }}
         >
           CAMBIAR TIPO DE PASE
         </Button>
 
-        {/* Cambiamos el onSubmit para que use nuestra función interna validada */}
         <form onSubmit={handleSubmit(handleInternalSubmit)}>
           <Stack spacing={4}>
             <Box>
@@ -109,7 +112,7 @@ export const RegistrationForm = ({
                 sx={{
                   fontWeight: 800,
                   fontSize: "0.85rem",
-                  color: brandCyan,
+                  color: brandPink,
                   letterSpacing: "0.3em",
                   textTransform: "uppercase",
                   mb: 1,
@@ -121,8 +124,8 @@ export const RegistrationForm = ({
                 sx={{
                   fontWeight: 900,
                   fontSize: "1.5rem",
-                  color: "#FFFFFF",
-                  borderBottom: `1px solid rgba(114, 248, 255, 0.1)`,
+                  color: deepText,
+                  borderBottom: `1px solid rgba(255, 183, 206, 0.2)`,
                   pb: 2,
                   display: "flex",
                   alignItems: "center",
@@ -134,10 +137,11 @@ export const RegistrationForm = ({
                   sx={{
                     px: 1.5,
                     py: 0.5,
-                    borderRadius: 4,
-                    bgcolor: "rgba(114, 248, 255, 0.1)",
-                    color: brandCyan,
-                    fontSize: "0.7rem",
+                    borderRadius: 2,
+                    bgcolor: "rgba(255, 183, 206, 0.15)",
+                    color: brandPink,
+                    fontSize: "0.65rem",
+                    fontWeight: 900,
                     letterSpacing: "0.1em",
                   }}
                 >
@@ -162,38 +166,34 @@ export const RegistrationForm = ({
               sx={inputStyles}
             />
 
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label='EMAIL'
-                fullWidth
-                autoComplete='off'
-                {...register("email", {
-                  required: "Email obligatorio",
-                  pattern: { value: /^\S+@\S+$/i, message: "Email inválido" },
-                })}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                sx={inputStyles}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label='WHATSAPP'
-                fullWidth
-                autoComplete='off'
-                placeholder='+521234567890'
-                {...register("phone", {
-                  required: "Teléfono obligatorio",
-                  pattern: {
-                    value: phoneRegex,
-                    message: "Mín. 10 dígitos (solo números y +)",
-                  },
-                })}
-                error={!!errors.phone}
-                helperText={errors.phone?.message}
-                sx={inputStyles}
-              />
-            </Grid>
+            <TextField
+              label='EMAIL'
+              fullWidth
+              autoComplete='off'
+              {...register("email", {
+                required: "Email obligatorio",
+                pattern: { value: /^\S+@\S+$/i, message: "Email inválido" },
+              })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              sx={inputStyles}
+            />
+            <TextField
+              label='WHATSAPP'
+              fullWidth
+              autoComplete='off'
+              placeholder='+521234567890'
+              {...register("phone", {
+                required: "Teléfono obligatorio",
+                pattern: {
+                  value: phoneRegex,
+                  message: "Mín. 10 dígitos (solo números y +)",
+                },
+              })}
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
+              sx={inputStyles}
+            />
 
             <TextField
               label='EMPRESA / ACADEMIA'
@@ -217,11 +217,16 @@ export const RegistrationForm = ({
                 MenuProps: {
                   PaperProps: {
                     sx: {
-                      bgcolor: "#064E57",
-                      color: "#FFF",
-                      borderRadius: 4,
+                      bgcolor: "#FFFFFF",
+                      color: deepText,
+                      borderRadius: 1,
+                      boxShadow: "0 10px 40px rgba(61, 43, 47, 0.15)",
                       "& .MuiMenuItem-root": {
-                        "&:hover": { bgcolor: brandCyan, color: darkPetroleum },
+                        fontWeight: 600,
+                        "&:hover": {
+                          bgcolor: "rgba(255, 183, 206, 0.15)",
+                          color: brandPink,
+                        },
                       },
                     },
                   },
@@ -229,7 +234,7 @@ export const RegistrationForm = ({
               }}
             >
               {visitorTypes.map((t) => (
-                <MenuItem key={t} value={t} sx={{ borderRadius: 4 }}>
+                <MenuItem key={t} value={t} sx={{ borderRadius: 2, m: 0.5 }}>
                   {t}
                 </MenuItem>
               ))}
@@ -247,8 +252,8 @@ export const RegistrationForm = ({
                         checked={!!value}
                         onChange={onChange}
                         sx={{
-                          color: "rgba(255,255,255,0.3)",
-                          "&.Mui-checked": { color: brandCyan },
+                          color: "rgba(61, 43, 47, 0.2)",
+                          "&.Mui-checked": { color: brandPink },
                         }}
                       />
                     )}
@@ -257,14 +262,15 @@ export const RegistrationForm = ({
                 label={
                   <Typography
                     variant='caption'
-                    sx={{ color: "rgba(255,255,255,0.7)" }}
+                    sx={{ color: "rgba(61, 43, 47, 0.6)", fontWeight: 500 }}
                   >
                     Acepto la{" "}
                     <span
                       style={{
-                        color: brandCyan,
+                        color: brandPink,
                         cursor: "pointer",
                         textDecoration: "underline",
+                        fontWeight: 700,
                       }}
                       onClick={(e) => {
                         e.preventDefault();
@@ -281,7 +287,12 @@ export const RegistrationForm = ({
               {errors.acceptTerms && (
                 <Typography
                   variant='caption'
-                  sx={{ color: "#ff4444", display: "block", ml: 4 }}
+                  sx={{
+                    color: "#d32f2f",
+                    display: "block",
+                    ml: 4,
+                    fontWeight: 600,
+                  }}
                 >
                   {errors.acceptTerms.message}
                 </Typography>
@@ -295,24 +306,31 @@ export const RegistrationForm = ({
               disabled={isSubmitting}
               sx={{
                 py: 2.5,
-                bgcolor: brandCyan,
-                color: darkPetroleum,
-                borderRadius: 4,
+                bgcolor: deepText,
+                color: "#FFFFFF",
+                borderRadius: 2,
                 fontWeight: 900,
-                letterSpacing: "0.3em",
-                boxShadow: `0 10px 30px rgba(114, 248, 255, 0.2)`,
+                letterSpacing: "0.2em",
+                boxShadow: `0 10px 30px rgba(61, 43, 47, 0.15)`,
                 "&:hover": {
-                  bgcolor: "#FFFFFF",
+                  bgcolor: brandPink,
+                  color: deepText,
                   transform: isSubmitting ? "none" : "translateY(-3px)",
+                  boxShadow: `0 15px 40px rgba(255, 183, 206, 0.4)`,
                 },
                 transition: "all 0.4s ease",
               }}
             >
               {isSubmitting ? (
-                <Stack direction='row' spacing={2} alignItems='center'>
-                  <CircularProgress size={20} sx={{ color: darkPetroleum }} />
+                <Stack
+                  direction='row'
+                  spacing={2}
+                  alignItems='center'
+                  justifyContent='center'
+                >
+                  <CircularProgress size={20} sx={{ color: "#FFFFFF" }} />
                   <Typography sx={{ fontWeight: 900, fontSize: "0.9rem" }}>
-                    REDIRECCIONANDO...
+                    PROCESANDO...
                   </Typography>
                 </Stack>
               ) : (

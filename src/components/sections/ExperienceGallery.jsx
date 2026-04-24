@@ -8,57 +8,36 @@ import {
 } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import masterclasses from "../../assets/images/masterclasess.webp";
-import makeupartist from "../../assets/images/makeupartist.webp";
+import makeupartist from "../../assets/images/a593023b-92e8-4a9e-9101-c03dc22d6059.jpeg";
 import barberskills from "../../assets/images/barberskills.webp";
-import networking from "../../assets/images/networking.webp";
-import exibithors from "../../assets/images/exibithors.webp";
+import networking from "../../assets/images/medium-shot-colleagues-back-office.jpg";
+import exibithors from "../../assets/images/waiting-room-with-monitors.jpg";
+import makeup from "../../assets/images/make-up-artist-getting-model-ready-photoshootin (1).jpg";
 import wtc from "../../assets/images/wtc.webp";
+import stand from "../../assets/images/store-middle-corridor.jpg";
+import brunch from "../../assets/images/female-make-up-blogger-with-streaming-with-smartphone-home.jpg";
+
 const galleryData = [
-  {
-    img: masterclasses,
-    cols: 2,
-    rows: 2,
-    title: "EXIBITORS",
-  },
-  {
-    img: makeupartist,
-    cols: 1,
-    rows: 1,
-    title: "MAKEUP ART",
-  },
-  {
-    img: barberskills,
-    cols: 1,
-    rows: 1,
-    title: "BARBER SKILLS",
-  },
-  {
-    img: networking,
-    cols: 1,
-    rows: 2,
-    title: "NETWORKING",
-  },
-  {
-    img: wtc,
-    cols: 1,
-    rows: 2,
-    title: "WTC CDMX",
-  },
-  {
-    img: exibithors,
-    cols: 2,
-    rows: 1,
-    title: "MASTERCLASSES",
-  },
+  { img: masterclasses, cols: 2, rows: 2, title: "EXHIBIDORES" },
+  { img: makeupartist, cols: 2, rows: 1, title: "ARTE Y MAQUILLAJE" },
+  { img: barberskills, cols: 1, rows: 1, title: "BARBER SKILLS" },
+  { img: networking, cols: 1, rows: 2, title: "NETWORKING" },
+  { img: wtc, cols: 1, rows: 2, title: "WTC CDMX" },
+  { img: exibithors, cols: 2, rows: 1, title: "MASTERCLASSES" },
+  { img: makeup, cols: 1, rows: 1, title: "MAKEUP ZONE" },
+  { img: stand, cols: 1, rows: 1, title: "STANDS" },
+  { img: brunch, cols: 1, rows: 1, title: "CREATORS ZONE" },
 ];
 
 export default function ExperienceGallery() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Paleta High-Tech
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B"; // El tono más oscuro para el cierre
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  // -------------------------
 
   return (
     <Box
@@ -66,8 +45,7 @@ export default function ExperienceGallery() {
       id='experiencia'
       sx={{
         py: { xs: 10, md: 15 },
-        // GRADIENTE: Del petróleo profundo al negro casi total
-        background: `linear-gradient(180deg, #042F35 0%, ${darkPetroleum} 100%)`,
+        bgcolor: lightBg,
         overflow: "hidden",
       }}
     >
@@ -75,31 +53,32 @@ export default function ExperienceGallery() {
         <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
           <Typography
             sx={{
-              fontFamily: "'Syne'",
+              // fontFamily: "'Syne'",
               fontWeight: 900,
               fontSize: { xs: "2.5rem", md: "4rem" },
               lineHeight: 1,
-              color: "#FFFFFF",
+              color: deepText,
             }}
           >
             VIVE LA{" "}
             <span
-              style={{ color: brandCyan, fontStyle: "italic", fontWeight: 400 }}
+              style={{ color: brandPink, fontStyle: "italic", fontWeight: 400 }}
             >
               EXPERIENCIA
             </span>{" "}
-            EBB
+            BWM
           </Typography>
           <Typography
             sx={{
-              // fontFamily: "'DM Sans'",
               fontSize: "0.75rem",
               fontWeight: 800,
               letterSpacing: "0.5em",
-              color: brandCyan,
+              color: "",
               mt: 2,
               textTransform: "uppercase",
-              opacity: 0.8,
+              bgcolor: "#FFCBDA",
+              width: "fit-content",
+              display: "inline-block",
             }}
           >
             Curaduría Visual 2027
@@ -130,13 +109,14 @@ export default function ExperienceGallery() {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                borderRadius: 4,
+                borderRadius: 1,
                 cursor: "pointer",
-                border: "1px solid rgba(255, 255, 255, 0.05)",
+                border: "1px solid rgba(0, 0, 0, 0.05)",
+                boxShadow: "0 10px 30px rgba(61, 43, 47, 0.05)",
                 "&:hover .gallery-overlay": { opacity: 1 },
                 "&:hover img": {
                   transform: "scale(1.1)",
-                  filter: "grayscale(0%) brightness(1.1)",
+                  filter: "sepia(0) contrast(1) brightness(1)",
                 },
               }}
             >
@@ -148,41 +128,40 @@ export default function ExperienceGallery() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  filter: "grayscale(80%) brightness(0.7)", // Más dramático inicialmente
+                  filter: "sepia(0.3) brightness(0.9) contrast(1.1)", // Efecto editorial cálido
                   transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
               />
 
-              {/* Overlay: Glassmorphism Cian */}
+              {/* Overlay: Glassmorphism Blanco/Rosa */}
               <Box
                 className='gallery-overlay'
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  bgcolor: "rgba(4, 47, 53, 0.6)", // Tono petróleo con transparencia
+                  bgcolor: "rgba(255, 255, 255, 0.6)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   opacity: 0,
-                  borderRadius: 4,
+                  borderRadius: 1,
                   transition: "0.5s ease",
-                  backdropFilter: "blur(12px)",
+                  backdropFilter: "blur(8px)",
                 }}
               >
                 <Typography
                   sx={{
-                    // fontFamily: "'Syne'",
-                    color: brandCyan,
+                    color: deepText,
                     fontWeight: 800,
                     fontSize: "0.85rem",
                     letterSpacing: "0.3em",
-                    border: `1.5px solid ${brandCyan}`,
+                    border: `2px solid ${brandPink}`,
                     px: 3,
                     py: 1.5,
-                    borderRadius: 4,
+                    borderRadius: 1,
                     textAlign: "center",
                     textTransform: "uppercase",
-                    boxShadow: `0 0 20px rgba(114, 248, 255, 0.2)`,
+                    bgcolor: "rgba(255, 255, 255, 0.8)",
                   }}
                 >
                   {item.title}
@@ -199,27 +178,25 @@ export default function ExperienceGallery() {
             display: "flex",
             justifyContent: "center",
             gap: 6,
-            opacity: 0.4,
+            opacity: 0.6,
           }}
         >
           <Typography
             sx={{
-              // fontFamily: "'DM Sans'",
-              fontSize: "0.65rem",
-              fontWeight: 700,
+              fontSize: "0.7rem",
+              fontWeight: 800,
               letterSpacing: "0.4em",
-              color: brandCyan,
+              color: brandPink,
             }}
           >
             1RA EDICIÓN
           </Typography>
           <Typography
             sx={{
-              // fontFamily: "'DM Sans'",
-              fontSize: "0.65rem",
-              fontWeight: 700,
+              fontSize: "0.7rem",
+              fontWeight: 800,
               letterSpacing: "0.4em",
-              color: "#FFF",
+              color: deepText,
             }}
           >
             WTC MÉXICO

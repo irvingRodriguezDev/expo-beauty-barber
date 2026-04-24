@@ -9,8 +9,6 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import Marquee from "react-fast-marquee";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 
 const benefits = [
@@ -40,26 +38,18 @@ const benefits = [
   },
 ];
 
-const brandItems = [
-  "L'Oréal Pro",
-  "Babyliss",
-  "Wahl",
-  "Schwarzkopf",
-  "Andis",
-  "Madelon",
-  "Ghd",
-  "Nioxin",
-  "OPI",
-];
 const message =
-  "Me interesa ser expositor, en la expo Belleza y Barberias 2027, me podrias brindar más detalles, sobre los stands para expositores, costos, etc.";
+  "Me interesa ser expositor, en Beauty World Mexico, me podrias brindar más detalles, sobre los stands para expositores, costos, etc.";
 
 export default function Exhibitors() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const brandCyan = "#72F8FF";
-  const deepPetroleum = "#02181B";
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FAD3DC"; // Fondo crema rosado
+  // -------------------------
 
   return (
     <Box
@@ -67,12 +57,15 @@ export default function Exhibitors() {
       component='section'
       id='expositores'
       sx={{
-        background: `linear-gradient(180deg, #042F35 0%, ${deepPetroleum} 100%)`,
+        bgcolor: "#FFD9E2",
         overflow: "hidden",
       }}
     >
       {/* 1. HEADER SECTION */}
-      <Container maxWidth='xl' sx={{ py: { xs: 8, md: 15 } }}>
+      <Container
+        maxWidth='xl'
+        sx={{ py: { xs: 8, md: 15 }, bgcolor: "#FFD9E2" }}
+      >
         <Grid container spacing={{ xs: 4, lg: 10 }} alignItems='flex-end'>
           <Grid item xs={12} lg={7}>
             <motion.div
@@ -82,13 +75,16 @@ export default function Exhibitors() {
             >
               <Typography
                 sx={{
-                  // fontFamily: "'DM Sans'",
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: brandCyan,
+                  color: "",
+                  width: "fit-content",
+                  display: "inline-block",
+                  bgcolor: "#FFCBDA",
                   mb: 3,
                   textAlign: { xs: "center", lg: "left" },
+                  textTransform: "uppercase",
                 }}
               >
                 PARTNERSHIPS 2027
@@ -96,10 +92,10 @@ export default function Exhibitors() {
               <Typography
                 variant='h2'
                 sx={{
-                  fontFamily: "'Syne', sans-serif",
+                  // fontFamily: "'Syne', sans-serif",
                   fontSize: { xs: "2.8rem", sm: "4rem", md: "5.5rem" },
                   fontWeight: 900,
-                  color: "#FFFFFF",
+                  color: deepText,
                   lineHeight: { xs: 1.1, md: 0.9 },
                   mb: { xs: 4, lg: 0 },
                   textAlign: { xs: "center", lg: "left" },
@@ -108,7 +104,7 @@ export default function Exhibitors() {
                 IMPULSA TU <br />
                 <span
                   style={{
-                    color: brandCyan,
+                    color: brandPink,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -127,52 +123,35 @@ export default function Exhibitors() {
             >
               <Box
                 sx={{
-                  borderLeft: { xs: "none", lg: `4px solid ${brandCyan}` },
-                  borderTop: {
-                    xs: `1px solid rgba(114, 248, 255, 0.3)`,
-                    lg: "none",
-                  },
+                  borderLeft: { xs: "none", lg: `4px solid ${brandPink}` },
                   pl: { lg: 4 },
-                  pt: { xs: 4, lg: 0 },
                   textAlign: { xs: "center", lg: "left" },
                 }}
               >
                 <Typography
                   sx={{
                     fontSize: "1.15rem",
-                    color: "rgba(255, 255, 255, 0.7)",
+                    color: "rgba(61, 43, 47, 0.7)",
                     mb: 4,
                     lineHeight: 1.7,
-                    fontWeight: 300,
+                    fontWeight: 500,
                   }}
                 >
                   Convertimos el WTC en el epicentro de negocios más vibrante de
                   Latinoamérica. Asegura tu lugar frente a los tomadores de
                   decisión.
                 </Typography>
-                {/* <Button
-                  endIcon={<ArrowForwardIcon />}
-                  sx={{
-                    // fontFamily: "'Syne'",
-                    fontWeight: 800,
-                    color: brandCyan,
-                    letterSpacing: "0.1em",
-                    "&:hover": {
-                      bgcolor: "transparent",
-                      color: "#FFFFFF",
-                      transform: "translateX(10px)",
-                    },
-                    transition: "0.3s",
-                  }}
-                >
-                  DESCARGAR BROCHURE COMERCIAL
-                </Button> */}
               </Box>
             </motion.div>
           </Grid>
         </Grid>
       </Container>
-      <Container maxWidth='lg' sx={{ pb: { xs: 10, md: 20 } }}>
+
+      {/* 2. CARD CENTRAL DE CONTACTO */}
+      <Container
+        maxWidth='lg'
+        sx={{ pb: { xs: 10, md: 20 }, bgcolor: "#FFD9E2" }}
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -181,53 +160,28 @@ export default function Exhibitors() {
           <Box
             sx={{
               p: { xs: 5, md: 8 },
-              background: "#02181B",
+              background: "#FFFFFF",
               textAlign: "center",
-              border: `1px solid rgba(114, 248, 255, 0.2)`,
-              borderRadius: 4,
+              border: `1px solid rgba(255, 183, 206, 0.4)`,
+              borderRadius: 1,
               position: "relative",
               overflow: "hidden",
+              boxShadow: "0 40px 100px rgba(61, 43, 47, 0.05)",
             }}
           >
-            {/* Glow decorativo de fondo */}
-            <Box
-              sx={{
-                position: "absolute",
-                top: "-50%",
-                left: "-50%",
-                width: "200%",
-                height: "200%",
-                background: `radial-gradient(circle, rgba(114, 248, 255, 0.03) 0%, transparent 50%)`,
-                pointerEvents: "none",
-              }}
-            />
-
-            <Typography
-              sx={{
-                // fontFamily: "'DM Sans'",
-                fontSize: "0.75rem",
-                fontWeight: 900,
-                letterSpacing: "0.5em",
-                color: brandCyan,
-                mb: 3,
-              }}
-            >
-              {/* OPORTUNIDAD PROFESIONAL */}
-            </Typography>
-
             <Typography
               variant='h3'
               sx={{
-                fontFamily: "'Syne'",
+                // fontFamily: "'Syne'",
                 fontWeight: 900,
                 mb: 3,
-                color: "#FFFFFF",
+                color: deepText,
                 fontSize: { xs: "2rem", md: "3.5rem" },
                 lineHeight: 1,
               }}
             >
               ¿LISTO PARA{" "}
-              <span style={{ color: brandCyan, fontStyle: "italic" }}>
+              <span style={{ color: brandPink, fontStyle: "italic" }}>
                 LIDERAR
               </span>{" "}
               EL SECTOR?
@@ -238,9 +192,10 @@ export default function Exhibitors() {
                 mb: 6,
                 maxWidth: 600,
                 mx: "auto",
-                color: "rgba(255, 255, 255, 0.5)",
+                color: "rgba(61, 43, 47, 0.6)",
                 fontSize: { xs: "1rem", md: "1.1rem" },
                 lineHeight: 1.8,
+                fontWeight: 500,
               }}
             >
               Quedan pocos espacios disponibles para la edición 2027 en el WTC.
@@ -255,22 +210,23 @@ export default function Exhibitors() {
               <Link
                 to={`https://wa.me/+525651580683?text=${message}`}
                 target='__blank'
+                style={{ textDecoration: "none" }}
               >
                 <Button
                   variant='contained'
                   sx={{
-                    bgcolor: brandCyan,
-                    color: "#02181B",
+                    bgcolor: deepText,
+                    color: "#FFFFFF",
                     px: { xs: 4, md: 6 },
                     py: 2,
-                    borderRadius: 4,
-                    // fontFamily: "'Syne'",
+                    borderRadius: 2,
                     fontWeight: 900,
                     letterSpacing: "0.2em",
                     "&:hover": {
-                      bgcolor: "#FFFFFF",
+                      bgcolor: brandPink,
+                      color: deepText,
                       transform: "translateY(-5px)",
-                      boxShadow: `0 10px 30px rgba(114, 248, 255, 0.3)`,
+                      boxShadow: `0 10px 30px rgba(255, 183, 206, 0.3)`,
                     },
                     transition: "0.3s",
                   }}
@@ -283,48 +239,16 @@ export default function Exhibitors() {
         </motion.div>
       </Container>
 
-      {/* 2. MARQUEE DE MARCAS */}
-      {/* <Box
-        sx={{
-          bgcolor: "#02181B",
-          py: { xs: 3, md: 5 },
-          transform: "rotate(-1deg) scale(1.02)",
-          my: 4,
-          borderY: `1px solid rgba(114, 248, 255, 0.1)`,
-        }}
-      >
-        <Marquee speed={60} gradient={false}>
-          {brandItems.concat(brandItems).map((brand, i) => (
-            <Typography
-              key={i}
-              sx={{
-                // fontFamily: "'Syne'",
-                fontSize: { xs: "1.2rem", md: "2.2rem" },
-                fontWeight: 800,
-                color: brandCyan,
-                mx: { xs: 4, md: 8 },
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
-                opacity: 0.4,
-                "&:hover": { opacity: 1, color: "#FFFFFF" },
-                transition: "0.3s",
-              }}
-            >
-              {brand} •
-            </Typography>
-          ))}
-        </Marquee>
-      </Box> */}
-
       {/* 3. BENEFITS GRID */}
-      <Box sx={{ py: { xs: 10, md: 15 } }}>
+      <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: "#FFD9E2" }}>
         <Container maxWidth='xl'>
           <Grid container spacing={4}>
             {benefits.map((b, i) => (
               <Grid item xs={12} sm={6} lg={4} key={i}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: i * 0.1 }}
                 >
                   <Card
@@ -332,36 +256,22 @@ export default function Exhibitors() {
                     sx={{
                       height: "100%",
                       p: { xs: 4, md: 6 },
-                      bgcolor: "rgba(255, 255, 255, 0.02)",
-                      backdropFilter: "blur(10px)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      borderRadius: 4,
+                      bgcolor: "#FFFFFF",
+                      border: "1px solid rgba(255, 183, 206, 0.2)",
+                      borderRadius: 1,
                       position: "relative",
                       overflow: "hidden",
                       transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
                       display: "flex",
                       flexDirection: "column",
-
-                      "&::before": {
-                        content: '""',
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "2px",
-                        background: brandCyan,
-                        transform: "scaleX(0)",
-                        transformOrigin: "left",
-                        transition: "transform 0.5s ease",
-                      },
+                      boxShadow: "0 10px 30px rgba(61, 43, 47, 0.02)",
 
                       "&:hover": {
-                        bgcolor: "rgba(114, 248, 255, 0.04)",
                         transform: "translateY(-15px)",
-                        borderColor: "rgba(114, 248, 255, 0.3)",
-                        "&::before": { transform: "scaleX(1)" },
+                        borderColor: brandPink,
+                        boxShadow: "0 20px 50px rgba(255, 183, 206, 0.2)",
                         "& .benefit-number": {
-                          opacity: 0.1,
+                          opacity: 0.15,
                           transform: "translateX(-15px)",
                         },
                       },
@@ -376,8 +286,8 @@ export default function Exhibitors() {
                         fontSize: "8rem",
                         fontWeight: 900,
                         // fontFamily: "'Syne'",
-                        color: brandCyan,
-                        opacity: 0.03,
+                        color: brandPink,
+                        opacity: 0.05,
                         lineHeight: 1,
                         transition: "0.6s ease",
                         pointerEvents: "none",
@@ -394,16 +304,17 @@ export default function Exhibitors() {
                           fontWeight: 900,
                           fontSize: "1.25rem",
                           letterSpacing: "0.05em",
-                          color: "#FFFFFF",
+                          color: deepText,
                           mb: 3,
+                          position: "relative",
                           "&::after": {
                             content: '""',
                             position: "absolute",
                             bottom: -8,
                             left: 0,
                             width: "30px",
-                            height: "2px",
-                            bgcolor: brandCyan,
+                            height: "3px",
+                            bgcolor: brandPink,
                           },
                         }}
                       >
@@ -413,9 +324,9 @@ export default function Exhibitors() {
                       <Typography
                         variant='body1'
                         sx={{
-                          color: "rgba(255, 255, 255, 0.5)",
-                          lineHeight: 1.9,
-                          fontWeight: 300,
+                          color: "rgba(61, 43, 47, 0.6)",
+                          lineHeight: 1.8,
+                          fontWeight: 500,
                           fontSize: "1rem",
                           mt: 2,
                         }}
@@ -430,8 +341,6 @@ export default function Exhibitors() {
           </Grid>
         </Container>
       </Box>
-
-      {/* 4. CTA FINAL */}
     </Box>
   );
 }

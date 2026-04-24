@@ -4,13 +4,16 @@ import { Box, Container, Typography, Button } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import EdificioWtc from "../../assets/images/EDIFICIOWTC.webp";
+
 export default function MapSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Colores de la nueva identidad
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#042F35";
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  // -------------------------
 
   return (
     <Box
@@ -18,25 +21,24 @@ export default function MapSection() {
       component='section'
       sx={{
         py: { xs: 12, md: 20 },
-        // El fondo base sigue siendo el petróleo oscuro
-        background: "linear-gradient(180deg, #042F35 0%, #02181B 100%)",
+        background: lightBg,
         position: "relative",
-        overflow: "hidden", // Importante para que la imagen no se salga
+        overflow: "hidden",
 
-        // CAPA DE LA IMAGEN: Centrada y con blend mode
+        // CAPA DE LA IMAGEN: Sutil y cálida
         "&::before": {
           content: '""',
           position: "absolute",
-          top: -130,
-          left: -200,
+          top: -100,
+          left: -150,
           right: 0,
           bottom: 0,
           backgroundImage: `url(${EdificioWtc})`,
-          backgroundPosition: "center", // Centrado exacto
+          backgroundPosition: "left top",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "contain", // O "contain" si prefieres que se vea el edificio completo
-          opacity: 0.2, // Ajusta este valor (0.1 a 0.2) para que se vea sutil
-          mixBlendMode: "luminosity", // Hace que la foto adopte los tonos del fondo
+          backgroundSize: "contain",
+          opacity: 0.12,
+          filter: "sepia(0.5) contrast(0.9)", // Tono cálido boutique
           zIndex: 0,
         },
       }}
@@ -58,13 +60,15 @@ export default function MapSection() {
           >
             <Typography
               sx={{
-                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.75rem",
                 fontWeight: 800,
                 letterSpacing: "0.4em",
-                color: brandCyan, // Acento Cian
+                color: "",
                 textTransform: "uppercase",
                 mb: 3,
+                width: "fit-content",
+                display: "inline-block",
+                bgcolor: "#FFCBDA",
               }}
             >
               UBICACIÓN PRESTIGIO
@@ -72,9 +76,8 @@ export default function MapSection() {
             <Typography
               variant='h2'
               sx={{
-                fontFamily: "'Syne', sans-serif",
                 fontSize: { xs: "2.5rem", md: "4rem" },
-                color: "#FFFFFF",
+                color: deepText,
                 lineHeight: 1.1,
                 mb: 3,
               }}
@@ -84,7 +87,7 @@ export default function MapSection() {
                 style={{
                   fontStyle: "italic",
                   fontWeight: 400,
-                  color: brandCyan, // Itálica en Cian
+                  color: brandPink,
                 }}
               >
                 Ciudad de México
@@ -94,7 +97,7 @@ export default function MapSection() {
             <Typography
               variant='body1'
               sx={{
-                color: "rgba(255, 255, 255, 0.75)",
+                color: "rgba(61, 43, 47, 0.7)",
                 fontSize: "1.1rem",
                 mb: 4,
                 lineHeight: 1.8,
@@ -108,20 +111,19 @@ export default function MapSection() {
             <Box
               sx={{ display: "flex", alignItems: "flex-start", gap: 2, mb: 5 }}
             >
-              <LocationOnIcon sx={{ color: brandCyan, mt: 0.5 }} />
+              <LocationOnIcon sx={{ color: brandPink, mt: 0.5 }} />
               <Box>
                 <Typography
                   sx={{
-                    fontWeight: 700,
-                    color: "#FFFFFF",
-                    // fontFamily: "'Syne'",
+                    fontWeight: 800,
+                    color: deepText,
                     letterSpacing: "0.05em",
                   }}
                 >
                   MONTECITO 38
                 </Typography>
                 <Typography
-                  sx={{ color: "rgba(255, 255, 255, 0.5)", fontSize: "0.9rem" }}
+                  sx={{ color: "rgba(61, 43, 47, 0.6)", fontSize: "0.9rem" }}
                 >
                   Col. Nápoles, Benito Juárez, <br />
                   CP 03810, CDMX.
@@ -136,18 +138,17 @@ export default function MapSection() {
               variant='outlined'
               endIcon={<OpenInNewIcon />}
               sx={{
-                borderRadius: 4,
-                borderColor: "rgba(255, 255, 255, 0.3)",
-                color: "#FFFFFF",
+                borderRadius: 2,
+                borderColor: "rgba(61, 43, 47, 0.2)",
+                color: deepText,
                 px: 4,
                 py: 1.5,
-                fontWeight: 700,
-                // fontFamily: "'Syne'",
+                fontWeight: 800,
                 letterSpacing: "0.15em",
                 "&:hover": {
-                  borderColor: brandCyan,
-                  color: brandCyan,
-                  bgcolor: "rgba(114, 248, 255, 0.05)",
+                  borderColor: brandPink,
+                  color: brandPink,
+                  bgcolor: "rgba(255, 183, 206, 0.05)",
                   transform: "translateY(-3px)",
                 },
                 transition: "0.3s",
@@ -157,7 +158,7 @@ export default function MapSection() {
             </Button>
           </motion.div>
 
-          {/* El Mapa con Frame de Diseño Tech */}
+          {/* El Mapa con Frame Boutique */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -169,26 +170,25 @@ export default function MapSection() {
                 position: "relative",
                 zIndex: 2,
                 p: { xs: 0.5, md: 0.8 },
-                bgcolor: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                boxShadow: "0 50px 100px rgba(0, 0, 0, 0.6)",
-                borderRadius: 4,
+                bgcolor: "#FFFFFF",
+                border: "1px solid rgba(255, 183, 206, 0.2)",
+                boxShadow: "0 40px 80px rgba(61, 43, 47, 0.08)",
+                borderRadius: 1,
               }}
             >
               <Box
                 sx={{
                   aspectRatio: { xs: "1/1", md: "16/9" },
                   overflow: "hidden",
-                  borderRadius: 4,
-                  // FILTRO: Ahora el mapa se ve en tonos azules/oscuros para encajar
+                  borderRadius: 1,
+                  // FILTRO: Mapa claro y elegante
                   filter:
-                    "grayscale(1) contrast(1.2) invert(0.9) brightness(0.7) sepia(0.3) hue-rotate(150deg)",
+                    "grayscale(0.5) contrast(1.1) brightness(1) sepia(0.1)",
                 }}
               >
                 <iframe
                   title='WTC Ciudad de México'
-                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.153163351945!2d-99.1748245239556!3d19.394132841852533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff716d80e145%3A0x6335e390c529ec2e!2sWorld%20Trade%20Center%20Ciudad%20de%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1712580000000!5m2!1ses-419!2smx'
+                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.1611883244!2d-99.1747864!3d19.393437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff71887e226d%3A0xc345ca6953289063!2sWorld%20Trade%20Center%20Ciudad%20de%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx'
                   width='100%'
                   height='100%'
                   style={{ border: 0, display: "block" }}
@@ -198,19 +198,20 @@ export default function MapSection() {
               </Box>
             </Box>
 
-            {/* Elemento Decorativo: Marco Cian Sutil */}
+            {/* Elemento Decorativo: Marco Rosa Sutil */}
             <Box
               sx={{
                 position: "absolute",
                 top: "-15px",
                 right: "-15px",
-                width: "60px",
-                height: "60px",
-                borderTopRightRadius: 12,
-                borderTop: `2px solid ${brandCyan}`,
-                borderRight: `2px solid ${brandCyan}`,
+                width: "80px",
+                height: "80px",
+                borderTopRightRadius: 16,
+                borderTop: `2px solid ${brandPink}`,
+                borderRight: `2px solid ${brandPink}`,
                 zIndex: 3,
                 pointerEvents: "none",
+                opacity: 0.6,
               }}
             />
           </motion.div>

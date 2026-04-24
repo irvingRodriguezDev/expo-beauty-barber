@@ -11,19 +11,10 @@ import {
   useTheme,
   useMediaQuery,
   Button,
+  Stack,
+  Divider,
 } from "@mui/material";
-import Navbar from "../Layout/Navbar";
-import Footer from "../Layout/Footer";
-import Logo from "../../assets/images/LogoBlanco.webp";
-
-const COLORS = {
-  petrolBlue: "#004d4d",
-  petrolDark: "#001a1a",
-  white: "#ffffff",
-  textSecondary: "#a0d1d1",
-  glass: "rgba(255, 255, 255, 0.05)",
-  borderWhite: "rgba(255, 255, 255, 0.15)",
-};
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 const TicketView = () => {
   const { code } = useParams();
@@ -33,6 +24,11 @@ const TicketView = () => {
   const [ticketData, setTicketData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97";
+  const deepText = "#3D2B2F";
+  const softBg = "#FFD9E2";
 
   useEffect(() => {
     const fetchTicket = async () => {
@@ -59,251 +55,298 @@ const TicketView = () => {
         justifyContent='center'
         alignItems='center'
         height='100vh'
+        bgcolor={softBg}
       >
-        <CircularProgress sx={{ color: COLORS.petrolBlue }} />
+        <CircularProgress sx={{ color: brandPink }} />
       </Box>
     );
 
-  const getAccessLabel = (type) => {
-    const labels = {
-      SINGLE_DAY: "ACCESO UN DÍA",
-      TWO_DAYS: "ACCESO DOS DÍAS",
-      GROUP_SINGLE: "PASE GRUPAL - 1 DÍA",
-      GROUP_TWO: "PASE GRUPAL - 2 DÍAS",
-    };
-    return labels[type] || type;
-  };
+  if (error)
+    return (
+      <Box
+        display='flex'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        height='100vh'
+        bgcolor={softBg}
+      >
+        <Typography
+          variant='h5'
+          sx={{ color: deepText, fontWeight: 900, mb: 2 }}
+        >
+          PASE NO ENCONTRADO
+        </Typography>
+        <Button
+          component={Link}
+          to='/'
+          variant='contained'
+          sx={{ bgcolor: deepText }}
+        >
+          Regresar
+        </Button>
+      </Box>
+    );
 
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* <Navbar /> */}
-
-      <Fade in={true} timeout={1200}>
-        <Container
-          maxWidth='sm' // Reducimos a SM para que no se vea tan estirado en desktop
-          sx={{
-            mt: { xs: 10, md: 15 },
-            mb: 8,
-            display: "flex",
-            justifyContent: "center",
-            px: { xs: 2, sm: 3 }, // Padding lateral preventivo
-          }}
-        >
+    <Box sx={{ minHeight: "100vh", bgcolor: softBg, pb: 10 }}>
+      <Fade in={true} timeout={1000}>
+        <Container maxWidth='sm' sx={{ pt: { xs: 8, md: 12 } }}>
           <Paper
-            elevation={24}
+            elevation={0}
             sx={{
               width: "100%",
-              position: "relative",
-              borderRadius: { xs: "20px", md: "28px" },
+              borderRadius: "32px",
               overflow: "hidden",
-              background: `linear-gradient(165deg, ${COLORS.petrolDark} 0%, ${COLORS.petrolBlue} 100%)`,
-              border: `1px solid ${COLORS.borderWhite}`,
-              boxShadow: "0 25px 50px rgba(0,0,0,0.4)",
+              bgcolor: "#FFFFFF",
+              border: `1px solid rgba(255, 183, 206, 0.4)`,
+              boxShadow: "0 30px 80px rgba(61, 43, 47, 0.08)",
+              position: "relative",
             }}
           >
-            {/* Header */}
+            {/* Sección Superior: Branding */}
             <Box
-              sx={{ pt: { xs: 4, md: 6 }, pb: 2, px: 3, textAlign: "center" }}
+              sx={{
+                p: 4,
+                textAlign: "center",
+                bgcolor: deepText,
+                color: "#FFF",
+              }}
             >
               <Typography
-                variant='overline'
                 sx={{
-                  color: COLORS.white,
-                  letterSpacing: { xs: 3, md: 5 },
-                  fontWeight: 300,
-                  opacity: 0.8,
-                  fontSize: { xs: "0.65rem", md: "0.75rem" },
+                  letterSpacing: 6,
+                  fontWeight: 900,
+                  fontSize: "0.65rem",
+                  color: brandPink,
+                  mb: 2,
                 }}
               >
-                PASE OFICIAL DE ENTRADA
+                PASE DE ACCESO EXCLUSIVO
               </Typography>
-
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  mt: { xs: -2, md: -4 },
-                }}
-              >
-                <Box
-                  component='img'
-                  src={Logo}
-                  sx={{
-                    width: { xs: "200px", md: "300px" },
-                    height: "auto",
-                    filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.3))",
-                  }}
-                />
-              </Box>
-
               <Typography
-                variant='body2'
+                variant='h4'
                 sx={{
-                  color: COLORS.textSecondary,
-                  mt: { xs: -2, md: -4 },
-                  fontWeight: 600,
-                  letterSpacing: 1,
-                  fontSize: { xs: "0.75rem", md: "0.85rem" },
+                  // fontFamily: "'Syne', sans-serif",
+                  fontWeight: 900,
+                  letterSpacing: -1,
                 }}
               >
-                WTC CIUDAD DE MÉXICO
+                BWM <span style={{ color: brandPink }}>2027</span>
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "0.75rem",
+                  opacity: 0.7,
+                  mt: 1,
+                  fontWeight: 600,
+                }}
+              >
+                WORLD TRADE CENTER • CDMX
               </Typography>
             </Box>
 
-            {/* Divisor Estilo Ticket con Troquelado Responsive */}
-            <Box
-              sx={{
-                position: "relative",
-                height: "1px",
-                borderTop: `2px dashed ${COLORS.borderWhite}`,
-                mx: { xs: 3, md: 4 },
-                my: 4,
-                "&::before, &::after": {
-                  content: '""',
+            {/* Troquelado Superior */}
+            <Box sx={{ position: "relative", height: 20 }}>
+              <Box
+                sx={{
                   position: "absolute",
-                  width: { xs: 25, md: 40 },
-                  height: { xs: 25, md: 40 },
+                  left: -15,
+                  top: -10,
+                  width: 30,
+                  height: 30,
                   borderRadius: "50%",
-                  background: COLORS.petrolDark, // Cambiado para fundirse con el fondo
-                  top: { xs: -13, md: -21 },
-                  zIndex: 2,
-                },
-                "&::before": { left: { xs: -42, md: -60 } },
-                "&::after": { right: { xs: -42, md: -60 } },
-              }}
-            />
+                  bgcolor: softBg,
+                  border: "1px solid rgba(255, 183, 206, 0.4)",
+                }}
+              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  right: -15,
+                  top: -10,
+                  width: 30,
+                  height: 30,
+                  borderRadius: "50%",
+                  bgcolor: softBg,
+                  border: "1px solid rgba(255, 183, 206, 0.4)",
+                }}
+              />
+            </Box>
 
-            {/* Sección del QR */}
-            <Box sx={{ textAlign: "center", mt: 2 }}>
+            {/* QR Section */}
+            <Box sx={{ p: 4, textAlign: "center" }}>
               <Box
                 sx={{
                   display: "inline-block",
-                  p: { xs: 1.5, md: 2.5 },
-                  borderRadius: "20px",
-                  backgroundColor: COLORS.white,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                  p: 2,
+                  bgcolor: "#FFF",
+                  borderRadius: 2,
+                  border: `2px solid #ee6f97`,
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
                 }}
               >
                 <QRCodeCanvas
                   value={code}
-                  size={isMobile ? 160 : 200}
+                  size={isMobile ? 180 : 220}
                   level='H'
-                  fgColor={COLORS.petrolDark}
+                  fgColor={deepText}
                 />
               </Box>
               <Typography
-                variant='h6'
                 sx={{
-                  color: COLORS.white,
                   mt: 3,
-                  fontFamily: "monospace",
-                  letterSpacing: { xs: 2, md: 4 },
-                  fontWeight: "bold",
-                  fontSize: { xs: "1rem", md: "1.25rem" },
+                  fontWeight: 900,
+                  letterSpacing: 4,
+                  color: deepText,
+                  // fontFamily: "monospace",
                 }}
               >
                 {code}
               </Typography>
             </Box>
 
-            {/* Información del Pase */}
-            <Box sx={{ px: { xs: 2, md: 4 }, mt: 4, mb: 5 }}>
+            {/* Divisor con línea punteada */}
+            <Box sx={{ px: 4, position: "relative" }}>
+              <Divider
+                sx={{
+                  borderStyle: "dashed",
+                  borderColor: "#ee6f97",
+                  opacity: 0.9,
+                }}
+              />
+              {/* Troquelado Central */}
               <Box
                 sx={{
-                  p: { xs: 2, md: 3 },
-                  borderRadius: "20px",
-                  background: COLORS.glass,
-                  border: `1px solid ${COLORS.borderWhite}`,
-                  backdropFilter: "blur(15px)",
+                  position: "absolute",
+                  left: -15,
+                  top: -15,
+                  width: 30,
+                  height: 30,
+                  borderRadius: "50%",
+                  bgcolor: softBg,
+                  border: "1px solid rgba(255, 183, 206, 0.4)",
                 }}
-              >
-                <Box sx={{ mb: 3 }}>
-                  <Typography
-                    variant='caption'
-                    sx={{
-                      color: COLORS.textSecondary,
-                      fontWeight: 800,
-                      textTransform: "uppercase",
-                      letterSpacing: 1.5,
-                      fontSize: "0.65rem",
-                    }}
-                  >
-                    TIPO DE ACCESO
-                  </Typography>
-                  <Typography
-                    variant='body1'
-                    sx={{
-                      color: COLORS.white,
-                      fontWeight: 700,
-                      fontSize: { xs: "0.9rem", md: "1.1rem" },
-                    }}
-                  >
-                    {getAccessLabel(ticketData?.accessType)}
-                  </Typography>
-                </Box>
+              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  right: -15,
+                  top: -15,
+                  width: 30,
+                  height: 30,
+                  borderRadius: "50%",
+                  bgcolor: softBg,
+                  border: "1px solid rgba(255, 183, 206, 0.4)",
+                }}
+              />
+            </Box>
 
+            {/* Información del Titular */}
+            <Box sx={{ p: 4 }}>
+              <Stack spacing={3}>
                 <Box>
                   <Typography
                     variant='caption'
-                    sx={{
-                      color: COLORS.textSecondary,
-                      fontWeight: 800,
-                      textTransform: "uppercase",
-                      letterSpacing: 1.5,
-                      fontSize: "0.65rem",
-                    }}
+                    sx={{ color: "#ee6f97", fontWeight: 900, letterSpacing: 2 }}
                   >
-                    TITULAR DE LA COMPRA
+                    TITULAR DEL ACCESO
                   </Typography>
                   <Typography
-                    variant='body1'
+                    variant='h5'
                     sx={{
-                      color: COLORS.white,
-                      fontWeight: 500,
-                      fontSize: { xs: "0.9rem", md: "1.1rem" },
+                      color: deepText,
+                      fontWeight: 900,
+                      textTransform: "uppercase",
+                      // fontFamily: "'Syne', sans-serif",
                     }}
                   >
                     {ticketData?.fullname}
                   </Typography>
                 </Box>
-              </Box>
+
+                <Stack
+                  direction='row'
+                  justifyContent='space-between'
+                  alignItems='flex-end'
+                >
+                  <Box>
+                    <Typography
+                      variant='caption'
+                      sx={{
+                        color: "#ee6f97",
+                        fontWeight: 900,
+                        letterSpacing: 2,
+                      }}
+                    >
+                      CATEGORÍA
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: deepText,
+                        fontWeight: 800,
+                        fontSize: "1.1rem",
+                      }}
+                    >
+                      {ticketData?.accessType || "GENERAL PASS"}
+                    </Typography>
+                  </Box>
+                  <ConfirmationNumberIcon
+                    sx={{ color: "#ee6f97", fontSize: 40, opacity: 0.9 }}
+                  />
+                </Stack>
+              </Stack>
             </Box>
 
             {/* Footer Informativo */}
-            <Box
-              sx={{
-                py: 3,
-                px: 4,
-                textAlign: "center",
-                background: "rgba(0,0,0,0.25)",
-              }}
-            >
+            <Box sx={{ bgcolor: "#ee6f97", p: 3, textAlign: "center" }}>
               <Typography
-                variant='caption'
                 sx={{
-                  color: COLORS.white,
-                  opacity: 0.8,
-                  lineHeight: 1.5,
-                  display: "block",
-                  fontSize: { xs: "0.65rem", md: "0.75rem" },
+                  fontSize: "0.7rem",
+                  color: "#FFF",
+                  fontWeight: 700,
+                  opacity: 0.9,
+                  px: 2,
                 }}
               >
-                Presenta este código QR en los módulos de registro para
-                canjearlo por tu pulsera oficial de acceso.
+                ESCANEABLE UNA SOLA VEZ • PRESENTE AL INGRESAR
               </Typography>
             </Box>
           </Paper>
+
+          {/* Acciones Finales */}
+          <Stack
+            direction='column'
+            alignItems='center'
+            spacing={2}
+            sx={{ mt: 6 }}
+          >
+            <Button
+              component={Link}
+              to='/'
+              fullWidth
+              variant='contained'
+              sx={{
+                bgcolor: deepText,
+                py: 2,
+                borderRadius: 2,
+                fontWeight: 900,
+                letterSpacing: 2,
+                boxShadow: "0 10px 30px rgba(61, 43, 47, 0.15)",
+                "&:hover": { bgcolor: brandPink, color: deepText },
+              }}
+            >
+              VOLVER AL PORTAL
+            </Button>
+            <Typography
+              variant='caption'
+              sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 700 }}
+            >
+              © 2026 BEAUTY WORL MEXICO
+            </Typography>
+          </Stack>
         </Container>
       </Fade>
-      <Box sx={{ display: "flex", justifyContent: "center", mb: 5 }}>
-        <Link to={"/"}>
-          <Button sx={{ borderRadius: 2 }} variant='contained'>
-            Ir a la Página Principal
-          </Button>
-        </Link>
-      </Box>
-      {/* <Footer /> */}
     </Box>
   );
 };

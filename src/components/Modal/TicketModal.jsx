@@ -18,7 +18,7 @@ const style = {
   width: { xs: "90%", sm: 400 },
   bgcolor: "#02181B", // Tu Dark Petroleum
   border: "1px solid rgba(114, 248, 255, 0.3)",
-  borderRadius: 4,
+  borderRadius: 2,
   boxShadow: "0 0 50px rgba(114, 248, 255, 0.1)",
   p: 4,
   textAlign: "center",

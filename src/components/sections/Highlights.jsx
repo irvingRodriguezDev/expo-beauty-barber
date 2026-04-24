@@ -12,9 +12,11 @@ export default function Highlights() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Paleta High-Tech
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#042F35";
+  // --- PALETA COHERENTE ---
+  const brandPink = "#ee6f97ff"; // Rosa pastel claro
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  // -------------------------
 
   const benefits = [
     {
@@ -40,31 +42,29 @@ export default function Highlights() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        // GRADIENTE: Continuidad del petróleo profundo
-        background: `linear-gradient(180deg, #042F35 0%, #064E57 100%)`,
+        bgcolor: lightBg,
         overflow: "hidden",
         position: "relative",
         py: { xs: 8, md: 0 },
       }}
     >
-      {/* 1. MARQUEES DE FONDO (TEXTURAS CIAN SUTILES) */}
+      {/* 1. MARQUEES DE FONDO (TEXTURAS ROSAS SUTILES) */}
       <Box
         sx={{
           position: "absolute",
           width: "120%",
           left: "-10%",
           top: { xs: "-2%", md: "1%" },
-          opacity: 0.1, // Muy tenue, como un reflejo en agua
+          opacity: 0.25,
           pointerEvents: "none",
         }}
       >
         <Marquee speed={80} gradient={false}>
           <Typography
             sx={{
-              // fontFamily: "'Syne'",
               fontSize: { xs: "5rem", md: "12rem" },
               fontWeight: 900,
-              color: brandCyan,
+              color: "rgba(238, 111, 151, 0.4)",
               whiteSpace: "nowrap",
             }}
           >
@@ -79,20 +79,18 @@ export default function Highlights() {
           width: "120%",
           left: "-10%",
           bottom: { xs: "5%", md: "2%" },
-          opacity: 0.15,
+          opacity: 0.3,
           pointerEvents: "none",
         }}
       >
         <Marquee speed={40} direction='right' gradient={false}>
           <Typography
             sx={{
-              // fontFamily: "'Syne'",
               fontSize: { xs: "4rem", md: "10rem" },
               fontWeight: 900,
-              // Contorno en Blanco para limpieza
               WebkitTextStroke: {
-                xs: "1px rgba(255,255,255,0.3)",
-                md: "2px rgba(255,255,255,0.3)",
+                xs: `1px ${brandPink}`,
+                md: `2px ${brandPink}`,
               },
               color: "transparent",
               whiteSpace: "nowrap",
@@ -115,12 +113,14 @@ export default function Highlights() {
             >
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: brandCyan,
+                  color: "",
                   mb: 3,
+                  width: "fit-content",
+                  display: "inline-block",
+                  bgcolor: "#FFCBDA",
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
@@ -129,9 +129,8 @@ export default function Highlights() {
               <Typography
                 variant='h2'
                 sx={{
-                  fontFamily: "'Syne'",
                   fontSize: { xs: "2.2rem", sm: "3.5rem", md: "5rem" },
-                  color: "#FFFFFF",
+                  color: deepText,
                   lineHeight: { xs: 1.1, md: 0.9 },
                   mb: 4,
                   fontWeight: 900,
@@ -141,7 +140,7 @@ export default function Highlights() {
                 MÁS QUE UNA EXPO, <br />
                 <span
                   style={{
-                    color: brandCyan,
+                    color: brandPink,
                     fontStyle: "italic",
                     fontWeight: 400,
                   }}
@@ -151,12 +150,12 @@ export default function Highlights() {
               </Typography>
               <Typography
                 sx={{
-                  // fontFamily: "'DM Sans'",
                   fontSize: "1.1rem",
-                  color: "rgba(255, 255, 255, 0.8)",
+                  color: "rgba(61, 43, 47, 0.7)",
                   maxWidth: { xs: "100%", md: "480px" },
                   lineHeight: 1.8,
                   textAlign: { xs: "center", md: "left" },
+                  fontWeight: 400,
                 }}
               >
                 Donde la técnica se convierte en legado. Un espacio diseñado
@@ -169,7 +168,7 @@ export default function Highlights() {
 
           {/* Lado Derecho: Pilares */}
           <Grid item xs={12} md={6} sx={{ mt: { xs: 0, md: -12 } }}>
-            <Stack spacing={{ xs: 2, md: 4 }}>
+            <Stack spacing={{ xs: 2, md: 2 }}>
               {benefits.map((benefit, i) => (
                 <motion.div
                   key={i}
@@ -185,20 +184,20 @@ export default function Highlights() {
                       textAlign: { xs: "center", sm: "left" },
                       gap: { xs: 2, sm: 4 },
                       p: 3,
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                      borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
                       transition: "0.4s",
                       "&:hover": {
-                        bgcolor: "rgba(114, 248, 255, 0.05)", // Hover Cian tenue
+                        bgcolor: "white",
                         transform: { xs: "none", md: "translateX(20px)" },
+                        boxShadow: "0 10px 30px rgba(61, 43, 47, 0.05)",
                       },
                     }}
                   >
                     <Typography
                       sx={{
-                        // fontFamily: "'Syne'",
                         fontSize: "1.5rem",
                         fontWeight: 900,
-                        color: brandCyan,
+                        color: brandPink,
                         minWidth: { sm: "40px" },
                       }}
                     >
@@ -207,10 +206,9 @@ export default function Highlights() {
                     <Box>
                       <Typography
                         sx={{
-                          // fontFamily: "'Syne'",
                           fontWeight: 800,
                           fontSize: "1.2rem",
-                          color: "#FFFFFF",
+                          color: deepText,
                           letterSpacing: "0.1em",
                         }}
                       >
@@ -218,8 +216,7 @@ export default function Highlights() {
                       </Typography>
                       <Typography
                         sx={{
-                          fontFamily: "'DM Sans'",
-                          color: "rgba(255, 255, 255, 0.6)",
+                          color: "rgba(61, 43, 47, 0.6)",
                           fontSize: "0.95rem",
                         }}
                       >
@@ -242,23 +239,23 @@ export default function Highlights() {
           bottom: { md: "25%" },
           my: { xs: 6, md: 0 },
           left: "-5%",
-          background: "rgba(255, 255, 255, 0.05)", // Casi transparente
+          background: "#FFFFFF",
           backdropFilter: "blur(10px)",
           py: 3,
-          transform: { xs: "rotate(0deg)", md: "rotate(-1.5deg)" },
+          transform: { xs: "rotate(1.5deg)", md: "rotate(-1.5deg)" },
           zIndex: 1,
-          borderY: `1px solid rgba(114, 248, 255, 0.2)`,
-          boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+          borderY: `1px solid rgba(255, 183, 206, 0.3)`,
+          boxShadow: "0 15px 35px rgba(61, 43, 47, 0.08)",
         }}
       >
         <Marquee speed={60} gradient={false}>
           {[
-            "SHOWS DE BARBERÍA",
+            "RELACIONES COMERCIALES",
             "ZONA DE MAQUILLAJE",
             "MASTERCLASSES",
             "OFERTAS EXCLUSIVAS",
             "LUGAR PARA CREADORES",
-            "RELACIONES COMERCIALES",
+            "SHOWS DE BARBERÍA",
           ].map((txt, idx) => (
             <Stack
               direction='row'
@@ -267,13 +264,12 @@ export default function Highlights() {
               sx={{ mx: { xs: 2, md: 4 } }}
             >
               <AutoAwesomeIcon
-                sx={{ color: brandCyan, mr: 2, fontSize: { xs: 16, md: 20 } }}
+                sx={{ color: brandPink, mr: 2, fontSize: { xs: 16, md: 20 } }}
               />
               <Typography
                 sx={{
-                  // fontFamily: "'Syne'",
                   fontWeight: 800,
-                  color: "#FFFFFF",
+                  color: deepText,
                   fontSize: { xs: "0.9rem", md: "1.1rem" },
                   letterSpacing: "0.2em",
                 }}
@@ -298,25 +294,25 @@ export default function Highlights() {
           justifyContent: "space-between",
           alignItems: "center",
           gap: 2,
-          opacity: 0.5,
+          opacity: 0.6,
         }}
       >
         <Typography
           sx={{
-            fontFamily: "monospace",
-            fontSize: "0.6rem",
-            color: brandCyan,
+            fontSize: "0.7rem",
+            color: brandPink,
             textAlign: "center",
             letterSpacing: "0.2em",
+            fontWeight: 700,
           }}
         >
-          PRODUCTION EBB2027
+          PRODUCTION BWM2027
         </Typography>
         <Typography
           sx={{
-            fontFamily: "monospace",
-            fontSize: "0.6rem",
-            color: "#FFFFFF",
+            fontSize: "0.7rem",
+            color: deepText,
+            fontWeight: 600,
             display: { xs: "none", sm: "block" },
           }}
         >

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/LogoNegro.webp";
+import Logo from "../../assets/images/LOGO_VINO.png";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },
@@ -30,8 +30,11 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("inicio");
 
-  const brandCyan = "#72F8FF";
-  const darkPetroleum = "#02181B"; // El fondo más profundo
+  // --- NUEVA PALETA LIGERA ---
+  const brandPink = "#ee6f97ff"; // Rosa claro/pastel
+  const deepText = "#3D2B2F"; // Texto oscuro cálido
+  const lightBg = "#FFCCD8"; // Fondo crema rosado
+  // ---------------------------
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,11 +64,11 @@ export default function Navbar() {
           right: 0,
           width: "100%",
           background: scrolled
-            ? "rgba(2, 24, 27, 0.85)" // Petróleo profundo con transparencia
+            ? "#FFD9E2" // Fondo ligero con transparencia
             : "transparent",
-          backdropFilter: scrolled ? "blur(20px)" : "none",
+          backdropFilter: scrolled ? "blur(15px)" : "none",
           borderBottom: scrolled
-            ? `1px solid rgba(114, 248, 255, 0.1)`
+            ? `1px solid rgba(255, 183, 206, 0.2)`
             : "none",
           transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           zIndex: 1200,
@@ -80,12 +83,11 @@ export default function Navbar() {
               height: { xs: 70, md: 90 },
             }}
           >
-            {/* Logo */}
+            {/* Logo - Ahora en versión normal (oscura) */}
             <Box
               onClick={() => scrollTo("inicio")}
               sx={{
                 cursor: "pointer",
-                filter: "brightness(0) invert(1)",
                 transition: "0.3s",
                 "&:hover": { transform: "scale(1.05)" },
               }}
@@ -93,9 +95,9 @@ export default function Navbar() {
               <Box
                 component='img'
                 src={Logo}
-                alt='Logo EBB'
+                alt='Logo BWM'
                 sx={{
-                  height: { xs: 40, md: 50 },
+                  height: { xs: 80, md: 80 },
                   width: "auto",
                   objectFit: "contain",
                 }}
@@ -119,15 +121,14 @@ export default function Navbar() {
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      // fontFamily: "'Syne'",
                       fontSize: "0.7rem",
                       fontWeight: 800,
                       letterSpacing: "0.25em",
                       textTransform: "uppercase",
                       color:
                         active === link.to
-                          ? brandCyan
-                          : "rgba(255,255,255,0.6)",
+                          ? brandPink
+                          : "rgba(61, 43, 47, 0.6)", // Texto suave cuando no está activo
                       position: "relative",
                       transition: "0.3s",
                       "&::after": {
@@ -136,11 +137,11 @@ export default function Navbar() {
                         bottom: -6,
                         left: 0,
                         width: active === link.to ? "100%" : "0%",
-                        height: "1px",
-                        bgcolor: brandCyan,
+                        height: "2px",
+                        bgcolor: brandPink,
                         transition: "0.3s ease",
                       },
-                      "&:hover": { color: "#FFF" },
+                      "&:hover": { color: deepText },
                     }}
                   >
                     {link.label}
@@ -153,19 +154,18 @@ export default function Navbar() {
                   variant='contained'
                   onClick={() => scrollTo("register")}
                   sx={{
-                    bgcolor: brandCyan,
-                    color: darkPetroleum,
-                    borderRadius: 4,
+                    bgcolor: brandPink,
+                    color: "#FFF", // Texto blanco sobre el rosa para mejor contraste
+                    borderRadius: 2,
                     px: 4,
                     py: 1.2,
                     fontSize: "0.75rem",
                     fontWeight: 900,
-                    // fontFamily: "'Syne'",
                     letterSpacing: "0.1em",
-                    boxShadow: `0 10px 20px rgba(114, 248, 255, 0.2)`,
+                    boxShadow: `0 8px 15px rgba(255, 183, 206, 0.3)`,
                     "&:hover": {
-                      bgcolor: "#FFF",
-                      color: darkPetroleum,
+                      bgcolor: deepText,
+                      color: "#FFF",
                       transform: "translateY(-2px)",
                     },
                     transition: "all 0.3s ease",
@@ -181,9 +181,9 @@ export default function Navbar() {
               onClick={() => setMenuOpen(!menuOpen)}
               sx={{
                 display: { md: "none" },
-                color: brandCyan,
-                bgcolor: "rgba(114, 248, 255, 0.05)",
-                borderRadius: 0,
+                color: brandPink,
+                bgcolor: "rgba(255, 183, 206, 0.08)",
+                borderRadius: 2,
               }}
             >
               {menuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -205,7 +205,7 @@ export default function Navbar() {
               position: "fixed",
               inset: 0,
               zIndex: 1150,
-              background: darkPetroleum,
+              background: lightBg,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -213,21 +213,21 @@ export default function Navbar() {
               p: 6,
             }}
           >
-            {/* Fondo decorativo en el menu mobile */}
+            {/* Texto de fondo en menu mobile */}
             <Typography
               sx={{
                 position: "absolute",
-                fontSize: "30vw",
+                fontSize: "25vw",
                 fontWeight: 900,
-                color: "rgba(114, 248, 255, 0.03)",
+                color: "rgba(255, 183, 206, 0.1)",
                 zIndex: 0,
-                fontFamily: "'Syne'",
+                userSelect: "none",
               }}
             >
               MENU
             </Typography>
 
-            <Stack spacing={6} sx={{ zIndex: 1, textAlign: "center" }}>
+            <Stack spacing={5} sx={{ zIndex: 1, textAlign: "center" }}>
               {navLinks.map((link, i) => (
                 <Typography
                   key={link.to}
@@ -240,14 +240,13 @@ export default function Navbar() {
                     setMenuOpen(false);
                   }}
                   sx={{
-                    fontFamily: "'Syne'",
-                    fontSize: "2.2rem",
+                    fontSize: "2rem",
                     fontWeight: 900,
-                    color: active === link.to ? brandCyan : "#FFF",
+                    color: active === link.to ? brandPink : deepText,
                     cursor: "pointer",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    "&:hover": { color: brandCyan },
+                    "&:hover": { color: brandPink },
                   }}
                 >
                   {link.label}
@@ -261,14 +260,14 @@ export default function Navbar() {
                   setMenuOpen(false);
                 }}
                 sx={{
-                  bgcolor: brandCyan,
-                  color: darkPetroleum,
-                  borderRadius: 4,
+                  bgcolor: brandPink,
+                  color: "#FFF",
+                  borderRadius: 2,
                   py: 2,
                   px: 6,
                   fontWeight: 900,
-                  fontFamily: "'Syne'",
                   fontSize: "1rem",
+                  boxShadow: `0 10px 20px rgba(255, 183, 206, 0.2)`,
                 }}
               >
                 BOLETOS
