@@ -69,7 +69,6 @@ export default function AboutEvent() {
                   color: "",
                   textTransform: "uppercase",
                   mb: 4,
-                  display: "flex",
                   alignItems: "center",
                   justifyContent: { xs: "center", lg: "flex-start" },
                   gap: 2,
