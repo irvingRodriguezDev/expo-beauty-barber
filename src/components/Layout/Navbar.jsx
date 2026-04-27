@@ -11,13 +11,11 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/images/LOGO_VINO.png";
-
+import Logo from "../../assets/images/logo-wapizima.webp";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
   { label: "Experiencia", to: "experiencia" },
   { label: "visitantes", to: "visitantes" },
-  { label: "¿Quiero Exponer?", to: "expositores" },
 ];
 
 const scrollTo = (id) => {

@@ -71,7 +71,7 @@ export default function MapSection() {
                 bgcolor: "#FFCBDA",
               }}
             >
-              UBICACIÓN PRESTIGIO
+              SEDE OFICIAL
             </Typography>
             <Typography
               variant='h2'
@@ -104,8 +104,10 @@ export default function MapSection() {
                 maxWidth: 400,
               }}
             >
-              El centro de convenciones más emblemático del país abre sus
-              puertas para recibir a la élite de la industria de la belleza.
+              El escenario más imponente de México se viste de gala para
+              celebrar nuestro 7º Aniversario. Un espacio de clase mundial
+              diseñado para brindarte la comodidad y seguridad que mereces
+              durante toda la convención.
             </Typography>
 
             <Box

@@ -5,41 +5,45 @@ import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 const perks = [
   {
-    label: "Relaciones Comerciales",
-    description: "Conecta con dueños de negocio y líderes del sector.",
-  },
-
-  {
-    label: "Zona de Maquillaje",
-    description: "Espacios de vanguardia dedicados a la alta cosmética.",
+    label: "Técnicas de Vanguardia",
+    description:
+      "Aprende micropintura, relieves y estructuras de salón con las mejores másteres.",
   },
   {
-    label: "Masterclasses",
-    description: "Capacitación técnica de alto nivel para profesionales.",
+    label: "Venta de Aniversario",
+    description:
+      "Acceso exclusivo a todo el stock de productos Wapizima con precios de locura.",
   },
   {
-    label: "Ofertas Exclusivas",
-    description: "Acceso privilegiado a lanzamientos y precios de expo.",
+    label: "Masterclasses En Vivo",
+    description:
+      "Capacitación técnica presencial para elevar el nivel de tu mesa de trabajo.",
   },
   {
-    label: "Lugar para Creadores",
-    description: "Zonas diseñadas para la creación de contenido digital.",
+    label: "Rifas y Premios",
+    description:
+      "Participa por más de 50 sorpresas y dinámicas especiales durante todo el día.",
   },
   {
-    label: "Shows de Barberia",
-    description: "Espectáculos en vivo con referentes de la barbería mundial.",
+    label: "Reconocimientos",
+    description:
+      "Forma parte de 'El Salón de tus Sueños' y recibe tu certificado de asistencia.",
+  },
+  {
+    label: "Comunidad VIP",
+    description:
+      "Conecta con miles de manicuristas y comparte tu pasión en el mejor ambiente.",
   },
 ];
 
 const profiles = [
-  "Estilistas",
-  "Barberos",
-  "Makeup Artists",
-  "Dueños de Salón",
-  "Distribuidores",
-  "Emprendedores",
+  "Manicuristas",
+  "Técnicas en Uñas",
+  "Nail Artists",
+  "Dueñas de Salón",
+  "Educadoras",
+  "Emprendedoras",
 ];
-
 export default function Visitors() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -84,7 +88,7 @@ export default function Visitors() {
                   display: "inline-block",
                 }}
               >
-                — Experiencia de Clase Mundial
+                — TU CRECIMIENTO ES NUESTRA PASIÓN
               </Typography>
               <Typography
                 variant='h2'
@@ -96,7 +100,7 @@ export default function Visitors() {
                   letterSpacing: "-0.04em",
                 }}
               >
-                La cima del <br />
+                El epicentro del <br />
                 <span
                   style={{
                     color: brandPink,
@@ -104,7 +108,7 @@ export default function Visitors() {
                     fontWeight: 400,
                   }}
                 >
-                  arte técnico
+                  nail art en México
                 </span>
               </Typography>
             </motion.div>
@@ -260,9 +264,9 @@ export default function Visitors() {
                         color: deepText,
                       }}
                     >
-                      6-7{" "}
+                      6{" "}
                       <span style={{ color: brandPink, fontSize: "0.5em" }}>
-                        FEB
+                        JUN
                       </span>
                     </Typography>
                     <Typography

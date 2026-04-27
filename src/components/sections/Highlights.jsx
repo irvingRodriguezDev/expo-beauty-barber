@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const items = [
-  "STANDS COMERCIALES • DEMOSTRACIONES EN VIVO • BARBER SHOWS • ZONA DE MAQUILLAJE • TALLERES Y CONFERENCIAS • NETWORKING VIP • MARKETPLACE PROFESIONAL • PREMIACIONES",
+  "7º ANIVERSARIO WAPIZIMA • CLASES MASTER CON EXPERTAS • VENTA DE PRODUCTOS A PRECIO ESPECIAL • MÚSICA EN VIVO • RIFAS Y PREMIOS • RECONOCIMIENTOS 'EL SALÓN DE TUS SUEÑOS' • DINÁMICAS Y SORPRESAS • WTC CIUDAD DE MÉXICO •",
 ];
 
 export default function Highlights() {
@@ -20,16 +20,16 @@ export default function Highlights() {
 
   const benefits = [
     {
-      title: "NEGOCIO",
-      desc: "Conecta con los proveedores más influyentes de la industria.",
+      title: "TÉCNICA Y ARTE",
+      desc: "Aprende micropintura, relieves, texturas y estructura de salón de la mano de Carolina Tavera, Yazmin Ibarra y grandes másteres.",
     },
     {
-      title: "EDUCACIÓN",
-      desc: "Aprende técnicas disruptivas de la mano de expertos globales.",
+      title: "SHOPPING EXCLUSIVO",
+      desc: "Aprovecha precios especiales de aniversario en toda la línea Wapizima. Stock disponible y lanzamientos durante todo el día.",
     },
     {
-      title: "CULTURA",
-      desc: "Vive la vibrante energía de las pasarelas y shows en vivo.",
+      title: "COMUNIDAD Y PREMIOS",
+      desc: "Participa en las dinámicas 'El Salón de tus Sueños' y vive la emoción de nuestras rifas, reconocimientos y sorpresas especiales.",
     },
   ];
 
@@ -124,7 +124,7 @@ export default function Highlights() {
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                LA EXPERIENCIA
+                NUESTRO CAMINO JUNTAS
               </Typography>
               <Typography
                 variant='h2'
@@ -137,7 +137,7 @@ export default function Highlights() {
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                MÁS QUE UNA EXPO, <br />
+                MÁS QUE UN EVENTO, <br />
                 <span
                   style={{
                     color: brandPink,
@@ -145,7 +145,7 @@ export default function Highlights() {
                     fontWeight: 400,
                   }}
                 >
-                  UN LEGADO.
+                  UNA CELEBRACIÓN.
                 </span>
               </Typography>
               <Typography
@@ -158,10 +158,9 @@ export default function Highlights() {
                   fontWeight: 400,
                 }}
               >
-                Donde la técnica se convierte en legado. Un espacio diseñado
-                para profesionales que buscan dominar las tendencias globales en
-                estilismo, estética avanzada y la arquitectura del corte
-                masculino.
+                Wapizima cumple 7 años. Hemos diseñado un itinerario intensivo
+                de 07:00 a 20:00 hrs para que te lleves el máximo conocimiento,
+                los mejores productos y recuerdos inolvidables en el WTC.
               </Typography>
             </motion.div>
           </Grid>
@@ -250,12 +249,17 @@ export default function Highlights() {
       >
         <Marquee speed={60} gradient={false}>
           {[
-            "RELACIONES COMERCIALES",
-            "ZONA DE MAQUILLAJE",
-            "MASTERCLASSES",
-            "OFERTAS EXCLUSIVAS",
-            "LUGAR PARA CREADORES",
-            "SHOWS DE BARBERÍA",
+            "VENTA DE PRODUCTOS",
+            "MÚSICA EN VIVO",
+            "RIFAS Y PREMIOS",
+            "CLASES DE ESTRUCTURA",
+            "MICROPINTURA EN GEL",
+            "RECONOCIMIENTOS",
+            "DINÁMICAS ESPECIALES",
+            "ZONA DE NETWORKING",
+            "LANZAMIENTOS EXCLUSIVOS",
+            "RELIEVES Y TEXTURAS",
+            "WTC MÉXICO",
           ].map((txt, idx) => (
             <Stack
               direction='row'
@@ -306,7 +310,7 @@ export default function Highlights() {
             fontWeight: 700,
           }}
         >
-          PRODUCTION BWM2027
+          CONVENCIÓN WAPIZIMA 2026
         </Typography>
         <Typography
           sx={{
@@ -316,7 +320,7 @@ export default function Highlights() {
             display: { xs: "none", sm: "block" },
           }}
         >
-          2027 • WTC MEXICO CITY ↓
+          2026 • WTC MEXICO CITY ↓
         </Typography>
       </Box>
     </Box>

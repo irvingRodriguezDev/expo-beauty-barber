@@ -80,7 +80,7 @@ export default function Hero() {
                   gap: 2,
                 }}
               >
-                ESTABLECIENDO EL ESTÁNDAR 2027
+                CELEBRANDO NUESTRA TRAYECTORIA
               </Typography>
             </motion.div>
 
@@ -99,7 +99,7 @@ export default function Hero() {
                 }}
               >
                 {" "}
-                BEAUTY
+                CONVENCIÓN
                 <br />
                 <span
                   style={{
@@ -108,9 +108,9 @@ export default function Hero() {
                     fontWeight: 400,
                   }}
                 >
-                  WORLD
+                  WAPIZIMA
                 </span>
-                <br /> MEXICO
+                <br /> CDMX
               </Typography>
             </Box>
 
@@ -130,9 +130,9 @@ export default function Hero() {
                   fontWeight: 400,
                 }}
               >
-                Donde la maestría técnica se encuentra con el networking de alto
-                nivel. Únete a la cumbre empresarial más influyente de la
-                industria en México.
+                Únete a la celebración más exclusiva de la industria. Una
+                experiencia única llena de aprendizaje, música en vivo, clases
+                magistrales y sorpresas inolvidables en el corazón de la CDMX.
               </Typography>
             </motion.div>
 
@@ -143,7 +143,7 @@ export default function Hero() {
               sx={{ mb: 8 }}
             >
               {[
-                { icon: <CalendarMonthIcon />, text: "05–06 FEB" },
+                { icon: <CalendarMonthIcon />, text: "06 JUN" },
                 { icon: <LocationOnIcon />, text: "WTC CDMX" },
               ].map((item, i) => (
                 <Box
@@ -230,7 +230,7 @@ export default function Hero() {
                   transition: "0.4s",
                 }}
               >
-                SER EXPOSITOR
+                VER PROGRAMA
               </Button>
             </Stack>
           </Box>

@@ -48,28 +48,28 @@ function Counter({ to, suffix = "" }) {
 
 const stats = [
   {
-    value: 5000,
+    value: 2000,
     suffix: "+",
-    label: "AUDIENCIA\nESTIMADA",
-    desc: "Líderes y tomadores de decisión.",
+    label: "AUDIENCIA ESTIMADA",
+    desc: "Cupo limitado para garantizar una experiencia VIP",
   },
   {
-    value: 2,
-    suffix: "DÍAS",
-    label: "EXPERIENCIA\nCURADA",
-    desc: "Inmersión total en tendencia.",
+    value: 13,
+    suffix: "",
+    label: "HORAS DE ARTE",
+    desc: "Una jornada intensiva de aprendizaje y sorpresas.",
+  },
+  {
+    value: 4,
+    suffix: "",
+    label: "MÁSTER CLASSES",
+    desc: "Sesiones estelares con las figuras más influyentes.",
   },
   {
     value: 50,
     suffix: "+",
-    label: "MARCAS\nEXHIBIDORAS",
-    desc: "El top tier de la industria.",
-  },
-  {
-    value: 20,
-    suffix: "+",
-    label: "SESIONES DE\nALTA MAESTRÍA",
-    desc: "Conferencias, talleres y demostraciones en vivo.",
+    label: "REGALOS & DINAMICAS",
+    desc: "Participación de los mejores y más de 50 rifas.",
   },
 ];
 
@@ -112,7 +112,7 @@ export default function Stats() {
           pointerEvents: "none",
         }}
       >
-        BWM 2027
+        WAPIZIMA
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
@@ -138,7 +138,7 @@ export default function Stats() {
                   bgcolor: "#FFCBDA",
                 }}
               >
-                PROYECCIÓN E IMPACTO
+                TRAYECTORIA Y COMUNIDAD
               </Typography>
               <Typography
                 variant='h3'
@@ -151,7 +151,7 @@ export default function Stats() {
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
-                Donde los números <br />
+                7 años de historias <br />
                 <span
                   style={{
                     color: brandPink,
@@ -159,7 +159,7 @@ export default function Stats() {
                     fontWeight: 400,
                   }}
                 >
-                  se vuelven arte.
+                  cumpliendo sueños juntos.
                 </span>
               </Typography>
             </motion.div>
@@ -180,8 +180,9 @@ export default function Stats() {
                 textAlign: { xs: "center", md: "right" },
               }}
             >
-              Analizamos cada métrica para garantizar que tu presencia tenga el
-              retorno de inversión que la industria de alto nivel exige.
+              Cada edición es una oportunidad para elevar el estándar del nail
+              art en México. Este aniversario no es solo un evento, es el
+              resultado de siete años de pasión compartida.
             </Typography>
           </Grid>
         </Grid>

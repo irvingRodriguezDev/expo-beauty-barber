@@ -5,21 +5,19 @@ import {
   Typography,
   TextField,
   MenuItem,
-  Grid,
   Box,
   CircularProgress,
   Checkbox,
   FormControlLabel,
+  Grid,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
 
 export const RegistrationForm = ({
   selectedPass,
-  onBack,
   onSubmit,
   visitorTypes,
   inputStyles,
@@ -36,11 +34,11 @@ export const RegistrationForm = ({
 
   const [openPolicy, setOpenPolicy] = useState(false);
 
-  // --- PALETA COHERENTE ---
-  const brandPink = "#ee6f97ff"; // Rosa pastel claro
-  const deepText = "#3D2B2F"; // Texto oscuro cálido
-  // -------------------------
+  // --- PALETA COHERENTE WAPIZIMA ---
+  const brandPink = "#E53888";
+  const deepText = "#3D2B2F";
 
+  // Regex para validar nombre y apellido
   const nameRegex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s[a-zA-ZÀ-ÿ\u00f1\u00d1]+)+$/;
   const phoneRegex = /^\+?[0-9]{10,15}$/;
 
@@ -55,110 +53,79 @@ export const RegistrationForm = ({
   return (
     <motion.div
       key='form'
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Paper
         elevation={0}
         sx={{
-          maxWidth: 650,
+          maxWidth: 550, // Un poco más estrecho para que se vea mejor centrado
           mx: "auto",
-          p: { xs: 4, md: 8 },
+          p: { xs: 3, md: 5 },
           background: "#FFFFFF",
-          borderRadius: 2,
-          border: `1px solid rgba(255, 183, 206, 0.3)`,
+          borderRadius: 2, // Bordes más redondeados para el estilo premium
+          border: `1px solid rgba(229, 56, 136, 0.15)`,
           position: "relative",
           overflow: "hidden",
-          boxShadow: "0 20px 60px rgba(61, 43, 47, 0.05)",
+          boxShadow: "0 30px 70px rgba(61, 43, 47, 0.08)",
         }}
       >
-        {/* Línea decorativa superior en Rosa */}
+        {/* Línea decorativa superior */}
         <Box
           sx={{
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
-            height: "4px",
-            background: `linear-gradient(90deg, transparent, ${brandPink}, transparent)`,
+            height: "6px",
+            background: `linear-gradient(90deg, ${brandPink}, #D82E7A)`,
           }}
         />
 
-        <Button
-          startIcon={<ArrowBackIcon />}
-          onClick={onBack}
-          sx={{
-            color: brandPink,
-            mb: 5,
-            fontSize: "0.75rem",
-            fontWeight: 800,
-            borderRadius: 2,
-            letterSpacing: "0.2em",
-            "&:hover": {
-              bgcolor: "rgba(255, 183, 206, 0.05)",
-              color: deepText,
-            },
-          }}
-        >
-          CAMBIAR TIPO DE PASE
-        </Button>
-
         <form onSubmit={handleSubmit(handleInternalSubmit)}>
-          <Stack spacing={4}>
-            <Box>
+          <Stack spacing={3}>
+            <Box sx={{ textAlign: "center", mb: 2 }}>
               <Typography
                 sx={{
                   fontWeight: 800,
-                  fontSize: "0.85rem",
+                  fontSize: "0.75rem",
                   color: brandPink,
-                  letterSpacing: "0.3em",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   mb: 1,
                 }}
               >
-                Inscripción de Profesional
+                7º Aniversario Wapizima
               </Typography>
               <Typography
                 sx={{
                   fontWeight: 900,
-                  fontSize: "1.5rem",
+                  fontSize: "1.8rem",
                   color: deepText,
-                  borderBottom: `1px solid rgba(255, 183, 206, 0.2)`,
-                  pb: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
+                  fontFamily: "'Syne', sans-serif",
                 }}
               >
                 {selectedPass.title}
-                <Box
-                  sx={{
-                    px: 1.5,
-                    py: 0.5,
-                    borderRadius: 2,
-                    bgcolor: "rgba(255, 183, 206, 0.15)",
-                    color: brandPink,
-                    fontSize: "0.65rem",
-                    fontWeight: 900,
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  CONFIRMADO
-                </Box>
+              </Typography>
+              <Typography
+                variant='caption'
+                sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 600 }}
+              >
+                Completa tus datos para recibir tu boleto digital.
               </Typography>
             </Box>
 
             <TextField
-              label='NOMBRE COMPLETO (Nombre y Apellido)'
+              label='NOMBRE COMPLETO'
               fullWidth
               autoComplete='off'
               {...register("fullname", {
                 required: "El nombre es obligatorio",
                 pattern: {
                   value: nameRegex,
-                  message: "Ingresa nombre y al menos un apellido",
+                  message: "Ingresa nombre y apellido",
                 },
               })}
               error={!!errors.fullname}
@@ -182,12 +149,12 @@ export const RegistrationForm = ({
               label='WHATSAPP'
               fullWidth
               autoComplete='off'
-              placeholder='+521234567890'
+              placeholder='10 dígitos'
               {...register("phone", {
                 required: "Teléfono obligatorio",
                 pattern: {
                   value: phoneRegex,
-                  message: "Mín. 10 dígitos (solo números y +)",
+                  message: "Número inválido",
                 },
               })}
               error={!!errors.phone}
@@ -196,13 +163,10 @@ export const RegistrationForm = ({
             />
 
             <TextField
-              label='EMPRESA / ACADEMIA'
+              label='TU ACADEMIA O SALÓN'
               fullWidth
               autoComplete='off'
-              {...register("businessName", {
-                required: "Este campo es obligatorio",
-              })}
-              error={!!errors.businessName}
+              {...register("businessName")}
               sx={inputStyles}
             />
 
@@ -213,28 +177,9 @@ export const RegistrationForm = ({
               {...register("profile", { required: "Selecciona tu perfil" })}
               error={!!errors.profile}
               sx={inputStyles}
-              SelectProps={{
-                MenuProps: {
-                  PaperProps: {
-                    sx: {
-                      bgcolor: "#FFFFFF",
-                      color: deepText,
-                      borderRadius: 1,
-                      boxShadow: "0 10px 40px rgba(61, 43, 47, 0.15)",
-                      "& .MuiMenuItem-root": {
-                        fontWeight: 600,
-                        "&:hover": {
-                          bgcolor: "rgba(255, 183, 206, 0.15)",
-                          color: brandPink,
-                        },
-                      },
-                    },
-                  },
-                },
-              }}
             >
               {visitorTypes.map((t) => (
-                <MenuItem key={t} value={t} sx={{ borderRadius: 2, m: 0.5 }}>
+                <MenuItem key={t} value={t}>
                   {t}
                 </MenuItem>
               ))}
@@ -252,7 +197,6 @@ export const RegistrationForm = ({
                         checked={!!value}
                         onChange={onChange}
                         sx={{
-                          color: "rgba(61, 43, 47, 0.2)",
                           "&.Mui-checked": { color: brandPink },
                         }}
                       />
@@ -262,37 +206,29 @@ export const RegistrationForm = ({
                 label={
                   <Typography
                     variant='caption'
-                    sx={{ color: "rgba(61, 43, 47, 0.6)", fontWeight: 500 }}
+                    sx={{ color: "rgba(61, 43, 47, 0.7)" }}
                   >
-                    Acepto la{" "}
+                    He leído y acepto la{" "}
                     <span
                       style={{
                         color: brandPink,
                         cursor: "pointer",
-                        textDecoration: "underline",
                         fontWeight: 700,
                       }}
                       onClick={(e) => {
                         e.preventDefault();
-                        e.stopPropagation();
                         setOpenPolicy(true);
                       }}
                     >
                       Política de Privacidad
-                    </span>{" "}
-                    y los términos de la Expo.
+                    </span>
                   </Typography>
                 }
               />
               {errors.acceptTerms && (
                 <Typography
                   variant='caption'
-                  sx={{
-                    color: "#d32f2f",
-                    display: "block",
-                    ml: 4,
-                    fontWeight: 600,
-                  }}
+                  sx={{ color: "#d32f2f", display: "block", ml: 4 }}
                 >
                   {errors.acceptTerms.message}
                 </Typography>
@@ -305,40 +241,30 @@ export const RegistrationForm = ({
               fullWidth
               disabled={isSubmitting}
               sx={{
-                py: 2.5,
-                bgcolor: deepText,
+                py: 2,
+                bgcolor: brandPink, // El botón ahora es rosa para que resalte más
                 color: "#FFFFFF",
-                borderRadius: 2,
+                borderRadius: "12px",
                 fontWeight: 900,
-                letterSpacing: "0.2em",
-                boxShadow: `0 10px 30px rgba(61, 43, 47, 0.15)`,
+                fontSize: "1rem",
+                boxShadow: `0 10px 25px rgba(229, 56, 136, 0.3)`,
                 "&:hover": {
-                  bgcolor: brandPink,
-                  color: deepText,
-                  transform: isSubmitting ? "none" : "translateY(-3px)",
-                  boxShadow: `0 15px 40px rgba(255, 183, 206, 0.4)`,
+                  bgcolor: deepText,
+                  transform: "translateY(-2px)",
+                  color: "#FFFFFF",
                 },
-                transition: "all 0.4s ease",
+                transition: "all 0.3s ease",
               }}
             >
               {isSubmitting ? (
-                <Stack
-                  direction='row'
-                  spacing={2}
-                  alignItems='center'
-                  justifyContent='center'
-                >
-                  <CircularProgress size={20} sx={{ color: "#FFFFFF" }} />
-                  <Typography sx={{ fontWeight: 900, fontSize: "0.9rem" }}>
-                    PROCESANDO...
-                  </Typography>
-                </Stack>
+                <CircularProgress size={24} sx={{ color: "#FFFFFF" }} />
               ) : (
-                `PROCEDER AL PAGO • $${selectedPass.price} MXN`
+                `COMPRAR POR $${selectedPass.price} MXN`
               )}
             </Button>
           </Stack>
         </form>
+
         <PrivacyPolicyModal
           open={openPolicy}
           onClose={() => setOpenPolicy(false)}

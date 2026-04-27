@@ -12,6 +12,8 @@ import Contact from "./components/sections/Contact";
 import Register from "./components/sections/Register";
 import ExperienceGallery from "./components/sections/ExperienceGallery";
 import { BrandAuthority } from "./components/sections/BrandAuthority";
+import Brands from "./components/sections/Brands";
+import { EventTimeline } from "./components/sections/EventTimeLine";
 
 export default function App() {
   return (
@@ -24,9 +26,10 @@ export default function App() {
           <AboutEvent />
           <Highlights />
           <Stats />
+          <Brands />
           <MapSection />
           <ExperienceGallery />
-          <BrandAuthority />
+          {/* <BrandAuthority /> */}
         </section>
         {/* VISITANTES */}
         <section id='visitantes'>
@@ -37,7 +40,8 @@ export default function App() {
         </section>
         {/* EXPOSITORES */}
         <section id='expositores'>
-          <Exhibitors />
+          {/* <Exhibitors /> */}
+          <EventTimeline />
         </section>
         {/* CONTACTO */}
         {/* <section id='contacto'>

@@ -66,7 +66,7 @@ export default function ExperienceGallery() {
             >
               EXPERIENCIA
             </span>{" "}
-            BWM
+            WAPIZIMA
           </Typography>
           <Typography
             sx={{
@@ -81,7 +81,7 @@ export default function ExperienceGallery() {
               display: "inline-block",
             }}
           >
-            Curaduría Visual 2027
+            Curaduría Visual 2026
           </Typography>
         </Box>
 

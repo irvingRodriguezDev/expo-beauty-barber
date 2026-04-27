@@ -20,10 +20,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export const PrivacyPolicyModal = ({ open, onClose }) => {
-  // --- PALETA COHERENTE ---
-  const brandPink = "#ee6f97";
+  // --- PALETA COHERENTE WAPIZIMA ---
+  const brandPink = "#E53888"; // El rosa vibrante que usamos en los botones
   const deepText = "#3D2B2F";
-  const softBg = "#FFD9E2";
+  const softBg = "#FFF5F8"; // Un fondo rosado mucho más sutil y limpio
 
   return (
     <Dialog
@@ -39,18 +39,18 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
         },
       }}
     >
-      {/* Header Estilo Galería */}
+      {/* Header */}
       <Box
         sx={{
           p: 3,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          borderBottom: "1px solid rgba(61, 43, 47, 0.08)",
+          borderBottom: "1px solid rgba(229, 56, 136, 0.1)",
           position: "sticky",
           top: 0,
-          bgcolor: softBg,
-          backdropFilter: "blur(10px)",
+          bgcolor: "rgba(255, 245, 248, 0.8)",
+          backdropFilter: "blur(15px)",
           zIndex: 10,
         }}
       >
@@ -58,77 +58,74 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
           variant='h6'
           sx={{
             fontWeight: 900,
-            color: deepText,
-            letterSpacing: 3,
-            fontSize: "0.9rem",
+            color: brandPink,
+            letterSpacing: 2,
+            fontSize: "0.8rem",
             textTransform: "uppercase",
           }}
         >
-          Compromiso de Privacidad
+          Compromiso Wapizima
         </Typography>
         <IconButton onClick={onClose} sx={{ color: deepText }}>
           <CloseIcon />
         </IconButton>
       </Box>
 
-      <Container maxWidth='md' sx={{ py: 8 }}>
+      <Container maxWidth='md' sx={{ py: { xs: 4, md: 8 } }}>
         {/* Intro */}
-        <Box sx={{ mb: 8, textAlign: "center" }}>
-          <GppGoodIcon
-            sx={{ fontSize: 60, color: brandPink, mb: 2, opacity: 0.8 }}
-          />
+        <Box sx={{ mb: 6, textAlign: "center" }}>
+          <GppGoodIcon sx={{ fontSize: 50, color: brandPink, mb: 2 }} />
           <Typography
             variant='h4'
             sx={{
               fontWeight: 900,
-              mb: 3,
+              mb: 2,
               color: deepText,
+              fontFamily: "'Syne', sans-serif",
             }}
           >
-            Tus datos, <span style={{ color: brandPink }}>seguros.</span>
+            Tu privacidad es{" "}
+            <span style={{ color: brandPink }}>nuestra prioridad.</span>
           </Typography>
           <Typography
             variant='body1'
             sx={{
-              lineHeight: 1.8,
+              lineHeight: 1.6,
               color: "rgba(61, 43, 47, 0.7)",
               maxWidth: "600px",
               mx: "auto",
             }}
           >
-            En cumplimiento con los términos de{" "}
-            <strong>Publicidad Mahur, S.A. de C.V.</strong> y
-            <strong> Beauty World Mexico</strong>, detallamos nuestra política
-            de protección de datos.
+            Para el evento <strong>7º Aniversario Wapizima</strong>, detallamos
+            cómo protegemos tu información y garantizamos una compra segura.
           </Typography>
         </Box>
 
-        <Box sx={{ display: "grid", gap: 6 }}>
+        <Box sx={{ display: "grid", gap: 5 }}>
           <section>
             <Typography
               variant='subtitle1'
               sx={{
                 color: brandPink,
                 fontWeight: 900,
-                mb: 2,
-                letterSpacing: 1.5,
-                fontSize: "0.75rem",
+                mb: 1.5,
+                letterSpacing: 1,
+                fontSize: "0.8rem",
                 textTransform: "uppercase",
               }}
             >
-              01. INFORMACIÓN RECOGIDA
+              01. DATOS DE REGISTRO
             </Typography>
             <Typography
               variant='body2'
-              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
+              sx={{ lineHeight: 1.7, color: "rgba(61, 43, 47, 0.8)" }}
             >
-              Recabamos datos personales esenciales para tu experiencia:{" "}
+              Recabamos únicamente lo necesario para identificarte:{" "}
               <strong>
-                Nombre completo, correo electrónico e información de perfil
-                profesional.
+                Nombre completo, correo electrónico y perfil profesional.
               </strong>{" "}
-              Esta información se utiliza exclusivamente para la gestión de tus
-              accesos y comunicación del evento.
+              Estos datos se utilizan para generar tu boleto digital y enviarte
+              actualizaciones exclusivas del aniversario.
             </Typography>
           </section>
 
@@ -137,34 +134,32 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
               direction='row'
               spacing={1}
               alignItems='center'
-              sx={{ mb: 2 }}
+              sx={{ mb: 1.5 }}
             >
-              <PaymentIcon sx={{ color: brandPink, fontSize: 20 }} />
+              <PaymentIcon sx={{ color: brandPink, fontSize: 18 }} />
               <Typography
                 variant='subtitle1'
                 sx={{
                   color: brandPink,
                   fontWeight: 900,
-                  letterSpacing: 1.5,
-                  fontSize: "0.75rem",
+                  letterSpacing: 1,
+                  fontSize: "0.8rem",
                   textTransform: "uppercase",
                 }}
               >
-                02. PAGOS Y SEGURIDAD BANCARIA
+                02. COMPRA SEGURA (STRIPE)
               </Typography>
             </Stack>
             <Typography
               variant='body2'
-              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
+              sx={{ lineHeight: 1.7, color: "rgba(61, 43, 47, 0.8)" }}
             >
-              Tu seguridad financiera es nuestra prioridad.{" "}
               <strong>
-                No almacenamos los datos de tus tarjetas en nuestros servidores
-              </strong>
-              . Todas las transacciones son procesadas mediante{" "}
-              <strong>Stripe</strong>, utilizando cifrado{" "}
-              <strong>SSL de grado bancario</strong> y cumpliendo con los
-              estándares PCI de nivel 1.
+                Wapizima no almacena ni tiene acceso a tus datos bancarios.
+              </strong>{" "}
+              El proceso de pago se realiza mediante <strong>Stripe</strong>,
+              líder mundial en seguridad financiera, bajo protocolos de cifrado
+              SSL de grado bancario.
             </Typography>
           </section>
 
@@ -173,91 +168,66 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
               direction='row'
               spacing={1}
               alignItems='center'
-              sx={{ mb: 2 }}
+              sx={{ mb: 1.5 }}
             >
-              <SecurityIcon sx={{ color: brandPink, fontSize: 20 }} />
+              <SecurityIcon sx={{ color: brandPink, fontSize: 18 }} />
               <Typography
                 variant='subtitle1'
                 sx={{
                   color: brandPink,
                   fontWeight: 900,
-                  letterSpacing: 1.5,
-                  fontSize: "0.75rem",
+                  letterSpacing: 1,
+                  fontSize: "0.8rem",
                   textTransform: "uppercase",
                 }}
               >
-                03. INFRAESTRUCTURA DE SEGURIDAD
+                03. PROTECCIÓN DEL BOLETO
               </Typography>
             </Stack>
             <Typography
               variant='body2'
-              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
+              sx={{ lineHeight: 1.7, color: "rgba(61, 43, 47, 0.8)" }}
             >
-              Implementamos protocolos avanzados de protección de datos en la
-              nube para asegurar que no exista ningún acceso no autorizado,
-              manteniendo la integridad de la base de datos de{" "}
-              <strong>Beauty World Mexico</strong>.
-            </Typography>
-          </section>
-
-          <section>
-            <Typography
-              variant='subtitle1'
-              sx={{
-                color: brandPink,
-                fontWeight: 900,
-                mb: 2,
-                letterSpacing: 1.5,
-                fontSize: "0.75rem",
-                textTransform: "uppercase",
-              }}
-            >
-              04. USO DE COOKIES Y ANALÍTICA
-            </Typography>
-            <Typography
-              variant='body2'
-              sx={{ lineHeight: 1.8, color: "rgba(61, 43, 47, 0.8)" }}
-            >
-              Utilizamos cookies técnicas para optimizar la velocidad de carga
-              de la plataforma y realizar análisis estadísticos anónimos que nos
-              ayuden a mejorar tu experiencia de navegación.
+              Tu boleto es personal e intransferible. La plataforma de{" "}
+              <strong>Floreciendo Juntas</strong> asegura que el código QR
+              generado sea único, protegiendo tu acceso al WTC frente a
+              cualquier intento de duplicidad.
             </Typography>
           </section>
         </Box>
 
-        <Divider sx={{ my: 8, borderColor: "rgba(61, 43, 47, 0.08)" }} />
+        <Divider sx={{ my: 6, borderColor: "rgba(229, 56, 136, 0.1)" }} />
 
-        <Stack alignItems='center' spacing={4}>
+        <Stack alignItems='center' spacing={3}>
           <Button
             variant='contained'
             onClick={onClose}
             sx={{
-              py: 2.5,
-              px: 8,
-              bgcolor: deepText,
+              py: 2,
+              px: 6,
+              bgcolor: brandPink,
               color: "#FFF",
               fontWeight: 900,
-              borderRadius: 2,
-              fontSize: "0.85rem",
-              letterSpacing: 2,
-              boxShadow: "0 20px 40px rgba(61, 43, 47, 0.15)",
-              "&:hover": { bgcolor: brandPink, color: deepText },
+              borderRadius: "50px",
+              fontSize: "0.9rem",
+              boxShadow: `0 15px 35px rgba(229, 56, 136, 0.3)`,
+              "&:hover": { bgcolor: deepText, color: "#fff" },
             }}
           >
-            HE LEÍDO Y ACEPTO LOS TÉRMINOS
+            ENTENDIDO Y ACEPTAR
           </Button>
 
           <Typography
             variant='caption'
             sx={{
-              display: "block",
               textAlign: "center",
               color: "rgba(61, 43, 47, 0.4)",
-              fontWeight: 700,
+              fontWeight: 600,
+              lineHeight: 1.5,
             }}
           >
             Última actualización: Abril 2026. <br />
-            Sujeto a cambios bajo las normativas legales vigentes.
+            Para dudas adicionales, contacta al soporte de Floreciendo Juntas.
           </Typography>
         </Stack>
       </Container>

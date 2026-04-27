@@ -11,7 +11,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/images/LOGO_VINO.png";
+import Logo from "../../assets/images/logo-wapizima.webp";
 import { useState } from "react";
 import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
 
@@ -30,7 +30,7 @@ export default function Footer() {
     { name: "INICIO", id: "hero" },
     { name: "VISITANTES", id: "visitantes" },
     { name: "EXPOSITORES", id: "expositores" },
-    { name: "REGISTRO", id: "register" },
+    { name: "BOLETOS", id: "register" },
   ];
 
   return (
@@ -70,8 +70,9 @@ export default function Footer() {
                 mb: 4,
               }}
             >
-              El punto de encuentro definitivo donde la maestría técnica se
-              fusiona con la visión empresarial del sector belleza en México.
+              El punto de encuentro donde tu talento florece y se conecta con la
+              comunidad de nail art más grande de México. Celebramos siete años
+              elevando juntas el estándar de nuestra industria.
             </Typography>
 
             <Stack
@@ -219,7 +220,7 @@ export default function Footer() {
                   lineHeight: 0.7,
                 }}
               >
-                2027
+                2026
               </Typography>
               <Typography
                 sx={{
@@ -229,7 +230,7 @@ export default function Footer() {
                   mt: -2,
                 }}
               >
-                6 <span style={{ color: softRose }}>.</span> 7 FEB
+                6 <span style={{ color: softRose }}></span> JUNIO
               </Typography>
             </Box>
 
@@ -278,11 +279,11 @@ export default function Footer() {
               letterSpacing: "0.15em",
             }}
           >
-            © 2027 BEAUTY WORLD MEXICO | POWERED BY IRF
+            © 2026 CONVENCIÓN WAPIZIMA | TODOS LOS DERECHOS RESERVADOS
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
-            {["POLITICA DE PRIVACIDAD", "CONTACTO"].map((item) => (
+            {["POLITICA DE PRIVACIDAD"].map((item) => (
               <Typography
                 key={item}
                 component='a'

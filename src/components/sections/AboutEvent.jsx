@@ -31,9 +31,9 @@ export default function AboutEvent() {
       <Typography
         sx={{
           position: "absolute",
-          bottom: { xs: "94%", md: "82%" },
-          right: { xs: "1%", md: "55%" },
-          fontSize: { xs: "20vw", md: "8vw" },
+          bottom: { xs: "94%", md: "80%" },
+          right: { xs: "1%", md: "64%" },
+          fontSize: { xs: "20vw", md: "5vw" },
           fontWeight: 800,
           color: "transparent",
           WebkitTextStroke: `3px rgba(238, 111, 151, 2.8)`,
@@ -42,10 +42,10 @@ export default function AboutEvent() {
           zIndex: 0,
         }}
       >
-        BWM2027
+        WAPIZIMA
       </Typography>
 
-      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1, mt: 5 }}>
         <Box
           sx={{
             display: "grid",
@@ -62,25 +62,6 @@ export default function AboutEvent() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <Typography
-                sx={{
-                  fontSize: "0.7rem",
-                  fontWeight: 900,
-                  letterSpacing: "0.6em",
-                  color: "",
-                  textTransform: "uppercase",
-                  mb: 4,
-                  alignItems: "center",
-                  justifyContent: { xs: "center", lg: "flex-start" },
-                  gap: 2,
-                  width: { xs: "100%", md: "fit-content" },
-                  display: "inline-block",
-                  bgcolor: "#FFCBDA",
-                }}
-              >
-                VISIÓN ESTRATÉGICA
-              </Typography>
-
-              <Typography
                 variant='h2'
                 sx={{
                   // fontFamily: "'Syne', sans-serif",
@@ -92,7 +73,7 @@ export default function AboutEvent() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Donde la <br />
+                Donde tu pasión <br />
                 <span
                   style={{
                     fontStyle: "italic",
@@ -100,7 +81,7 @@ export default function AboutEvent() {
                     color: brandPink,
                   }}
                 >
-                  industria brilla
+                  se convierte en arte
                 </span>
               </Typography>
 
@@ -116,9 +97,9 @@ export default function AboutEvent() {
                     fontWeight: 400,
                   }}
                 >
-                  Beauty World Mexico es el epicentro donde el prestigio y la
-                  innovación convergen para redefinir el futuro de la estética
-                  en México.
+                  Celebramos siete años siendo parte de tu crecimiento.
+                  Prepárate para una jornada intensiva donde el aprendizaje y la
+                  comunidad se unen en el evento más esperado del año.
                 </Typography>
 
                 <Box
@@ -141,7 +122,7 @@ export default function AboutEvent() {
                         // fontFamily: "'Syne', sans-serif",
                       }}
                     >
-                      RESPALDO Y EXPERIENCIA
+                      SHOPPING & NETWORKING
                     </Typography>
                     <Typography
                       sx={{
@@ -151,10 +132,12 @@ export default function AboutEvent() {
                         mb: 3,
                       }}
                     >
-                      Organizado por <strong>Publicidad Mahur</strong>, líderes
-                      con más de 15 años proyectando negocios en el{" "}
-                      <strong>WTC CDMX</strong>. Nuestra trayectoria respalda la
-                      calidad y seguridad de cada edición.
+                      <b>Venta de productos:</b> Accede a lanzamientos
+                      exclusivos y precios especiales de aniversario en toda
+                      nuestra línea de productos. ¡Renueva tu stock con lo mejor
+                      de Wapizima! <br /> <b>Experiencia Total:</b> Disfruta de
+                      dinámicas en vivo, zonas de práctica y la oportunidad de
+                      conectar con las mejores profesionales de la industria.
                     </Typography>
 
                     <Typography
@@ -172,7 +155,7 @@ export default function AboutEvent() {
                         borderRadius: "4px",
                       }}
                     >
-                      CASOS DE ÉXITO PREVIOS:
+                      SECCIONES DEL EVENTO:
                     </Typography>
 
                     <Stack
@@ -182,10 +165,10 @@ export default function AboutEvent() {
                       useFlexGap
                     >
                       {[
-                        "Expo Impresión",
-                        "PubliFest",
-                        "Mundo para la Mujer",
-                        "Industrias Creativas",
+                        "MUSICA EN VIVO",
+                        "CLASES MASTER",
+                        "RIFAS Y PREMIOS",
+                        "VENTA DIRECTA",
                       ].map((evento) => (
                         <Box
                           key={evento}
@@ -218,7 +201,7 @@ export default function AboutEvent() {
                       bgcolor: "#FFCBDA",
                     }}
                   >
-                    #BWM2027
+                    #7ºANIVERSARIOWAPIZIMA
                   </Typography>
                 </Box>
               </Stack>
