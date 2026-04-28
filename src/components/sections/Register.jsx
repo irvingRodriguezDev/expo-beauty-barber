@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { RegistrationForm } from "./RegistrationForm"; // Asumo que este ya maneja los campos
 import { useCaptcha } from "../../hooks/useCaptcha";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 // --- PERFILES ADAPTADOS A MANICURISTAS ---
 const visitorOptions = [
@@ -57,9 +58,10 @@ export default function Register() {
 
   // Seteamos el pase único por defecto
   const singlePass = {
-    id: "ANNIVERSARY_PASS",
+    id: 1,
     title: "ACCESO TOTAL 7º ANIVERSARIO",
     price: 500,
+    maxQuantity: 50, // Permitimos comprar hasta 50 boletos en una sola transacción
     desc: "Incluye Masterclasses, acceso a venta exclusiva, música en vivo y kit de bienvenida.",
   };
 
@@ -67,7 +69,7 @@ export default function Register() {
   const [status, setStatus] = useState("form");
   const [loading, setLoading] = useState(false);
 
-  const urlRegister = import.meta.env.VITE_BACKEND_URL_REGISTER;
+  const url = import.meta.env.VITE_BACKEND_URL;
   const { getCaptchaToken } = useCaptcha();
 
   const handleOnSubmit = async (data) => {
@@ -75,24 +77,22 @@ export default function Register() {
     const token = await getCaptchaToken("formulario_registro");
 
     const dataForm = {
-      fullname: data.fullname,
-      email: data.email,
+      buyerName: data.fullname,
+      buyerEmail: data.email,
       phone: data.phone,
+      eventId: 1,
       profile: data.profile,
       businessName: data.businessName || "N/A", // Si no tiene negocio, enviamos N/A
       accessType: singlePass.id, // Siempre enviamos el ID del pase único
+      quantity: data.quantity, // Cantidad de boletos
       captcha: token,
     };
 
     try {
-      const response = await fetch(urlRegister, {
-        method: "POST",
-        body: JSON.stringify({ dataForm }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.ok) {
-        const resData = await response.json();
+      const uri = `${url}/events/buy/ticket/open`;
+      const response = await axios.post(uri, dataForm);
+      if (response.status === 200) {
+        const resData = response.data;
         // Redirección directa a Stripe
         window.location.href = resData.url;
       } else {

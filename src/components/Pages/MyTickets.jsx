@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   Box,
   Container,
   Typography,
   TextField,
-  Button,
   CircularProgress,
   Stack,
   Paper,
   Divider,
   IconButton,
-  InputAdornment,
   Grid,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
@@ -41,23 +39,46 @@ const MyTickets = () => {
         setLoading(true);
       }
       try {
-        const captchaToken = await executeRecaptcha("search_tickets");
+        // CORRECCIÓN: Un solo objeto para toda la configuración
         const response = await axios.get(
-          `https://api.expobellezaybarberias.com/search-tickets`,
+          `${import.meta.env.VITE_BACKEND_URL}/tickets/search-tickets`,
           {
-            params: { email: email.toLowerCase().trim(), captchaToken },
+            params: {
+              email: email.toLowerCase().trim(),
+            },
+            headers: {
+              "ngrok-skip-browser-warning": "true",
+            },
           },
         );
+
         setTickets(response.data.tickets || []);
         setSearched(true);
       } catch (err) {
-        console.error(err);
+        console.error("Error en fetchTickets:", err);
       } finally {
         if (!isSilent) setLoading(false);
       }
     },
-    [email, executeRecaptcha],
+    [email],
   );
+  useEffect(() => {
+    let interval = null;
+
+    // Solo activamos el polling si ya se realizó una búsqueda inicial
+    // y si hay boletos en la lista
+    if (searched && tickets.length > 0) {
+      interval = setInterval(() => {
+        console.log("Actualizando estado de boletos...");
+        fetchTickets(true); // isSilent = true para que sea invisible al usuario
+      }, 40000); // 40 segundos
+    }
+
+    // Limpieza al desmontar o cambiar condiciones
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [searched, tickets.length, fetchTickets]);
 
   return (
     <Box sx={{ bgcolor: "#FFD9E2", minHeight: "100vh", py: 10, px: 2 }}>
@@ -126,6 +147,7 @@ const MyTickets = () => {
               placeholder='Ingresa tu correo'
               variant='standard'
               value={email}
+              autoComplete='off'
               onChange={(e) => setEmail(e.target.value)}
               InputProps={{
                 disableUnderline: true,
@@ -155,10 +177,11 @@ const MyTickets = () => {
           </Paper>
 
           {/* Lista de Tickets - Layout Editorial */}
+
           <Grid container spacing={3} sx={{ mt: 4 }}>
             <AnimatePresence>
               {tickets.map((ticket, index) => (
-                <Grid item xs={12} md={6} key={ticket.ticketCode}>
+                <Grid item xs={12} md={6} key={ticket.code}>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -173,7 +196,7 @@ const MyTickets = () => {
                       sx={{
                         display: "flex",
                         bgcolor: "#FFF",
-                        borderRadius: 2,
+                        borderRadius: 1,
                         overflow: "hidden",
                         height: 140,
                         cursor: "pointer",
@@ -203,7 +226,7 @@ const MyTickets = () => {
                             letterSpacing: "0.2em",
                           }}
                         >
-                          PASS # {ticket.ticketCode.slice(-4)}
+                          PASS # {ticket.code.slice(-4)}
                         </Typography>
                       </Box>
 
@@ -226,7 +249,7 @@ const MyTickets = () => {
                             lineHeight: 1.2,
                           }}
                         >
-                          {ticket.fullname}
+                          {ticket.buyerName}
                         </Typography>
                         <Typography
                           sx={{
@@ -236,7 +259,7 @@ const MyTickets = () => {
                             mt: 0.5,
                           }}
                         >
-                          BEAUTY WORL MEXICO 2027
+                          CONVENCIÓN WAPIZIMA 2026
                         </Typography>
                       </Box>
 
@@ -249,8 +272,8 @@ const MyTickets = () => {
                           width: 20,
                           height: 20,
                           borderRadius: "50%",
-                          bgcolor: "#FDF8F9",
-                          border: "1px solid rgba(255, 183, 206, 0.3)",
+                          bgcolor: "#FED9E1",
+                          border: "1px solid rgba(255, 183, 206, 0.9)",
                         }}
                       />
                       <Box
@@ -261,8 +284,8 @@ const MyTickets = () => {
                           width: 20,
                           height: 20,
                           borderRadius: "50%",
-                          bgcolor: "#FDF8F9",
-                          border: "1px solid rgba(255, 183, 206, 0.3)",
+                          bgcolor: "#FED9E1",
+                          border: "1px solid rgba(255, 183, 206, 0.9)",
                         }}
                       />
                       <Divider
@@ -298,6 +321,14 @@ const MyTickets = () => {
           {searched && tickets.length === 0 && !loading && (
             <Typography sx={{ color: deepText, opacity: 0.5, fontWeight: 700 }}>
               No se encontraron registros. Intenta con otro correo.
+            </Typography>
+          )}
+          {tickets.length > 0 && (
+            <Typography
+              variant='caption'
+              sx={{ color: brandPink, opacity: 0.7, marginTop: -14 }}
+            >
+              • La lista se actualiza automáticamente
             </Typography>
           )}
         </Stack>

@@ -33,7 +33,7 @@ export const RegistrationForm = ({
   });
 
   const [openPolicy, setOpenPolicy] = useState(false);
-
+  const [quantity, setQuantity] = useState(1); // Estado local para manejar la cantidad de boletos
   // --- PALETA COHERENTE WAPIZIMA ---
   const brandPink = "#E53888";
   const deepText = "#3D2B2F";
@@ -45,6 +45,7 @@ export const RegistrationForm = ({
   const handleInternalSubmit = (data) => {
     const cleanData = {
       ...data,
+      quantity: parseInt(data.quantity, 10), // Aseguramos que la cantidad sea un número
       phone: data.phone.replace(/[\s-]/g, ""),
     };
     onSubmit(cleanData);
@@ -167,6 +168,30 @@ export const RegistrationForm = ({
               fullWidth
               autoComplete='off'
               {...register("businessName")}
+              sx={inputStyles}
+            />
+            <TextField
+              label='CANTIDAD DE BOLETOS'
+              fullWidth
+              autoComplete='off'
+              defaultValue={quantity}
+              onChange={(e) => {
+                setQuantity(e.target.value);
+              }}
+              {...register("quantity", {
+                required: "La cantidad es obligatoria",
+                min: { value: 1, message: "Mínimo 1 boleto" },
+                max: {
+                  value: selectedPass.maxQuantity,
+                  message: `Máximo ${selectedPass.maxQuantity} boletos`,
+                },
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: "Solo se permiten números",
+                },
+              })}
+              error={!!errors.quantity}
+              helperText={errors.quantity?.message}
               sx={inputStyles}
             />
 

@@ -15,6 +15,7 @@ import {
   Divider,
 } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import axios from "axios";
 
 const TicketView = () => {
   const { code } = useParams();
@@ -33,19 +34,30 @@ const TicketView = () => {
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        const response = await fetch(
-          `https://api.expobellezaybarberias.com/ticket/${code}`,
+        // Con Axios, la respuesta ya viene parseada en .data
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/tickets/show/${code}`,
+          {
+            headers: {
+              // Este header le dice a ngrok que no muestre la página de advertencia
+              "ngrok-skip-browser-warning": "true",
+            },
+          },
         );
-        if (!response.ok) throw new Error("Ticket no encontrado");
-        const data = await response.json();
-        setTicketData(data);
+
+        // En Axios, si llega aquí es porque el status es 2xx
+        setTicketData(response.data.ticket); // Accedemos a .ticket que envías desde el backend
         setLoading(false);
       } catch (err) {
+        console.error("Error al obtener ticket:", err);
         setError(true);
         setLoading(false);
       }
     };
-    fetchTicket();
+
+    if (code) {
+      fetchTicket();
+    }
   }, [code]);
 
   if (loading)
@@ -132,7 +144,8 @@ const TicketView = () => {
                   letterSpacing: -1,
                 }}
               >
-                BWM <span style={{ color: brandPink }}>2027</span>
+                CONVENCIÓN{" "}
+                <span style={{ color: brandPink }}>WAPIZIMA 2026</span>
               </Typography>
               <Typography
                 sx={{
@@ -181,7 +194,7 @@ const TicketView = () => {
                   display: "inline-block",
                   p: 2,
                   bgcolor: "#FFF",
-                  borderRadius: 2,
+                  borderRadius: 1,
                   border: `2px solid #ee6f97`,
                   boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
                 }}
@@ -261,7 +274,7 @@ const TicketView = () => {
                       // fontFamily: "'Syne', sans-serif",
                     }}
                   >
-                    {ticketData?.fullname}
+                    {ticketData?.buyerName}
                   </Typography>
                 </Box>
 

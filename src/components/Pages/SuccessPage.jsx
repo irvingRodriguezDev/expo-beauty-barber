@@ -102,7 +102,7 @@ const SuccessPage = () => {
                 px: { md: 4 },
               }}
             >
-              Tu lugar en la <b>BEAUTY WORLD MEXICO 2027</b> está asegurado.
+              Tu lugar en la <b>CONVENCIÓN WAPIZIMA 2026</b> está asegurado.
               Enviamos tus accesos digitales y códigos QR a tu correo
               electrónico.
             </Typography>

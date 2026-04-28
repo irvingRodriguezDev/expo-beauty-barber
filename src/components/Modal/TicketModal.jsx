@@ -16,8 +16,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { xs: "90%", sm: 400 },
-  bgcolor: "#02181B", // Tu Dark Petroleum
-  border: "1px solid rgba(114, 248, 255, 0.3)",
+  bgcolor: "#FFD9E2", // Tu Dark Petroleum
+  border: "1px solid #EE6F97",
   borderRadius: 2,
   boxShadow: "0 0 50px rgba(114, 248, 255, 0.1)",
   p: 4,
@@ -27,7 +27,7 @@ const style = {
 export const TicketModal = ({ open, handleClose, ticket }) => {
   if (!ticket) return null;
 
-  const brandCyan = "#72F8FF";
+  const brandCyan = "#FA2DAF";
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -38,7 +38,7 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
             position: "absolute",
             right: 8,
             top: 8,
-            color: "rgba(255,255,255,0.5)",
+            color: "#EE6F97",
           }}
         >
           <CloseIcon />
@@ -52,7 +52,7 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
         </Typography>
         <Typography
           variant='caption'
-          sx={{ color: "rgba(255,255,255,0.5)", mb: 3, display: "block" }}
+          sx={{ color: "#EE6F97", mb: 3, display: "block" }}
         >
           MUESTRA ESTE CÓDIGO EN LA ENTRADA
         </Typography>
@@ -61,13 +61,13 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
           sx={{
             bgcolor: "#FFF",
             p: 2,
-            borderRadius: 2,
+            borderRadius: 1,
             display: "inline-block",
             mb: 3,
           }}
         >
           <QRCodeSVG
-            value={ticket.ticketCode}
+            value={ticket.code}
             size={250}
             level={"H"}
             includeMargin={true}
@@ -76,20 +76,16 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
 
         <Stack spacing={1} sx={{ textAlign: "left", mt: 2 }}>
           <Box>
-            <Typography
-              sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.7rem" }}
-            >
+            <Typography sx={{ color: "#FA2DAF", fontSize: "0.7rem" }}>
               ASISTENTE
             </Typography>
-            <Typography sx={{ color: "#FFF", fontWeight: 700 }}>
-              {ticket.fullname}
+            <Typography sx={{ color: "#FA2DAF", fontWeight: 700 }}>
+              {ticket.buyerName}
             </Typography>
           </Box>
           <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
           <Box>
-            <Typography
-              sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.7rem" }}
-            >
+            <Typography sx={{ color: "#FA2DAF", fontSize: "0.7rem" }}>
               CÓDIGO DE ACCESO
             </Typography>
             <Typography
@@ -99,7 +95,7 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
                 fontFamily: "monospace",
               }}
             >
-              {ticket.ticketCode}
+              {ticket.code}
             </Typography>
           </Box>
         </Stack>
