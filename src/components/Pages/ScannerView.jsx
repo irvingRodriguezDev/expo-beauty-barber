@@ -134,7 +134,7 @@ const ScannerView = () => {
           <Paper
             elevation={0}
             sx={{
-              borderRadius: 2,
+              borderRadius: 1,
               overflow: "hidden",
               background: COLORS.white,
               p: 4,
@@ -173,7 +173,7 @@ const ScannerView = () => {
                 position: "relative",
                 width: "100%",
                 aspectRatio: "1/1",
-                borderRadius: 2,
+                borderRadius: 1,
                 overflow: "hidden",
                 bgcolor: COLORS.deepText,
                 display: "flex",
@@ -283,7 +283,7 @@ const ScannerView = () => {
                 onClick={() => setIsScanning(true)}
                 sx={{
                   py: 2.5,
-                  borderRadius: 2,
+                  borderRadius: 1,
                   bgcolor: COLORS.deepText,
                   color: COLORS.white,
                   fontWeight: 900,
@@ -307,7 +307,7 @@ const ScannerView = () => {
                   onClick={() => setIsScanning(false)}
                   sx={{
                     py: 2,
-                    borderRadius: 2,
+                    borderRadius: 1,
                     borderColor: COLORS.deepText,
                     color: COLORS.deepText,
                     fontWeight: 900,
