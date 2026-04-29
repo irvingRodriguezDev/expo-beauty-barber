@@ -7,26 +7,26 @@ import {
   ImageListItem,
 } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import masterclasses from "../../assets/images/masterclasess.webp";
-import makeupartist from "../../assets/images/a593023b-92e8-4a9e-9101-c03dc22d6059.jpeg";
-import barberskills from "../../assets/images/barberskills.webp";
-import networking from "../../assets/images/medium-shot-colleagues-back-office.jpg";
-import exibithors from "../../assets/images/waiting-room-with-monitors.jpg";
-import makeup from "../../assets/images/make-up-artist-getting-model-ready-photoshootin (1).jpg";
+import principal from "../../assets/images/IMG_3944.webp";
+import secundaria from "../../assets/images/IMG_0266.webp";
+import tercera from "../../assets/images/595928731_1763292267821013_7968336426710516918_n.jpg";
+import cuarta from "../../assets/images/595711977_1763292237821016_6095411728285724851_n.jpg";
+import caro from "../../assets/images/caro.jpg";
+import convencion from "../../assets/images/convencion.jpg";
+import limado from "../../assets/images/limado.jpg";
+import morra from "../../assets/images/morra.jpg";
 import wtc from "../../assets/images/wtc.webp";
-import stand from "../../assets/images/store-middle-corridor.jpg";
-import brunch from "../../assets/images/female-make-up-blogger-with-streaming-with-smartphone-home.jpg";
 
 const galleryData = [
-  { img: masterclasses, cols: 2, rows: 2, title: "EXHIBIDORES" },
-  { img: makeupartist, cols: 2, rows: 1, title: "ARTE Y MAQUILLAJE" },
-  { img: barberskills, cols: 1, rows: 1, title: "BARBER SKILLS" },
-  { img: networking, cols: 1, rows: 2, title: "NETWORKING" },
+  { img: principal, cols: 2, rows: 2, title: "PREMIOS" },
+  { img: secundaria, cols: 2, rows: 1, title: "COMUNIDAD" },
+  { img: tercera, cols: 1, rows: 1, title: "NUEVAS HABILIDADES" },
+  { img: caro, cols: 1, rows: 2, title: "DINAMICAS" },
   { img: wtc, cols: 1, rows: 2, title: "WTC CDMX" },
-  { img: exibithors, cols: 2, rows: 1, title: "MASTERCLASSES" },
-  { img: makeup, cols: 1, rows: 1, title: "MAKEUP ZONE" },
-  { img: stand, cols: 1, rows: 1, title: "STANDS" },
-  { img: brunch, cols: 1, rows: 1, title: "CREATORS ZONE" },
+  { img: cuarta, cols: 2, rows: 1, title: "MASTERCLASSES" },
+  { img: limado, cols: 1, rows: 1, title: "APRENDIZAJE" },
+  { img: convencion, cols: 1, rows: 1, title: "CONVENCION" },
+  { img: morra, cols: 1, rows: 1, title: "RECUERDOS" },
 ];
 
 export default function ExperienceGallery() {
@@ -181,16 +181,6 @@ export default function ExperienceGallery() {
             opacity: 0.6,
           }}
         >
-          <Typography
-            sx={{
-              fontSize: "0.7rem",
-              fontWeight: 800,
-              letterSpacing: "0.4em",
-              color: brandPink,
-            }}
-          >
-            1RA EDICIÓN
-          </Typography>
           <Typography
             sx={{
               fontSize: "0.7rem",

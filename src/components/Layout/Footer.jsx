@@ -27,9 +27,8 @@ export default function Footer() {
   // -----------------------------
 
   const navLinks = [
-    { name: "INICIO", id: "hero" },
+    { name: "INICIO", id: "inicio" },
     { name: "VISITANTES", id: "visitantes" },
-    { name: "EXPOSITORES", id: "expositores" },
     { name: "BOLETOS", id: "register" },
   ];
 

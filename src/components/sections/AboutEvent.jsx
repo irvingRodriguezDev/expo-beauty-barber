@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Box, Container, Typography, Stack } from "@mui/material";
 import Makeup from "../../assets/images/makeup.jpg";
+import convencion from "../../assets/images/convencion.jpg";
 export default function AboutEvent() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -31,7 +32,7 @@ export default function AboutEvent() {
       <Typography
         sx={{
           position: "absolute",
-          bottom: { xs: "94%", md: "80%" },
+          bottom: { xs: "95%", sm: "87%", md: "80%", lg: "85%" },
           right: { xs: "1%", md: "64%" },
           fontSize: { xs: "20vw", md: "5vw" },
           fontWeight: 800,
@@ -229,7 +230,7 @@ export default function AboutEvent() {
                 >
                   <Box
                     component='img'
-                    src={Makeup}
+                    src={convencion}
                     alt='Beauty Industry Elite'
                     sx={{
                       width: "100%",

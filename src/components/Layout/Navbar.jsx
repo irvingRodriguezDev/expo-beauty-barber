@@ -95,7 +95,7 @@ export default function Navbar() {
                 src={Logo}
                 alt='Logo BWM'
                 sx={{
-                  height: { xs: 80, md: 80 },
+                  height: { xs: 50, md: 80 },
                   width: "auto",
                   objectFit: "contain",
                 }}

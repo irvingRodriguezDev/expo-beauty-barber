@@ -3,8 +3,8 @@ import { Box, Container, Typography, Button, Stack } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import WomenEbb from "../../assets/images/WONDER EBB.webp";
-
+import logowapi from "../../assets/images/LogoWapi-removebg-preview.png";
+import mono from "../../assets/images/sedarosa.webp";
 const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
@@ -251,16 +251,65 @@ export default function Hero() {
             >
               <Box
                 component='img'
-                src={WomenEbb}
+                src={mono}
                 loading='eager'
-                alt='BEAUTY WORLD MEXICO 2027 WTC'
+                alt='Carolina'
                 sx={{
                   width: "100%",
                   height: "auto",
+                  mt: { xs: 10, lg: 0 },
+                  ml: { xs: -10, lg: 0 },
                   maxWidth: { xs: 500, lg: "100%" },
                   objectFit: "cover",
-                  borderRadius: 2, // Un poco de redondeo suaviza la estética boutique
+                  borderRadius: 0, // Un poco de redondeo suaviza la estética boutique
                   filter: "contrast(1.05)",
+                  zIndex: 0,
+                  rotate: "270deg",
+                  position: "absolute",
+                  // boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
+                }}
+              />
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: { xs: "270px", lg: "445px" },
+                  textAlign: "center",
+                  mt: { xs: -20, lg: -48 },
+                  zIndex: 200,
+                  position: "relative",
+                }}
+              >
+                7º
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: { xs: "40px", lg: "85px" },
+                  textAlign: "center",
+                  mt: { xs: -17, lg: -27 },
+                  zIndex: 250,
+                  position: "relative",
+                }}
+              >
+                ANIVERSARIO
+              </Typography>
+              <Box
+                component='img'
+                src={logowapi}
+                loading='eager'
+                alt='Carolina'
+                sx={{
+                  width: "100%",
+                  height: "auto",
+                  mt: { xs: -2, lg: 10 },
+                  maxWidth: { xs: 300, lg: "100%" },
+                  objectFit: "cover",
+                  borderRadius: 0, // Un poco de redondeo suaviza la estética boutique
+                  filter: "contrast(1.05)",
+                  zIndex: 0,
+                  rotate: "0deg",
+                  position: "absolute",
+                  display: { xs: "none", lg: "block" },
                   // boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
                 }}
               />
