@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Box, Container, Typography, Stack } from "@mui/material";
-import Makeup from "../../assets/images/makeup.jpg";
 import convencion from "../../assets/images/convencion.jpg";
 export default function AboutEvent() {
   const ref = useRef(null);

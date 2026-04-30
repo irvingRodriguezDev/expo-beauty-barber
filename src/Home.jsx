@@ -4,6 +4,7 @@ import App from "./App"; // Tu página de registro actual
 import ScannerView from "./components/Pages/ScannerView";
 import SuccessPage from "./components/Pages/SuccessPage";
 import MyTickets from "./components/Pages/MyTickets";
+import ErrorPage from "./components/Pages/ErrorPage";
 function Home() {
   return (
     <Router>
@@ -11,6 +12,7 @@ function Home() {
         {/* Ruta para el formulario de registro y pago */}
         <Route path='/' element={<App />} />
         <Route path='/payment-success' element={<SuccessPage />} />
+        <Route path='/payment-error' element={<ErrorPage />} />
         {/* Ruta dinámica para el boleto digital */}
         <Route path='/ticket/:code' element={<TicketView />} />
         <Route path='/mis-boletos' element={<MyTickets />} />
