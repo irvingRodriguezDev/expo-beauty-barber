@@ -38,9 +38,9 @@ const TicketView = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/tickets/show/${code}`,
           {
+            // Este header le dice a ngrok que no muestre la página de advertencia
             headers: {
-              // Este header le dice a ngrok que no muestre la página de advertencia
-              "ngrok-skip-browser-warning": "true",
+              "Content-Type": "application/json",
             },
           },
         );
