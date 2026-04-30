@@ -45,7 +45,7 @@ const MyTickets = () => {
       try {
         const captchaToken = await executeRecaptcha("search_tickets");
         const response = await axios.get(
-          `https://api.expobellezaybarberias.com/search-tickets`,
+          `https://api.beautyworldmexico.com.mx/search-tickets`,
           {
             params: { email: email.toLowerCase().trim(), captchaToken },
           },

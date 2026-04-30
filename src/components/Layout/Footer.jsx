@@ -288,7 +288,7 @@ export default function Footer() {
                 component='a'
                 href={
                   item === "CONTACTO"
-                    ? "mailto:contacto@expobellezaybarberias.com"
+                    ? "mailto:contacto@beautyworldmexico.com.mx"
                     : "#"
                 }
                 onClick={(e) => {

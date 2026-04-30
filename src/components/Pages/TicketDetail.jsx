@@ -34,7 +34,7 @@ const TicketView = () => {
     const fetchTicket = async () => {
       try {
         const response = await fetch(
-          `https://api.expobellezaybarberias.com/ticket/${code}`,
+          `https://api.beautyworldmexico.com.mx/ticket/${code}`,
         );
         if (!response.ok) throw new Error("Ticket no encontrado");
         const data = await response.json();
