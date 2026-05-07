@@ -137,7 +137,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Badges de Info */}
-            <Stack
+            {/* <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={2}
               sx={{ mb: 8 }}
@@ -181,7 +181,7 @@ export default function Hero() {
                   </Typography>
                 </Box>
               ))}
-            </Stack>
+            </Stack> */}
 
             {/* Acciones */}
             <Stack
@@ -209,7 +209,7 @@ export default function Hero() {
                   transition: "0.4s",
                 }}
               >
-                RESERVAR LUGAR
+                COMPRA TU BOLETO 6 JUN
               </Button>
               <Button
                 variant='outlined'
