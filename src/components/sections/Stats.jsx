@@ -112,7 +112,7 @@ export default function Stats() {
           pointerEvents: "none",
         }}
       >
-        BWM 2027
+        BBM 2027
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>

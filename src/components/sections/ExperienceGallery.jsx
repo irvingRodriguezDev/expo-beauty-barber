@@ -66,7 +66,7 @@ export default function ExperienceGallery() {
             >
               EXPERIENCIA
             </span>{" "}
-            BWM
+            BBM
           </Typography>
           <Typography
             sx={{

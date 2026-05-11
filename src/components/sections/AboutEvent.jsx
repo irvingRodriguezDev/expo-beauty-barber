@@ -27,7 +27,7 @@ export default function AboutEvent() {
         overflow: "hidden",
       }}
     >
-      {/* Marca de agua BWM - Ahora en un rosa sutil para fondo claro */}
+      {/* Marca de agua BBM - Ahora en un rosa sutil para fondo claro */}
       <Typography
         sx={{
           position: "absolute",
@@ -42,7 +42,7 @@ export default function AboutEvent() {
           zIndex: 0,
         }}
       >
-        BWM2027
+        BBM2027
       </Typography>
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
@@ -116,7 +116,7 @@ export default function AboutEvent() {
                     fontWeight: 400,
                   }}
                 >
-                  Beauty World Mexico es el epicentro donde el prestigio y la
+                  BEAUTY BUSINESS MEXICO es el epicentro donde el prestigio y la
                   innovación convergen para redefinir el futuro de la estética
                   en México.
                 </Typography>
@@ -218,7 +218,7 @@ export default function AboutEvent() {
                       bgcolor: "#FFCBDA",
                     }}
                   >
-                    #BWM2027
+                    #BBM2027
                   </Typography>
                 </Box>
               </Stack>

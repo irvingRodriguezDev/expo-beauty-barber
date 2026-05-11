@@ -81,7 +81,7 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
             mb: 3,
           }}
         >
-          Beauty World Mexico
+          BEAUTY BUSINESS MEXICO
         </Typography>
 
         {/* Contenedor del QR con estética de tarjeta */}

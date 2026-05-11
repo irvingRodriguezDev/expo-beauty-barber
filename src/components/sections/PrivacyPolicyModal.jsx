@@ -98,8 +98,8 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
           >
             En cumplimiento con los términos de{" "}
             <strong>Publicidad Mahur, S.A. de C.V.</strong> y
-            <strong> Beauty World Mexico</strong>, detallamos nuestra política
-            de protección de datos.
+            <strong> BEAUTY BUSINESS MEXICO</strong>, detallamos nuestra
+            política de protección de datos.
           </Typography>
         </Box>
 
@@ -196,7 +196,7 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
               Implementamos protocolos avanzados de protección de datos en la
               nube para asegurar que no exista ningún acceso no autorizado,
               manteniendo la integridad de la base de datos de{" "}
-              <strong>Beauty World Mexico</strong>.
+              <strong>BEAUTY BUSINESS MEXICO</strong>.
             </Typography>
           </section>
 

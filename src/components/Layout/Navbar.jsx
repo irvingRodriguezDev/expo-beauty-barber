@@ -15,8 +15,8 @@ import Logo from "../../assets/images/LOGO_VINO.png";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },
-  { label: "Experiencia", to: "experiencia" },
   { label: "visitantes", to: "visitantes" },
+  { label: "Experiencia", to: "experiencia" },
   { label: "¿Quiero Exponer?", to: "expositores" },
 ];
 
@@ -95,9 +95,9 @@ export default function Navbar() {
               <Box
                 component='img'
                 src={Logo}
-                alt='Logo BWM'
+                alt='Logo BBM'
                 sx={{
-                  height: { xs: 80, md: 80 },
+                  height: { xs: 80, md: 100 },
                   width: "auto",
                   objectFit: "contain",
                 }}

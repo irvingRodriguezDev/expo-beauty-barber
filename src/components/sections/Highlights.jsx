@@ -306,7 +306,7 @@ export default function Highlights() {
             fontWeight: 700,
           }}
         >
-          PRODUCTION BWM2027
+          PRODUCTION BBM2027
         </Typography>
         <Typography
           sx={{

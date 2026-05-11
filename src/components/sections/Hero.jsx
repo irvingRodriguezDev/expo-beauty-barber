@@ -108,7 +108,7 @@ export default function Hero() {
                     fontWeight: 400,
                   }}
                 >
-                  WORLD
+                  BUSINESS
                 </span>
                 <br /> MEXICO
               </Typography>
@@ -253,7 +253,7 @@ export default function Hero() {
                 component='img'
                 src={WomenEbb}
                 loading='eager'
-                alt='BEAUTY WORLD MEXICO 2027 WTC'
+                alt='BEAUTY BUSINESS MEXICO 2027 WTC'
                 sx={{
                   width: "100%",
                   height: "auto",

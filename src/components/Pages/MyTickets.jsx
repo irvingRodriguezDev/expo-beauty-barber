@@ -45,7 +45,7 @@ const MyTickets = () => {
       try {
         const captchaToken = await executeRecaptcha("search_tickets");
         const response = await axios.get(
-          `https://api.beautyworldmexico.com.mx/search-tickets`,
+          `https://api.beautybusinessmexico.com.mx/search-tickets`,
           {
             params: { email: email.toLowerCase().trim(), captchaToken },
           },
@@ -111,7 +111,8 @@ const MyTickets = () => {
                     fontWeight: 600,
                   }}
                 >
-                  Consulta y presenta tus accesos para Beauty World Mexico 2027.
+                  Consulta y presenta tus accesos para BEAUTY BUSINESS MEXICO
+                  2027.
                 </Typography>
               </motion.div>
             </Box>
@@ -304,7 +305,7 @@ const MyTickets = () => {
                                 fontWeight: 600,
                               }}
                             >
-                              BEAUTY WORLD MEXICO 2027
+                              BEAUTY BUSINESS MEXICO 2027
                             </Typography>
                           </Box>
 

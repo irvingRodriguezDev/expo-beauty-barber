@@ -278,7 +278,7 @@ export default function Footer() {
               letterSpacing: "0.15em",
             }}
           >
-            © 2027 BEAUTY WORLD MEXICO | POWERED BY IRF
+            © 2027 BEAUTY BUSINESS MEXICO | POWERED BY BBM
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
@@ -288,7 +288,7 @@ export default function Footer() {
                 component='a'
                 href={
                   item === "CONTACTO"
-                    ? "mailto:contacto@beautyworldmexico.com.mx"
+                    ? "mailto:contacto@beautybusinessmexico.com.mx"
                     : "#"
                 }
                 onClick={(e) => {

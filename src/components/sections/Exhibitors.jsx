@@ -39,7 +39,7 @@ const benefits = [
 ];
 
 const message =
-  "Me interesa ser expositor, en Beauty World Mexico, me podrias brindar más detalles, sobre los stands para expositores, costos, etc.";
+  "Me interesa ser expositor, en BEAUTY BUSINESS MEXICO, me podrias brindar más detalles, sobre los stands para expositores, costos, etc.";
 
 export default function Exhibitors() {
   const ref = useRef(null);
