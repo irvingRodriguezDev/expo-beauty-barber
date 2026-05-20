@@ -12,6 +12,7 @@ import SuccessPage from "./components/Pages/SuccessPage";
 import MyTickets from "./components/Pages/MyTickets";
 import ErrorPage from "./components/Pages/ErrorPage";
 import NotFound from "./components/Pages/NotFound";
+import SoldOutEvent from "./components/Pages/SoldOutPage";
 
 function Home() {
   return (
@@ -26,7 +27,7 @@ function Home() {
         {/* Grupo de rutas con la misma base */}
         <Route path='/convencion-wtc-mexico'>
           {/* Esta es la ruta index (la raíz del grupo) */}
-          <Route index element={<App />} />
+          <Route index element={<SoldOutEvent />} />
 
           {/* Las sub-rutas se vuelven relativas a la base */}
           {/* URL resultante: /convencion-wtc-mexico/mis-boletos */}
