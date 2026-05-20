@@ -34,7 +34,7 @@ const TicketView = () => {
     const fetchTicket = async () => {
       try {
         const response = await fetch(
-          `https://api.beautybusinessmexico.com.mx/ticket/${code}`,
+          `https://api.beautybusinessmexico.com/ticket/${code}`,
         );
         if (!response.ok) throw new Error("Ticket no encontrado");
         const data = await response.json();
@@ -132,7 +132,7 @@ const TicketView = () => {
                   letterSpacing: -1,
                 }}
               >
-                BWM <span style={{ color: brandPink }}>2027</span>
+                BBM <span style={{ color: brandPink }}>2027</span>
               </Typography>
               <Typography
                 sx={{
@@ -342,7 +342,7 @@ const TicketView = () => {
               variant='caption'
               sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 700 }}
             >
-              © 2026 BEAUTY WORL MEXICO
+              © 2027 BEAUTY BUSINESS MEXICO
             </Typography>
           </Stack>
         </Container>
