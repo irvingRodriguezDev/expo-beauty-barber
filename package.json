@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
+    "@yudiel/react-qr-scanner": "^2.6.0",
     "axios": "^1.15.2",
     "framer-motion": "^11.0.0",
     "html5-qrcode": "^2.3.8",
@@ -24,7 +25,6 @@
     "react-fast-marquee": "^1.6.5",
     "react-google-recaptcha-v3": "^1.11.0",
     "react-hook-form": "^7.51.0",
-    "react-qr-scanner": "^1.0.0-alpha.11",
     "react-router-dom": "^7.14.0",
     "sweetalert2": "^11.26.24",
     "sweetalert2-react-content": "^5.1.2"

@@ -39,10 +39,7 @@ const MotionPaper = motion(Paper);
 
 export const EventTimeline = () => {
   return (
-    <Box
-      component='section'
-      sx={{ py: 6, bgcolor: "transparent", height: "100%" }}
-    >
+    <Box component='section' sx={{ py: 6, bgcolor: softBg, height: "100%" }}>
       <Container maxWidth='2xl'>
         {/* Cabecera compacta */}
         <Box

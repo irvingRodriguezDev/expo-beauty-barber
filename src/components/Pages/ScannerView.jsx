@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import QrScanner from "react-qr-scanner";
+import React, { useRef, useState } from "react";
+import { Scanner } from "@yudiel/react-qr-scanner";
 import {
   Box,
   Typography,
@@ -57,62 +57,100 @@ const playSound = (type) => {
 };
 
 const ScannerView = () => {
-  const [loading, setLoading] = useState(false);
+  const scanLock = useRef(false);
+
+  const lastScanRef = useRef({
+    code: null,
+    time: 0,
+  });
   const [isScanning, setIsScanning] = useState(false);
   const [lastStatus, setLastStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const handleScan = async (detectedCodes) => {
+    // LOCK ABSOLUTO INMEDIATO
+    if (scanLock.current) return;
 
-  const handleScan = async (data) => {
-    if (data && !loading && isScanning) {
-      const code = typeof data === "object" ? data.text : data;
+    scanLock.current = true;
+
+    try {
+      if (!detectedCodes || detectedCodes.length === 0) {
+        scanLock.current = false;
+        return;
+      }
+
+      const code = detectedCodes[0]?.rawValue;
+
+      if (!code) {
+        scanLock.current = false;
+        return;
+      }
+
+      const now = Date.now();
+
+      if (
+        lastScanRef.current.code === code &&
+        now - lastScanRef.current.time < 3000
+      ) {
+        scanLock.current = false;
+        return;
+      }
+
+      lastScanRef.current = {
+        code,
+        time: now,
+      };
+
       setIsScanning(false);
       setLoading(true);
 
-      try {
-        const response = await fetch(
-          "https://api.expobellezaybarberias.com/check-in/",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ code }),
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/tickets/validate`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({ code }),
+        },
+      );
 
-        const result = await response.json();
+      const result = await response.json();
 
-        if (response.ok) {
-          playSound("success");
-          setLastStatus("success");
-          MySwal.fire({
-            icon: "success",
-            title: `<span style="font-family: 'Syne'; font-weight: 900; color: ${COLORS.deepText}">ACCESO AUTORIZADO</span>`,
-            html: `
-              <div style="padding: 10px;">
-                <b style="font-size: 1.4rem; color: ${COLORS.deepText}">${result.fullname.toUpperCase()}</b><br/>
-                <div style="margin-top: 10px; display: inline-block; padding: 5px 15px; border-radius: 20px; background: ${COLORS.brandPink}; color: ${COLORS.deepText}; font-weight: 800; font-size: 0.8rem;">
-                  ${result.accessType}
-                </div>
-              </div>
-            `,
-            background: COLORS.white,
-            confirmButtonColor: COLORS.deepText,
-            confirmButtonText: "CONTINUAR",
-            customClass: { popup: "premium-swal-border" },
-          }).then(() => setLastStatus(null));
-        } else {
-          playSound("error");
-          setLastStatus("error");
-          MySwal.fire({
-            icon: "error",
-            title: "ENTRADA DENEGADA",
-            text: result.message,
-            confirmButtonColor: COLORS.error,
-          }).then(() => setLastStatus(null));
-        }
-      } catch (err) {
+      if (response.ok) {
+        playSound("success");
+        setLastStatus("success");
+
+        await MySwal.fire({
+          icon: "success",
+          title: "ACCESO AUTORIZADO",
+          text: result.fullname,
+          confirmButtonText: "CONTINUAR",
+          showConfirmButton: false,
+          timer: 1200,
+        });
+      } else {
         playSound("error");
-      } finally {
-        setLoading(false);
+        setLastStatus("error");
+
+        await MySwal.fire({
+          icon: "error",
+          title: "ENTRADA DENEGADA",
+          text: result.message,
+          showConfirmButton: false,
+          timer: 1200,
+        });
       }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+
+      setTimeout(() => {
+        setIsScanning(true);
+
+        // LIBERA EL LOCK HASTA EL FINAL
+        scanLock.current = false;
+      }, 1500);
     }
   };
 
@@ -222,16 +260,24 @@ const ScannerView = () => {
                         }}
                       />
                     </Box>
-                    <QrScanner
-                      delay={300}
-                      onError={(err) => console.log(err)}
+                    <Scanner
+                      formats={["qr_code"]}
                       onScan={handleScan}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
+                      onError={(error) => console.log(error)}
+                      constraints={{
+                        facingMode: "environment",
                       }}
-                      constraints={{ video: { facingMode: "environment" } }}
+                      styles={{
+                        container: {
+                          width: "100%",
+                          height: "100%",
+                        },
+                        video: {
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        },
+                      }}
                     />
                   </motion.div>
                 ) : (
