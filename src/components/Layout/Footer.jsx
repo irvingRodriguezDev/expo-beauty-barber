@@ -288,7 +288,7 @@ export default function Footer() {
                 component='a'
                 href={
                   item === "CONTACTO"
-                    ? "mailto:contacto@beautybusinessmexico.com.mx"
+                    ? "mailto:itzel@beatybusinessmexico.com"
                     : "#"
                 }
                 onClick={(e) => {

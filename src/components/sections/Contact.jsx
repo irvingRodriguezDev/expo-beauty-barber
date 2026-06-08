@@ -18,7 +18,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const WHATSAPP_NUMBER = "521XXXXXXXXXX";
-const CONTACT_EMAIL = "contacto@expobeautybarber.com";
+const CONTACT_EMAIL = "itzel@beatybusinessmexico.comm";
 
 const productTypes = [
   "Productos Capilares",
