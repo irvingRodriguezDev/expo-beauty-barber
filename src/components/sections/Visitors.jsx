@@ -6,38 +6,50 @@ import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 const perks = [
   {
     label: "Relaciones Comerciales",
-    description: "Conecta con dueños de negocio y líderes del sector.",
+    description:
+      "Conecta con dueños de negocio, distribuidores, proveedores y líderes del sector beauty.",
   },
 
   {
     label: "Zona de Maquillaje",
-    description: "Espacios de vanguardia dedicados a la alta cosmética.",
+    description:
+      "Descubre nuevas técnicas, tendencias y lanzamientos de las marcas más reconocidas.",
   },
+
+  {
+    label: "Nail Experience",
+    description:
+      "Explora las últimas innovaciones en uñas, diseño, productos y herramientas profesionales.",
+  },
+
   {
     label: "Masterclasses",
-    description: "Capacitación técnica de alto nivel para profesionales.",
+    description:
+      "Capacitación especializada impartida por expertos nacionales e internacionales.",
   },
+
   {
-    label: "Ofertas Exclusivas",
-    description: "Acceso privilegiado a lanzamientos y precios de expo.",
+    label: "Networking VIP",
+    description:
+      "Genera alianzas estratégicas y oportunidades de crecimiento para tu negocio.",
   },
+
   {
-    label: "Lugar para Creadores",
-    description: "Zonas diseñadas para la creación de contenido digital.",
-  },
-  {
-    label: "Shows de Barberia",
-    description: "Espectáculos en vivo con referentes de la barbería mundial.",
+    label: "Tendencias & Negocios",
+    description:
+      "Conoce las tendencias que están transformando la industria de la belleza y el bienestar.",
   },
 ];
 
 const profiles = [
   "Estilistas",
-  "Barberos",
   "Makeup Artists",
+  "Nail Artists",
   "Dueños de Salón",
   "Distribuidores",
+  "Marcas Beauty",
   "Emprendedores",
+  "Profesionales de Spa",
 ];
 
 export default function Visitors() {

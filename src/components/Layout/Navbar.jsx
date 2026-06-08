@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/images/LOGO_VINO.png";
+import Logo from "../../assets/images/LOGO_VINO.webp";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },
@@ -171,7 +171,7 @@ export default function Navbar() {
                     transition: "all 0.3s ease",
                   }}
                 >
-                  BOLETOS
+                  QUIERO ASISTIR
                 </Button>
               </Stack>
             </Stack>

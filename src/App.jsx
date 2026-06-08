@@ -12,6 +12,7 @@ import Contact from "./components/sections/Contact";
 import Register from "./components/sections/Register";
 import ExperienceGallery from "./components/sections/ExperienceGallery";
 import { BrandAuthority } from "./components/sections/BrandAuthority";
+import BenefitsSection from "./components/sections/BenefitsSection";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Hero />
           <AboutEvent />
           <Highlights />
+          <BenefitsSection />
           <Stats />
           <MapSection />
           <ExperienceGallery />

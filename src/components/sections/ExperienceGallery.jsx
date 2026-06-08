@@ -8,19 +8,19 @@ import {
 } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import masterclasses from "../../assets/images/masterclasess.webp";
-import makeupartist from "../../assets/images/a593023b-92e8-4a9e-9101-c03dc22d6059.jpeg";
-import barberskills from "../../assets/images/barberskills.webp";
-import networking from "../../assets/images/medium-shot-colleagues-back-office.jpg";
+import makeupartist from "../../assets/images/cute-women-taking-selfie.webp";
+import barberskills from "../../assets/images/make-up-artist-work-her-beauty-visage-studio-salon-woman-applying-by-professional-make-up-master-bea.webp";
+import networking from "../../assets/images/medium-shot-colleagues-back-office.webp";
 import exibithors from "../../assets/images/waiting-room-with-monitors.jpg";
-import makeup from "../../assets/images/make-up-artist-getting-model-ready-photoshootin (1).jpg";
+import makeup from "../../assets/images/make-up-artist-getting-model-ready-photoshootin-_1_.webp";
 import wtc from "../../assets/images/wtc.webp";
 import stand from "../../assets/images/store-middle-corridor.jpg";
-import brunch from "../../assets/images/female-make-up-blogger-with-streaming-with-smartphone-home.jpg";
+import brunch from "../../assets/images/female-make-up-blogger-with-streaming-with-smartphone-home.webp";
 
 const galleryData = [
   { img: masterclasses, cols: 2, rows: 2, title: "EXHIBIDORES" },
   { img: makeupartist, cols: 2, rows: 1, title: "ARTE Y MAQUILLAJE" },
-  { img: barberskills, cols: 1, rows: 1, title: "BARBER SKILLS" },
+  { img: barberskills, cols: 1, rows: 1, title: "BUSINESS" },
   { img: networking, cols: 1, rows: 2, title: "NETWORKING" },
   { img: wtc, cols: 1, rows: 2, title: "WTC CDMX" },
   { img: exibithors, cols: 2, rows: 1, title: "MASTERCLASSES" },

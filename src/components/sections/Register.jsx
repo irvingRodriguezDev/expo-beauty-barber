@@ -7,12 +7,15 @@ import { useCaptcha } from "../../hooks/useCaptcha";
 import Swal from "sweetalert2";
 
 const visitorOptions = [
-  "Barberos",
-  "Maquillistas Profesionales",
   "Estilistas",
+  "Makeup Artists",
+  "Nail Artists",
   "Dueños de Salón",
+  "Distribuidores",
+  "Marcas Beauty",
+  "Emprendedores",
+  "Profesionales de Spa",
 ];
-
 // --- PALETA COHERENTE ---
 const brandPink = "#ee6f97ff"; // Rosa pastel claro
 const deepText = "#3D2B2F"; // Texto oscuro cálido

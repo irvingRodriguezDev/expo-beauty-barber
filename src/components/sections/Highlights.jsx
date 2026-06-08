@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const items = [
-  "STANDS COMERCIALES • DEMOSTRACIONES EN VIVO • BARBER SHOWS • ZONA DE MAQUILLAJE • TALLERES Y CONFERENCIAS • NETWORKING VIP • MARKETPLACE PROFESIONAL • PREMIACIONES",
+  "STANDS COMERCIALES • MASTERCLASSES • NETWORKING • ZONA DE MAQUILLAJE • NAIL EXPERIENCE • TENDENCIAS BEAUTY • PROVEEDORES • CONFERENCIAS • INNOVACIÓN • PREMIACIONES",
 ];
 
 export default function Highlights() {
@@ -145,7 +145,7 @@ export default function Highlights() {
                     fontWeight: 400,
                   }}
                 >
-                  UN LEGADO.
+                  UNA OPORTUNIDAD DE NEGOCIO.
                 </span>
               </Typography>
               <Typography
@@ -158,10 +158,10 @@ export default function Highlights() {
                   fontWeight: 400,
                 }}
               >
-                Donde la técnica se convierte en legado. Un espacio diseñado
-                para profesionales que buscan dominar las tendencias globales en
-                estilismo, estética avanzada y la arquitectura del corte
-                masculino.
+                El evento donde profesionales, emprendedores y marcas de la
+                industria beauty se reúnen para descubrir tendencias, crear
+                alianzas comerciales y encontrar nuevas oportunidades de
+                crecimiento.
               </Typography>
             </motion.div>
           </Grid>
@@ -253,9 +253,13 @@ export default function Highlights() {
             "RELACIONES COMERCIALES",
             "ZONA DE MAQUILLAJE",
             "MASTERCLASSES",
+            "NAIL EXPERIENCE",
             "OFERTAS EXCLUSIVAS",
             "LUGAR PARA CREADORES",
-            "SHOWS DE BARBERÍA",
+            "NETWORKING VIP",
+            "TENDENCIAS BEAUTY",
+            "MARCAS LÍDERES",
+            "OPORTUNIDADES DE NEGOCIO",
           ].map((txt, idx) => (
             <Stack
               direction='row'

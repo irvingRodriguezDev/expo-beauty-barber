@@ -11,7 +11,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/images/LOGO_VINO.png";
+import Logo from "../../assets/images/LOGO_VINO.webp";
 import { useState } from "react";
 import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
 
