@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap");
+
+.coming-soon {
+  min-height: 100vh;
+  background: #ffd7e4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  text-align: center;
+  max-width: 900px;
+  z-index: 2;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(224, 82, 151, 0.12);
+  color: #e05297;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.content h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  color: #c63d82;
+  margin-bottom: 1.5rem;
+}
+
+.content h1 span {
+  color: #e05297;
+  display: block;
+}
+
+.content p {
+  font-family: "Poppins", sans-serif;
+  color: #7a4a61;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+}
+
+.content button {
+  background: #e05297;
+  color: white;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 15px 35px rgba(224, 82, 151, 0.25);
+}
+
+.content button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 45px rgba(224, 82, 151, 0.35);
+}
+
+/* Decoraciones */
+
+.decor {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(224, 82, 151, 0.08);
+}
+
+.decor-top {
+  width: 350px;
+  height: 350px;
+  top: -120px;
+  right: -120px;
+}
+
+.decor-bottom {
+  width: 450px;
+  height: 450px;
+  bottom: -180px;
+  left: -180px;
+}
+
+.coming-soon::before,
+.coming-soon::after {
+  content: "✦";
+  position: absolute;
+  color: rgba(224, 82, 151, 0.35);
+  font-size: 3rem;
+}
+
+.coming-soon::before {
+  top: 15%;
+  left: 12%;
+}
+
+.coming-soon::after {
+  bottom: 18%;
+  right: 15%;
+}

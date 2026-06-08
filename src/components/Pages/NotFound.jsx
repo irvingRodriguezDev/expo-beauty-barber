@@ -13,7 +13,7 @@ const NotFound = () => {
 
     // Redirigir cuando llegue a 0
     if (seconds === 0) {
-      navigate("/convencion-wtc-mexico");
+      navigate("/");
     }
 
     // Limpiar el intervalo al desmontar el componente
