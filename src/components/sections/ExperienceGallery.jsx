@@ -1,12 +1,7 @@
 import { useRef } from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  ImageList,
-  ImageListItem,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
+
 import principal from "../../assets/images/IMG_3944.webp";
 import secundaria from "../../assets/images/IMG_0266.webp";
 import tercera from "../../assets/images/595928731_1763292267821013_7968336426710516918_n.jpg";
@@ -18,15 +13,15 @@ import morra from "../../assets/images/morra.jpg";
 import wtc from "../../assets/images/wtc.webp";
 
 const galleryData = [
-  { img: principal, cols: 2, rows: 2, title: "PREMIOS" },
-  { img: secundaria, cols: 2, rows: 1, title: "COMUNIDAD" },
-  { img: tercera, cols: 1, rows: 1, title: "NUEVAS HABILIDADES" },
-  { img: caro, cols: 1, rows: 2, title: "DINAMICAS" },
-  { img: wtc, cols: 1, rows: 2, title: "WTC CDMX" },
-  { img: cuarta, cols: 2, rows: 1, title: "MASTERCLASSES" },
-  { img: limado, cols: 1, rows: 1, title: "APRENDIZAJE" },
-  { img: convencion, cols: 1, rows: 1, title: "CONVENCION" },
-  { img: morra, cols: 1, rows: 1, title: "RECUERDOS" },
+  { img: principal, title: "PREMIOS" },
+  { img: secundaria, title: "COMUNIDAD" },
+  { img: tercera, title: "NUEVAS HABILIDADES" },
+  { img: caro, title: "DINÁMICAS" },
+  { img: wtc, title: "SEDES PREMIUM" },
+  { img: cuarta, title: "MASTERCLASSES" },
+  { img: limado, title: "APRENDIZAJE" },
+  { img: convencion, title: "CONVENCIONES" },
+  { img: morra, title: "RECUERDOS" },
 ];
 
 export default function ExperienceGallery() {
@@ -34,29 +29,33 @@ export default function ExperienceGallery() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   // --- PALETA COHERENTE ---
-  const brandPink = "#ee6f97ff"; // Rosa pastel claro
-  const deepText = "#3D2B2F"; // Texto oscuro cálido
-  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  const brandPink = "#ee6f97ff";
+  const deepText = "#3D2B2F";
+  const lightBg = "#FFD9E2";
   // -------------------------
+
+  // Duplicamos el array para lograr el efecto infinito impecable en el carrusel
+  const duplicatedGallery = [...galleryData, ...galleryData];
 
   return (
     <Box
       ref={ref}
       id='experiencia'
       sx={{
-        py: { xs: 10, md: 15 },
+        py: { xs: 8, md: 12 },
         bgcolor: lightBg,
         overflow: "hidden",
+        position: "relative",
       }}
     >
       <Container maxWidth='xl'>
-        <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
+        {/* ENCABEZADO COMPACTO */}
+        <Box sx={{ textAlign: "center", mb: { xs: 5, md: 6 } }}>
           <Typography
             sx={{
-              // fontFamily: "'Syne'",
               fontWeight: 900,
-              fontSize: { xs: "2.5rem", md: "4rem" },
-              lineHeight: 1,
+              fontSize: { xs: "2.2rem", md: "3.5rem" },
+              lineHeight: 1.1,
               color: deepText,
             }}
           >
@@ -72,124 +71,173 @@ export default function ExperienceGallery() {
             sx={{
               fontSize: "0.75rem",
               fontWeight: 800,
-              letterSpacing: "0.5em",
-              color: "",
-              mt: 2,
+              letterSpacing: "0.4em",
+              color: deepText,
+              mt: 1.5,
               textTransform: "uppercase",
               bgcolor: "#FFCBDA",
               width: "fit-content",
               display: "inline-block",
+              px: 1.5,
+              py: 0.3,
+              borderRadius: "4px",
             }}
           >
-            Curaduría Visual 2026
+            Galería Curada de Momentos
           </Typography>
         </Box>
+      </Container>
 
-        <ImageList
-          variant='quilted'
-          cols={4}
-          rowHeight={300}
-          gap={20}
-          sx={{
-            gridTemplateColumns: {
-              xs: "repeat(2, 1fr) !important",
-              md: "repeat(4, 1fr) !important",
+      {/* CONTENEDOR DEL CARRUSEL INFINITO */}
+      <Box
+        sx={{
+          width: "100%",
+          overflow: "hidden",
+          position: "relative",
+          display: "flex",
+          py: 2,
+          "&:hover .marquee-track": {
+            animationPlayState: "paused", // Pausa el movimiento al hacer hover general
+          },
+        }}
+      >
+        <Box
+          className='marquee-track'
+          component={motion.div}
+          animate={inView ? { x: [0, -1800] } : {}}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 35,
+              ease: "linear",
             },
           }}
+          sx={{
+            display: "flex",
+            gap: "24px",
+            whiteSpace: "nowrap",
+            width: "max-content",
+            px: 2,
+          }}
         >
-          {galleryData.map((item, index) => (
-            <ImageListItem
+          {duplicatedGallery.map((item, index) => (
+            <Box
               key={index}
-              cols={item.cols || 1}
-              rows={item.rows || 1}
               component={motion.div}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.03,
+                y: -5,
+                transition: { duration: 0.4, ease: "easeOut" },
+              }}
               sx={{
+                width: { xs: "260px", md: "340px" },
+                height: { xs: "320px", md: "420px" },
                 position: "relative",
                 overflow: "hidden",
-                borderRadius: 1,
+                borderRadius: "16px",
                 cursor: "pointer",
-                border: "1px solid rgba(0, 0, 0, 0.05)",
-                boxShadow: "0 10px 30px rgba(61, 43, 47, 0.05)",
+                flexShrink: 0,
+                border: "1px solid rgba(255, 255, 255, 0.4)",
+                boxShadow: "0 8px 25px rgba(61, 43, 47, 0.06)",
                 "&:hover .gallery-overlay": { opacity: 1 },
                 "&:hover img": {
-                  transform: "scale(1.1)",
                   filter: "sepia(0) contrast(1) brightness(1)",
                 },
               }}
             >
-              <img
+              <Box
+                component='img'
                 src={item.img}
                 alt={item.title}
                 loading='lazy'
-                style={{
+                sx={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  filter: "sepia(0.3) brightness(0.9) contrast(1.1)", // Efecto editorial cálido
-                  transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
+                  filter: "sepia(0.2) brightness(0.95) contrast(1.05)",
+                  transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
               />
 
-              {/* Overlay: Glassmorphism Blanco/Rosa */}
+              {/* Overlay: Glassmorphism Ultra-Premium */}
               <Box
                 className='gallery-overlay'
                 sx={{
                   position: "absolute",
                   inset: 0,
-                  bgcolor: "rgba(255, 255, 255, 0.6)",
+                  background:
+                    "linear-gradient(to top, rgba(61, 43, 47, 0.85) 0%, rgba(255, 255, 255, 0.1) 100%)",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: "flex-end",
+                  p: 3,
                   opacity: 0,
-                  borderRadius: 1,
-                  transition: "0.5s ease",
-                  backdropFilter: "blur(8px)",
+                  transition: "opacity 0.4s ease",
+                  backdropFilter: "blur(4px)",
                 }}
               >
-                <Typography
-                  sx={{
-                    color: deepText,
-                    fontWeight: 800,
-                    fontSize: "0.85rem",
-                    letterSpacing: "0.3em",
-                    border: `2px solid ${brandPink}`,
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 1,
-                    textAlign: "center",
-                    textTransform: "uppercase",
-                    bgcolor: "rgba(255, 255, 255, 0.8)",
-                  }}
-                >
-                  {item.title}
-                </Typography>
+                <Box sx={{ width: "100%" }}>
+                  <Typography
+                    sx={{
+                      color: "#FFF",
+                      fontWeight: 900,
+                      fontSize: "0.9rem",
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      mb: 0.5,
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: brandPink,
+                      fontSize: "0.75rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.1em",
+                    }}
+                  >
+                    CONVENCIONES ÉLITE
+                  </Typography>
+                </Box>
               </Box>
-            </ImageListItem>
+            </Box>
           ))}
-        </ImageList>
+        </Box>
+      </Box>
 
-        {/* Decoración inferior */}
+      {/* LÍNEA DE CRÉDITO O CIERRE DE SECCIÓN */}
+      <Container maxWidth='xl'>
         <Box
           sx={{
-            mt: 8,
+            mt: 4,
             display: "flex",
-            justifyContent: "center",
-            gap: 6,
-            opacity: 0.6,
+            justifyContent: "space-between",
+            alignItems: "center",
+            opacity: 0.5,
+            px: 2,
           }}
         >
           <Typography
             sx={{
               fontSize: "0.7rem",
               fontWeight: 800,
-              letterSpacing: "0.4em",
+              letterSpacing: "0.2em",
               color: deepText,
             }}
           >
-            WTC MÉXICO
+            EDICIONES NACIONALES
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "0.7rem",
+              fontWeight: 800,
+              letterSpacing: "0.2em",
+              color: deepText,
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            MÉXICO • COMPARTIERON SU PASIÓN
           </Typography>
         </Box>
       </Container>

@@ -84,6 +84,7 @@ export default function Brands() {
         background: softPink,
         overflow: "hidden",
         position: "relative",
+        mt: -30,
       }}
     >
       <Box sx={{ textAlign: "center", mb: 6, px: 2 }}>

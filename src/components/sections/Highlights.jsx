@@ -4,32 +4,32 @@ import { Box, Container, Typography, Grid, Stack } from "@mui/material";
 import Marquee from "react-fast-marquee";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
-const items = [
-  "7º ANIVERSARIO WAPIZIMA • CLASES MASTER CON EXPERTAS • VENTA DE PRODUCTOS A PRECIO ESPECIAL • MÚSICA EN VIVO • RIFAS Y PREMIOS • RECONOCIMIENTOS 'EL SALÓN DE TUS SUEÑOS' • DINÁMICAS Y SORPRESAS • WTC CIUDAD DE MÉXICO •",
-];
+// Textos conceptuales continuos para los marquees gigantes de fondo
+const backgroundItems =
+  "• PASIÓN POR EL ARTE • COMUNIDAD DE ÉLITE • EXPERIENCIA TOTAL • CAPACITACIÓN INTERNACIONAL • LANZAMIENTOS EXCLUSIVOS • WAPIZIMA EVENTS • ";
 
 export default function Highlights() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   // --- PALETA COHERENTE ---
-  const brandPink = "#ee6f97ff"; // Rosa pastel claro
-  const deepText = "#3D2B2F"; // Texto oscuro cálido
-  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  const brandPink = "#ee6f97ff";
+  const deepText = "#3D2B2F";
+  const lightBg = "#FFD9E2";
   // -------------------------
 
   const benefits = [
     {
-      title: "TÉCNICA Y ARTE",
-      desc: "Aprende micropintura, relieves, texturas y estructura de salón de la mano de Carolina Tavera, Yazmin Ibarra y grandes másteres.",
+      title: "ALTA TÉCNICA Y ARTE",
+      desc: "Domina estructuras de salón, relieves, texturas y las últimas tendencias globales de la mano de las másteres e instructoras más influyentes.",
     },
     {
       title: "SHOPPING EXCLUSIVO",
-      desc: "Aprovecha precios especiales de aniversario en toda la línea Wapizima. Stock disponible y lanzamientos durante todo el día.",
+      desc: "Accede a todo el stock oficial de la marca con precios preferenciales de exposición y sé la primera en adquirir los lanzamientos de temporada.",
     },
     {
-      title: "COMUNIDAD Y PREMIOS",
-      desc: "Participa en las dinámicas 'El Salón de tus Sueños' y vive la emoción de nuestras rifas, reconocimientos y sorpresas especiales.",
+      title: "COMUNIDAD Y LOGROS",
+      desc: "Comparte experiencias con profesionales de todo el país, expande tu red de networking y vive dinámicas únicas diseñadas para impulsar tu negocio.",
     },
   ];
 
@@ -55,20 +55,20 @@ export default function Highlights() {
           width: "120%",
           left: "-10%",
           top: { xs: "-2%", md: "1%" },
-          opacity: 0.25,
+          opacity: 0.2,
           pointerEvents: "none",
         }}
       >
-        <Marquee speed={80} gradient={false}>
+        <Marquee speed={60} gradient={false}>
           <Typography
             sx={{
-              fontSize: { xs: "5rem", md: "12rem" },
+              fontSize: { xs: "5rem", md: "11rem" },
               fontWeight: 900,
-              color: "rgba(238, 111, 151, 0.4)",
+              color: "rgba(238, 111, 151, 0.3)",
               whiteSpace: "nowrap",
             }}
           >
-            {items}
+            {backgroundItems}
           </Typography>
         </Marquee>
       </Box>
@@ -79,14 +79,14 @@ export default function Highlights() {
           width: "120%",
           left: "-10%",
           bottom: { xs: "5%", md: "2%" },
-          opacity: 0.3,
+          opacity: 0.25,
           pointerEvents: "none",
         }}
       >
         <Marquee speed={40} direction='right' gradient={false}>
           <Typography
             sx={{
-              fontSize: { xs: "4rem", md: "10rem" },
+              fontSize: { xs: "4rem", md: "9rem" },
               fontWeight: 900,
               WebkitTextStroke: {
                 xs: `1px ${brandPink}`,
@@ -96,7 +96,7 @@ export default function Highlights() {
               whiteSpace: "nowrap",
             }}
           >
-            {items}
+            {backgroundItems}
           </Typography>
         </Marquee>
       </Box>
@@ -104,8 +104,8 @@ export default function Highlights() {
       {/* 2. CONTENIDO PRINCIPAL */}
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 2 }}>
         <Grid container spacing={{ xs: 6, md: 10 }} alignItems='center'>
-          {/* Lado Izquierdo: Manifiesto */}
-          <Grid item xs={12} md={6} sx={{ mt: { xs: 0, md: -12 } }}>
+          {/* Lado Izquierdo: Manifiesto General */}
+          <Grid item xs={12} md={6} sx={{ mt: { xs: 0, md: -6 } }}>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -116,11 +116,14 @@ export default function Highlights() {
                   fontSize: "0.75rem",
                   fontWeight: 800,
                   letterSpacing: "0.5em",
-                  color: "",
+                  color: deepText,
                   mb: 3,
                   width: "fit-content",
                   display: "inline-block",
                   bgcolor: "#FFCBDA",
+                  px: 1.5,
+                  py: 0.5,
+                  borderRadius: "4px",
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
@@ -129,9 +132,9 @@ export default function Highlights() {
               <Typography
                 variant='h2'
                 sx={{
-                  fontSize: { xs: "2.2rem", sm: "3.5rem", md: "5rem" },
+                  fontSize: { xs: "2.2rem", sm: "3.5rem", md: "4.5rem" },
                   color: deepText,
-                  lineHeight: { xs: 1.1, md: 0.9 },
+                  lineHeight: { xs: 1.1, md: 0.95 },
                   mb: 4,
                   fontWeight: 900,
                   textAlign: { xs: "center", md: "left" },
@@ -151,29 +154,30 @@ export default function Highlights() {
               <Typography
                 sx={{
                   fontSize: "1.1rem",
-                  color: "rgba(61, 43, 47, 0.7)",
+                  color: "rgba(61, 43, 47, 0.8)",
                   maxWidth: { xs: "100%", md: "480px" },
                   lineHeight: 1.8,
                   textAlign: { xs: "center", md: "left" },
                   fontWeight: 400,
                 }}
               >
-                Wapizima cumple 7 años. Hemos diseñado un itinerario intensivo
-                de 07:00 a 20:00 hrs para que te lleves el máximo conocimiento,
-                los mejores productos y recuerdos inolvidables en el WTC.
+                Diseñamos experiencias de alto impacto logístico y educativo
+                para que te lleves el máximo conocimiento, acceso preferencial a
+                insumos premium y recuerdos inolvidables en cada una de nuestras
+                sedes.
               </Typography>
             </motion.div>
           </Grid>
 
           {/* Lado Derecho: Pilares */}
-          <Grid item xs={12} md={6} sx={{ mt: { xs: 0, md: -12 } }}>
-            <Stack spacing={{ xs: 2, md: 2 }}>
+          <Grid item xs={12} md={6} sx={{ mt: { xs: 0, md: -6 } }}>
+            <Stack spacing={1}>
               {benefits.map((benefit, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 0.5 + i * 0.2 }}
+                  transition={{ duration: 0.8, delay: 0.3 + i * 0.15 }}
                 >
                   <Box
                     sx={{
@@ -187,8 +191,9 @@ export default function Highlights() {
                       transition: "0.4s",
                       "&:hover": {
                         bgcolor: "white",
-                        transform: { xs: "none", md: "translateX(20px)" },
+                        transform: { xs: "none", md: "translateX(15px)" },
                         boxShadow: "0 10px 30px rgba(61, 43, 47, 0.05)",
+                        borderRadius: "12px",
                       },
                     }}
                   >
@@ -208,15 +213,16 @@ export default function Highlights() {
                           fontWeight: 800,
                           fontSize: "1.2rem",
                           color: deepText,
-                          letterSpacing: "0.1em",
+                          letterSpacing: "0.05em",
                         }}
                       >
                         {benefit.title}
                       </Typography>
                       <Typography
                         sx={{
-                          color: "rgba(61, 43, 47, 0.6)",
+                          color: "rgba(61, 43, 47, 0.65)",
                           fontSize: "0.95rem",
+                          mt: 0.5,
                         }}
                       >
                         {benefit.desc}
@@ -235,12 +241,11 @@ export default function Highlights() {
         sx={{
           position: { xs: "relative", md: "absolute" },
           width: "110%",
-          bottom: { md: "25%" },
+          bottom: { md: "20%" },
           my: { xs: 6, md: 0 },
           left: "-5%",
           background: "#FFFFFF",
-          backdropFilter: "blur(10px)",
-          py: 3,
+          py: 2.5,
           transform: { xs: "rotate(1.5deg)", md: "rotate(-1.5deg)" },
           zIndex: 1,
           borderY: `1px solid rgba(255, 183, 206, 0.3)`,
@@ -255,11 +260,10 @@ export default function Highlights() {
             "CLASES DE ESTRUCTURA",
             "MICROPINTURA EN GEL",
             "RECONOCIMIENTOS",
-            "DINÁMICAS ESPECIALES",
             "ZONA DE NETWORKING",
             "LANZAMIENTOS EXCLUSIVOS",
             "RELIEVES Y TEXTURAS",
-            "WTC MÉXICO",
+            "EXPERIENCIA PREMIUM",
           ].map((txt, idx) => (
             <Stack
               direction='row'
@@ -274,8 +278,8 @@ export default function Highlights() {
                 sx={{
                   fontWeight: 800,
                   color: deepText,
-                  fontSize: { xs: "0.9rem", md: "1.1rem" },
-                  letterSpacing: "0.2em",
+                  fontSize: { xs: "0.9rem", md: "1.05rem" },
+                  letterSpacing: "0.15em",
                 }}
               >
                 {txt}
@@ -288,16 +292,13 @@ export default function Highlights() {
       {/* FOOTER DE SECCIÓN */}
       <Box
         sx={{
-          position: { xs: "relative", md: "absolute" },
-          bottom: { md: 40 },
-          mt: { xs: 4, md: 0 },
+          position: "absolute",
+          bottom: 30,
           width: "100%",
           px: 4,
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
           justifyContent: "space-between",
           alignItems: "center",
-          gap: 2,
           opacity: 0.6,
         }}
       >
@@ -305,12 +306,11 @@ export default function Highlights() {
           sx={{
             fontSize: "0.7rem",
             color: brandPink,
-            textAlign: "center",
             letterSpacing: "0.2em",
             fontWeight: 700,
           }}
         >
-          CONVENCIÓN WAPIZIMA 2026
+          PLATAFORMA DE EVENTOS WAPIZIMA
         </Typography>
         <Typography
           sx={{
@@ -320,7 +320,7 @@ export default function Highlights() {
             display: { xs: "none", sm: "block" },
           }}
         >
-          2026 • WTC MEXICO CITY ↓
+          MÉXICO • EXPERIENCIA DIGITAL ↓
         </Typography>
       </Box>
     </Box>

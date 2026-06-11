@@ -25,6 +25,7 @@
     "react-fast-marquee": "^1.6.5",
     "react-google-recaptcha-v3": "^1.11.0",
     "react-hook-form": "^7.51.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^7.14.0",
     "sweetalert2": "^11.26.24",
     "sweetalert2-react-content": "^5.1.2"

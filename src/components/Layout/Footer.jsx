@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Container,
@@ -12,24 +13,25 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import Logo from "../../assets/images/logo-wapizima.webp";
-import { useState } from "react";
 import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const [openPolicy, setOpenPolicy] = useState(false);
 
+  // Obtener el año en curso dinámicamente
+  const currentYear = new Date().getFullYear();
+
   // --- PALETA LIGERA Y CLARA ---
-  const lightPinkBg = "#FFD9E2"; // Fondo crema rosado muy ligero
-  const softRose = "#FFB7CE"; // Rosa pastel para acentos
-  const deepText = "#3D2B2F"; // Gris cálido oscuro para textos legibles
-  const mediumRose = "#F2A7C0"; // Rosa un poco más intenso para hovers
+  const lightPinkBg = "#FFD9E2";
+  const softRose = "#FFB7CE";
+  const deepText = "#3D2B2F";
   // -----------------------------
 
   const navLinks = [
     { name: "INICIO", id: "inicio" },
     { name: "VISITANTES", id: "visitantes" },
-    { name: "BOLETOS", id: "register" },
+    { name: "BOLETOS", id: "events-list" },
   ];
 
   return (
@@ -41,28 +43,27 @@ export default function Footer() {
         pb: 6,
         width: "100%",
         color: deepText,
-        borderTop: `1px solid rgba(255, 183, 206, 0.3)`, // Línea sutil superior
+        borderTop: `1px solid rgba(255, 183, 206, 0.3)`,
       }}
     >
       <Container maxWidth='xl'>
         <Grid container spacing={{ xs: 6, md: 4 }}>
-          {/* Columna 1: Brand Identity */}
+          {/* Columna 1: Identidad de Marca */}
           <Grid item xs={12} sm={6} md={4}>
             <Box
               component='img'
               src={Logo}
-              alt='Expo Beauty & Barber'
+              alt='Wapizima Events'
               sx={{
-                height: { xs: 120, md: 100 },
+                height: { xs: 110, md: 90 },
                 width: "auto",
                 mb: 3,
                 display: "block",
-                // Quitamos el filtro invert ya que el fondo es claro
               }}
             />
             <Typography
               sx={{
-                color: "rgba(61, 43, 47, 0.7)",
+                color: "rgba(61, 43, 47, 0.75)",
                 lineHeight: 1.8,
                 maxWidth: { xs: "100%", sm: 340 },
                 fontSize: "0.95rem",
@@ -70,15 +71,14 @@ export default function Footer() {
               }}
             >
               El punto de encuentro donde tu talento florece y se conecta con la
-              comunidad de nail art más grande de México. Celebramos siete años
-              elevando juntas el estándar de nuestra industria.
+              comunidad de nail art más grande de México. Elevando juntas el
+              estándar de nuestra industria.
             </Typography>
 
             <Stack
               direction='row'
               spacing={1.5}
               sx={{
-                display: "flex",
                 justifyContent: { xs: "center", md: "flex-start" },
               }}
             >
@@ -88,11 +88,11 @@ export default function Footer() {
                   sx={{
                     color: softRose,
                     border: `1px solid ${softRose}`,
-                    borderRadius: 2,
+                    borderRadius: "12px",
                     "&:hover": {
                       bgcolor: softRose,
                       color: "#FFF",
-                      transform: "translateY(-5px)",
+                      transform: "translateY(-4px)",
                       boxShadow: `0 5px 15px rgba(255, 183, 206, 0.4)`,
                     },
                     transition: "all 0.3s ease",
@@ -108,15 +108,17 @@ export default function Footer() {
           <Grid item xs={6} sm={6} md={2}>
             <Typography
               sx={{
-                color: "",
                 fontWeight: 800,
                 bgcolor: "#FFCBDA",
                 mb: 4,
                 fontSize: "0.75rem",
-                letterSpacing: "0.3em",
+                letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 width: "fit-content",
                 display: "inline-block",
+                px: 1,
+                py: 0.2,
+                borderRadius: "2px",
               }}
             >
               Navegación
@@ -143,61 +145,63 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          {/* Columna 3: Sede */}
+          {/* Columna 3: Sede Principal / Oficinas */}
           <Grid item xs={6} sm={6} md={3}>
             <Typography
               sx={{
-                color: "",
                 bgcolor: "#FFCBDA",
                 fontWeight: 800,
                 mb: 4,
                 fontSize: "0.75rem",
-                letterSpacing: "0.3em",
+                letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 width: "fit-content",
                 display: "inline-block",
+                px: 1,
+                py: 0.2,
+                borderRadius: "2px",
               }}
             >
-              La Sede
+              Corporativo
             </Typography>
             <Typography
               sx={{
                 color: deepText,
                 fontSize: "0.85rem",
-                lineHeight: 2,
+                lineHeight: 1.8,
                 mb: 3,
                 fontWeight: 500,
               }}
             >
-              <strong style={{ color: deepText }}>WTC Ciudad de México</strong>{" "}
+              <strong style={{ color: deepText }}>Wapizima Oficial</strong>{" "}
               <br />
-              Montecito 38, Col. Nápoles <br />
-              CP 03810, CDMX.
+              Atención a Clientes y Distribución <br />
+              Sedes Recurrentes: CDMX y Guadalajara.
             </Typography>
             <Typography
               component='a'
-              href='#'
+              href='https://maps.google.com'
               target='_blank'
+              rel='noopener noreferrer'
               sx={{
                 color: deepText,
                 fontWeight: 800,
                 fontSize: "0.7rem",
-                letterSpacing: "0.2em",
+                letterSpacing: "0.15em",
                 textDecoration: "none",
                 borderBottom: `2px solid ${softRose}`,
                 pb: 0.5,
-                "&:hover": { color: deepText, borderColor: deepText },
+                "&:hover": { color: softRose, borderColor: softRose },
                 transition: "0.3s",
                 width: "fit-content",
                 display: "inline-block",
-                bgcolor: "#FFCBDA",
               }}
             >
-              GOOGLE MAPS →
+              VER DIRECCIONES →
             </Typography>
           </Grid>
 
-          {/* Columna 4: Fecha & Scroll */}
+          {/* Columna 4: Fecha Dinámica Automática & Scroll */}
           <Grid
             item
             xs={12}
@@ -208,28 +212,30 @@ export default function Footer() {
               display: "flex",
               flexDirection: "column",
               alignItems: { xs: "center", md: "flex-end" },
+              justifyContent: "space-between",
             }}
           >
-            <Box sx={{ position: "relative", mb: 4 }}>
+            <Box sx={{ position: "relative", mb: { xs: 4, md: 0 } }}>
               <Typography
                 sx={{
                   fontWeight: 900,
-                  fontSize: { xs: "4rem", md: "5.5rem" },
-                  color: "rgba(238, 111, 151, 0.5)", // Rosa fantasma sobre fondo claro
-                  lineHeight: 0.7,
+                  fontSize: { xs: "3.5rem", md: "5rem" },
+                  color: "rgba(238, 111, 151, 0.45)",
+                  lineHeight: 0.8,
                 }}
               >
-                2026
+                {currentYear}
               </Typography>
               <Typography
                 sx={{
                   fontWeight: 800,
-                  fontSize: "1.8rem",
+                  fontSize: "1.2rem",
                   color: deepText,
-                  mt: -2,
+                  mt: 0.5,
+                  letterSpacing: "0.1em",
                 }}
               >
-                6 <span style={{ color: softRose }}></span> JUNIO
+                TEMPORADA • <span style={{ color: softRose }}>ÉLITE</span>
               </Typography>
             </Box>
 
@@ -239,14 +245,15 @@ export default function Footer() {
                 bgcolor: "white",
                 border: `1px solid ${softRose}`,
                 color: softRose,
-                borderRadius: 2,
-                width: 50,
-                height: 50,
+                borderRadius: "12px",
+                width: 48,
+                height: 48,
                 transition: "0.3s",
                 "&:hover": {
                   bgcolor: softRose,
                   color: "#FFF",
                   boxShadow: `0 8px 20px rgba(255, 183, 206, 0.3)`,
+                  transform: "translateY(-3px)",
                 },
               }}
             >
@@ -257,8 +264,8 @@ export default function Footer() {
 
         <Divider
           sx={{
-            borderColor: "rgba(0, 0, 0, 0.05)",
-            mt: { xs: 8, md: 10 },
+            borderColor: "rgba(61, 43, 47, 0.08)",
+            mt: { xs: 6, md: 8 },
             mb: 4,
           }}
         />
@@ -272,45 +279,37 @@ export default function Footer() {
         >
           <Typography
             sx={{
-              color: "rgba(61, 43, 47, 0.4)",
+              color: "rgba(61, 43, 47, 0.45)",
               fontSize: "0.65rem",
               fontWeight: 700,
-              letterSpacing: "0.15em",
+              letterSpacing: "0.1em",
             }}
           >
-            © 2026 CONVENCIÓN WAPIZIMA | TODOS LOS DERECHOS RESERVADOS
+            © {currentYear} CONVENCCIONES WAPIZIMA | TODOS LOS DERECHOS
+            RESERVADOS
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
-            {["POLITICA DE PRIVACIDAD"].map((item) => (
-              <Typography
-                key={item}
-                component='a'
-                href={
-                  item === "CONTACTO"
-                    ? "mailto:contacto@expobellezaybarberias.com"
-                    : "#"
-                }
-                onClick={(e) => {
-                  if (item === "POLITICA DE PRIVACIDAD") {
-                    e.preventDefault();
-                    setOpenPolicy(true);
-                  }
-                }}
-                sx={{
-                  color: "rgba(61, 43, 47, 0.6)",
-                  fontSize: "0.7rem",
-                  textDecoration: "none",
-                  fontWeight: 800,
-                  letterSpacing: "0.1em",
-                  cursor: "pointer",
-                  transition: "0.3s",
-                  "&:hover": { color: softRose },
-                }}
-              >
-                {item}
-              </Typography>
-            ))}
+            <Typography
+              component='a'
+              href='#'
+              onClick={(e) => {
+                e.preventDefault();
+                setOpenPolicy(true);
+              }}
+              sx={{
+                color: "rgba(61, 43, 47, 0.6)",
+                fontSize: "0.7rem",
+                textDecoration: "none",
+                fontWeight: 800,
+                letterSpacing: "0.1em",
+                cursor: "pointer",
+                transition: "0.3s",
+                "&:hover": { color: softRose },
+              }}
+            >
+              POLÍTICA DE PRIVACIDAD
+            </Typography>
           </Stack>
         </Stack>
       </Container>

@@ -27,7 +27,7 @@ export default function App() {
           <Highlights />
           <Stats />
           <Brands />
-          <MapSection />
+          {/* <MapSection /> */}
           <ExperienceGallery />
           {/* <BrandAuthority /> */}
         </section>
@@ -35,13 +35,11 @@ export default function App() {
         <section id='visitantes'>
           <Visitors />
         </section>
-        <section id='register'>
-          <Register />
-        </section>
+        <section id='register'>{/* <Register /> */}</section>
         {/* EXPOSITORES */}
         <section id='expositores'>
           {/* <Exhibitors /> */}
-          <EventTimeline />
+          {/* <EventTimeline /> */}
         </section>
         {/* CONTACTO */}
         {/* <section id='contacto'>

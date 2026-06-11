@@ -2,14 +2,15 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Box, Container, Typography, Stack } from "@mui/material";
 import convencion from "../../assets/images/convencion.jpg";
+
 export default function AboutEvent() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   // --- PALETA COHERENTE ---
-  const brandPink = "#ee6f97ff"; // Rosa pastel claro
-  const deepText = "#3D2B2F"; // Texto oscuro cálido
-  const lightBg = "#FFD9E2"; // Fondo crema rosado
+  const brandPink = "#ee6f97ff";
+  const deepText = "#3D2B2F";
+  const lightBg = "#FFD9E2";
   // -------------------------
 
   return (
@@ -18,7 +19,7 @@ export default function AboutEvent() {
       component='section'
       id='visitantes'
       sx={{
-        py: { xs: 8, md: 20 },
+        py: { xs: 8, md: 16 },
         minHeight: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
@@ -27,16 +28,16 @@ export default function AboutEvent() {
         overflow: "hidden",
       }}
     >
-      {/* Marca de agua BWM - Ahora en un rosa sutil para fondo claro */}
+      {/* Marca de agua - Sutil y elegante */}
       <Typography
         sx={{
           position: "absolute",
-          bottom: { xs: "95%", sm: "87%", md: "80%", lg: "85%" },
-          right: { xs: "1%", md: "64%" },
-          fontSize: { xs: "20vw", md: "5vw" },
+          bottom: { xs: "95%", sm: "87%", md: "75%", lg: "80%" },
+          right: { xs: "1%", md: "60%" },
+          fontSize: { xs: "20vw", md: "6vw" },
           fontWeight: 800,
           color: "transparent",
-          WebkitTextStroke: `3px rgba(238, 111, 151, 2.8)`,
+          WebkitTextStroke: `2px rgba(238, 111, 151, 0.25)`, // Bajamos opacidad para que no compita
           lineHeight: 1,
           userSelect: "none",
           zIndex: 0,
@@ -64,7 +65,6 @@ export default function AboutEvent() {
               <Typography
                 variant='h2'
                 sx={{
-                  // fontFamily: "'Syne', sans-serif",
                   fontSize: { xs: "2.8rem", sm: "3.5rem", md: "5rem" },
                   fontWeight: 900,
                   lineHeight: 1,
@@ -91,24 +91,22 @@ export default function AboutEvent() {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.1rem", md: "1.3rem" },
-                    lineHeight: 1.7,
-                    color: "rgba(61, 43, 47, 0.7)",
+                    fontSize: { xs: "1.1rem", md: "1.25rem" },
+                    lineHeight: 1.8,
+                    color: "rgba(61, 43, 47, 0.8)",
                     fontWeight: 400,
                   }}
                 >
-                  Celebramos siete años siendo parte de tu crecimiento.
-                  Prepárate para una jornada intensiva donde el aprendizaje y la
-                  comunidad se unen en el evento más esperado del año.
+                  Creamos espacios diseñados para inspirar, conectar y acelerar
+                  tu crecimiento profesional. Cada evento de Wapizima es una
+                  inmersión total en las últimas tendencias globales de la
+                  industria del nail art.
                 </Typography>
 
                 <Box
                   sx={{
                     pl: { xs: 0, md: 4 },
-                    borderLeft: {
-                      xs: "none",
-                      md: `2px solid ${brandPink}`,
-                    },
+                    borderLeft: { xs: "none", md: `2px solid ${brandPink}` },
                     position: "relative",
                   }}
                 >
@@ -119,10 +117,9 @@ export default function AboutEvent() {
                         color: deepText,
                         fontWeight: 700,
                         mb: 1,
-                        // fontFamily: "'Syne', sans-serif",
                       }}
                     >
-                      SHOPPING & NETWORKING
+                      EXPOSICIÓN, NETWORKING Y MÁS
                     </Typography>
                     <Typography
                       sx={{
@@ -132,18 +129,18 @@ export default function AboutEvent() {
                         mb: 3,
                       }}
                     >
-                      <b>Venta de productos:</b> Accede a lanzamientos
-                      exclusivos y precios especiales de aniversario en toda
-                      nuestra línea de productos. ¡Renueva tu stock con lo mejor
-                      de Wapizima! <br /> <b>Experiencia Total:</b> Disfruta de
-                      dinámicas en vivo, zonas de práctica y la oportunidad de
-                      conectar con las mejores profesionales de la industria.
+                      <b>Lanzamientos Exclusivos:</b> Accede de primera mano a
+                      colecciones nuevas con precios preferenciales de marca.
+                      ¡Eleva el nivel de tu mesa de trabajo! <br />
+                      <b>Comunidad de Élite:</b> Interactúa en zonas de práctica
+                      guiada y conecta cara a cara con las master instructors
+                      nacionales e internacionales más influyentes.
                     </Typography>
 
                     <Typography
                       variant='caption'
                       sx={{
-                        color: "",
+                        color: deepText,
                         fontWeight: 800,
                         letterSpacing: "0.1em",
                         display: "block",
@@ -155,7 +152,7 @@ export default function AboutEvent() {
                         borderRadius: "4px",
                       }}
                     >
-                      SECCIONES DEL EVENTO:
+                      ¿QUÉ INCLUYEN NUESTRAS SEDES?
                     </Typography>
 
                     <Stack
@@ -165,13 +162,14 @@ export default function AboutEvent() {
                       useFlexGap
                     >
                       {[
-                        "MUSICA EN VIVO",
-                        "CLASES MASTER",
-                        "RIFAS Y PREMIOS",
+                        "MASTER CLASSES",
+                        "ZONAS DE EXPERIENCIA",
+                        "SHOWS EN VIVO",
                         "VENTA DIRECTA",
-                      ].map((evento) => (
+                        "CERTIFICACIONES",
+                      ].map((tag) => (
                         <Box
-                          key={evento}
+                          key={tag}
                           sx={{
                             px: 1.5,
                             py: 0.5,
@@ -184,31 +182,34 @@ export default function AboutEvent() {
                             bgcolor: "white",
                           }}
                         >
-                          {evento}
+                          {tag}
                         </Box>
                       ))}
                     </Stack>
                   </Box>
+
                   <Typography
                     sx={{
                       fontSize: "0.75rem",
                       fontWeight: 800,
-                      color: "",
+                      color: deepText,
                       letterSpacing: "0.2em",
                       textTransform: "uppercase",
                       width: "fit-content",
                       display: "inline-block",
                       bgcolor: "#FFCBDA",
+                      px: 1,
+                      py: 0.2,
                     }}
                   >
-                    #7ºANIVERSARIOWAPIZIMA
+                    #COMUNIDADWAPIZIMA
                   </Typography>
                 </Box>
               </Stack>
             </motion.div>
           </Box>
 
-          {/* LADO DERECHO: COMPOSICIÓN VISUAL */}
+          {/* LADO DERECHO: COMPOSICIÓN VISUAL (Se mantiene idéntico) */}
           <Box sx={{ position: "relative" }}>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -230,7 +231,7 @@ export default function AboutEvent() {
                   <Box
                     component='img'
                     src={convencion}
-                    alt='Beauty Industry Elite'
+                    alt='Wapizima Events Elite'
                     sx={{
                       width: "100%",
                       height: "100%",
@@ -243,7 +244,6 @@ export default function AboutEvent() {
                       },
                     }}
                   />
-                  {/* Gradiente de cierre suave en la base de la imagen */}
                   <Box
                     sx={{
                       position: "absolute",
@@ -257,7 +257,6 @@ export default function AboutEvent() {
                 </Box>
               </Box>
 
-              {/* Elemento decorativo de fondo (Frame) */}
               <Box
                 sx={{
                   position: "absolute",

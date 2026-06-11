@@ -1,19 +1,36 @@
-import { motion } from "framer-motion";
-import { Box, Container, Typography, Button, Stack } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Stack,
+  Card,
+  CardContent,
+  CircularProgress,
+} from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import logowapi from "../../assets/images/LogoWapi-removebg-preview.png";
-import mono from "../../assets/images/sedarosa.webp";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import { useState } from "react";
+
 const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-export default function Hero() {
-  // --- PALETA COHERENTE CON NAVBAR Y FOOTER ---
-  const brandPink = "#ee6f97ff"; // Rosa pastel claro
-  const deepText = "#3D2B2F"; // Texto oscuro cálido
-  const lightBg = "#FFD9E2"; // Fondo crema rosado
-  // --------------------------------------------
+export default function Hero({
+  events,
+  loading,
+  onOpenPurchase,
+  onViewDetails,
+}) {
+  // --- PALETA DE COLORES PREMIUM ---
+  const brandPink = "#ee6f97ff";
+  const deepText = "#3D2B2F";
+  const lightBg = "#FFD9E2";
+
+  // Tomamos solo los 3 eventos más próximos
+  const nextEvents = events ? events.slice(0, 3) : [];
 
   return (
     <Box
@@ -23,11 +40,10 @@ export default function Hero() {
         minHeight: { xs: "auto", md: "100vh" },
         display: "flex",
         alignItems: "center",
-        // Gradiente ligero y elegante
-        background: `#FFD9E2`,
+        background: lightBg,
         overflow: "hidden",
-        pt: { xs: 15, md: 12 }, // Más padding arriba para no chocar con el navbar claro
-        pb: { xs: 8, md: 0 },
+        pt: { xs: 15, md: 12 },
+        pb: { xs: 8, md: 12 },
       }}
     >
       {/* Decoración sutil de fondo */}
@@ -38,7 +54,7 @@ export default function Hero() {
           left: "10%",
           width: "60vw",
           height: "60vw",
-          background: `radial-gradient(circle, rgba(255, 183, 206, 0.12) 0%, transparent 70%)`,
+          background: `radial-gradient(circle, rgba(255, 183, 206, 0.2) 0%, transparent 70%)`,
           filter: "blur(80px)",
           pointerEvents: "none",
           zIndex: 0,
@@ -49,12 +65,12 @@ export default function Hero() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1.2fr 0.8fr" },
-            gap: { xs: 6, lg: 4 },
+            gridTemplateColumns: { xs: "1fr", lg: "0.9fr 1.1fr" },
+            gap: { xs: 6, lg: 8 },
             alignItems: "center",
           }}
         >
-          {/* LADO IZQUIERDO: TEXTOS */}
+          {/* LADO IZQUIERDO: CONCEPTO GENERAL DE LA PLATAFORMA */}
           <Box sx={{ textAlign: { xs: "center", lg: "left" } }}>
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -66,21 +82,18 @@ export default function Hero() {
                   fontSize: "0.75rem",
                   fontWeight: 900,
                   letterSpacing: "0.6em",
-                  color: "#3D2B2F",
-                  bgcolor: "#FFCBDA", // Usando el rosa más oscuro que pidió el cliente
+                  color: "#FFF",
+                  bgcolor: "#3D2B2F",
                   textTransform: "uppercase",
                   mb: 4,
-                  // --- CAMBIOS CLAVE ---
-                  display: "inline-block", // Esto hace que el fondo se ajuste al texto
-                  px: 1.5, // Padding lateral para que respire el resaltado
-                  py: 0.5, // Un poco de padding arriba/abajo
-                  width: "fit-content", // Asegura que no se estire
-                  // ---------------------
-                  alignItems: "center",
-                  gap: 2,
+                  display: "inline-block",
+                  px: 2,
+                  py: 0.8,
+                  width: "fit-content",
+                  borderRadius: "4px",
                 }}
               >
-                CELEBRANDO NUESTRA TRAYECTORIA
+                Plataforma Oficial de Eventos
               </Typography>
             </motion.div>
 
@@ -89,17 +102,17 @@ export default function Hero() {
                 component='h1'
                 variant='h1'
                 sx={{
-                  fontSize: { xs: "3.5rem", sm: "5.5rem", lg: "8.5rem" },
-                  lineHeight: 0.85,
+                  fontSize: { xs: "3rem", sm: "4.5rem", lg: "5.5rem" },
+                  lineHeight: 0.95,
                   fontWeight: 900,
-                  // fontFamily: "'Syne', sans-serif",
-                  color: deepText, // Texto oscuro sobre fondo claro
+                  color: deepText,
                   letterSpacing: "-0.02em",
                   mb: 2,
                 }}
               >
-                {" "}
-                CONVENCIÓN
+                VIVE LA
+                <br />
+                EXPERIENCIA
                 <br />
                 <span
                   style={{
@@ -110,7 +123,6 @@ export default function Hero() {
                 >
                   WAPIZIMA
                 </span>
-                <br /> CDMX
               </Typography>
             </Box>
 
@@ -121,199 +133,220 @@ export default function Hero() {
             >
               <Typography
                 sx={{
-                  fontSize: { xs: "1.1rem", md: "1.2rem" },
-                  maxWidth: 550,
+                  fontSize: { xs: "1.05rem", md: "1.15rem" },
+                  maxWidth: 500,
                   mx: { xs: "auto", lg: 0 },
                   mb: 6,
-                  color: "rgba(61, 43, 47, 0.7)", // Texto descriptivo suave
+                  color: "rgba(61, 43, 47, 0.8)",
                   lineHeight: 1.8,
-                  fontWeight: 400,
                 }}
               >
-                Únete a la celebración más exclusiva de la industria. Una
-                experiencia única llena de aprendizaje, música en vivo, clases
-                magistrales y sorpresas inolvidables en el corazón de la CDMX.
+                Sé parte de los congresos, clases magistrales y competencias más
+                exclusivos de la industria de las uñas en México. Descubre
+                nuestros próximos eventos y asegura tu lugar antes de que se
+                agoten.
               </Typography>
             </motion.div>
 
-            {/* Badges de Info */}
-            {/* <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              sx={{ mb: 8 }}
-            >
-              {[
-                { icon: <CalendarMonthIcon />, text: "06 JUN" },
-                { icon: <LocationOnIcon />, text: "WTC CDMX" },
-              ].map((item, i) => (
-                <Box
-                  key={i}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    px: 3,
-                    py: 1.5,
-                    borderRadius: 2,
-                    bgcolor: "#FFF",
-                    border: `1px solid rgba(255, 183, 206, 0.3)`,
-                    boxShadow: "0 4px 15px rgba(255, 183, 206, 0.1)",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: brandPink,
-                      display: "flex",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    {item.icon}
-                  </Box>
-                  <Typography
-                    sx={{
-                      fontWeight: 800,
-                      fontSize: "0.8rem",
-                      letterSpacing: "0.2em",
-                      color: deepText,
-                    }}
-                  >
-                    {item.text}
-                  </Typography>
-                </Box>
-              ))}
-            </Stack> */}
-
-            {/* Acciones */}
             <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={3}
+              direction='row'
               justifyContent={{ xs: "center", lg: "flex-start" }}
             >
               <Button
-                variant='contained'
-                onClick={() => scrollTo("register")}
-                sx={{
-                  bgcolor: brandPink,
-                  color: "#FFF",
-                  borderRadius: 2,
-                  px: 6,
-                  py: 2.5,
-                  fontWeight: 900,
-                  letterSpacing: "0.2em",
-                  boxShadow: `0 10px 30px rgba(255, 183, 206, 0.4)`,
-                  "&:hover": {
-                    bgcolor: deepText,
-                    color: "#FFF",
-                    transform: "translateY(-5px)",
-                  },
-                  transition: "0.4s",
-                }}
-              >
-                COMPRA TU BOLETO 6 JUN
-              </Button>
-              <Button
                 variant='outlined'
-                onClick={() => scrollTo("expositores")}
+                onClick={() => scrollTo("visitantes")}
                 sx={{
-                  borderColor: "rgba(61, 43, 47, 0.2)",
+                  borderColor: "rgba(61, 43, 47, 0.3)",
                   color: deepText,
-                  borderRadius: 2,
-                  px: 6,
-                  py: 2.5,
+                  borderRadius: "12px",
+                  px: 4,
+                  py: 1.5,
                   fontWeight: 800,
-                  letterSpacing: "0.2em",
+                  letterSpacing: "0.1em",
                   "&:hover": {
                     borderColor: brandPink,
                     color: brandPink,
-                    bgcolor: "rgba(255, 183, 206, 0.05)",
+                    bgcolor: "rgba(255,183,206,0.1)",
                   },
-                  transition: "0.4s",
                 }}
               >
-                VER PROGRAMA
+                Conoce más sobre nosotros
               </Button>
             </Stack>
           </Box>
 
-          {/* LADO DERECHO: IMAGEN */}
-          <Box
-            sx={{
-              position: "relative",
-              display: "flex",
-              justifyContent: { xs: "center", lg: "flex-end" },
-              mt: { xs: 0, lg: 10 },
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2 }}
+          {/* LADO DERECHO: TARJETAS DINÁMICAS DE LOS 3 PRÓXIMOS EVENTOS */}
+          <Box sx={{ width: "100%" }}>
+            <Typography
+              variant='h5'
+              sx={{
+                color: deepText,
+                fontWeight: 900,
+                mb: 3,
+                textAlign: { xs: "center", lg: "left" },
+                letterSpacing: "-0.01em",
+              }}
             >
-              <Box
-                component='img'
-                src={mono}
-                loading='eager'
-                alt='Carolina'
-                sx={{
-                  width: "100%",
-                  height: "auto",
-                  mt: { xs: 10, lg: 0 },
-                  ml: { xs: -10, lg: 0 },
-                  maxWidth: { xs: 500, lg: "100%" },
-                  objectFit: "cover",
-                  borderRadius: 0, // Un poco de redondeo suaviza la estética boutique
-                  filter: "contrast(1.05)",
-                  zIndex: 0,
-                  rotate: "270deg",
-                  position: "absolute",
-                  // boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
-                }}
-              />
+              Próximos Eventos Disponibles 🔥
+            </Typography>
+
+            {loading ? (
+              <Box display='flex' justifyContent='center' py={6}>
+                <CircularProgress sx={{ color: brandPink }} />
+              </Box>
+            ) : nextEvents.length === 0 ? (
               <Typography
-                sx={{
-                  fontWeight: "bold",
-                  fontSize: { xs: "270px", lg: "445px" },
-                  textAlign: "center",
-                  mt: { xs: -20, lg: -48 },
-                  zIndex: 200,
-                  position: "relative",
-                }}
+                variant='body1'
+                sx={{ color: "rgba(61, 43, 47, 0.6)", fontStyle: "italic" }}
               >
-                7º
+                Por el momento no hay eventos programados. ¡Vuelve pronto!
               </Typography>
-              <Typography
-                sx={{
-                  fontWeight: "bold",
-                  fontSize: { xs: "40px", lg: "85px" },
-                  textAlign: "center",
-                  mt: { xs: -17, lg: -27 },
-                  zIndex: 250,
-                  position: "relative",
-                }}
-              >
-                ANIVERSARIO
-              </Typography>
-              <Box
-                component='img'
-                src={logowapi}
-                loading='eager'
-                alt='Carolina'
-                sx={{
-                  width: "100%",
-                  height: "auto",
-                  mt: { xs: -2, lg: 10 },
-                  maxWidth: { xs: 300, lg: "100%" },
-                  objectFit: "cover",
-                  borderRadius: 0, // Un poco de redondeo suaviza la estética boutique
-                  filter: "contrast(1.05)",
-                  zIndex: 0,
-                  rotate: "0deg",
-                  position: "absolute",
-                  display: { xs: "none", lg: "block" },
-                  // boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
-                }}
-              />
-            </motion.div>
+            ) : (
+              <Stack spacing={3}>
+                <AnimatePresence>
+                  {nextEvents.map((evento, index) => (
+                    <motion.div
+                      key={evento.id || index}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ y: -4 }}
+                    >
+                      <Card
+                        sx={{
+                          borderRadius: "20px",
+                          bgcolor: "rgba(255, 255, 255, 0.85)",
+                          backdropFilter: "blur(10px)",
+                          border: "1px solid rgba(238, 111, 151, 0.15)",
+                          boxShadow: "0 10px 30px rgba(61, 43, 47, 0.04)",
+                        }}
+                      >
+                        <CardContent sx={{ p: 3, "&:last-child": { pb: 3 } }}>
+                          <Box
+                            display='flex'
+                            flexDirection={{ xs: "column", sm: "row" }}
+                            justifyContent='space-between'
+                            alignItems={{ xs: "flex-start", sm: "center" }}
+                            gap={2}
+                          >
+                            {/* Detalles informativos del Evento */}
+                            <Box>
+                              <Typography
+                                variant='h6'
+                                sx={{
+                                  fontWeight: 800,
+                                  color: deepText,
+                                  mb: 1,
+                                  lineHeight: 1.2,
+                                }}
+                              >
+                                {evento.titulo}
+                              </Typography>
+
+                              <Stack
+                                direction='row'
+                                spacing={2}
+                                alignItems='center'
+                                sx={{ color: "rgba(61, 43, 47, 0.7)" }}
+                              >
+                                <Box
+                                  display='flex'
+                                  alignItems='center'
+                                  gap={0.5}
+                                >
+                                  <CalendarMonthIcon
+                                    sx={{
+                                      fontSize: "1.1rem",
+                                      color: brandPink,
+                                    }}
+                                  />
+                                  <Typography
+                                    variant='body2'
+                                    sx={{ fontWeight: 700 }}
+                                  >
+                                    {evento.fecha}{" "}
+                                    {/* Formateado desde tu BD o un helper */}
+                                  </Typography>
+                                </Box>
+                                <Box
+                                  display='flex'
+                                  alignItems='center'
+                                  gap={0.5}
+                                >
+                                  <LocationOnIcon
+                                    sx={{
+                                      fontSize: "1.1rem",
+                                      color: brandPink,
+                                    }}
+                                  />
+                                  <Typography
+                                    variant='body2'
+                                    sx={{ fontWeight: 600 }}
+                                  >
+                                    {evento.ubicacion}
+                                  </Typography>
+                                </Box>
+                              </Stack>
+                            </Box>
+
+                            {/* Botones de Acción transaccionales */}
+                            <Stack
+                              direction={{ xs: "row", sm: "column", md: "row" }}
+                              spacing={1.5}
+                              sx={{ width: { xs: "100%", sm: "auto" } }}
+                            >
+                              <Button
+                                variant='outlined'
+                                onClick={() => onViewDetails(evento.slug)}
+                                sx={{
+                                  borderColor: "rgba(61, 43, 47, 0.2)",
+                                  color: deepText,
+                                  borderRadius: "10px",
+                                  fontWeight: 700,
+                                  fontSize: "0.85rem",
+                                  px: 2.5,
+                                  py: 1,
+                                  flexGrow: { xs: 1, sm: 0 },
+                                  "&:hover": {
+                                    borderColor: deepText,
+                                    bgcolor: "rgba(61,43,47,0.03)",
+                                  },
+                                }}
+                              >
+                                Detalles
+                              </Button>
+                              <Button
+                                variant='contained'
+                                onClick={() => onOpenPurchase(evento)}
+                                startIcon={<ConfirmationNumberIcon />}
+                                sx={{
+                                  bgcolor: brandPink,
+                                  color: "#FFF",
+                                  borderRadius: "10px",
+                                  fontWeight: 800,
+                                  fontSize: "0.85rem",
+                                  px: 3,
+                                  py: 1,
+                                  flexGrow: { xs: 1, sm: 0 },
+                                  boxShadow: `0 6px 20px rgba(238, 111, 151, 0.25)`,
+                                  "&:hover": {
+                                    bgcolor: deepText,
+                                    transform: "translateY(-2px)",
+                                  },
+                                  transition: "all 0.3s",
+                                }}
+                              >
+                                Boletos
+                              </Button>
+                            </Stack>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </Stack>
+            )}
           </Box>
         </Box>
       </Container>
@@ -323,17 +356,17 @@ export default function Hero() {
         onClick={() => scrollTo("visitantes")}
         sx={{
           position: "absolute",
-          bottom: 40,
+          bottom: 20,
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",
         }}
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <KeyboardArrowDownIcon sx={{ color: brandPink, fontSize: 40 }} />
+          <KeyboardArrowDownIcon sx={{ color: brandPink, fontSize: 36 }} />
         </motion.div>
       </Box>
     </Box>
