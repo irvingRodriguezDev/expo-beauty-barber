@@ -18,6 +18,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { TicketModal } from "../Modal/TicketModal";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import MethodGet from "../../config/service";
 
 const MyTickets = () => {
   const [email, setEmail] = useState("");
@@ -40,17 +41,10 @@ const MyTickets = () => {
       }
       try {
         // CORRECCIÓN: Un solo objeto para toda la configuración
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/tickets/search-tickets`,
-          {
-            params: {
-              email: email.toLowerCase().trim(),
-            },
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
+        const response = await MethodGet(
+          `/ticket/search?email=${email.toLowerCase().trim()}`,
         );
+        console.log(response, "la respuesta al buscar");
 
         setTickets(response.data.tickets || []);
         setSearched(true);

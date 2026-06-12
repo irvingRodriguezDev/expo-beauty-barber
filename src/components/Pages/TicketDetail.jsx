@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import axios from "axios";
+import MethodGet from "../../config/service";
 
 const TicketView = () => {
   const { code } = useParams();
@@ -35,18 +36,10 @@ const TicketView = () => {
     const fetchTicket = async () => {
       try {
         // Con Axios, la respuesta ya viene parseada en .data
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/tickets/show/${code}`,
-          {
-            // Este header le dice a ngrok que no muestre la página de advertencia
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
+        const response = await MethodGet(`/ticket/${code}`);
 
         // En Axios, si llega aquí es porque el status es 2xx
-        setTicketData(response.data.ticket); // Accedemos a .ticket que envías desde el backend
+        setTicketData(response.data.data); // Accedemos a .ticket que envías desde el backend
         setLoading(false);
       } catch (err) {
         console.error("Error al obtener ticket:", err);
@@ -144,8 +137,9 @@ const TicketView = () => {
                   letterSpacing: -1,
                 }}
               >
-                CONVENCIÓN{" "}
-                <span style={{ color: brandPink }}>WAPIZIMA 2026</span>
+                <span style={{ color: brandPink, textTransform: "uppercase" }}>
+                  {ticketData.evento?.titulo}
+                </span>
               </Typography>
               <Typography
                 sx={{
@@ -153,9 +147,10 @@ const TicketView = () => {
                   opacity: 0.7,
                   mt: 1,
                   fontWeight: 600,
+                  textTransform: "uppercase",
                 }}
               >
-                WORLD TRADE CENTER • CDMX
+                {ticketData.evento?.lugar}
               </Typography>
             </Box>
 
@@ -274,7 +269,7 @@ const TicketView = () => {
                       // fontFamily: "'Syne', sans-serif",
                     }}
                   >
-                    {ticketData?.buyerName}
+                    {ticketData.orden?.buyerName}
                   </Typography>
                 </Box>
 
@@ -301,7 +296,7 @@ const TicketView = () => {
                         fontSize: "1.1rem",
                       }}
                     >
-                      {ticketData?.accessType || "GENERAL PASS"}
+                      {ticketData?.accessType || "ACCESO GENERAL"}
                     </Typography>
                   </Box>
                   <ConfirmationNumberIcon
@@ -355,7 +350,7 @@ const TicketView = () => {
               variant='caption'
               sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 700 }}
             >
-              © 2026 BEAUTY WORL MEXICO
+              © 2026 EVENTOS WAPIZIMA
             </Typography>
           </Stack>
         </Container>

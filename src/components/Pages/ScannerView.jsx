@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { MethodPost } from "../../config/service";
 
 const MySwal = withReactContent(Swal);
 
@@ -103,16 +104,8 @@ const ScannerView = () => {
       setIsScanning(false);
       setLoading(true);
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/tickets/validate`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code }),
-        },
-      );
+      const response = await MethodPost("/ticket/validate", code);
+      console.log(response, "la respuesta al validar");
 
       const result = await response.json();
 

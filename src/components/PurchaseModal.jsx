@@ -11,6 +11,7 @@ import {
   IconButton,
   Divider,
   InputAdornment,
+  Checkbox,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PersonIcon from "@mui/icons-material/Person";
@@ -23,6 +24,7 @@ import FormatDate from "../utils/FormatDate";
 import { formatMexicanCurrency } from "../utils/FormatCurrency";
 import { MethodPost } from "../config/service";
 import Swal from "sweetalert2";
+import { PrivacyPolicyModal } from "./sections/PrivacyPolicyModal";
 
 export default function PurchaseModal({
   open,
@@ -52,7 +54,7 @@ export default function PurchaseModal({
   }, [open, evento]);
 
   if (!evento) return null;
-
+  const [aceptaPoliticas, setAceptaPoliticas] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -140,7 +142,7 @@ export default function PurchaseModal({
   };
 
   const totalPago = Number(formData.cantidad_boletos) * Number(evento.costo);
-
+  const [openPolicyModal, setOpenPolicyModal] = useState(false);
   return (
     <Dialog
       open={open}
@@ -226,6 +228,7 @@ export default function PurchaseModal({
               value={formData.nombre}
               onChange={handleChange}
               variant='outlined'
+              autoComplete='off'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -246,6 +249,7 @@ export default function PurchaseModal({
               value={formData.correo}
               onChange={handleChange}
               variant='outlined'
+              autoComplete='off'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -267,6 +271,7 @@ export default function PurchaseModal({
               onChange={handleChange}
               variant='outlined'
               placeholder='Ej. 5512345678'
+              autoComplete='off'
               inputProps={{ pattern: "[0-9]{10}" }}
               InputProps={{
                 startAdornment: (
@@ -392,13 +397,68 @@ export default function PurchaseModal({
               </Typography>
             </Stack>
           </Box>
-
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 3,
+              px: 2,
+            }}
+          >
+            <Stack
+              direction='row'
+              alignItems='flex-start'
+              spacing={1}
+              sx={{ maxWidth: "420px" }}
+            >
+              <Checkbox
+                checked={aceptaPoliticas}
+                onChange={(e) => setAceptaPoliticas(e.target.checked)}
+                size='small'
+                sx={{
+                  color: "rgba(61, 43, 47, 0.4)",
+                  padding: "2px", // Compacto para que no desfase el texto
+                  "&.Mui-checked": {
+                    color: "#E53888", // El rosa vibrante de Wapizima
+                  },
+                }}
+              />
+              <Typography
+                variant='caption'
+                sx={{
+                  color: "rgba(61, 43, 47, 0.7)",
+                  fontWeight: 600,
+                  lineHeight: 1.4,
+                  textAlign: "left",
+                  userSelect: "none", // Evita que se seleccione el texto al dar clic rápido
+                }}
+              >
+                Al realizar la compra, confirmo que soy mayor de edad y acepto
+                de conformidad la{" "}
+                <span
+                  onClick={() => setOpenPolicyModal(true)} // Aquí disparas la función que abre tu modal de privacidad
+                  style={{
+                    color: "#E53888",
+                    fontWeight: 800,
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                >
+                  política de privacidad
+                </span>{" "}
+                de la plataforma.
+              </Typography>
+            </Stack>
+          </Box>
           {/* BOTÓN SUBMIT COMPRA */}
           <Button
             type='submit'
             variant='contained'
             fullWidth
             startIcon={<ConfirmationNumberIcon />}
+            disabled={!aceptaPoliticas}
             sx={{
               bgcolor: brandPink,
               color: "#FFF",
@@ -420,6 +480,10 @@ export default function PurchaseModal({
           </Button>
         </Box>
       </DialogContent>
+      <PrivacyPolicyModal
+        open={openPolicyModal}
+        onClose={() => setOpenPolicyModal(false)}
+      />
     </Dialog>
   );
 }

@@ -80,7 +80,7 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
               ASISTENTE
             </Typography>
             <Typography sx={{ color: "#FA2DAF", fontWeight: 700 }}>
-              {ticket.buyerName}
+              {ticket.orden?.buyerName}
             </Typography>
           </Box>
           <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />

@@ -49,7 +49,7 @@ export default function Footer() {
       <Container maxWidth='xl'>
         <Grid container spacing={{ xs: 6, md: 4 }}>
           {/* Columna 1: Identidad de Marca */}
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={6}>
             <Box
               component='img'
               src={Logo}
@@ -70,9 +70,9 @@ export default function Footer() {
                 mb: 4,
               }}
             >
-              El punto de encuentro donde tu talento florece y se conecta con la
-              comunidad de nail art más grande de México. Elevando juntas el
-              estándar de nuestra industria.
+              Conéctate con los eventos y la educación de nail art más grande de
+              México. Asegura tu lugar en las mejores experiencias en vivo y
+              eleva el estándar de tu talento junto a nosotros
             </Typography>
 
             <Stack
@@ -82,7 +82,7 @@ export default function Footer() {
                 justifyContent: { xs: "center", md: "flex-start" },
               }}
             >
-              {[InstagramIcon, FacebookIcon, LinkedInIcon].map((Icon, i) => (
+              {[InstagramIcon, FacebookIcon].map((Icon, i) => (
                 <IconButton
                   key={i}
                   sx={{
@@ -105,7 +105,7 @@ export default function Footer() {
           </Grid>
 
           {/* Columna 2: Navegación */}
-          <Grid item xs={6} sm={6} md={2}>
+          {/* <Grid item xs={6} sm={6} md={2}>
             <Typography
               sx={{
                 fontWeight: 800,
@@ -143,10 +143,10 @@ export default function Footer() {
                 </Typography>
               ))}
             </Stack>
-          </Grid>
+          </Grid> */}
 
           {/* Columna 3: Sede Principal / Oficinas */}
-          <Grid item xs={6} sm={6} md={3}>
+          {/* <Grid item xs={6} sm={6} md={3}>
             <Typography
               sx={{
                 bgcolor: "#FFCBDA",
@@ -199,14 +199,14 @@ export default function Footer() {
             >
               VER DIRECCIONES →
             </Typography>
-          </Grid>
+          </Grid> */}
 
           {/* Columna 4: Fecha Dinámica Automática & Scroll */}
           <Grid
             item
             xs={12}
             sm={6}
-            md={3}
+            md={6}
             sx={{
               textAlign: { xs: "center", md: "right" },
               display: "flex",
@@ -285,8 +285,7 @@ export default function Footer() {
               letterSpacing: "0.1em",
             }}
           >
-            © {currentYear} CONVENCCIONES WAPIZIMA | TODOS LOS DERECHOS
-            RESERVADOS
+            © {currentYear} EVENTOS WAPIZIMA | TODOS LOS DERECHOS RESERVADOS
           </Typography>
 
           <Stack direction='row' spacing={{ xs: 2, md: 4 }}>

@@ -82,6 +82,7 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
               mb: 2,
               color: deepText,
               fontFamily: "'Syne', sans-serif",
+              fontSize: { xs: "1.8rem", md: "2.5rem" },
             }}
           >
             Tu privacidad es{" "}
@@ -94,14 +95,17 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
               color: "rgba(61, 43, 47, 0.7)",
               maxWidth: "600px",
               mx: "auto",
+              fontSize: "1rem",
             }}
           >
-            Para el evento <strong>7º Aniversario Wapizima</strong>, detallamos
-            cómo protegemos tu información y garantizamos una compra segura.
+            A través de nuestra plataforma oficial de boletaje, detallamos cómo
+            protegemos tu información y garantizamos una transacción segura en
+            cada uno de nuestros eventos.
           </Typography>
         </Box>
 
         <Box sx={{ display: "grid", gap: 5 }}>
+          {/* Sección 01 */}
           <section>
             <Typography
               variant='subtitle1'
@@ -118,17 +122,25 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
             </Typography>
             <Typography
               variant='body2'
-              sx={{ lineHeight: 1.7, color: "rgba(61, 43, 47, 0.8)" }}
+              sx={{
+                lineHeight: 1.7,
+                color: "rgba(61, 43, 47, 0.8)",
+                fontSize: "0.9rem",
+              }}
             >
-              Recabamos únicamente lo necesario para identificarte:{" "}
+              Recabamos únicamente la información estrictamente necesaria para
+              validar tu acceso:{" "}
               <strong>
-                Nombre completo, correo electrónico y perfil profesional.
+                Nombre completo, correo electrónico y datos de contacto
+                profesional.
               </strong>{" "}
-              Estos datos se utilizan para generar tu boleto digital y enviarte
-              actualizaciones exclusivas del aniversario.
+              Estos datos se utilizan de forma exclusiva para generar tu boleto
+              digital, enviar tus comprobantes de pago y notificarte sobre
+              actualizaciones o cambios importantes del evento adquirido.
             </Typography>
           </section>
 
+          {/* Sección 02 */}
           <section>
             <Stack
               direction='row'
@@ -152,17 +164,24 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
             </Stack>
             <Typography
               variant='body2'
-              sx={{ lineHeight: 1.7, color: "rgba(61, 43, 47, 0.8)" }}
+              sx={{
+                lineHeight: 1.7,
+                color: "rgba(61, 43, 47, 0.8)",
+                fontSize: "0.9rem",
+              }}
             >
               <strong>
-                Wapizima no almacena ni tiene acceso a tus datos bancarios.
+                Wapizima no almacena, no procesa ni tiene acceso a tus datos
+                bancarios o tarjetas de crédito/débito.
               </strong>{" "}
-              El proceso de pago se realiza mediante <strong>Stripe</strong>,
-              líder mundial en seguridad financiera, bajo protocolos de cifrado
-              SSL de grado bancario.
+              Todo el proceso de pago se delega de forma directa a{" "}
+              <strong>Stripe</strong>, una de las pasarelas de pago líderes a
+              nivel mundial, operando bajo rigurosos protocolos de cifrado SSL y
+              estándares de seguridad PCI-DSS de grado bancario.
             </Typography>
           </section>
 
+          {/* Sección 03 */}
           <section>
             <Stack
               direction='row'
@@ -181,17 +200,22 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
                   textTransform: "uppercase",
                 }}
               >
-                03. PROTECCIÓN DEL BOLETO
+                03. PROTECCIÓN Y VALIDEZ DEL BOLETO
               </Typography>
             </Stack>
             <Typography
               variant='body2'
-              sx={{ lineHeight: 1.7, color: "rgba(61, 43, 47, 0.8)" }}
+              sx={{
+                lineHeight: 1.7,
+                color: "rgba(61, 43, 47, 0.8)",
+                fontSize: "0.9rem",
+              }}
             >
-              Tu boleto es personal e intransferible. La plataforma de{" "}
-              <strong>Floreciendo Juntas</strong> asegura que el código QR
-              generado sea único, protegiendo tu acceso al WTC frente a
-              cualquier intento de duplicidad.
+              Cada boleto digital emitido es personal, único e intransferible.
+              Nuestro sistema de seguridad encripta los datos de compra en un
+              **código QR dinámico** asignado a tu orden, asegurando un control
+              de acceso ágil, blindado y protegido frente a cualquier intento de
+              falsificación o duplicidad en la entrada del recinto.
             </Typography>
           </section>
         </Box>
@@ -210,11 +234,13 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
               fontWeight: 900,
               borderRadius: "50px",
               fontSize: "0.9rem",
+              textTransform: "none", // Se ve más moderno e internacional sin el uppercase forzado
               boxShadow: `0 15px 35px rgba(229, 56, 136, 0.3)`,
               "&:hover": { bgcolor: deepText, color: "#fff" },
+              transition: "all 0.3s ease",
             }}
           >
-            ENTENDIDO Y ACEPTAR
+            Entendido y Aceptar
           </Button>
 
           <Typography
@@ -222,12 +248,14 @@ export const PrivacyPolicyModal = ({ open, onClose }) => {
             sx={{
               textAlign: "center",
               color: "rgba(61, 43, 47, 0.4)",
-              fontWeight: 600,
+              fontWeight: 700,
               lineHeight: 1.5,
+              letterSpacing: 0.5,
             }}
           >
-            Última actualización: Abril 2026. <br />
-            Para dudas adicionales, contacta al soporte de Floreciendo Juntas.
+            Última actualización: Junio 2026. <br />
+            Para dudas adicionales o aclaraciones, contacta a nuestro equipo de
+            soporte técnico oficial.
           </Typography>
         </Stack>
       </Container>

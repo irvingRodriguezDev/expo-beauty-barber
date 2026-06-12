@@ -28,6 +28,7 @@ import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import MethodGet from "../../config/service";
 import { formatMexicanCurrency } from "../../utils/FormatCurrency";
+import PurchaseModal from "../PurchaseModal";
 
 export default function EventDetai({
   onOpenPurchase,
@@ -50,6 +51,16 @@ export default function EventDetai({
         console.log("ocurrio un error al obtener el evento", error);
       });
   }, [slug]);
+  const [openPurchase, setOpenPurchase] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const handleClickOpenPurchase = (id) => {
+    setOpenPurchase(true);
+    setSelectedEvent(id);
+  };
+  const handleClosePurchase = () => {
+    setOpenPurchase(false);
+    setSelectedEvent(null);
+  };
 
   // Simulación de fetch a tu API Gateway de AWS usando el slug
   //   useEffect(() => {
@@ -373,7 +384,7 @@ export default function EventDetai({
                     <Button
                       variant='contained'
                       fullWidth
-                      onClick={() => onOpenPurchase?.(evento)}
+                      onClick={() => handleClickOpenPurchase(evento)}
                       startIcon={<ConfirmationNumberIcon />}
                       sx={{
                         bgcolor: brandPink,
@@ -415,6 +426,13 @@ export default function EventDetai({
           </Grid>
         </Container>
       </Box>
+      {selectedEvent && (
+        <PurchaseModal
+          open={openPurchase}
+          onClose={handleClosePurchase}
+          evento={selectedEvent}
+        />
+      )}
       <Footer />
     </>
   );
