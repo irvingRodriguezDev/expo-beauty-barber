@@ -12,10 +12,11 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../../assets/images/logo-wapizima.webp";
+import { Link } from "react-router-dom";
 const navLinks = [
   { label: "Inicio", to: "inicio" },
-  { label: "Experiencia", to: "experiencia" },
-  { label: "visitantes", to: "visitantes" },
+  // { label: "Experiencia", to: "experiencia" },
+  // { label: "visitantes", to: "visitantes" },
 ];
 
 const scrollTo = (id) => {
@@ -90,16 +91,18 @@ export default function Navbar() {
                 "&:hover": { transform: "scale(1.05)" },
               }}
             >
-              <Box
-                component='img'
-                src={Logo}
-                alt='Logo BWM'
-                sx={{
-                  height: { xs: 50, md: 80 },
-                  width: "auto",
-                  objectFit: "contain",
-                }}
-              />
+              <Link to={"/"} style={{ textDecoration: "none" }}>
+                <Box
+                  component='img'
+                  src={Logo}
+                  alt='Logo BWM'
+                  sx={{
+                    height: { xs: 50, md: 80 },
+                    width: "auto",
+                    objectFit: "contain",
+                  }}
+                />
+              </Link>
             </Box>
 
             {/* Desktop Navigation */}
@@ -147,7 +150,7 @@ export default function Navbar() {
                 ))}
               </Stack>
 
-              <Stack direction='row' spacing={2} sx={{ ml: 4 }}>
+              {/* <Stack direction='row' spacing={2} sx={{ ml: 4 }}>
                 <Button
                   variant='contained'
                   onClick={() => scrollTo("register")}
@@ -171,7 +174,7 @@ export default function Navbar() {
                 >
                   BOLETOS
                 </Button>
-              </Stack>
+              </Stack> */}
             </Stack>
 
             {/* Mobile Toggle */}

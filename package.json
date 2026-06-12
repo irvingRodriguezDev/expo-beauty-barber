@@ -16,7 +16,7 @@
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
     "@yudiel/react-qr-scanner": "^2.6.0",
-    "axios": "^1.15.2",
+    "axios": "^1.17.0",
     "framer-motion": "^11.0.0",
     "html5-qrcode": "^2.3.8",
     "qrcode.react": "^4.2.0",
@@ -28,7 +28,8 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^7.14.0",
     "sweetalert2": "^11.26.24",
-    "sweetalert2-react-content": "^5.1.2"
+    "sweetalert2-react-content": "^5.1.2",
+    "swiper": "^12.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

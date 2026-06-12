@@ -25,7 +25,7 @@ const ErrorPage = () => {
         sx={{
           maxWidth: 400,
           width: "100%",
-          borderRadius: 3,
+          borderRadius: "18px",
           boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
           textAlign: "center",
         }}

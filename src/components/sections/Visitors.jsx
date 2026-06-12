@@ -247,7 +247,7 @@ export default function Visitors() {
         </Box>
 
         {/* ÁREA DE REGISTRO E INVITACIÓN (Alineación compactada) */}
-        <Box sx={{ position: "relative" }}>
+        {/* <Box sx={{ position: "relative" }}>
           <Grid container justifyContent='center'>
             <Grid item xs={12} lg={11}>
               <motion.div
@@ -399,7 +399,7 @@ export default function Visitors() {
               </motion.div>
             </Grid>
           </Grid>
-        </Box>
+        </Box> */}
       </Container>
     </Box>
   );

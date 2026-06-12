@@ -13,23 +13,33 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import MethodGet from "../../config/service";
+import EventsSlider from "../EventsSlider";
 
 const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-export default function Hero({
-  events,
-  loading,
-  onOpenPurchase,
-  onViewDetails,
-}) {
+export default function Hero({ loading, onOpenPurchase, onViewDetails }) {
   // --- PALETA DE COLORES PREMIUM ---
   const brandPink = "#ee6f97ff";
   const deepText = "#3D2B2F";
   const lightBg = "#FFD9E2";
 
   // Tomamos solo los 3 eventos más próximos
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    let url = "/events";
+    MethodGet(url)
+      .then((res) => {
+        setEvents(res.data);
+      })
+      .catch((error) => {
+        console.log(error, "ocurrio uyn error");
+      });
+  }, []);
+
   const nextEvents = events ? events.slice(0, 3) : [];
 
   return (
@@ -176,20 +186,22 @@ export default function Hero({
           </Box>
 
           {/* LADO DERECHO: TARJETAS DINÁMICAS DE LOS 3 PRÓXIMOS EVENTOS */}
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: "100%", maxWidth: "800px", mx: "auto" }}>
+            {" "}
+            {/* Agregamos un maxWidth para que una sola tarjeta no se estire infinito en pantallas gigantes */}
             <Typography
               variant='h5'
               sx={{
-                color: deepText,
+                color: brandPink,
                 fontWeight: 900,
+                fontStyle: "italic",
                 mb: 3,
-                textAlign: { xs: "center", lg: "left" },
+                textAlign: { xs: "center", lg: "center" },
                 letterSpacing: "-0.01em",
               }}
             >
               Próximos Eventos Disponibles 🔥
             </Typography>
-
             {loading ? (
               <Box display='flex' justifyContent='center' py={6}>
                 <CircularProgress sx={{ color: brandPink }} />
@@ -197,155 +209,24 @@ export default function Hero({
             ) : nextEvents.length === 0 ? (
               <Typography
                 variant='body1'
-                sx={{ color: "rgba(61, 43, 47, 0.6)", fontStyle: "italic" }}
+                sx={{
+                  color: "rgba(61, 43, 47, 0.6)",
+                  fontStyle: "italic",
+                  textAlign: "center",
+                }}
               >
                 Por el momento no hay eventos programados. ¡Vuelve pronto!
               </Typography>
             ) : (
-              <Stack spacing={3}>
-                <AnimatePresence>
-                  {nextEvents.map((evento, index) => (
-                    <motion.div
-                      key={evento.id || index}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      whileHover={{ y: -4 }}
-                    >
-                      <Card
-                        sx={{
-                          borderRadius: "20px",
-                          bgcolor: "rgba(255, 255, 255, 0.85)",
-                          backdropFilter: "blur(10px)",
-                          border: "1px solid rgba(238, 111, 151, 0.15)",
-                          boxShadow: "0 10px 30px rgba(61, 43, 47, 0.04)",
-                        }}
-                      >
-                        <CardContent sx={{ p: 3, "&:last-child": { pb: 3 } }}>
-                          <Box
-                            display='flex'
-                            flexDirection={{ xs: "column", sm: "row" }}
-                            justifyContent='space-between'
-                            alignItems={{ xs: "flex-start", sm: "center" }}
-                            gap={2}
-                          >
-                            {/* Detalles informativos del Evento */}
-                            <Box>
-                              <Typography
-                                variant='h6'
-                                sx={{
-                                  fontWeight: 800,
-                                  color: deepText,
-                                  mb: 1,
-                                  lineHeight: 1.2,
-                                }}
-                              >
-                                {evento.titulo}
-                              </Typography>
-
-                              <Stack
-                                direction='row'
-                                spacing={2}
-                                alignItems='center'
-                                sx={{ color: "rgba(61, 43, 47, 0.7)" }}
-                              >
-                                <Box
-                                  display='flex'
-                                  alignItems='center'
-                                  gap={0.5}
-                                >
-                                  <CalendarMonthIcon
-                                    sx={{
-                                      fontSize: "1.1rem",
-                                      color: brandPink,
-                                    }}
-                                  />
-                                  <Typography
-                                    variant='body2'
-                                    sx={{ fontWeight: 700 }}
-                                  >
-                                    {evento.fecha}{" "}
-                                    {/* Formateado desde tu BD o un helper */}
-                                  </Typography>
-                                </Box>
-                                <Box
-                                  display='flex'
-                                  alignItems='center'
-                                  gap={0.5}
-                                >
-                                  <LocationOnIcon
-                                    sx={{
-                                      fontSize: "1.1rem",
-                                      color: brandPink,
-                                    }}
-                                  />
-                                  <Typography
-                                    variant='body2'
-                                    sx={{ fontWeight: 600 }}
-                                  >
-                                    {evento.ubicacion}
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                            </Box>
-
-                            {/* Botones de Acción transaccionales */}
-                            <Stack
-                              direction={{ xs: "row", sm: "column", md: "row" }}
-                              spacing={1.5}
-                              sx={{ width: { xs: "100%", sm: "auto" } }}
-                            >
-                              <Button
-                                variant='outlined'
-                                onClick={() => onViewDetails(evento.slug)}
-                                sx={{
-                                  borderColor: "rgba(61, 43, 47, 0.2)",
-                                  color: deepText,
-                                  borderRadius: "10px",
-                                  fontWeight: 700,
-                                  fontSize: "0.85rem",
-                                  px: 2.5,
-                                  py: 1,
-                                  flexGrow: { xs: 1, sm: 0 },
-                                  "&:hover": {
-                                    borderColor: deepText,
-                                    bgcolor: "rgba(61,43,47,0.03)",
-                                  },
-                                }}
-                              >
-                                Detalles
-                              </Button>
-                              <Button
-                                variant='contained'
-                                onClick={() => onOpenPurchase(evento)}
-                                startIcon={<ConfirmationNumberIcon />}
-                                sx={{
-                                  bgcolor: brandPink,
-                                  color: "#FFF",
-                                  borderRadius: "10px",
-                                  fontWeight: 800,
-                                  fontSize: "0.85rem",
-                                  px: 3,
-                                  py: 1,
-                                  flexGrow: { xs: 1, sm: 0 },
-                                  boxShadow: `0 6px 20px rgba(238, 111, 151, 0.25)`,
-                                  "&:hover": {
-                                    bgcolor: deepText,
-                                    transform: "translateY(-2px)",
-                                  },
-                                  transition: "all 0.3s",
-                                }}
-                              >
-                                Boletos
-                              </Button>
-                            </Stack>
-                          </Box>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </Stack>
+              <EventsSlider
+                eventos={nextEvents}
+                brandPink='#EE6F97'
+                deepText='#3D2B2F'
+                onViewDetails={(slug) => console.log("Ver detalle de:", slug)}
+                onOpenPurchase={(evt) =>
+                  console.log("Abrir modal de compra para:", evt.titulo)
+                }
+              />
             )}
           </Box>
         </Box>
