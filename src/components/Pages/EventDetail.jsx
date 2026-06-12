@@ -215,17 +215,14 @@ export default function EventDetail({
                   >
                     Acerca del evento
                   </Typography>
-                  <Typography
-                    variant='body1'
+                  <Box
                     sx={{
-                      color: "rgba(61, 43, 47, 0.8)",
+                      color: "#4a3a50",
                       lineHeight: 1.7,
-                      mb: 4,
-                      textAlign: "justify",
+                      "& p": { mb: 1.5 },
                     }}
-                  >
-                    {evento.descripcion}
-                  </Typography>
+                    dangerouslySetInnerHTML={{ __html: evento.descripcion }}
+                  />
 
                   <Divider
                     sx={{ my: 3, borderColor: "rgba(238, 111, 151, 0.15)" }}
