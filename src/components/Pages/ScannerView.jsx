@@ -104,22 +104,31 @@ const ScannerView = () => {
       setIsScanning(false);
       setLoading(true);
 
-      const response = await MethodPost("/ticket/validate", code);
-      console.log(response, "la respuesta al validar");
+      // 🚀 Disparamos la petición enviando el código en el objeto
+      const response = await MethodPost("/ticket/validate", { code });
+      console.log(response, "la respuesta");
 
-      const result = await response.json();
+      // 💡 NOTA: Si MethodPost usa Axios, los datos están en response.data.
+      // Si usa fetch nativo, dejas el await response.json().
+      // Supongamos que es Axios o maneja data limpia:
+      const result = response.data || (await response.json());
 
-      if (response.ok) {
+      // Evaluamos el status de la respuesta HTTP
+      if (response.status === 200 || result.valid === true) {
         playSound("success");
         setLastStatus("success");
+
+        // 💡 EXTRAEMOS EL NOMBRE DEL COMPRADOR (Mapeado desde la relación que agregamos)
+        const nombreComprador =
+          result.ticket?.orden?.buyerName || "Boleto Válido";
 
         await MySwal.fire({
           icon: "success",
           title: "ACCESO AUTORIZADO",
-          text: result.fullname,
+          text: `Cliente: ${nombreComprador}`, // 🎨 Muestra el nombre real del comprador
           confirmButtonText: "CONTINUAR",
           showConfirmButton: false,
-          timer: 1200,
+          timer: 1500, // Le damos un poquito más de tiempo para que el staff alcance a leer
         });
       } else {
         playSound("error");
@@ -128,19 +137,34 @@ const ScannerView = () => {
         await MySwal.fire({
           icon: "error",
           title: "ENTRADA DENEGADA",
-          text: result.message,
+          text: result.message || "Boleto inválido o ya usado",
           showConfirmButton: false,
-          timer: 1200,
+          timer: 1500,
         });
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error en el escaneo:", error);
+
+      // 🚨 Si el servidor responde un 400 o 404, Axios lo manda directo al catch.
+      // Capturamos el error para pintar la alerta roja de todos modos:
+      playSound("error");
+      setLastStatus("error");
+
+      const errorMsg =
+        error.response?.data?.message || "Error al conectar con el servidor";
+
+      await MySwal.fire({
+        icon: "error",
+        title: "ENTRADA DENEGADA",
+        text: errorMsg,
+        showConfirmButton: false,
+        timer: 2500,
+      });
     } finally {
       setLoading(false);
 
       setTimeout(() => {
         setIsScanning(true);
-
         // LIBERA EL LOCK HASTA EL FINAL
         scanLock.current = false;
       }, 1500);
@@ -373,7 +397,7 @@ const ScannerView = () => {
                 letterSpacing: 1,
               }}
             >
-              World Trade Center • Ciudad de México
+              EVENTOS • WAPIZIMA
             </Typography>
           </Paper>
         </motion.div>

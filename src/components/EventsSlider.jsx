@@ -19,7 +19,6 @@ export default function EventsSlider({
   return (
     <Box
       sx={{
-        width: "100%",
         padding: "10px 5px",
         // Paginación premium estilo barra estirada para Wapizima
         "& .swiper-pagination-bullet": {
@@ -55,7 +54,7 @@ export default function EventsSlider({
       >
         {eventos.map((evento, index) => (
           <SwiperSlide key={evento.id || index} style={{ height: "auto" }}>
-            <Box sx={{ px: { xs: 1, sm: 3 } }}>
+            <Box width='100%'>
               {" "}
               {/* Un pequeño colchón interno para que luzcan las sombras */}
               <EventCard

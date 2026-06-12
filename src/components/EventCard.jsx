@@ -21,21 +21,21 @@ import PurchaseModal from "./PurchaseModal";
 
 export default function EventCard({
   evento,
-  onViewDetails,
-  onOpenPurchase,
   brandPink = "#EE6F97",
   deepText = "#3D2B2F",
 }) {
-  // Aseguramos un precio base formateado o un texto de preventa
   const precioFormateado = evento.costo
     ? `${formatMexicanCurrency(Number(evento.costo))} MXN`
     : "Preventa Activa";
+
   const [openPurchase, setOpenPurchase] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const handleClickOpenPurchase = (id) => {
+
+  const handleClickOpenPurchase = (evt) => {
     setOpenPurchase(true);
-    setSelectedEvent(id);
+    setSelectedEvent(evt);
   };
+
   const handleClosePurchase = () => {
     setOpenPurchase(false);
     setSelectedEvent(null);
@@ -47,223 +47,274 @@ export default function EventCard({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      whileHover={{ y: -4 }}
-      style={{ paddingBottom: "20px" }}
+      whileHover={{ y: -6 }}
+      style={{ paddingBottom: "15px", height: "100%" }}
     >
       <Card
         sx={{
+          width: "100%",
           borderRadius: "24px",
-          bgcolor: "rgba(255, 255, 255, 0.9)",
+          bgcolor: "rgba(255, 255, 255, 0.95)",
           backdropFilter: "blur(15px)",
           border: "1px solid rgba(238, 111, 151, 0.2)",
-          boxShadow: "0 20px 40px rgba(61, 43, 47, 0.06)",
+          boxShadow: "0 15px 35px rgba(61, 43, 47, 0.06)",
           overflow: "hidden",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column", // 💡 Forzamos el flujo vertical siempre
         }}
       >
+        {/* 🖼️ PARTE SUPERIOR: Imagen / Flyer en grande */}
         <Box
-          display='flex'
-          flexDirection={{ xs: "column", md: "row" }}
-          alignItems='stretch'
+          sx={{
+            width: "100%",
+            position: "relative",
+            overflow: "hidden",
+            bgcolor: "rgba(61, 43, 47, 0.03)",
+            // Proporción ideal para flyers verticales/cuadrados en tarjetas (Relación 4:3)
+            aspectRatio: "4/3",
+          }}
         >
-          {/* Contenedor Visual: Flyer del Evento */}
-          <Box
-            sx={{
-              width: { xs: "100%", md: "40%" },
-              minHeight: { xs: "200px", md: "300px" },
-              position: "relative",
-              overflow: "hidden",
-              bgcolor: "rgba(61, 43, 47, 0.03)",
-            }}
-          >
-            {evento.flyer ? (
-              <Box
-                component='img'
-                src={evento.flyer}
-                alt={evento.titulo}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  position: "absolute",
-                  transition: "transform 0.5s ease",
-                  "&:hover": {
-                    transform: "scale(1.04)",
-                  },
-                }}
+          {evento.flyer ? (
+            <Box
+              component='img'
+              src={evento.flyer}
+              alt={evento.titulo}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                transition: "transform 0.5s ease",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
+              }}
+            />
+          ) : (
+            <Box
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              height='100%'
+              width='100%'
+              sx={{
+                background: `linear-gradient(45deg, ${brandPink}15, rgba(255,255,255,1))`,
+              }}
+            >
+              <LocalActivityIcon
+                sx={{ fontSize: "3rem", color: `${brandPink}40` }}
               />
-            ) : (
-              // Fallback estético si no hay imagen arriba todavía
+            </Box>
+          )}
+
+          {/* Badge de Costo Flotando sobre el Flyer */}
+          <Chip
+            label={precioFormateado}
+            sx={{
+              position: "absolute",
+              top: 16,
+              left: 16,
+              bgcolor: "rgba(255, 255, 255, 0.95)",
+              backdropFilter: "blur(5px)",
+              color: deepText,
+              fontWeight: 900,
+              fontSize: ".9rem",
+              padding: "3px",
+              border: `1px solid ${brandPink}30`,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+              "& .MuiChip-label": { px: 1.2 },
+            }}
+          />
+        </Box>
+
+        {/* 📝 PARTE INFERIOR: Detalles del Evento y Botones de Acción */}
+        <CardContent
+          sx={{
+            p: { xs: 3, md: 3.5 },
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            bgcolor:
+              "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,233,238,0.15) 100%)", // Sutil degradado de fondo
+            "&:last-child": { pb: { xs: 3, md: 3.5 } },
+          }}
+        >
+          <Box>
+            {/* Título con Efecto Premium */}
+            <Typography
+              variant='h6'
+              sx={{
+                fontWeight: 900,
+                color: deepText,
+                mb: 2.5,
+                lineHeight: 1.2,
+                fontSize: { xs: "1.25rem", md: "1.4rem" },
+                textTransform: "uppercase",
+                letterSpacing: "-0.02em",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                // Efecto de brillo sutil en el texto para marcas exclusivas
+                background: `linear-gradient(135deg, ${deepText} 0%, #6E4F55 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              {evento.titulo}
+            </Typography>
+
+            {/* 💎 BLOQUE DE METADATOS ESTILO BENTO (Estructura Premium) */}
+            <Stack spacing={1} sx={{ mb: 4 }}>
+              {/* Fila Fecha */}
               <Box
                 display='flex'
                 alignItems='center'
-                justifyContent='center'
-                height='100%'
-                width='100%'
+                gap={1.5}
                 sx={{
-                  background: `linear-gradient(45deg, ${brandPink}15, rgba(255,255,255,1))`,
+                  bgcolor: "rgba(238, 111, 151, 0.05)",
+                  px: 2,
+                  py: 1.2,
+                  borderRadius: "14px",
+                  border: "1px solid rgba(238, 111, 151, 0.08)",
                 }}
               >
-                <LocalActivityIcon
-                  sx={{ fontSize: "3rem", color: `${brandPink}40` }}
-                />
-              </Box>
-            )}
-
-            {/* Badge de Costo Premium sobrepuesto en la imagen */}
-            <Chip
-              label={precioFormateado}
-              sx={{
-                position: "absolute",
-                top: 16,
-                left: 16,
-                bgcolor: "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(5px)",
-                color: deepText,
-                fontWeight: 900,
-                fontSize: "0.85rem",
-                border: `1px solid ${brandPink}30`,
-                boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-                "& .MuiChip-label": { px: 1.5 },
-              }}
-            />
-          </Box>
-
-          {/* Contenedor de Información Transaccional */}
-          <CardContent
-            sx={{
-              p: { xs: 3, sm: 4 },
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              "&:last-child": { pb: { xs: 3, sm: 4 } },
-            }}
-          >
-            <Box>
-              {/* Tag sutil de disponibilidad */}
-              <Typography
-                variant='caption'
-                sx={{
-                  textTransform: "uppercase",
-                  fontWeight: 800,
-                  letterSpacing: "0.1em",
-                  color: brandPink,
-                  display: "block",
-                  mb: 1,
-                }}
-              >
-                {/* Preventa Autorizada Abierta ⚡ */}
-              </Typography>
-
-              <Typography
-                variant='h5'
-                sx={{
-                  fontWeight: 900,
-                  color: deepText,
-                  mb: 2,
-                  lineHeight: 1.2,
-                  fontSize: { xs: "1.3rem", sm: "1.5rem" },
-                  textTransform: "uppercase",
-                }}
-              >
-                {evento.titulo}
-              </Typography>
-
-              <Stack
-                direction={{ xs: "column", sm: "row" }}
-                spacing={{ xs: 1.5, sm: 3 }}
-                sx={{ mb: 4, color: "rgba(61, 43, 47, 0.75)" }}
-              >
-                <Box display='flex' alignItems='center' gap={1}>
-                  <CalendarMonthIcon
-                    sx={{ fontSize: "1.2rem", color: brandPink }}
-                  />
-                  <Typography variant='body2' sx={{ fontWeight: 700 }}>
-                    {FormatDate(evento.fecha)}
-                  </Typography>
-                </Box>
-              </Stack>
-              <Stack
-                direction={{ xs: "column", sm: "row" }}
-                spacing={{ xs: 1.5, sm: 3 }}
-                sx={{ mb: 4, color: "rgba(61, 43, 47, 0.75)" }}
-              >
-                <Box display='flex' alignItems='center' gap={1}>
-                  <LocationOnIcon
-                    sx={{ fontSize: "1.2rem", color: brandPink }}
-                  />
-                  <Typography variant='body2' sx={{ fontWeight: 600 }}>
-                    {evento.lugar}
-                  </Typography>
-                </Box>
-              </Stack>
-            </Box>
-
-            {/* Acciones de Compra Directa */}
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              width='100%'
-            >
-              {/* Ajustamos el Link para que se estire correctamente junto con el botón usando flex: 1 */}
-              <Link
-                to={`/evento/${evento.slug}`}
-                style={{ textDecoration: "none", flex: 1, display: "flex" }}
-              >
-                <Button
-                  variant='outlined'
-                  startIcon={<ArticleIcon />}
-                  fullWidth // <-- Forzamos a que ocupe todo el ancho disponible que le da el Link
+                <Box
+                  display='flex'
+                  alignItems='center'
+                  justifyContent='center'
                   sx={{
-                    borderColor: "rgba(61, 43, 47, 0.25)",
-                    color: deepText,
-                    borderRadius: "12px",
-                    fontWeight: 700,
-                    fontSize: "0.9rem",
-                    py: 1.5,
-                    textTransform: "none",
-                    "&:hover": {
-                      borderColor: deepText,
-                      bgcolor: "rgba(61,43,47,0.03)",
-                    },
+                    bgcolor: "#FFF",
+                    p: 0.8,
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 10px rgba(238,111,151,0.1)",
                   }}
                 >
-                  Detalles
-                </Button>
-              </Link>
+                  <CalendarMonthIcon
+                    sx={{ fontSize: "1.1rem", color: brandPink }}
+                  />
+                </Box>
+                <Typography
+                  variant='body2'
+                  sx={{ fontWeight: 800, fontSize: "0.85rem", color: deepText }}
+                >
+                  {FormatDate(evento.fecha)}
+                </Typography>
+              </Box>
 
-              <Button
-                variant='contained'
-                // 💡 SOLUCIÓN AL RE-RENDER: Añadimos () => antes de tu función
-                // Ahora solo se va a ejecutar cuando el usuario le dé un tap/clic real
-                onClick={() => handleClickOpenPurchase(evento)}
-                startIcon={<ConfirmationNumberIcon />}
+              {/* Fila Lugar */}
+              <Box
+                display='flex'
+                alignItems='center'
+                gap={1.5}
                 sx={{
-                  bgcolor: brandPink,
-                  color: "#FFF",
-                  borderRadius: "12px",
-                  fontWeight: 700,
-                  fontSize: "0.8rem",
-                  px: 4,
-                  py: 1.5,
-                  flex: 1.4,
-                  textTransform: "none",
-                  boxShadow: `0 8px 24px rgba(238, 111, 151, 0.35)`,
-                  "&:hover": {
-                    bgcolor: brandPink,
-                    color: "#FFF",
-                    boxShadow: "0 8px 24px rgba(61, 43, 47, 0.25)",
-                    transform: "translateY(-1px)",
-                  },
-                  transition: "all 0.2s ease-in-out",
+                  bgcolor: "rgba(61, 43, 47, 0.03)",
+                  px: 2,
+                  py: 1.2,
+                  borderRadius: "14px",
+                  border: "1px solid rgba(61, 43, 47, 0.05)",
                 }}
               >
-                Comprar Boleto
-              </Button>
+                <Box
+                  display='flex'
+                  alignItems='center'
+                  justifyContent='center'
+                  sx={{
+                    bgcolor: "#FFF",
+                    p: 0.8,
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.02)",
+                  }}
+                >
+                  <LocationOnIcon
+                    sx={{ fontSize: "1.1rem", color: brandPink }}
+                  />
+                </Box>
+                <Typography
+                  variant='body2'
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                    color: "rgba(61, 43, 47, 0.85)",
+                  }}
+                >
+                  {evento.lugar}
+                </Typography>
+              </Box>
             </Stack>
-          </CardContent>
-        </Box>
+          </Box>
+
+          {/* ⚡ BOTONES DE ACCIÓN UNIFICADOS CON MICROINTERACCIONES */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={1.5}
+            width='100%'
+          >
+            <Link
+              to={`/evento/${evento.slug}`}
+              style={{ textDecoration: "none", flex: 1, display: "flex" }}
+            >
+              <Button
+                variant='outlined'
+                startIcon={<ArticleIcon />}
+                fullWidth
+                sx={{
+                  borderColor: "rgba(61, 43, 47, 0.2)",
+                  color: deepText,
+                  borderRadius: "14px", // Bordes más orgánicos
+                  fontWeight: 800,
+                  fontSize: "0.85rem",
+                  py: 1.4,
+                  textTransform: "none",
+                  letterSpacing: "0.02em",
+                  backdropFilter: "blur(5px)",
+                  transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                  "&:hover": {
+                    borderColor: brandPink,
+                    color: brandPink,
+                    bgcolor: "rgba(238, 111, 151, 0.04)",
+                    transform: "translateY(-1px)",
+                  },
+                }}
+              >
+                Ver Detalles
+              </Button>
+            </Link>
+
+            <Button
+              variant='contained'
+              onClick={() => handleClickOpenPurchase(evento)}
+              startIcon={<ConfirmationNumberIcon />}
+              sx={{
+                // Gradiente premium característico de Wapizima
+                background: `linear-gradient(135deg, ${brandPink} 0%, #D64C77 100%)`,
+                color: "#FFF",
+                borderRadius: "14px",
+                fontWeight: 800,
+                fontSize: "0.85rem",
+                py: 1.4,
+                flex: 1.3,
+                textTransform: "none",
+                letterSpacing: "0.02em",
+                boxShadow: `0 8px 25px rgba(238, 111, 151, 0.35)`,
+                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                "&:hover": {
+                  background: `linear-gradient(135deg, #F080A3 0%, ${brandPink} 100%)`,
+                  boxShadow: `0 12px 28px rgba(238, 111, 151, 0.45)`,
+                  transform: "translateY(-2px)",
+                },
+                "&:active": {
+                  transform: "translateY(0)",
+                },
+              }}
+            >
+              Adquirir Boleto
+            </Button>
+          </Stack>
+        </CardContent>
       </Card>
+
       {selectedEvent && (
         <PurchaseModal
           open={openPurchase}
