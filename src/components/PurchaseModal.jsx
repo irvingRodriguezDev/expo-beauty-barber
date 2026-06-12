@@ -116,8 +116,8 @@ export default function PurchaseModal({
       console.error("Ocurrió un error en el checkout:", error);
 
       Swal.fire({
-        title: "Error de conexión",
-        text: "No pudimos comunicarnos con el servidor. Por favor, verifica tu conexión e intenta de nuevo.",
+        title: "Ocurrio un problema durante la compra",
+        text: error.response.data.message,
         icon: "error",
         timer: 3500,
         showConfirmButton: true,
@@ -308,13 +308,6 @@ export default function PurchaseModal({
                 >
                   {formatMexicanCurrency(Number(evento.costo) || 0)} MXN c/u
                 </Typography>
-                <br />
-                <Typography
-                  variant='caption'
-                  sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 800 }}
-                >
-                  hasta 10 boletos por transacción
-                </Typography>
               </Box>
 
               <Stack direction='row' spacing={1.5} alignItems='center'>
@@ -344,7 +337,6 @@ export default function PurchaseModal({
 
                 <IconButton
                   onClick={handleIncrement}
-                  disabled={formData.cantidad_boletos === 10}
                   sx={{
                     bgcolor: "#FFF",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
