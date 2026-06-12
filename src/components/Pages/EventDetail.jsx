@@ -11,8 +11,6 @@ import {
   Card,
   CardContent,
   Divider,
-  IconButton,
-  Chip,
   CircularProgress,
   useMediaQuery,
   useTheme,
@@ -22,7 +20,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import ShieldIcon from "@mui/icons-material/Shield";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import FormatDate from "../../utils/FormatDate";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
@@ -30,17 +27,18 @@ import MethodGet from "../../config/service";
 import { formatMexicanCurrency } from "../../utils/FormatCurrency";
 import PurchaseModal from "../PurchaseModal";
 
-export default function EventDetai({
-  onOpenPurchase,
+export default function EventDetail({
   brandPink = "#EE6F97",
   deepText = "#3D2B2F",
 }) {
   const { slug } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [evento, setEvento] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [openPurchase, setOpenPurchase] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
   useEffect(() => {
     MethodGet(`/events/${slug}`)
       .then((res) => {
@@ -48,58 +46,21 @@ export default function EventDetai({
         setLoading(false);
       })
       .catch((error) => {
-        console.log("ocurrio un error al obtener el evento", error);
+        console.log("Ocurrió un error al obtener el evento", error);
+        setLoading(false);
       });
   }, [slug]);
-  const [openPurchase, setOpenPurchase] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const handleClickOpenPurchase = (id) => {
+
+  const handleClickOpenPurchase = (evt) => {
+    if (evt.isSoldOut) return; // 🔒 Protección extra en la función
     setOpenPurchase(true);
-    setSelectedEvent(id);
+    setSelectedEvent(evt);
   };
+
   const handleClosePurchase = () => {
     setOpenPurchase(false);
     setSelectedEvent(null);
   };
-
-  // Simulación de fetch a tu API Gateway de AWS usando el slug
-  //   useEffect(() => {
-  //     // Aquí conectarías con tu: axios.get(`${VITE_API_BASE_URL}/events/${slug}`)
-  //     const fetchEventDetail = async () => {
-  //       try {
-  //         setLoading(true);
-  //         // Mock temporal para desarrollo basado en tu ecosistema
-  //         setTimeout(() => {
-  //           setEvento({
-  //             id: 1,
-  //             titulo: "Chrismast Nails Masterclass",
-  //             slug: "chrismast-nails",
-  //             fecha: "2026-06-19",
-  //             lugar: "Grand Forum CDMX",
-  //             ubicacion_detallada:
-  //               "Calz. de Tlalpan 3155, Ojo de Agua, Coyoacán, 04650 Ciudad de México, CDMX",
-  //             precio: 1250,
-  //             flyer_url:
-  //               "https://eventos-wapizima.s3.us-east-2.amazonaws.com/flyers/1781202754087-717668510_1906828490134056_1614804637812860953_n.jpg",
-  //             descripcion:
-  //               "Llega el evento más esperado del año para la industria de las uñas en México. Una capacitación intensiva de diseño de alta gama enfocada en las tendencias globales de la temporada decembrina. Aprende técnicas avanzadas de estructura, mano alzada y aplicación de efectos premium de la mano de los mejores instructores internacionales del ecosistema.",
-  //             incluye: [
-  //               "Acceso completo a las conferencias magistrales",
-  //               "Kit de productos premium Wapizima de regalo",
-  //               "Certificación oficial de asistencia",
-  //               "Coffee break y zona de networking con líderes del sector",
-  //             ],
-  //           });
-  //           setLoading(false);
-  //         }, 600);
-  //       } catch (error) {
-  //         console.error("Error al obtener el evento:", error);
-  //         setLoading(false);
-  //       }
-  //     };
-
-  //     fetchEventDetail();
-  //   }, [slug]);
 
   if (loading) {
     return (
@@ -131,6 +92,9 @@ export default function EventDetai({
     );
   }
 
+  // 💡 Guardamos el estado booleano para fácil lectura limpia en el código
+  const isAgotado = evento.is_sold_out || false;
+
   return (
     <>
       <Navbar />
@@ -141,7 +105,7 @@ export default function EventDetai({
         exit={{ opacity: 0 }}
         sx={{
           minHeight: "100vh",
-          bgcolor: "#FFD8E2", // Fondo rosa pastel suave unificado
+          bgcolor: "#FFD8E2", // Tu tono de fondo premium unificado
           pb: 8,
           pt: 8,
         }}
@@ -175,8 +139,11 @@ export default function EventDetai({
                     borderRadius: "28px",
                     overflow: "hidden",
                     boxShadow: "0 20px 50px rgba(61, 43, 47, 0.08)",
-                    border: "1px solid rgba(238, 111, 151, 0.15)",
+                    border: isAgotado
+                      ? "1px solid rgba(61, 43, 47, 0.15)"
+                      : "1px solid rgba(238, 111, 151, 0.15)",
                     position: "relative",
+                    filter: isAgotado ? "grayscale(15%)" : "none",
                   }}
                 >
                   <Box
@@ -186,11 +153,46 @@ export default function EventDetai({
                     sx={{
                       width: "100%",
                       height: "auto",
-                      //   maxHeight: "550px",
-                      objectFit: "cover",
                       display: "block",
                     }}
                   />
+
+                  {/* 🚨 MARCA DE AGUA SOBRE EL FLYER PRINCIPAL */}
+                  {isAgotado && (
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        bgcolor: "rgba(61, 43, 47, 0.4)",
+                        backdropFilter: "blur(3px)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: "#FFF",
+                          fontWeight: 950,
+                          fontSize: { xs: "2rem", sm: "3rem" },
+                          letterSpacing: "0.15em",
+                          textTransform: "uppercase",
+                          border: "5px solid #FFF",
+                          px: 4,
+                          py: 1.5,
+                          borderRadius: "16px",
+                          transform: "rotate(-10deg)",
+                          boxShadow: "0 15px 35px rgba(0,0,0,0.4)",
+                          textShadow: "0 2px 12px rgba(0,0,0,0.4)",
+                        }}
+                      >
+                        Agotado
+                      </Typography>
+                    </Box>
+                  )}
                 </Card>
 
                 {/* Detalles Informativos del Evento */}
@@ -228,6 +230,7 @@ export default function EventDetai({
                   <Divider
                     sx={{ my: 3, borderColor: "rgba(238, 111, 151, 0.15)" }}
                   />
+
                   {evento.mapa && (
                     <Box
                       sx={{
@@ -236,6 +239,7 @@ export default function EventDetai({
                         borderRadius: "16px",
                         overflow: "hidden",
                         mt: 4,
+                        filter: isAgotado ? "grayscale(30%)" : "none",
                       }}
                     >
                       <iframe
@@ -261,7 +265,9 @@ export default function EventDetai({
                     borderRadius: "24px",
                     bgcolor: "rgba(255, 255, 255, 0.95)",
                     backdropFilter: "blur(10px)",
-                    border: `1px solid rgba(238, 111, 151, 0.25)`,
+                    border: isAgotado
+                      ? `1px solid rgba(61, 43, 47, 0.15)`
+                      : `1px solid rgba(238, 111, 151, 0.25)`,
                     boxShadow: "0 20px 40px rgba(61, 43, 47, 0.05)",
                     p: { xs: 1, sm: 2 },
                   }}
@@ -272,41 +278,70 @@ export default function EventDetai({
                       sx={{
                         textTransform: "uppercase",
                         fontWeight: 800,
-                        color: brandPink,
+                        color: isAgotado ? "rgba(61, 43, 47, 0.5)" : brandPink,
                         letterSpacing: "0.05em",
                       }}
                     >
-                      Costo por boleto
+                      {isAgotado ? "Estado del Inventario" : "Costo por boleto"}
                     </Typography>
-                    <Typography
-                      variant='h3'
-                      sx={{ fontWeight: 900, color: deepText, mt: 0.5, mb: 3 }}
-                    >
-                      {formatMexicanCurrency(Number(evento.costo))}{" "}
-                      <Box
-                        component='span'
+
+                    {/* Modificación dinámica del Bloque de Precio */}
+                    {isAgotado ? (
+                      <Typography
+                        variant='h4'
                         sx={{
-                          fontSize: "1.2rem",
-                          fontWeight: 700,
-                          color: "rgba(61, 43, 47, 0.5)",
+                          fontWeight: 900,
+                          color: "rgba(61, 43, 47, 0.4)",
+                          mt: 0.5,
+                          mb: 3,
                         }}
                       >
-                        MXN
-                      </Box>
-                    </Typography>
+                        BOLETOS AGOTADOS
+                      </Typography>
+                    ) : (
+                      <Typography
+                        variant='h3'
+                        sx={{
+                          fontWeight: 900,
+                          color: deepText,
+                          mt: 0.5,
+                          mb: 3,
+                        }}
+                      >
+                        {formatMexicanCurrency(Number(evento.costo)) || "0.00"}{" "}
+                        <Box
+                          component='span'
+                          sx={{
+                            fontSize: "1.2rem",
+                            fontWeight: 700,
+                            color: "rgba(61, 43, 47, 0.5)",
+                          }}
+                        >
+                          MXN
+                        </Box>
+                      </Typography>
+                    )}
 
                     <Stack spacing={2.5} sx={{ mb: 4 }}>
                       {/* Fecha */}
                       <Stack direction='row' spacing={2} alignItems='center'>
                         <Box
                           sx={{
-                            bgcolor: `${brandPink}15`,
+                            bgcolor: isAgotado
+                              ? "rgba(61, 43, 47, 0.05)"
+                              : `${brandPink}15`,
                             p: 1,
                             borderRadius: "10px",
                             display: "flex",
                           }}
                         >
-                          <CalendarMonthIcon sx={{ color: brandPink }} />
+                          <CalendarMonthIcon
+                            sx={{
+                              color: isAgotado
+                                ? "rgba(61, 43, 47, 0.4)"
+                                : brandPink,
+                            }}
+                          />
                         </Box>
                         <Box>
                           <Typography
@@ -336,13 +371,21 @@ export default function EventDetai({
                       >
                         <Box
                           sx={{
-                            bgcolor: `${brandPink}15`,
+                            bgcolor: isAgotado
+                              ? "rgba(61, 43, 47, 0.05)"
+                              : `${brandPink}15`,
                             p: 1,
                             borderRadius: "10px",
                             display: "flex",
                           }}
                         >
-                          <LocationOnIcon sx={{ color: brandPink }} />
+                          <LocationOnIcon
+                            sx={{
+                              color: isAgotado
+                                ? "rgba(61, 43, 47, 0.4)"
+                                : brandPink,
+                            }}
+                          />
                         </Box>
                         <Box>
                           <Typography
@@ -380,33 +423,45 @@ export default function EventDetai({
                       sx={{ my: 3, borderColor: "rgba(238, 111, 151, 0.15)" }}
                     />
 
-                    {/* CTA Transaccional Principal */}
+                    {/* CTA Transaccional Principal Deshabilitado Dinámicamente */}
                     <Button
                       variant='contained'
                       fullWidth
+                      disabled={isAgotado} // 🔒 Inhabilita el botón de manera nativa en HTML
                       onClick={() => handleClickOpenPurchase(evento)}
                       startIcon={<ConfirmationNumberIcon />}
                       sx={{
-                        bgcolor: brandPink,
-                        color: "#FFF",
+                        background: isAgotado
+                          ? "rgba(61, 43, 47, 0.12) !important"
+                          : `linear-gradient(135deg, ${brandPink} 0%, #D64C77 100%)`,
+                        color: isAgotado
+                          ? "rgba(61, 43, 47, 0.4) !important"
+                          : "#FFF",
                         borderRadius: "14px",
                         fontWeight: 800,
                         fontSize: "1rem",
                         py: 1.8,
                         textTransform: "none",
-                        boxShadow: `0 10px 25px rgba(238, 111, 151, 0.35)`,
+                        boxShadow: isAgotado
+                          ? "none"
+                          : `0 10px 25px rgba(238, 111, 151, 0.35)`,
                         "&:hover": {
-                          bgcolor: brandPink,
-                          color: "#fff",
-                          boxShadow: "0 10px 25px rgba(61, 43, 47, 0.2)",
+                          background: isAgotado
+                            ? "rgba(61, 43, 47, 0.12) !important"
+                            : `linear-gradient(135deg, #F080A3 0%, ${brandPink} 100%)`,
+                          boxShadow: isAgotado
+                            ? "none"
+                            : "0 10px 25px rgba(61, 43, 47, 0.2)",
                         },
                         transition: "all 0.3s",
                       }}
                     >
-                      Adquirir Boleto{" "}
+                      {isAgotado
+                        ? "Venta Terminada (Agotado)"
+                        : "Adquirir Boleto"}
                     </Button>
 
-                    {/* Beneficio de Compra Segura */}
+                    {/* Beneficio de Compra Segura / Leyenda de Sold Out */}
                     <Stack
                       direction='row'
                       spacing={1}
@@ -414,9 +469,16 @@ export default function EventDetai({
                       alignItems='center'
                       sx={{ mt: 2.5, color: "rgba(61, 43, 47, 0.5)" }}
                     >
-                      <ShieldIcon sx={{ fontSize: "1rem", color: "green" }} />
+                      <ShieldIcon
+                        sx={{
+                          fontSize: "1rem",
+                          color: isAgotado ? "grey" : "green",
+                        }}
+                      />
                       <Typography variant='caption' sx={{ fontWeight: 700 }}>
-                        Pago seguro encriptado vía Stripe
+                        {isAgotado
+                          ? "Soporte de eventos: contacto@wapizima.info"
+                          : "Pago seguro encriptado vía Stripe"}
                       </Typography>
                     </Stack>
                   </CardContent>
@@ -426,6 +488,7 @@ export default function EventDetai({
           </Grid>
         </Container>
       </Box>
+
       {selectedEvent && (
         <PurchaseModal
           open={openPurchase}

@@ -106,7 +106,6 @@ export default function PurchaseModal({
             res.data.message ||
             "Ocurrió un problema al generar el link de pago.",
           icon: "error",
-          timer: 3500,
           showConfirmButton: true, // Mejor dejamos que el usuario lo cierre para que lea bien el error
           confirmButtonColor: "#3D2B2F",
         });

@@ -14,7 +14,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../../assets/images/logo-wapizima.webp";
 import { Link } from "react-router-dom";
 const navLinks = [
-  { label: "Inicio", to: "inicio" },
+  { label: "Inicio", to: "/" },
+  { label: "Mis Boletos", to: "/mis-boletos" },
+
   // { label: "Experiencia", to: "experiencia" },
   // { label: "visitantes", to: "visitantes" },
 ];
@@ -114,39 +116,40 @@ export default function Navbar() {
             >
               <Stack direction='row' spacing={4}>
                 {navLinks.map((link) => (
-                  <Box
-                    key={link.to}
-                    component='button'
-                    onClick={() => scrollTo(link.to)}
-                    sx={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      fontSize: "0.7rem",
-                      fontWeight: 800,
-                      letterSpacing: "0.25em",
-                      textTransform: "uppercase",
-                      color:
-                        active === link.to
-                          ? brandPink
-                          : "rgba(61, 43, 47, 0.6)", // Texto suave cuando no está activo
-                      position: "relative",
-                      transition: "0.3s",
-                      "&::after": {
-                        content: '""',
-                        position: "absolute",
-                        bottom: -6,
-                        left: 0,
-                        width: active === link.to ? "100%" : "0%",
-                        height: "2px",
-                        bgcolor: brandPink,
-                        transition: "0.3s ease",
-                      },
-                      "&:hover": { color: deepText },
-                    }}
-                  >
-                    {link.label}
-                  </Box>
+                  <Link to={link.to} style={{ textDecoration: "none" }}>
+                    <Box
+                      key={link.to}
+                      component='button'
+                      sx={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        fontSize: "0.7rem",
+                        fontWeight: 800,
+                        letterSpacing: "0.25em",
+                        textTransform: "uppercase",
+                        color:
+                          active === link.to
+                            ? brandPink
+                            : "rgba(61, 43, 47, 0.6)", // Texto suave cuando no está activo
+                        position: "relative",
+                        transition: "0.3s",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          bottom: -6,
+                          left: 0,
+                          width: active === link.to ? "100%" : "0%",
+                          height: "2px",
+                          bgcolor: brandPink,
+                          transition: "0.3s ease",
+                        },
+                        "&:hover": { color: deepText },
+                      }}
+                    >
+                      {link.label}
+                    </Box>
+                  </Link>
                 ))}
               </Stack>
 
