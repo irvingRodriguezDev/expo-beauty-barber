@@ -4,10 +4,9 @@ import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import { Box } from "@mui/material";
 import EventCard from "./EventCard";
 
-// Importación de estilos obligatorios de Swiper
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade"; // Estilo para transición fluida de una tarjeta
+import "swiper/css/effect-fade";
 
 export default function EventsSlider({
   eventos = [],
@@ -19,44 +18,44 @@ export default function EventsSlider({
   return (
     <Box
       sx={{
-        padding: "10px 5px",
-        // Paginación premium estilo barra estirada para Wapizima
+        padding: "0px 5px",
+        width: "100%",
+        maxWidth: "460px", // Limita el ancho máximo para mantener las proporciones estilizadas del flyer vertical
+        margin: "0 auto",
         "& .swiper-pagination-bullet": {
           bgcolor: "rgba(61, 43, 47, 0.2)",
           opacity: 1,
         },
         "& .swiper-pagination-bullet-active": {
           bgcolor: brandPink,
-          width: "30px",
+          width: "25px",
           borderRadius: "4px",
           transition: "all 0.4s ease",
         },
         "& .swiper-pagination": {
           position: "relative",
-          marginTop: "25px",
+          marginTop: "15px",
         },
       }}
     >
       <Swiper
         modules={[Pagination, Autoplay, EffectFade]}
         spaceBetween={0}
-        slidesPerView={1} // <-- Fuerza estrictamente 1 tarjeta a la vez en cualquier pantalla
-        effect={"fade"} // <-- Hace un efecto cross-fade elegante (puedes quitarlo si prefieres slide horizontal)
+        slidesPerView={1}
+        effect={"fade"}
         fadeEffect={{ crossFade: true }}
         pagination={{ clickable: true }}
-        loop={eventos.length > 1} // Solo hace ciclo infinito si hay más de 1 evento
+        loop={eventos.length > 1}
         autoplay={{
-          delay: 4000, // Tus 4 segundos exactos
+          delay: 4000,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true, // Si el usuario pasa el mouse para comprar, se pausa temporalmente
+          pauseOnMouseEnter: true,
         }}
         style={{ width: "100%", height: "auto" }}
       >
         {eventos.map((evento, index) => (
-          <SwiperSlide key={evento.id || index} style={{ height: "auto" }}>
-            <Box width='100%'>
-              {" "}
-              {/* Un pequeño colchón interno para que luzcan las sombras */}
+          <SwiperSlide key={evento.id || index}>
+            <Box sx={{ p: 1, height: "100%" }}>
               <EventCard
                 evento={evento}
                 onViewDetails={onViewDetails}

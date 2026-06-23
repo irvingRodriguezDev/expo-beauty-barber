@@ -27,7 +27,7 @@ const style = {
 export const TicketModal = ({ open, handleClose, ticket }) => {
   if (!ticket) return null;
 
-  const brandCyan = "#FA2DAF";
+  const brandCyan = "#EE6F97";
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -46,7 +46,7 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
 
         <Typography
           variant='h6'
-          sx={{ color: brandCyan, fontWeight: 900, mb: 1 }}
+          sx={{ color: "#3D2B2F", fontWeight: 900, mb: 1 }}
         >
           BOLETO DIGITAL
         </Typography>
@@ -76,16 +76,20 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
 
         <Stack spacing={1} sx={{ textAlign: "left", mt: 2 }}>
           <Box>
-            <Typography sx={{ color: "#FA2DAF", fontSize: "0.7rem" }}>
+            <Typography
+              sx={{ color: "#3D2B2F", fontSize: "0.9rem", fontWeight: "bold" }}
+            >
               ASISTENTE
             </Typography>
-            <Typography sx={{ color: "#FA2DAF", fontWeight: 700 }}>
+            <Typography sx={{ color: "#EE6F97", fontWeight: 700 }}>
               {ticket.orden?.buyerName}
             </Typography>
           </Box>
           <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
           <Box>
-            <Typography sx={{ color: "#FA2DAF", fontSize: "0.7rem" }}>
+            <Typography
+              sx={{ color: "#3D2B2F", fontSize: "0.9rem", fontWeight: "bold" }}
+            >
               CÓDIGO DE ACCESO
             </Typography>
             <Typography

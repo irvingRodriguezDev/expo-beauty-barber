@@ -44,7 +44,6 @@ const MyTickets = () => {
         const response = await MethodGet(
           `/ticket/search?email=${email.toLowerCase().trim()}`,
         );
-        console.log(response, "la respuesta al buscar");
 
         setTickets(response.data.tickets || []);
         setSearched(true);
@@ -256,7 +255,8 @@ const MyTickets = () => {
                               mt: 0.5,
                             }}
                           >
-                            CONVENCIÓN WAPIZIMA 2026
+                            {JSON.stringify()}
+                            {ticket.evento?.titulo || "Eventos Wapizima"}
                           </Typography>
                         </Box>
 

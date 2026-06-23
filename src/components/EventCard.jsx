@@ -10,7 +10,6 @@ import {
   Chip,
 } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import FormatDate from "../utils/FormatDate";
@@ -24,18 +23,16 @@ export default function EventCard({
   brandPink = "#EE6F97",
   deepText = "#3D2B2F",
 }) {
-  // 💡 Simulamos o leemos el estado de Sold Out (Cámbialo por tu propiedad real, ej: evento.sold_out)
   const isAgotado = evento.is_sold_out || false;
+  const [openPurchase, setOpenPurchase] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const precioFormateado = evento.costo
     ? `${formatMexicanCurrency(Number(evento.costo))} MXN`
     : "Preventa Activa";
 
-  const [openPurchase, setOpenPurchase] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-
   const handleClickOpenPurchase = (evt) => {
-    if (isAgotado) return; // Protección extra
+    if (isAgotado) return;
     setOpenPurchase(true);
     setSelectedEvent(evt);
   };
@@ -47,39 +44,37 @@ export default function EventCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-      whileHover={!isAgotado ? { y: -6 } : {}} // No animar elevación si está agotado
-      style={{ paddingBottom: "15px", height: "100%" }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      whileHover={!isAgotado ? { y: -4 } : {}}
+      style={{ height: "100%", display: "flex" }}
     >
       <Card
         sx={{
           width: "100%",
           borderRadius: "24px",
-          bgcolor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(15px)",
-          border: isAgotado
-            ? "1px solid rgba(61, 43, 47, 0.1)"
-            : "1px solid rgba(238, 111, 151, 0.2)",
-          boxShadow: "0 15px 35px rgba(61, 43, 47, 0.06)",
+          bgcolor: "rgba(255, 255, 255, 0.98)",
+          border: `1px solid rgba(238, 111, 151, 0.15)`,
+          boxShadow: "0 10px 30px rgba(61, 43, 47, 0.04)",
           overflow: "hidden",
-          height: "100%",
           display: "flex",
           flexDirection: "column",
-          opacity: isAgotado ? 0.85 : 1, // Sutil opacidad general si está agotado
-          filter: isAgotado ? "grayscale(20%)" : "none",
+          maxHeight: "85vh", // Evita que crezca infinitamente en pantallas verticales
         }}
       >
-        {/* 🖼️ PARTE SUPERIOR: Imagen / Flyer */}
+        {/* 🖼️ CONTENEDOR FLEXIBLE PARA EL FLYER */}
         <Box
           sx={{
             width: "100%",
+            flex: "1 1 auto",
             position: "relative",
             overflow: "hidden",
-            bgcolor: "rgba(61, 43, 47, 0.03)",
-            aspectRatio: "4/3",
+            bgcolor: "rgba(61, 43, 47, 0.02)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           {evento.flyer ? (
@@ -90,7 +85,8 @@ export default function EventCard({
               sx={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+                objectFit: "cover", // O "contain" si prefieres ver los bordes completos sin recortes mínimos
+                objectPosition: "center top",
               }}
             />
           ) : (
@@ -98,19 +94,19 @@ export default function EventCard({
               display='flex'
               alignItems='center'
               justifyContent='center'
-              height='100%'
+              height='250px'
               width='100%'
               sx={{
-                background: `linear-gradient(45deg, ${brandPink}15, rgba(255,255,255,1))`,
+                background: `linear-gradient(45deg, ${brandPink}10, rgba(255,255,255,1))`,
               }}
             >
               <LocalActivityIcon
-                sx={{ fontSize: "3rem", color: `${brandPink}40` }}
+                sx={{ fontSize: "2.5rem", color: `${brandPink}30` }}
               />
             </Box>
           )}
 
-          {/* 🚨 MARCA DE AGUA PREMIUM "SOLD OUT" (Se sobrepone al flyer) */}
+          {/* Sello de Agotado */}
           {isAgotado && (
             <Box
               sx={{
@@ -119,129 +115,99 @@ export default function EventCard({
                 left: 0,
                 width: "100%",
                 height: "100%",
-                bgcolor: "rgba(61, 43, 47, 0.55)", // Capa oscura traslúcida
-                backdropFilter: "blur(4px)", // Efecto glassmorphism
+                bgcolor: "rgba(61, 43, 47, 0.4)",
+                backdropFilter: "blur(4px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 zIndex: 2,
               }}
             >
-              <motion.div
-                initial={{ scale: 0.6, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 100 }}
+              <Typography
+                sx={{
+                  color: "#FFF",
+                  fontWeight: 900,
+                  fontSize: "1.8rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  border: "3px solid #FFF",
+                  px: 3,
+                  py: 0.5,
+                  borderRadius: "8px",
+                  transform: "rotate(-10deg)",
+                  textShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                }}
               >
-                <Typography
-                  sx={{
-                    color: "#FFF",
-                    fontWeight: 950,
-                    fontSize: { xs: "1.8rem", md: "2.2rem" },
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    border: "4px solid #FFF",
-                    px: 3,
-                    py: 1,
-                    borderRadius: "12px",
-                    transform: "rotate(-12deg)", // Inclinación premium estilo sello
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-                    textShadow: "0 2px 10px rgba(0,0,0,0.5)",
-                    fontStyle: "italic",
-                  }}
-                >
-                  Agotado
-                </Typography>
-              </motion.div>
+                Agotado
+              </Typography>
             </Box>
           )}
 
-          {/* Badge de Costo (Oculto si está agotado para limpiar la UI) */}
+          {/* Badge del Precio flotando de forma sutil */}
           {!isAgotado && (
             <Chip
               label={precioFormateado}
               sx={{
                 position: "absolute",
-                top: 16,
-                left: 16,
+                top: 14,
+                left: 14,
                 bgcolor: "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(5px)",
+                backdropFilter: "blur(8px)",
                 color: deepText,
-                fontWeight: 900,
-                fontSize: "0.8rem",
-                border: `1px solid ${brandPink}30`,
-                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                "& .MuiChip-label": { px: 1.2 },
+                fontWeight: 800,
+                fontSize: "0.75rem",
+                border: `1px solid rgba(61, 43, 47, 0.08)`,
+                boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+                zIndex: 1,
               }}
             />
           )}
         </Box>
 
-        {/* 📝 PARTE INFERIOR: Detalles del Evento */}
+        {/* 📝 CONTENEDOR DE DETALLES Y BOTONES (Fijado abajo para acceso inmediato) */}
         <CardContent
           sx={{
-            p: { xs: 3, md: 3.5 },
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            "&:last-child": { pb: { xs: 3, md: 3.5 } },
+            p: 2.5,
+            bgcolor: "#FFF",
+            borderTop: "1px solid rgba(61, 43, 47, 0.04)",
+            flex: "0 0 auto", // Impide que esta sección colapse o se estire anormalmente
           }}
         >
-          <Box>
+          <Typography
+            variant='h6'
+            sx={{
+              fontWeight: 800,
+              color: deepText,
+              mb: 1.5,
+              fontSize: "1.15rem",
+              lineHeight: 1.3,
+              display: "-webkit-box",
+              WebkitLineClamp: 1, // Reducido a 1 línea para ganar espacio vertical para los botones
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textTransform: "uppercase",
+            }}
+          >
+            {evento.titulo}
+          </Typography>
+
+          <Stack direction='row' alignItems='center' gap={1} sx={{ mb: 2 }}>
+            <CalendarMonthIcon sx={{ fontSize: "1rem", color: brandPink }} />
             <Typography
-              variant='h6'
+              variant='body2'
               sx={{
-                fontWeight: 900,
-                color: isAgotado ? "rgba(61, 43, 47, 0.6)" : deepText,
-                mb: 2.5,
-                lineHeight: 1.2,
-                fontSize: { xs: "1.25rem", md: "1.4rem" },
-                textTransform: "uppercase",
-                letterSpacing: "-0.02em",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                overflow: "hidden",
+                fontWeight: 600,
+                fontSize: "0.8rem",
+                color: "rgba(61, 43, 47, 0.7)",
               }}
             >
-              {evento.titulo}
+              {FormatDate(evento.fecha)}
             </Typography>
+          </Stack>
 
-            <Stack spacing={1} sx={{ mb: 4 }}>
-              <Box
-                display='flex'
-                alignItems='center'
-                gap={1.5}
-                sx={{
-                  bgcolor: "rgba(238, 111, 151, 0.03)",
-                  px: 2,
-                  py: 1.2,
-                  borderRadius: "14px",
-                }}
-              >
-                <CalendarMonthIcon
-                  sx={{
-                    fontSize: "1.1rem",
-                    color: isAgotado ? "rgba(61,43,47,0.4)" : brandPink,
-                  }}
-                />
-                <Typography
-                  variant='body2'
-                  sx={{
-                    fontWeight: 800,
-                    fontSize: "0.85rem",
-                    color: isAgotado ? "rgba(61,43,47,0.5)" : deepText,
-                  }}
-                >
-                  {FormatDate(evento.fecha)}
-                </Typography>
-              </Box>
-            </Stack>
-          </Box>
-
-          {/* ⚡ BOTONES DE ACCIÓN */}
+          {/* ⚡ BOTONES DE ACCIÓN VISIBLES Y ERGONÓMICOS */}
           <Stack
-            direction={{ xs: "column", sm: "row" }}
+            direction={{ xs: "column", md: "row" }}
             spacing={1.5}
             width='100%'
           >
@@ -254,41 +220,41 @@ export default function EventCard({
                 startIcon={<ArticleIcon />}
                 fullWidth
                 sx={{
-                  borderColor: "rgba(61, 43, 47, 0.2)",
+                  borderColor: "rgba(61, 43, 47, 0.15)",
                   color: deepText,
-                  borderRadius: "14px",
-                  fontWeight: 800,
-                  fontSize: "0.85rem",
-                  py: 1.4,
+                  borderRadius: "12px",
+                  fontWeight: 700,
+                  fontSize: "0.8rem",
+                  py: 1.2,
                   textTransform: "none",
+                  "&:hover": {
+                    borderColor: brandPink,
+                    bgcolor: "rgba(238, 111, 151, 0.02)",
+                  },
                 }}
               >
-                Ver Detalles
+                Detalles
               </Button>
             </Link>
-            {/* Cambia dinámicamente si está agotado */}
+
             <Button
               variant='contained'
-              disabled={isAgotado} // 🔒 Deshabilitamos la interacción nativa
+              disabled={isAgotado}
               onClick={() => handleClickOpenPurchase(evento)}
               startIcon={<ConfirmationNumberIcon />}
               sx={{
-                background: isAgotado
-                  ? "rgba(61, 43, 47, 0.12) !important"
-                  : `linear-gradient(135deg, ${brandPink} 0%, #D64C77 100%)`,
-                color: isAgotado ? "rgba(61, 43, 47, 0.4) !important" : "#FFF",
-                borderRadius: "14px",
-                fontWeight: 800,
-                fontSize: "0.85rem",
-                py: 1.4,
-                flex: 1.3,
+                background: `linear-gradient(135deg, ${brandPink} 0%, #D64C77 100%)`,
+                color: "#FFF",
+                borderRadius: "12px",
+                fontWeight: 700,
+                fontSize: "0.8rem",
+                py: 1.2,
+                flex: 1.2,
                 textTransform: "none",
-                boxShadow: isAgotado
-                  ? "none"
-                  : `0 8px 25px rgba(238, 111, 151, 0.35)`,
+                boxShadow: `0 6px 20px rgba(238, 111, 151, 0.25)`,
               }}
             >
-              {isAgotado ? "Agotado" : "Adquirir Boleto"}
+              Comprar
             </Button>
           </Stack>
         </CardContent>
