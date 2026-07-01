@@ -15,8 +15,8 @@ import {
   Divider,
 } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import axios from "axios";
 import MethodGet from "../../config/service";
+import WapiLogo from "../../assets/images/wsinfilo.png";
 
 const TicketView = () => {
   const { code } = useParams();
@@ -32,14 +32,15 @@ const TicketView = () => {
   const deepText = "#3D2B2F";
   const softBg = "#FFD9E2";
 
+  // Dimensiones calculadas dinámicamente para el QR y el círculo central
+  const qrSize = isMobile ? 180 : 220;
+  const centerSize = isMobile ? 70 : 100; // Tamaño perfecto para el círculo premium
+
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        // Con Axios, la respuesta ya viene parseada en .data
         const response = await MethodGet(`/ticket/${code}`);
-
-        // En Axios, si llega aquí es porque el status es 2xx
-        setTicketData(response.data.data); // Accedemos a .ticket que envías desde el backend
+        setTicketData(response.data.data);
         setLoading(false);
       } catch (err) {
         console.error("Error al obtener ticket:", err);
@@ -132,7 +133,6 @@ const TicketView = () => {
               <Typography
                 variant='h4'
                 sx={{
-                  // fontFamily: "'Syne', sans-serif",
                   fontWeight: 900,
                   letterSpacing: -1,
                 }}
@@ -182,32 +182,74 @@ const TicketView = () => {
               />
             </Box>
 
-            {/* QR Section */}
+            {/* QR Section con Contenedor Premium */}
             <Box sx={{ p: 4, textAlign: "center" }}>
               <Box
                 sx={{
                   display: "inline-block",
                   p: 2,
                   bgcolor: "#FFF",
-                  borderRadius: 1,
+                  borderRadius: "24px", // Bordes más redondeados para la estética premium
                   border: `2px solid #ee6f97`,
                   boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
+                  position: "relative", // Clave para posicionar el círculo encima
                 }}
               >
+                {/* Código QR Base */}
                 <QRCodeCanvas
                   value={code}
-                  size={isMobile ? 180 : 220}
+                  size={qrSize}
                   level='H'
                   fgColor={deepText}
+                  imageSettings={{
+                    src: "", // No pasamos la imagen por aquí para evitar el renderizado plano
+                    height: centerSize,
+                    width: centerSize,
+                    excavate: true, // Deja el espacio en blanco perfecto para el círculo
+                  }}
                 />
+
+                {/* Insignia Circular Premium (Incrustada exactamente al centro) */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: centerSize,
+                    height: centerSize,
+                    borderRadius: "50%",
+                    bgcolor: "#FFFFFF",
+                    // Doble borde sutil emulando la estética oro rosa/marca elegante de la imagen
+                    border: `2px solid ${brandPink}`,
+                    boxShadow:
+                      "0px 4px 12px rgba(61, 43, 47, 0.15), inset 0px 2px 4px rgba(255, 255, 255, 0.8)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    pt: "6px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Box
+                    component='img'
+                    src={WapiLogo}
+                    alt='Wapizima Logo'
+                    sx={{
+                      width: "90%",
+                      height: "90%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </Box>
               </Box>
+
               <Typography
                 sx={{
                   mt: 3,
                   fontWeight: 900,
                   letterSpacing: 4,
                   color: deepText,
-                  // fontFamily: "monospace",
                 }}
               >
                 {code}
@@ -266,7 +308,6 @@ const TicketView = () => {
                       color: deepText,
                       fontWeight: 900,
                       textTransform: "uppercase",
-                      // fontFamily: "'Syne', sans-serif",
                     }}
                   >
                     {ticketData.orden?.buyerName}
