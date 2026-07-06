@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Dialog,
   DialogContent,
   Box,
   Typography,
   TextField,
-  Stack,
   Button,
   IconButton,
   Divider,
@@ -33,15 +31,15 @@ export default function PurchaseModal({
   brandPink = "#EE6F97",
   deepText = "#3D2B2F",
 }) {
-  // Estados del Formulario
   const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
     telefono: "",
     cantidad_boletos: 1,
   });
+  const [aceptaPoliticas, setAceptaPoliticas] = useState(false);
+  const [openPolicyModal, setOpenPolicyModal] = useState(false);
 
-  // Resetear el formulario cada vez que se abre con un evento nuevo
   useEffect(() => {
     if (open) {
       setFormData({
@@ -50,17 +48,18 @@ export default function PurchaseModal({
         telefono: "",
         cantidad_boletos: 1,
       });
+      setAceptaPoliticas(false); // Reiniciar el checkbox al abrir
     }
   }, [open, evento]);
 
   if (!evento) return null;
-  const [aceptaPoliticas, setAceptaPoliticas] = useState(false);
+  const isAgotado = evento.is_sold_out || false;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Manejadores del contador de boletos
   const handleIncrement = () => {
     setFormData((prev) => ({
       ...prev,
@@ -75,10 +74,9 @@ export default function PurchaseModal({
         cantidad_boletos: Number(prev.cantidad_boletos) - 1,
       }));
     }
-    4;
   };
+
   const handleConfirmPurchase = async (payload) => {
-    // 1. Mostramos un modal de carga inmediato para congelar la pantalla y evitar clics dobles
     onClose();
     Swal.fire({
       title: "Procesando tu solicitud...",
@@ -86,50 +84,43 @@ export default function PurchaseModal({
       icon: "info",
       allowOutsideClick: false,
       didOpen: () => {
-        Swal.showLoading(); // Muestra el spinner nativo de SweetAlert
+        Swal.showLoading();
       },
     });
 
     try {
       let url = "/reservar";
-      // 2. Realizamos la petición POST a tu API Gateway
       const res = await MethodPost(url, payload);
 
       if (res.data && res.data.stripeUrl) {
-        // 3. ¡CORRECCIÓN CRÍTICA! Redirección correcta usando .href
         window.location.href = res.data.stripeUrl;
       } else {
-        // Si la API responde pero no trae URL (por ejemplo, error controlado del backend)
         Swal.fire({
           title: "Ha habido un problema",
           text:
             res.data.message ||
             "Ocurrió un problema al generar el link de pago.",
           icon: "error",
-          showConfirmButton: true, // Mejor dejamos que el usuario lo cierre para que lea bien el error
-          confirmButtonColor: "#3D2B2F",
+          showConfirmButton: true,
+          confirmButtonColor: deepText,
         });
       }
     } catch (error) {
-      // 4. Captura de errores de red o caídas del servidor AWS
       console.error("Ocurrió un error en el checkout:", error);
-
       Swal.fire({
-        title: "Ocurrio un problema durante la compra",
-        text: error.response.data.message,
+        title: "Ocurrió un problema durante la compra",
+        text: error.response?.data?.message || "Error de conexión",
         icon: "error",
-        timer: 3500,
         showConfirmButton: true,
-        confirmButtonColor: "#3D2B2F",
+        confirmButtonColor: deepText,
       });
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Payload estructurado listo para tu Backend en AWS
     const payload = {
-      eventId: evento.id, // ID oculto requerido
+      eventId: evento.id,
       evento: evento.titulo,
       buyerName: formData.nombre,
       buyerEmail: formData.correo,
@@ -141,7 +132,21 @@ export default function PurchaseModal({
   };
 
   const totalPago = Number(formData.cantidad_boletos) * Number(evento.costo);
-  const [openPolicyModal, setOpenPolicyModal] = useState(false);
+
+  // Estilos comunes reutilizables para inputs refinados
+  const inputStyles = {
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "14px",
+      transition: "all 0.3s ease",
+      "&.Mui-focused fieldset": {
+        borderColor: brandPink,
+      },
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: brandPink,
+    },
+  };
+
   return (
     <Dialog
       open={open}
@@ -151,52 +156,53 @@ export default function PurchaseModal({
       scroll='body'
       PaperProps={{
         sx: {
-          borderRadius: "24px",
+          borderRadius: "28px",
           bgcolor: "rgba(255, 255, 255, 0.98)",
           backdropFilter: "blur(20px)",
-          boxShadow: "0 24px 50px rgba(61, 43, 47, 0.15)",
-          border: "1px solid rgba(238, 111, 151, 0.2)",
+          boxShadow: "0 24px 60px rgba(61, 43, 47, 0.18)",
+          border: "1px solid rgba(238, 111, 151, 0.25)",
           overflow: "hidden",
         },
       }}
     >
-      {/* Botón de cerrar superior */}
       <IconButton
         onClick={onClose}
         sx={{
           position: "absolute",
-          top: 16,
-          right: 16,
+          top: 20,
+          right: 20,
           color: "rgba(61, 43, 47, 0.4)",
-          "&:hover": { color: deepText, bgcolor: "rgba(61,43,47,0.04)" },
+          "&:hover": { color: deepText, bgcolor: "rgba(61,43,47,0.05)" },
+          zIndex: 10,
         }}
       >
         <CloseIcon />
       </IconButton>
 
-      {/* Animación de entrada de contenido */}
-      <DialogContent sx={{ p: { xs: 3, sm: 4 } }}>
+      <DialogContent sx={{ p: { xs: 3, sm: 4.5 } }}>
         <Box component='form' onSubmit={handleSubmit}>
-          {/* ENCABEZADO: Resumen del Evento Seleccionado */}
-          <Box sx={{ mb: 3, pr: 4 }}>
+          {/* ENCABEZADO */}
+          <Box sx={{ mb: 3, pr: 3 }}>
             <Typography
               variant='caption'
               sx={{
                 textTransform: "uppercase",
-                fontWeight: 800,
+                fontWeight: 900,
                 color: brandPink,
-                letterSpacing: "0.05em",
+                letterSpacing: "0.1em",
+                display: "block",
               }}
             >
               Estás adquiriendo accesos para:
             </Typography>
             <Typography
-              variant='h6'
+              variant='h5'
               sx={{
                 fontWeight: 900,
                 color: deepText,
-                lineHeight: 1.2,
+                lineHeight: 1.15,
                 mt: 0.5,
+                textTransform: "uppercase",
               }}
             >
               {evento.titulo}
@@ -205,20 +211,19 @@ export default function PurchaseModal({
               variant='caption'
               sx={{
                 color: "rgba(61, 43, 47, 0.6)",
-                fontWeight: 600,
+                fontWeight: 700,
                 display: "block",
-                mt: 0.5,
+                mt: 0.8,
               }}
             >
-              {evento.lugar} • {FormatDate(evento.fecha)}
+              📍 {evento.lugar} • 📅 {FormatDate(evento.fecha)}
             </Typography>
           </Box>
 
-          <Divider sx={{ mb: 3, borderColor: "rgba(238, 111, 151, 0.12)" }} />
+          <Divider sx={{ mb: 3, borderColor: "rgba(238, 111, 151, 0.15)" }} />
 
-          {/* FORMULARIO DE CAPTURA */}
-          <Stack spacing={2.5}>
-            {/* Input Nombre */}
+          {/* FORMULARIO */}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
             <TextField
               required
               fullWidth
@@ -231,14 +236,13 @@ export default function PurchaseModal({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <PersonIcon sx={{ color: "rgba(61, 43, 47, 0.3)" }} />
+                    <PersonIcon sx={{ color: "rgba(61, 43, 47, 0.35)" }} />
                   </InputAdornment>
                 ),
               }}
-              sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px" } }}
+              sx={inputStyles}
             />
 
-            {/* Input Correo */}
             <TextField
               required
               fullWidth
@@ -252,44 +256,43 @@ export default function PurchaseModal({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <EmailIcon sx={{ color: "rgba(61, 43, 47, 0.3)" }} />
+                    <EmailIcon sx={{ color: "rgba(61, 43, 47, 0.35)" }} />
                   </InputAdornment>
                 ),
               }}
-              sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px" } }}
+              sx={inputStyles}
             />
 
-            {/* Input Teléfono (WhatsApp) */}
             <TextField
               required
               fullWidth
               type='tel'
-              label='Número de WhatsApp (10 dígitos)'
+              label='Número de WhatsApp'
               name='telefono'
               value={formData.telefono}
               onChange={handleChange}
               variant='outlined'
-              placeholder='Ej. 5512345678'
+              placeholder='10 dígitos (Ej. 5512345678)'
               autoComplete='off'
               inputProps={{ pattern: "[0-9]{10}" }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <WhatsAppIcon sx={{ color: "rgba(61, 43, 47, 0.3)" }} />
+                    <WhatsAppIcon sx={{ color: "rgba(61, 43, 47, 0.35)" }} />
                   </InputAdornment>
                 ),
               }}
-              sx={{ "& .MuiOutlinedInput-root": { borderRadius: "12px" } }}
+              sx={inputStyles}
             />
 
-            {/* CONTADOR DE BOLETOS PREMIUM */}
+            {/* SELECCIÓN DE CANTIDAD */}
             <Box
-              display='flex'
-              alignItems='center'
-              justifyContent='space-between'
               sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
                 p: 2,
-                borderRadius: "14px",
+                borderRadius: "16px",
                 bgcolor: "rgba(61, 43, 47, 0.03)",
                 border: "1px solid rgba(61, 43, 47, 0.05)",
               }}
@@ -303,30 +306,31 @@ export default function PurchaseModal({
                 </Typography>
                 <Typography
                   variant='caption'
-                  sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 600 }}
+                  sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 700 }}
                 >
                   {formatMexicanCurrency(Number(evento.costo) || 0)} MXN c/u
                 </Typography>
               </Box>
 
-              <Stack direction='row' spacing={1.5} alignItems='center'>
+              <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
                 <IconButton
                   onClick={handleDecrement}
                   disabled={formData.cantidad_boletos <= 1}
                   sx={{
                     bgcolor: "#FFF",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                     p: 0.8,
+                    "&:hover": { bgcolor: "#f5f5f5" },
                   }}
                 >
-                  <RemoveIcon sx={{ fontSize: "1.1rem" }} />
+                  <RemoveIcon sx={{ fontSize: "1.1rem", color: deepText }} />
                 </IconButton>
 
                 <Typography
                   variant='body1'
                   sx={{
                     fontWeight: 900,
-                    minWidth: "20px",
+                    minWidth: "24px",
                     textAlign: "center",
                     color: deepText,
                   }}
@@ -338,118 +342,115 @@ export default function PurchaseModal({
                   onClick={handleIncrement}
                   sx={{
                     bgcolor: "#FFF",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                     p: 0.8,
+                    "&:hover": { bgcolor: "#f5f5f5" },
                   }}
                 >
-                  <AddIcon sx={{ fontSize: "1.1rem" }} />
+                  <AddIcon sx={{ fontSize: "1.1rem", color: deepText }} />
                 </IconButton>
-              </Stack>
+              </Box>
             </Box>
-          </Stack>
+          </Box>
 
-          {/* RESUMEN DE PAGO TOTAL */}
+          {/* TOTAL */}
           <Box
             sx={{
-              mt: 3,
+              mt: 3.5,
               mb: 3,
-              p: 2,
-              borderRadius: "14px",
-              border: `1px dashed ${brandPink}50`,
-              bgcolor: `${brandPink}03`,
+              p: 2.2,
+              borderRadius: "16px",
+              border: `1.5px dashed ${brandPink}60`,
+              bgcolor: `${brandPink}05`,
             }}
           >
-            <Stack
-              direction='row'
-              justifyContent='space-between'
-              alignItems='center'
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
               <Typography
                 variant='body2'
-                sx={{ fontWeight: 700, color: "rgba(61, 43, 47, 0.6)" }}
+                sx={{ fontWeight: 800, color: "rgba(61, 43, 47, 0.5)" }}
               >
                 Total a pagar:
               </Typography>
               <Typography
-                variant='h5'
+                variant='h4'
                 sx={{ fontWeight: 900, color: deepText }}
               >
                 {formatMexicanCurrency(Number(totalPago))}{" "}
                 <Box
                   component='span'
                   sx={{
-                    fontSize: "0.9rem",
-                    fontWeight: 700,
+                    fontSize: "0.85rem",
+                    fontWeight: 800,
                     color: "rgba(61, 43, 47, 0.4)",
                   }}
                 >
                   MXN
                 </Box>
               </Typography>
-            </Stack>
+            </Box>
           </Box>
+
+          {/* POLÍTICAS DE PRIVACIDAD */}
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: 3,
-              px: 2,
+              alignItems: "flex-start",
+              gap: 1,
+              mb: 3.5,
+              px: 0.5,
             }}
           >
-            <Stack
-              direction='row'
-              alignItems='flex-start'
-              spacing={1}
-              sx={{ maxWidth: "420px" }}
+            <Checkbox
+              checked={aceptaPoliticas}
+              onChange={(e) => setAceptaPoliticas(e.target.checked)}
+              size='small'
+              sx={{
+                color: "rgba(61, 43, 47, 0.3)",
+                p: "2px",
+                "&.Mui-checked": { color: brandPink },
+              }}
+            />
+            <Typography
+              variant='caption'
+              sx={{
+                color: "rgba(61, 43, 47, 0.75)",
+                fontWeight: 600,
+                lineHeight: 1.4,
+                userSelect: "none",
+              }}
             >
-              <Checkbox
-                checked={aceptaPoliticas}
-                onChange={(e) => setAceptaPoliticas(e.target.checked)}
-                size='small'
+              Al realizar la compra, confirmo que soy mayor de edad y acepto de
+              conformidad la{" "}
+              <Box
+                component='span'
+                onClick={() => setOpenPolicyModal(true)}
                 sx={{
-                  color: "rgba(61, 43, 47, 0.4)",
-                  padding: "2px", // Compacto para que no desfase el texto
-                  "&.Mui-checked": {
-                    color: "#E53888", // El rosa vibrante de Wapizima
-                  },
-                }}
-              />
-              <Typography
-                variant='caption'
-                sx={{
-                  color: "rgba(61, 43, 47, 0.7)",
-                  fontWeight: 600,
-                  lineHeight: 1.4,
-                  textAlign: "left",
-                  userSelect: "none", // Evita que se seleccione el texto al dar clic rápido
+                  color: brandPink,
+                  fontWeight: 800,
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  "&:hover": { color: deepText },
                 }}
               >
-                Al realizar la compra, confirmo que soy mayor de edad y acepto
-                de conformidad la{" "}
-                <span
-                  onClick={() => setOpenPolicyModal(true)} // Aquí disparas la función que abre tu modal de privacidad
-                  style={{
-                    color: "#E53888",
-                    fontWeight: 800,
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                >
-                  política de privacidad
-                </span>{" "}
-                de la plataforma.
-              </Typography>
-            </Stack>
+                política de privacidad
+              </Box>{" "}
+              de la plataforma.
+            </Typography>
           </Box>
-          {/* BOTÓN SUBMIT COMPRA */}
+
+          {/* BOTÓN DE ACCIÓN */}
           <Button
             type='submit'
             variant='contained'
             fullWidth
             startIcon={<ConfirmationNumberIcon />}
-            disabled={!aceptaPoliticas}
+            disabled={!aceptaPoliticas || isAgotado}
             sx={{
               bgcolor: brandPink,
               color: "#FFF",
@@ -459,18 +460,18 @@ export default function PurchaseModal({
               py: 1.8,
               textTransform: "none",
               boxShadow: `0 8px 24px rgba(238, 111, 151, 0.3)`,
+              transition: "all 0.3s ease-in-out",
               "&:hover": {
-                bgcolor: brandPink,
-                color: "#ffff",
-                boxShadow: "0 8px 24px rgba(61, 43, 47, 0.2)",
+                bgcolor: "#D64C77",
+                boxShadow: "0 10px 28px rgba(61, 43, 47, 0.25)",
               },
-              transition: "all 0.3s",
             }}
           >
-            Proceder al Pago Seguro
+            {isAgotado ? "Agotado Temporalmente" : "Proceder al Pago Seguro"}
           </Button>
         </Box>
       </DialogContent>
+
       <PrivacyPolicyModal
         open={openPolicyModal}
         onClose={() => setOpenPolicyModal(false)}
