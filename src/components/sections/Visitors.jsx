@@ -274,7 +274,7 @@ export default function Visitors() {
                     >
                       6-7{" "}
                       <span style={{ color: brandPink, fontSize: "0.5em" }}>
-                        FEB
+                        MAR
                       </span>
                     </Typography>
                     <Typography
@@ -285,7 +285,7 @@ export default function Visitors() {
                         color: brandPink,
                       }}
                     >
-                      WTC • CIUDAD DE MÉXICO
+                      EXPO REFORMA • CDMX
                     </Typography>
                   </Box>
 

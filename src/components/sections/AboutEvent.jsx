@@ -152,9 +152,9 @@ export default function AboutEvent() {
                       }}
                     >
                       Organizado por <strong>Publicidad Mahur</strong>, líderes
-                      con más de 15 años proyectando negocios en el{" "}
-                      <strong>WTC CDMX</strong>. Nuestra trayectoria respalda la
-                      calidad y seguridad de cada edición.
+                      con más de 15 años proyectando negocios. Nuestra
+                      trayectoria respalda la calidad y seguridad de cada
+                      edición.
                     </Typography>
 
                     <Typography

@@ -13,7 +13,7 @@ import barberskills from "../../assets/images/make-up-artist-work-her-beauty-vis
 import networking from "../../assets/images/medium-shot-colleagues-back-office.webp";
 import exibithors from "../../assets/images/waiting-room-with-monitors.jpg";
 import makeup from "../../assets/images/make-up-artist-getting-model-ready-photoshootin-_1_.webp";
-import wtc from "../../assets/images/wtc.webp";
+import reforma from "../../assets/images/reforma.webp";
 import stand from "../../assets/images/store-middle-corridor.jpg";
 import brunch from "../../assets/images/female-make-up-blogger-with-streaming-with-smartphone-home.webp";
 
@@ -22,7 +22,7 @@ const galleryData = [
   { img: makeupartist, cols: 2, rows: 1, title: "ARTE Y MAQUILLAJE" },
   { img: barberskills, cols: 1, rows: 1, title: "BUSINESS" },
   { img: networking, cols: 1, rows: 2, title: "NETWORKING" },
-  { img: wtc, cols: 1, rows: 2, title: "WTC CDMX" },
+  { img: reforma, cols: 1, rows: 2, title: "EXPO REFORMA CDMX" },
   { img: exibithors, cols: 2, rows: 1, title: "MASTERCLASSES" },
   { img: makeup, cols: 1, rows: 1, title: "MAKEUP ZONE" },
   { img: stand, cols: 1, rows: 1, title: "STANDS" },
@@ -199,7 +199,7 @@ export default function ExperienceGallery() {
               color: deepText,
             }}
           >
-            WTC MÉXICO
+            EXPO REFORMA CDMX
           </Typography>
         </Box>
       </Container>

@@ -66,6 +66,7 @@ export default function Highlights() {
               fontWeight: 900,
               color: "rgba(238, 111, 151, 0.4)",
               whiteSpace: "nowrap",
+              mb: "30px",
             }}
           >
             {items}
@@ -78,7 +79,7 @@ export default function Highlights() {
           position: "absolute",
           width: "120%",
           left: "-10%",
-          bottom: { xs: "5%", md: "2%" },
+          bottom: { xs: "5%", md: "2%", lg: "-40px" },
           opacity: 0.3,
           pointerEvents: "none",
         }}
@@ -236,10 +237,10 @@ export default function Highlights() {
         sx={{
           position: { xs: "relative", md: "absolute" },
           width: "110%",
-          bottom: { md: "25%" },
+          bottom: { md: "25%", lg: "25%" },
           my: { xs: 6, md: 0 },
-          left: "-5%",
-          background: "#FFFFFF",
+          right: "-5%",
+          background: "#FFF",
           backdropFilter: "blur(10px)",
           py: 3,
           transform: { xs: "rotate(1.5deg)", md: "rotate(-1.5deg)" },
@@ -289,7 +290,7 @@ export default function Highlights() {
       <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
-          bottom: { md: 40 },
+          bottom: { md: 20 },
           mt: { xs: 4, md: 0 },
           width: "100%",
           px: 4,
@@ -320,7 +321,7 @@ export default function Highlights() {
             display: { xs: "none", sm: "block" },
           }}
         >
-          2027 • WTC MEXICO CITY ↓
+          2027 • EXPO REFORMA CDMX ↓
         </Typography>
       </Box>
     </Box>

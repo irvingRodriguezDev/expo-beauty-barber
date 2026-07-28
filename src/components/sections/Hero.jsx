@@ -143,8 +143,8 @@ export default function Hero() {
               sx={{ mb: 8 }}
             >
               {[
-                { icon: <CalendarMonthIcon />, text: "05–06 FEB" },
-                { icon: <LocationOnIcon />, text: "WTC CDMX" },
+                { icon: <CalendarMonthIcon />, text: "06–07 MAR" },
+                { icon: <LocationOnIcon />, text: "EXPO REFORMA CDMX" },
               ].map((item, i) => (
                 <Box
                   key={i}
@@ -253,7 +253,7 @@ export default function Hero() {
                 component='img'
                 src={WomenEbb}
                 loading='eager'
-                alt='BEAUTY BUSINESS MEXICO 2027 WTC'
+                alt='BEAUTY BUSINESS MEXICO 2027 EXPO REFORMA'
                 sx={{
                   width: "100%",
                   height: "auto",

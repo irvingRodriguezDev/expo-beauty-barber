@@ -18,7 +18,7 @@ export const BrandAuthority = () => {
     },
     {
       icon: <EventAvailableIcon sx={{ color: brandPink, fontSize: 32 }} />,
-      title: "SEDE WTC",
+      title: "EXPO REFORMA CDMX",
       desc: "Organizadores constantes en el recinto más importante del país.",
     },
     {

@@ -137,9 +137,9 @@ export default function Exhibitors() {
                     fontWeight: 500,
                   }}
                 >
-                  Convertimos el WTC en el epicentro de negocios más vibrante de
-                  Latinoamérica. Asegura tu lugar frente a los tomadores de
-                  decisión.
+                  Convertimos EXPO REFORMA en el epicentro de negocios más
+                  vibrante de Latinoamérica. Asegura tu lugar frente a los
+                  tomadores de decisión.
                 </Typography>
               </Box>
             </motion.div>
@@ -198,8 +198,8 @@ export default function Exhibitors() {
                 fontWeight: 500,
               }}
             >
-              Quedan pocos espacios disponibles para la edición 2027 en el WTC.
-              Asegura tu presencia en el evento élite de la industria.
+              Quedan pocos espacios disponibles para la edición 2027 en EXPO
+              REFORMA. Asegura tu presencia en el evento élite de la industria.
             </Typography>
 
             <Stack

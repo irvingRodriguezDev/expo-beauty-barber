@@ -169,10 +169,9 @@ export default function Footer() {
                 fontWeight: 500,
               }}
             >
-              <strong style={{ color: deepText }}>WTC Ciudad de México</strong>{" "}
-              <br />
-              Montecito 38, Col. Nápoles <br />
-              CP 03810, CDMX.
+              <strong style={{ color: deepText }}>EXPO REFORMA</strong> <br />
+              Av. Morelos 67, Col. Cuauhtémoc <br />
+              CP 06600, CDMX.
             </Typography>
             <Typography
               component='a'
@@ -229,7 +228,7 @@ export default function Footer() {
                   mt: -2,
                 }}
               >
-                6 <span style={{ color: softRose }}>.</span> 7 FEB
+                6 <span style={{ color: softRose }}>.</span> 7 MAR
               </Typography>
             </Box>
 

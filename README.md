@@ -37,7 +37,7 @@ src/
 │       ├── AboutEvent.jsx    ← Sobre el evento
 │       ├── Highlights.jsx    ← Lo que encontrarás
 │       ├── Stats.jsx         ← Contadores animados
-│       ├── MapSection.jsx    ← Mapa WTC
+│       ├── MapSection.jsx    ← Mapa EXPO REFORMA
 │       ├── Visitors.jsx      ← Sección visitantes
 │       ├── Exhibitors.jsx    ← Sección expositores
 │       └── Contact.jsx       ← Formulario de contacto

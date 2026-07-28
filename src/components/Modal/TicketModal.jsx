@@ -183,8 +183,8 @@ export const TicketModal = ({ open, handleClose, ticket }) => {
             fontWeight: 600,
           }}
         >
-          Presenta este código digital o impreso <br /> en los mostradores del
-          WTC.
+          Presenta este código digital o impreso <br /> en los mostradores de
+          EXPO REFORMA.
         </Typography>
       </Box>
     </Modal>
