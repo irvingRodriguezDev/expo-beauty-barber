@@ -272,7 +272,7 @@ export default function Visitors() {
                         color: deepText,
                       }}
                     >
-                      6-7{" "}
+                      13-14{" "}
                       <span style={{ color: brandPink, fontSize: "0.5em" }}>
                         MAR
                       </span>

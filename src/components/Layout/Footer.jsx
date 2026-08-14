@@ -228,7 +228,7 @@ export default function Footer() {
                   mt: -2,
                 }}
               >
-                6 <span style={{ color: softRose }}>.</span> 7 MAR
+                13 <span style={{ color: softRose }}>.</span> 14 MAR
               </Typography>
             </Box>
 

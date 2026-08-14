@@ -143,7 +143,7 @@ export default function Hero() {
               sx={{ mb: 8 }}
             >
               {[
-                { icon: <CalendarMonthIcon />, text: "06–07 MAR" },
+                { icon: <CalendarMonthIcon />, text: "13–14 MAR" },
                 { icon: <LocationOnIcon />, text: "EXPO REFORMA CDMX" },
               ].map((item, i) => (
                 <Box
