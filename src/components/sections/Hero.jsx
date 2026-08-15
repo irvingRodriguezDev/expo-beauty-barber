@@ -1,5 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Box, Container, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Button,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -10,21 +17,24 @@ import EventCard from "../EventCard";
 const scrollTo = (id) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-export default function Hero({ loading }) {
+export default function Hero() {
   const brandPink = "#ee6f97ff";
   const lightBg = "#FFD9E2";
   const deepText = "#3D2B2F";
 
   const [events, setEvents] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     let url = "/events";
     MethodGet(url)
       .then((res) => {
+        setLoading(true);
         setEvents(res.data || []);
+        setLoading(false);
       })
       .catch((error) => {
+        setLoading(true);
         console.log(error, "ocurrio un error");
       });
   }, []);
@@ -37,11 +47,47 @@ export default function Hero({ loading }) {
 
   const handlePrev = () => {
     setCurrentIndex(
-      (prev) => (prev - 1 + nextEvents.length) % nextEvents.length,
+      (prev) => (prev - 1 + nextEvents.length) % nextEvents.length
     );
   };
 
-  if (loading || nextEvents.length === 0) return null;
+  if (loading || nextEvents.length === 0)
+    return (
+      <>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            bgcolor: "#FFD9E2",
+            display: "flex",
+            justifyContent: "center",
+            padding: "30px",
+          }}
+        >
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress
+              aria-label='Cargando Eventos'
+              sx={{ color: "#EE6E97" }}
+            />
+          </Grid>
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography
+              variant='h2'
+              sx={{
+                fontSize: { xs: ".9rem", sm: "1.2rem", md: "1.5rem" },
+                fontWeight: 900,
+                lineHeight: 1,
+                color: deepText,
+                mb: 5,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Consultando Eventos disponibles
+            </Typography>
+          </Grid>
+        </Grid>
+      </>
+    );
 
   const currentEvent = nextEvents[currentIndex];
 

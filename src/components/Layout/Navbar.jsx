@@ -42,7 +42,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
       const sections = navLinks.map((l) => document.getElementById(l.to));
       const current = sections.findLast(
-        (s) => s && s.getBoundingClientRect().top <= 120,
+        (s) => s && s.getBoundingClientRect().top <= 120
       );
       if (current) setActive(current.id);
     };
@@ -115,8 +115,12 @@ export default function Navbar() {
               sx={{ display: { xs: "none", md: "flex" } }}
             >
               <Stack direction='row' spacing={4}>
-                {navLinks.map((link) => (
-                  <Link to={link.to} style={{ textDecoration: "none" }}>
+                {navLinks.map((link, index) => (
+                  <Link
+                    to={link.to}
+                    style={{ textDecoration: "none" }}
+                    key={index}
+                  >
                     <Box
                       key={link.to}
                       component='button'
