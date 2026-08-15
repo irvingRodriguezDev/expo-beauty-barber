@@ -351,6 +351,22 @@ export default function PurchaseModal({
                 </IconButton>
               </Box>
             </Box>
+            <Box
+              sx={{
+                bgcolor: "rgba(238, 111, 151, 0.08)",
+                p: 1.5,
+                borderRadius: "8px",
+              }}
+            >
+              <Typography
+                variant='caption'
+                color='text.secondary'
+                display='block'
+              >
+                Aceptamos **Tarjetas de Débito/Crédito** y pagos en efectivo en
+                **OXXO**.
+              </Typography>
+            </Box>
           </Box>
 
           {/* TOTAL */}
