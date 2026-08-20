@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../../assets/images/LOGO_VINO.webp";
+import Logo from "../assets/images/LOGO_VINO.webp";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },
@@ -41,7 +41,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
       const sections = navLinks.map((l) => document.getElementById(l.to));
       const current = sections.findLast(
-        (s) => s && s.getBoundingClientRect().top <= 120,
+        (s) => s && s.getBoundingClientRect().top <= 120
       );
       if (current) setActive(current.id);
     };

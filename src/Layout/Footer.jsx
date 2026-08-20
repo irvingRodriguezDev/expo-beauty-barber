@@ -11,9 +11,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/images/LOGO_VINO.webp";
+import Logo from "../assets/images/LOGO_VINO.webp";
 import { useState } from "react";
-import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
+import { PrivacyPolicyModal } from "../components/sections/PrivacyPolicyModal";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });

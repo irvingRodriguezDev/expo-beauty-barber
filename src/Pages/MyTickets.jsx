@@ -18,7 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { TicketModal } from "../Modal/TicketModal";
+import { TicketModal } from "../components/Modal/TicketModal";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
@@ -48,7 +48,7 @@ const MyTickets = () => {
           `https://api.beautybusinessmexico.com/search-tickets`,
           {
             params: { email: email.toLowerCase().trim(), captchaToken },
-          },
+          }
         );
         setTickets(response.data.tickets || []);
         setSearched(true);
@@ -58,7 +58,7 @@ const MyTickets = () => {
         if (!isSilent) setLoading(false);
       }
     },
-    [email, executeRecaptcha],
+    [email, executeRecaptcha]
   );
 
   return (

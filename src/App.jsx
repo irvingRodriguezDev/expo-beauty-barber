@@ -1,6 +1,6 @@
 import "./index.css";
-import Navbar from "./components/Layout/Navbar";
-import Footer from "./components/Layout/Footer";
+import Navbar from "./Layout/Navbar";
+import Footer from "./Layout/Footer";
 import Hero from "./components/sections/Hero";
 import AboutEvent from "./components/sections/AboutEvent";
 import Highlights from "./components/sections/Highlights";

@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TicketView from "./components/Pages/TicketDetail"; // El componente que creamos antes
+import TicketView from "./Pages/TicketDetail"; // El componente que creamos antes
 import App from "./App"; // Tu página de registro actual
-import ScannerView from "./components/Pages/ScannerView";
-import SuccessPage from "./components/Pages/SuccessPage";
-import MyTickets from "./components/Pages/MyTickets";
+import ScannerView from "./Pages/ScannerView";
+import SuccessPage from "./Pages/SuccessPage";
+import MyTickets from "./Pages/MyTickets";
 function Home() {
   return (
     <Router>
