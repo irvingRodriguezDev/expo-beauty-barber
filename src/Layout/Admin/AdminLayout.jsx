@@ -1,32 +1,23 @@
 // src/components/admin/AdminLayout.jsx
 import React, { useState } from "react";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import {
   Box,
-  Drawer,
-  AppBar,
   Toolbar,
   List,
   Typography,
   Divider,
-  IconButton,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Avatar,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import {
   DashboardOutlined,
   EventOutlined,
-  AirlineSeatReclineExtraOutlined,
   QrCodeScannerOutlined,
   LogoutOutlined,
-  MenuOutlined,
-  PersonOutlined,
 } from "@mui/icons-material";
 import AppBarLayout from "./AppBarLayout";
 import DrawerLayout from "./DrawerLayout";
@@ -56,6 +47,10 @@ export const AdminLayout = ({ children }) => {
       path: "/admin/validar-qr",
     },
   ];
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   const handleLogout = async () => {
     try {
@@ -88,7 +83,10 @@ export const AdminLayout = ({ children }) => {
           return (
             <ListItem key={item.text} disablePadding sx={{ mb: 1 }}>
               <ListItemButton
-                onClick={() => navigate(item.path)}
+                onClick={() => {
+                  navigate(item.path);
+                  setMobileOpen(false); // Cierra el drawer tras hacer clic en cualquier pantalla
+                }}
                 sx={{
                   borderRadius: 2,
                   backgroundColor: active ? "#EC4899" : "transparent",
@@ -136,29 +134,32 @@ export const AdminLayout = ({ children }) => {
     <Box
       sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#F8FAFC" }}
     >
-      {/* Navbar Superior */}
+      {/* Navbar Superior (El botón de hamburguesa estará visible en todo momento) */}
       <AppBarLayout
         drawerWidth={drawerWidth}
-        drawerContent={drawerContent}
         anchorEl={anchorEl}
-        mobileOpen={mobileOpen}
         setAnchorEl={setAnchorEl}
+        onDrawerToggle={handleDrawerToggle}
       />
-      {/* Drawer Lateral / Sidebar */}
+
+      {/* Drawer Lateral Oculto por Defecto */}
       <DrawerLayout
         drawerContent={drawerContent}
         drawerWidth={drawerWidth}
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
       />
-      {/* Área Principal donde se renderizan las sub-rutas */}
+
+      {/* Área Principal: Aprovecha el 100% del ancho disponible */}
       <Box
         component='main'
         sx={{
           flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          p: { xs: 2, sm: 3 },
+          width: "100%", // Ocupa todo el espacio horizontal
           mt: 8,
+          boxSizing: "border-box",
+          overflowX: "hidden",
         }}
       >
         {children}

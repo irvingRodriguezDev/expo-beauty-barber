@@ -8,33 +8,21 @@ const DrawerLayout = ({
   setMobileOpen,
 }) => {
   return (
-    <Box
-      component='nav'
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+    <Drawer
+      variant='temporary'
+      open={mobileOpen}
+      onClose={() => setMobileOpen(false)}
+      ModalProps={{ keepMounted: true }} // Optimización de renderizado
+      sx={{
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: drawerWidth,
+          borderRight: "none",
+        },
+      }}
     >
-      <Drawer
-        variant='permanent'
-        open={mobileOpen}
-        onClose={() => setMobileOpen(false)}
-        ModalProps={{ keepMounted: true }}
-        sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": { width: drawerWidth },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
-      <Drawer
-        variant='permanent'
-        sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": { width: drawerWidth, borderRight: "none" },
-        }}
-        open
-      >
-        {drawerContent}
-      </Drawer>
-    </Box>
+      {drawerContent}
+    </Drawer>
   );
 };
 

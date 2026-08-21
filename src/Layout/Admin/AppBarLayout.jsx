@@ -12,16 +12,16 @@ import React from "react";
 
 const AppBarLayout = ({
   drawerWidth,
-  mobileOpen,
   anchorEl,
   handleLogout,
   setAnchorEl,
+  onDrawerToggle,
 }) => {
   return (
     <AppBar
       position='fixed'
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        width: "100%",
         ml: { sm: `${drawerWidth}px` },
         backgroundColor: "#FFFFFF",
         color: "#1E293B",
@@ -32,8 +32,8 @@ const AppBarLayout = ({
         <IconButton
           color='inherit'
           edge='start'
-          onClick={() => setMobileOpen(!mobileOpen)}
-          sx={{ mr: 2, display: { sm: "none" } }}
+          onClick={onDrawerToggle}
+          sx={{ mr: 2 }} // Visible en móvil y desktop
         >
           <MenuOutlined />
         </IconButton>
