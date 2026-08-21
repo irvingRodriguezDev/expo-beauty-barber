@@ -17,6 +17,10 @@ import App from "../App";
 //VISTAS ADMIN
 import AdminLogin from "../Pages/Admin/Auth/AdminLogin";
 import { AdminDashboard } from "../Pages/Admin/AdminDashboard";
+import SuccessPage from "../Pages/SuccessPage";
+import TicketView from "../Pages/TicketDetail";
+import MyTickets from "../Pages/MyTickets";
+import ScannerView from "../Pages/ScannerView";
 
 export const AppRoutes = () => {
   return (
@@ -26,6 +30,11 @@ export const AppRoutes = () => {
             1. RUTAS PÚBLICAS (Clientes / Compradores)
            ========================================== */}
         <Route path='/' element={<App />} />
+        <Route path='/payment-success' element={<SuccessPage />} />
+        <Route path='/ticket/:code' element={<TicketView />} />
+        <Route path='/mis-boletos' element={<MyTickets />} />
+        <Route path='/admin/check-in' element={<ScannerView />} />
+
         {/* <Route path='/evento/:slug' element={<EventDetailPage />} />
         <Route path='/evento/:slug/boletos' element={<SeatSelectionPage />} />
         <Route path='/checkout/confirmacion' element={<CheckoutPage />} /> */}

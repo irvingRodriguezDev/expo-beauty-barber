@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { getCurrentUser } from "aws-amplify/auth";
+import { useAuth } from "../context/AuthContext";
+import { Box, CircularProgress } from "@mui/material";
 
 export const ProtectedRoute = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    try {
-      await getCurrentUser();
-      setIsAuthenticated(true);
-    } catch (error) {
-      setIsAuthenticated(false);
-    }
-  };
+  const { user, loading } = useAuth();
 
   // Carga inicial mientras verifica la sesión en Cognito
-  if (isAuthenticated === null) {
+  if (loading) {
     return (
-      <div className='flex h-screen items-center justify-center bg-slate-900 text-white'>
-        <p>Cargando sesión...</p>
-      </div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
     );
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to='/admin/login' replace />;
+  return user ? <Outlet /> : <Navigate to='/admin/login' replace />;
 };

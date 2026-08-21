@@ -1,7 +1,6 @@
 // src/aws-config.js
-import { Amplify } from "aws-amplify";
 
-Amplify.configure({
+export const awsConfig = {
   Auth: {
     Cognito: {
       userPoolId: import.meta.env.VITE_AWS_COGNITO_POOL_ID, // Tu User Pool ID de AWS
@@ -9,4 +8,4 @@ Amplify.configure({
       region: import.meta.env.VITE_AWS_REGION,
     },
   },
-});
+};
