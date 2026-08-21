@@ -160,7 +160,7 @@ export default function Visitors() {
                     border: "1px solid rgba(255, 183, 206, 0.2)",
                     position: "relative",
                     overflow: "hidden",
-                    borderRadius: 1,
+                    borderRadius: "18px",
                     transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
                     boxShadow: "0 10px 30px rgba(61, 43, 47, 0.03)",
                     "&:hover": {
@@ -231,7 +231,7 @@ export default function Visitors() {
                   sx={{
                     background: "#FFFFFF",
                     color: deepText,
-                    borderRadius: 1,
+                    borderRadius: "18px",
                     p: { xs: 4, md: 8 },
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },

@@ -21,6 +21,8 @@ import SuccessPage from "../Pages/SuccessPage";
 import TicketView from "../Pages/TicketDetail";
 import MyTickets from "../Pages/MyTickets";
 import ScannerView from "../Pages/ScannerView";
+import AdminEventsPage from "../Pages/Admin/AdminEventsPage";
+import AdminSeatEditorPage from "../Pages/Admin/AdminSeatEditorPage";
 
 export const AppRoutes = () => {
   return (
@@ -53,15 +55,11 @@ export const AppRoutes = () => {
             element={<Navigate to='/admin/dashboard' replace />}
           />
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
-          {/* <Route path='/admin/eventos' element={<AdminEventsPage />} />
-          <Route
-            path='/admin/eventos/nuevo'
-            element={<AdminCreateEventPage />}
-          />
+          <Route path='/admin/eventos' element={<AdminEventsPage />} />
           <Route
             path='/admin/eventos/:id/mapa'
             element={<AdminSeatEditorPage />}
-          /> */}
+          />
         </Route>
 
         {/* 404 - Redirección genérica */}

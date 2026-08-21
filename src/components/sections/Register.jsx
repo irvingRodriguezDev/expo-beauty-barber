@@ -25,26 +25,26 @@ const lightBg = "#FFD9E2"; // Fondo crema rosado
 const inputStyles = {
   mb: 3,
   "& .MuiOutlinedInput-root": {
-    borderRadius: 1,
+    borderRadius: "18px",
     backgroundColor: "#FFFFFF",
     transition: "all 0.3s ease-in-out",
 
     "& fieldset": {
       borderColor: "rgba(255, 183, 206, 0.4)", // Borde Rosa sutil
       borderWidth: "1px",
-      borderRadius: 1,
+      borderRadius: "18px",
     },
 
     "&:hover fieldset": {
       borderColor: `${brandPink} !important`,
-      borderRadius: 1,
+      borderRadius: "18px",
     },
 
     "&.Mui-focused fieldset": {
       borderColor: `${brandPink} !important`,
       borderWidth: "2px",
       boxShadow: `0 0 20px rgba(255, 183, 206, 0.15)`,
-      borderRadius: 1,
+      borderRadius: "18px",
     },
   },
 
@@ -211,8 +211,8 @@ export default function Register() {
               {status === "idle"
                 ? "Selecciona tu Acceso"
                 : status === "form"
-                  ? "Datos del Profesional"
-                  : "Redirigiendo al Pago..."}
+                ? "Datos del Profesional"
+                : "Redirigiendo al Pago..."}
             </Typography>
           </motion.div>
         </Box>

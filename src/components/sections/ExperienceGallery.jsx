@@ -109,9 +109,9 @@ export default function ExperienceGallery() {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                borderRadius: 1,
                 cursor: "pointer",
                 border: "1px solid rgba(0, 0, 0, 0.05)",
+                borderRadius: "18px",
                 boxShadow: "0 10px 30px rgba(61, 43, 47, 0.05)",
                 "&:hover .gallery-overlay": { opacity: 1 },
                 "&:hover img": {
@@ -158,7 +158,7 @@ export default function ExperienceGallery() {
                     border: `2px solid ${brandPink}`,
                     px: 3,
                     py: 1.5,
-                    borderRadius: 1,
+                    borderRadius: "18px",
                     textAlign: "center",
                     textTransform: "uppercase",
                     bgcolor: "rgba(255, 255, 255, 0.8)",

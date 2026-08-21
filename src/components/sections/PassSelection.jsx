@@ -28,7 +28,7 @@ export const PassSelection = ({ options, onSelect }) => {
                 textAlign: "center",
                 cursor: "pointer",
                 transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
-                borderRadius: 1,
+                borderRadius: "18px",
                 color: deepText,
                 position: "relative",
                 overflow: "hidden",

@@ -92,7 +92,7 @@ export const BrandAuthority = () => {
                     sx={{
                       p: 4,
                       height: "100%",
-                      borderRadius: 1,
+                      borderRadius: "18px",
                       border: "1px solid rgba(255, 183, 206, 0.3)",
                       background: "#FFFFFF",
                       textAlign: "center",

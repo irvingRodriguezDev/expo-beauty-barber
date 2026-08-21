@@ -13,12 +13,10 @@ Amplify.configure(awsConfig);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <GoogleReCaptchaProvider reCaptchaKey='6Len0rcsAAAAAIJYpBuZY8P3E1l-7GQ0q5zmRDDw'>
-          <AppRoutes />
-        </GoogleReCaptchaProvider>
-      </ThemeProvider>
+      <CssBaseline />
+      <GoogleReCaptchaProvider reCaptchaKey='6Len0rcsAAAAAIJYpBuZY8P3E1l-7GQ0q5zmRDDw'>
+        <AppRoutes />
+      </GoogleReCaptchaProvider>
     </AuthProvider>
   </StrictMode>
 );
