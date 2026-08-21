@@ -22,6 +22,7 @@ import { useAuth } from "../../../context/AuthContext";
 import NewPasswordRequiredForm from "./NewPasswordRequiredForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import ConfirmResetPasswordForm from "./ConfirmResetPasswordForm";
+import { inputStyles } from "../../../utils/InputStyles";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -163,6 +164,7 @@ export default function AdminLogin() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 autoComplete='off'
+                sx={inputStyles}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
@@ -182,6 +184,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                sx={inputStyles}
                 autoComplete='off'
                 InputProps={{
                   startAdornment: (

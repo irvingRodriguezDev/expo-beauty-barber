@@ -16,13 +16,13 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
+import { inputStyles } from "../../utils/InputStyles";
 
 export const RegistrationForm = ({
   selectedPass,
   onBack,
   onSubmit,
   visitorTypes,
-  inputStyles,
   isSubmitting,
 }) => {
   const {
