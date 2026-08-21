@@ -16,13 +16,15 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import App from "../App";
 //VISTAS ADMIN
 import AdminLogin from "../Pages/Admin/Auth/AdminLogin";
-import { AdminDashboard } from "../Pages/Admin/AdminDashboard";
+import { AdminDashboard } from "../Pages/Admin/Dashboard/AdminDashboard";
 import SuccessPage from "../Pages/SuccessPage";
 import TicketView from "../Pages/TicketDetail";
 import MyTickets from "../Pages/MyTickets";
 import ScannerView from "../Pages/ScannerView";
-import AdminEventsPage from "../Pages/Admin/AdminEventsPage";
-import AdminSeatEditorPage from "../Pages/Admin/AdminSeatEditorPage";
+import AdminEventsPage from "../Pages/Admin/Events/AdminEventsPage";
+import AdminSeatEditorPage from "../Pages/Admin/Events/AdminSeatEditorPage";
+import { AdminEventFormPage } from "../Pages/Admin/Events/AdminEventFormPage";
+import { AdminAdvancedMapPage } from "../Pages/Admin/Events/AdminAdvancedMapPage";
 
 export const AppRoutes = () => {
   return (
@@ -56,6 +58,11 @@ export const AppRoutes = () => {
           />
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
           <Route path='/admin/eventos' element={<AdminEventsPage />} />
+          <Route path='/admin/eventos/nuevo' element={<AdminEventFormPage />} />
+          <Route
+            path='/admin/eventos/avanzado'
+            element={<AdminAdvancedMapPage />}
+          />
           <Route
             path='/admin/eventos/:id/mapa'
             element={<AdminSeatEditorPage />}
