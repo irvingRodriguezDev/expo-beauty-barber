@@ -65,7 +65,7 @@ export const AdminLayout = ({ children }) => {
     <Box
       sx={{
         height: "100%",
-        backgroundColor: "#0F172A",
+        backgroundColor: "#fff",
         color: "#FFFFFF",
         display: "flex",
         flexDirection: "column",
@@ -92,7 +92,7 @@ export const AdminLayout = ({ children }) => {
                   backgroundColor: active ? "#EC4899" : "transparent",
                   color: active ? "#FFFFFF" : "#94A3B8",
                   "&:hover": {
-                    backgroundColor: active ? "#DB2777" : "#1E293B",
+                    backgroundColor: active ? "#DB2777" : "#DB2777",
                     color: "#FFFFFF",
                   },
                 }}

@@ -195,7 +195,7 @@ export const AdminAdvancedMapPage = () => {
             }}
           >
             <Stage
-              width={1000}
+              width={1340}
               height={700}
               draggable
               onMouseDown={(e) => {
