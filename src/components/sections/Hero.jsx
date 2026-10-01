@@ -1,193 +1,208 @@
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Box,
   Container,
-  Button,
-  CircularProgress,
-  Grid,
   Typography,
+  Stack,
+  Chip,
+  Skeleton,
+  Grid,
 } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { useEffect, useState } from "react";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import MethodGet from "../../config/service";
-import EventCard from "../EventCard";
-
-const scrollTo = (id) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+import EventCard from "../events/EventCard";
 
 export default function Hero() {
-  const brandPink = "#ee6f97ff";
-  const lightBg = "#FFD9E2";
-  const deepText = "#3D2B2F";
+  const brandPink = "#E11D74";
+  const darkText = "#2B1E22";
+  const lightBg = "#FFF5F8";
+  const borderTone = "rgba(225, 29, 116, 0.15)";
 
   const [events, setEvents] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     let url = "/events";
+    setLoading(true);
     MethodGet(url)
       .then((res) => {
-        setLoading(true);
         setEvents(res.data || []);
-        setLoading(false);
       })
       .catch((error) => {
-        setLoading(true);
-        console.log(error, "ocurrio un error");
+        console.error("Error al obtener eventos:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
-  const nextEvents = events ? events.slice(0, 5) : [];
+  // Limitamos a los primeros 6 eventos para el Hero Grid
+  const featuredEvents = events ? events.slice(0, 6) : [];
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % nextEvents.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + nextEvents.length) % nextEvents.length
-    );
-  };
-
-  if (loading || nextEvents.length === 0)
+  if (loading) {
     return (
-      <>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            bgcolor: "#FFD9E2",
-            display: "flex",
-            justifyContent: "center",
-            padding: "30px",
-          }}
-        >
-          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-            <CircularProgress
-              aria-label='Cargando Eventos'
-              sx={{ color: "#EE6E97" }}
-            />
+      <Box
+        sx={{
+          bgcolor: lightBg,
+          borderRadius: { xs: 3, md: 4 },
+          mt: { xs: 10, md: 12 },
+          mb: 4,
+          mx: { xs: 2, md: 4 },
+          p: { xs: 3, md: 4 },
+          border: `1px solid ${borderTone}`,
+        }}
+      >
+        <Stack spacing={3}>
+          <Skeleton
+            variant='rounded'
+            width={240}
+            height={32}
+            sx={{ bgcolor: "rgba(225, 29, 116, 0.08)", borderRadius: "50px" }}
+          />
+          <Grid container spacing={3}>
+            {[1, 2, 3].map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item}>
+                <Skeleton
+                  variant='rounded'
+                  width='100%'
+                  height={380}
+                  sx={{
+                    bgcolor: "rgba(225, 29, 116, 0.05)",
+                    borderRadius: "20px",
+                  }}
+                />
+              </Grid>
+            ))}
           </Grid>
-          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-            <Typography
-              variant='h2'
-              sx={{
-                fontSize: { xs: ".9rem", sm: "1.2rem", md: "1.5rem" },
-                fontWeight: 900,
-                lineHeight: 1,
-                color: deepText,
-                mb: 5,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Consultando Eventos disponibles
-            </Typography>
-          </Grid>
-        </Grid>
-      </>
+        </Stack>
+      </Box>
     );
+  }
 
-  const currentEvent = nextEvents[currentIndex];
+  if (featuredEvents.length === 0) {
+    return (
+      <Box
+        sx={{
+          bgcolor: lightBg,
+          py: 6,
+          px: 3,
+          textAlign: "center",
+          borderRadius: { xs: 4, md: 5 },
+          mt: { xs: 10, md: 12 },
+          mb: 4,
+          mx: { xs: 2, md: 4 },
+          border: `1px solid ${borderTone}`,
+          boxShadow: "0 10px 30px rgba(225, 29, 116, 0.06)",
+        }}
+      >
+        <Typography
+          variant='h6'
+          sx={{ color: darkText, fontWeight: 800, mb: 1 }}
+        >
+          Próximamente más eventos
+        </Typography>
+        <Typography
+          variant='body2'
+          sx={{ color: "rgba(43, 30, 34, 0.65)", fontWeight: 500 }}
+        >
+          Mantente al tanto de nuestras redes para nuevas fechas y
+          capacitaciones.
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box
       component='section'
       sx={{
         position: "relative",
-        minHeight: "100vh",
-        width: "100vw",
         bgcolor: lightBg,
+        backgroundImage: `radial-gradient(circle at 80% 20%, rgba(225, 29, 116, 0.08) 0%, transparent 50%),
+                          radial-gradient(circle at 10% 90%, rgba(225, 29, 116, 0.05) 0%, transparent 40%)`,
+        borderRadius: { xs: 3, md: 4 },
         overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
+        mt: { xs: 10, md: 12 },
+        mb: 6,
+        mx: { xs: 2, md: 4 },
+        p: { xs: 2.5, sm: 3, md: 4 },
+        border: `1px solid ${borderTone}`,
+        boxShadow: "0 12px 35px -10px rgba(225, 29, 116, 0.08)",
       }}
     >
-      <Container
-        maxWidth='xl'
-        sx={{ position: "relative", zIndex: 1, py: { xs: 8, md: 0 } }}
-      >
-        <AnimatePresence mode='wait'>
-          {/* El contenedor animado envuelve directamente a la tarjeta completa */}
-          <motion.div
-            key={currentEvent.id || currentIndex}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
-            <EventCard
-              evento={currentEvent}
-              brandPink={brandPink}
-              deepText={deepText}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </Container>
-
-      {/* CONTROLES LATERALES DEL SLIDER */}
-      {nextEvents.length > 1 && (
-        <>
-          <Button
-            onClick={handlePrev}
-            sx={{
-              position: "absolute",
-              left: 20,
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: deepText,
-              zIndex: 2,
-              minWidth: "auto",
-              p: 1.5,
-              borderRadius: "50%",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.4)" },
-            }}
-          >
-            <ArrowBackIosNewIcon fontSize='large' />
-          </Button>
-          <Button
-            onClick={handleNext}
-            sx={{
-              position: "absolute",
-              right: 20,
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: deepText,
-              zIndex: 2,
-              minWidth: "auto",
-              p: 1.5,
-              borderRadius: "50%",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.4)" },
-            }}
-          >
-            <ArrowForwardIosIcon fontSize='large' />
-          </Button>
-        </>
-      )}
-
-      {/* Flecha Scroll Down */}
-      <Box
-        onClick={() => scrollTo("visitantes")}
-        sx={{
-          position: "absolute",
-          bottom: 20,
-          left: "50%",
-          transform: "translateX(-50%)",
-          cursor: "pointer",
-          zIndex: 2,
-          display: { xs: "none", md: "block" },
-        }}
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+      <Container maxWidth='xl' disableGutters>
+        {/* Encabezado del Hero */}
+        <Stack
+          direction='row'
+          alignItems='center'
+          justifyContent='space-between'
+          sx={{ mb: 3.5, px: 0.5 }}
         >
-          <KeyboardArrowDownIcon
-            sx={{ color: brandPink, fontSize: 36, opacity: 0.8 }}
+          <Chip
+            icon={
+              <EventAvailableIcon
+                sx={{ color: `${brandPink} !important`, fontSize: 16 }}
+              />
+            }
+            label='PRÓXIMOS EVENTOS DESTACADOS'
+            size='small'
+            sx={{
+              backgroundColor: "#FFFFFF",
+              color: darkText,
+              borderColor: borderTone,
+              borderWidth: 1,
+              borderStyle: "solid",
+              fontWeight: 800,
+              letterSpacing: "0.08em",
+              fontSize: "0.68rem",
+              py: 1.6,
+              px: 0.5,
+              borderRadius: "50px",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.02)",
+            }}
           />
-        </motion.div>
-      </Box>
+
+          <Typography
+            variant='caption'
+            sx={{
+              color: "rgba(43, 30, 34, 0.6)",
+              fontWeight: 700,
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            {featuredEvents.length}{" "}
+            {featuredEvents.length === 1
+              ? "evento disponible"
+              : "eventos disponibles"}
+          </Typography>
+        </Stack>
+
+        {/* Grid Adaptativo de EventCards */}
+        <Grid container spacing={{ xs: 2.5, sm: 3, md: 3.5 }}>
+          {featuredEvents.map((evento, index) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={evento.id || index}>
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                sx={{ height: "100%" }}
+              >
+                <EventCard
+                  evento={evento}
+                  brandPink={brandPink}
+                  deepText={darkText}
+                />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Box>
   );
 }

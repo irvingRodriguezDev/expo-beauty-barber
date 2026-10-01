@@ -10,218 +10,138 @@ import {
 } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import Logo from "../../assets/images/logo-wapizima.webp";
+import Logo from "../../assets/images/LOGOTIPO-EVENTOS.webp";
 import { PrivacyPolicyModal } from "../sections/PrivacyPolicyModal";
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const [openPolicy, setOpenPolicy] = useState(false);
 
-  // Obtener el año en curso dinámicamente
   const currentYear = new Date().getFullYear();
 
-  // --- PALETA LIGERA Y CLARA ---
-  const lightPinkBg = "#FFD9E2";
-  const softRose = "#FFB7CE";
-  const deepText = "#3D2B2F";
-  // -----------------------------
-
-  const navLinks = [
-    { name: "INICIO", id: "inicio" },
-    { name: "VISITANTES", id: "visitantes" },
-    { name: "BOLETOS", id: "events-list" },
-  ];
+  // Paleta Consistente y Vibrante
+  const brandPink = "#E11D74";
+  const darkText = "#2B1E22";
+  const lightBg = "#FFF5F8"; // Rosa ultrasuave para fondo de sección
 
   return (
     <Box
       component='footer'
       sx={{
-        bgcolor: lightPinkBg,
-        pt: { xs: 8, md: 12 },
-        pb: 6,
+        bgcolor: lightBg,
+        pt: { xs: 8, md: 10 },
+        pb: 5,
         width: "100%",
-        color: deepText,
-        borderTop: `1px solid rgba(255, 183, 206, 0.3)`,
+        color: darkText,
+        borderTop: "1px solid rgba(225, 29, 116, 0.12)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       <Container maxWidth='xl'>
-        <Grid container spacing={{ xs: 6, md: 4 }}>
-          {/* Columna 1: Identidad de Marca */}
-          <Grid item xs={12} sm={6} md={6}>
+        <Grid container spacing={{ xs: 5, md: 4 }} alignItems='center'>
+          {/* Columna 1: Branding e Identidad */}
+          <Grid item xs={12} md={7}>
             <Box
-              component='img'
-              src={Logo}
-              alt='Wapizima Events'
               sx={{
-                height: { xs: 110, md: 90 },
-                width: "auto",
-                mb: 3,
-                display: "block",
-              }}
-            />
-            <Typography
-              sx={{
-                color: "rgba(61, 43, 47, 0.75)",
-                lineHeight: 1.8,
-                maxWidth: { xs: "100%", sm: 340 },
-                fontSize: "0.95rem",
-                mb: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: { xs: "center", md: "flex-start" },
+                textAlign: { xs: "center", md: "left" },
               }}
             >
-              Conéctate con los eventos y la educación de nail art más grande de
-              México. Asegura tu lugar en las mejores experiencias en vivo y
-              eleva el estándar de tu talento junto a nosotros
-            </Typography>
+              <Box
+                component='img'
+                src={Logo}
+                alt='Wapizima Events'
+                sx={{
+                  height: { xs: 65, md: 75 },
+                  width: "auto",
+                  mb: 2.5,
+                  objectFit: "contain",
+                }}
+              />
+              <Typography
+                sx={{
+                  color: "rgba(43, 30, 34, 0.75)",
+                  lineHeight: 1.7,
+                  maxWidth: 460,
+                  fontSize: "0.92rem",
+                  mb: 3.5,
+                  fontWeight: 450,
+                }}
+              >
+                Conéctate con los eventos y la educación de nail art más grande
+                de México. Asegura tu lugar en las mejores experiencias en vivo
+                y eleva el estándar de tu talento junto a nosotros.
+              </Typography>
 
-            <Stack
-              direction='row'
-              spacing={1.5}
-              sx={{
-                justifyContent: { xs: "center", md: "flex-start" },
-              }}
-            >
-              {[InstagramIcon, FacebookIcon].map((Icon, i) => (
-                <IconButton
-                  key={i}
-                  sx={{
-                    color: softRose,
-                    border: `1px solid ${softRose}`,
-                    borderRadius: "12px",
-                    "&:hover": {
-                      bgcolor: softRose,
-                      color: "#FFF",
-                      transform: "translateY(-4px)",
-                      boxShadow: `0 5px 15px rgba(255, 183, 206, 0.4)`,
-                    },
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  <Icon sx={{ fontSize: 18 }} />
-                </IconButton>
-              ))}
-            </Stack>
+              {/* Redes Sociales */}
+              <Stack direction='row' spacing={1.5}>
+                {[
+                  { icon: InstagramIcon, url: "https://instagram.com" },
+                  { icon: FacebookIcon, url: "https://facebook.com" },
+                ].map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <IconButton
+                      key={i}
+                      component='a'
+                      href={item.url}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      sx={{
+                        color: brandPink,
+                        bgcolor: "rgba(225, 29, 116, 0.06)",
+                        border: "1px solid rgba(225, 29, 116, 0.18)",
+                        borderRadius: "14px",
+                        p: 1.2,
+                        transition:
+                          "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                        "&:hover": {
+                          bgcolor: brandPink,
+                          color: "#FFFFFF",
+                          transform: "translateY(-4px)",
+                          boxShadow: "0 8px 20px rgba(225, 29, 116, 0.28)",
+                        },
+                      }}
+                    >
+                      <Icon sx={{ fontSize: 20 }} />
+                    </IconButton>
+                  );
+                })}
+              </Stack>
+            </Box>
           </Grid>
 
-          {/* Columna 2: Navegación */}
-          {/* <Grid item xs={6} sm={6} md={2}>
-            <Typography
-              sx={{
-                fontWeight: 800,
-                bgcolor: "#FFCBDA",
-                mb: 4,
-                fontSize: "0.75rem",
-                letterSpacing: "0.25em",
-                textTransform: "uppercase",
-                width: "fit-content",
-                display: "inline-block",
-                px: 1,
-                py: 0.2,
-                borderRadius: "2px",
-              }}
-            >
-              Navegación
-            </Typography>
-            <Stack spacing={2}>
-              {navLinks.map((link) => (
-                <Typography
-                  key={link.name}
-                  component='a'
-                  href={`#${link.id}`}
-                  sx={{
-                    color: deepText,
-                    textDecoration: "none",
-                    fontSize: "0.85rem",
-                    fontWeight: 700,
-                    transition: "0.3s",
-                    letterSpacing: "0.1em",
-                    "&:hover": { color: softRose, pl: 1 },
-                  }}
-                >
-                  {link.name}
-                </Typography>
-              ))}
-            </Stack>
-          </Grid> */}
-
-          {/* Columna 3: Sede Principal / Oficinas */}
-          {/* <Grid item xs={6} sm={6} md={3}>
-            <Typography
-              sx={{
-                bgcolor: "#FFCBDA",
-                fontWeight: 800,
-                mb: 4,
-                fontSize: "0.75rem",
-                letterSpacing: "0.25em",
-                textTransform: "uppercase",
-                width: "fit-content",
-                display: "inline-block",
-                px: 1,
-                py: 0.2,
-                borderRadius: "2px",
-              }}
-            >
-              Corporativo
-            </Typography>
-            <Typography
-              sx={{
-                color: deepText,
-                fontSize: "0.85rem",
-                lineHeight: 1.8,
-                mb: 3,
-                fontWeight: 500,
-              }}
-            >
-              <strong style={{ color: deepText }}>Wapizima Oficial</strong>{" "}
-              <br />
-              Atención a Clientes y Distribución <br />
-              Sedes Recurrentes: CDMX y Guadalajara.
-            </Typography>
-            <Typography
-              component='a'
-              href='https://maps.google.com'
-              target='_blank'
-              rel='noopener noreferrer'
-              sx={{
-                color: deepText,
-                fontWeight: 800,
-                fontSize: "0.7rem",
-                letterSpacing: "0.15em",
-                textDecoration: "none",
-                borderBottom: `2px solid ${softRose}`,
-                pb: 0.5,
-                "&:hover": { color: softRose, borderColor: softRose },
-                transition: "0.3s",
-                width: "fit-content",
-                display: "inline-block",
-              }}
-            >
-              VER DIRECCIONES →
-            </Typography>
-          </Grid> */}
-
-          {/* Columna 4: Fecha Dinámica Automática & Scroll */}
+          {/* Columna 2: Indicador de Temporada & Scroll Top */}
           <Grid
             item
             xs={12}
-            sm={6}
-            md={6}
+            md={5}
             sx={{
-              textAlign: { xs: "center", md: "right" },
               display: "flex",
               flexDirection: "column",
               alignItems: { xs: "center", md: "flex-end" },
-              justifyContent: "space-between",
+              justifyContent: "center",
             }}
           >
-            <Box sx={{ position: "relative", mb: { xs: 4, md: 0 } }}>
+            <Box
+              sx={{
+                textAlign: { xs: "center", md: "right" },
+                mb: 3,
+                userSelect: "none",
+              }}
+            >
               <Typography
                 sx={{
                   fontWeight: 900,
-                  fontSize: { xs: "3.5rem", md: "5rem" },
-                  color: "rgba(238, 111, 151, 0.45)",
+                  fontSize: { xs: "4rem", md: "5.5rem" },
+                  color: "rgba(225, 29, 116, 0.12)",
                   lineHeight: 0.8,
+                  letterSpacing: "-0.04em",
+                  fontFamily: "monospace, sans-serif",
                 }}
               >
                 {currentYear}
@@ -229,32 +149,36 @@ export default function Footer() {
               <Typography
                 sx={{
                   fontWeight: 800,
-                  fontSize: "1.2rem",
-                  color: deepText,
-                  mt: 0.5,
-                  letterSpacing: "0.1em",
+                  fontSize: "0.95rem",
+                  color: darkText,
+                  mt: 1,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
                 }}
               >
-                TEMPORADA • <span style={{ color: softRose }}>ÉLITE</span>
+                TEMPORADA • <span style={{ color: brandPink }}>ÉLITE</span>
               </Typography>
             </Box>
 
             <IconButton
               onClick={scrollToTop}
+              aria-label='Volver arriba'
               sx={{
-                bgcolor: "white",
-                border: `1px solid ${softRose}`,
-                color: softRose,
-                borderRadius: "12px",
+                bgcolor: "#FFFFFF",
+                border: "1px solid rgba(225, 29, 116, 0.2)",
+                color: brandPink,
+                borderRadius: "14px",
                 width: 48,
                 height: 48,
-                transition: "0.3s",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
+                transition: "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
                 "&:hover": {
-                  bgcolor: softRose,
-                  color: "#FFF",
-                  boxShadow: `0 8px 20px rgba(255, 183, 206, 0.3)`,
-                  transform: "translateY(-3px)",
+                  bgcolor: brandPink,
+                  color: "#FFFFFF",
+                  boxShadow: "0 8px 22px rgba(225, 29, 116, 0.35)",
+                  transform: "translateY(-4px)",
                 },
+                "&:active": { transform: "translateY(-1px)" },
               }}
             >
               <ArrowUpwardIcon fontSize='small' />
@@ -264,47 +188,46 @@ export default function Footer() {
 
         <Divider
           sx={{
-            borderColor: "rgba(61, 43, 47, 0.08)",
-            mt: { xs: 6, md: 8 },
+            borderColor: "rgba(225, 29, 116, 0.1)",
+            mt: { xs: 5, md: 7 },
             mb: 4,
           }}
         />
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar / Copyright */}
         <Stack
-          direction={{ xs: "column-reverse", md: "row" }}
+          direction={{ xs: "column-reverse", sm: "row" }}
           justifyContent='space-between'
           alignItems='center'
-          spacing={3}
+          spacing={2}
         >
           <Typography
             sx={{
-              color: "rgba(61, 43, 47, 0.45)",
-              fontSize: "0.65rem",
+              color: "rgba(43, 30, 34, 0.5)",
+              fontSize: "0.72rem",
               fontWeight: 700,
-              letterSpacing: "0.1em",
+              letterSpacing: "0.08em",
+              textAlign: { xs: "center", sm: "left" },
             }}
           >
             © {currentYear} EVENTOS WAPIZIMA | TODOS LOS DERECHOS RESERVADOS
           </Typography>
 
-          <Stack direction='row' spacing={{ xs: 2, md: 4 }}>
+          <Stack direction='row' spacing={3}>
             <Typography
-              component='a'
-              href='#'
-              onClick={(e) => {
-                e.preventDefault();
-                setOpenPolicy(true);
-              }}
+              component='button'
+              onClick={() => setOpenPolicy(true)}
               sx={{
-                color: "rgba(61, 43, 47, 0.6)",
-                fontSize: "0.7rem",
-                textDecoration: "none",
+                background: "none",
+                border: "none",
+                padding: 0,
+                color: "rgba(43, 30, 34, 0.65)",
+                fontSize: "0.72rem",
                 fontWeight: 800,
                 letterSpacing: "0.1em",
                 cursor: "pointer",
-                transition: "0.3s",
-                "&:hover": { color: softRose },
+                transition: "color 0.2s ease",
+                "&:hover": { color: brandPink },
               }}
             >
               POLÍTICA DE PRIVACIDAD

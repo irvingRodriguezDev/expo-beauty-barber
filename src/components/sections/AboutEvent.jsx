@@ -1,17 +1,25 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Box, Container, Typography, Stack } from "@mui/material";
+import { Box, Container, Typography, Stack, Chip } from "@mui/material";
 import convencion from "../../assets/images/convencion.jpg";
 
 export default function AboutEvent() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  // --- PALETA COHERENTE ---
-  const brandPink = "#ee6f97ff";
-  const deepText = "#3D2B2F";
-  const lightBg = "#FFD9E2";
-  // -------------------------
+  // Paleta Unificada
+  const brandPink = "#E11D74";
+  const darkText = "#2B1E22";
+  const lightBg = "#FFF5F8";
+  const borderTone = "rgba(225, 29, 116, 0.15)";
+
+  const tags = [
+    "MASTER CLASSES",
+    "ZONAS DE EXPERIENCIA",
+    "SHOWS EN VIVO",
+    "VENTA DIRECTA",
+    "CERTIFICACIONES",
+  ];
 
   return (
     <Box
@@ -19,256 +27,245 @@ export default function AboutEvent() {
       component='section'
       id='visitantes'
       sx={{
-        py: { xs: 8, md: 16 },
-        minHeight: { xs: "auto", md: "100vh" },
-        display: "flex",
-        alignItems: "center",
+        py: { xs: 8, md: 14 },
         bgcolor: lightBg,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Marca de agua - Sutil y elegante */}
+      {/* Marca de agua tipográfica decorativa */}
       <Typography
+        aria-hidden='true'
         sx={{
           position: "absolute",
-          bottom: { xs: "95%", sm: "87%", md: "75%", lg: "80%" },
-          right: { xs: "1%", md: "60%" },
-          fontSize: { xs: "20vw", md: "6vw" },
-          fontWeight: 800,
+          top: { xs: "2%", md: "4%" },
+          right: { xs: "-5%", md: "2%" },
+          fontSize: { xs: "18vw", md: "11vw" },
+          fontWeight: 900,
           color: "transparent",
-          WebkitTextStroke: `2px rgba(238, 111, 151, 0.25)`, // Bajamos opacidad para que no compita
+          WebkitTextStroke: "1.5px rgba(225, 29, 116, 0.28)",
           lineHeight: 1,
           userSelect: "none",
           zIndex: 0,
+          letterSpacing: "-0.04em",
         }}
       >
         WAPIZIMA
       </Typography>
 
-      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1, mt: 5 }}>
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: { xs: 8, lg: 12 },
+            gridTemplateColumns: { xs: "1fr", lg: "1.1fr 0.9fr" },
+            gap: { xs: 6, lg: 10 },
             alignItems: "center",
           }}
         >
           {/* LADO IZQUIERDO: CONTENIDO EDITORIAL */}
-          <Box sx={{ textAlign: { xs: "center", lg: "left" } }}>
+          <Box>
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <Typography
                 variant='h2'
                 sx={{
-                  fontSize: { xs: "2.8rem", sm: "3.5rem", md: "5rem" },
+                  fontSize: { xs: "2.4rem", sm: "3.2rem", md: "4.2rem" },
                   fontWeight: 900,
-                  lineHeight: 1,
-                  color: deepText,
-                  mb: 5,
+                  lineHeight: 1.08,
+                  color: darkText,
+                  mb: 3.5,
                   letterSpacing: "-0.02em",
                 }}
               >
                 Donde tu pasión <br />
-                <span
-                  style={{
+                <Typography
+                  component='span'
+                  inheritViewProp
+                  sx={{
                     fontStyle: "italic",
                     fontWeight: 400,
                     color: brandPink,
+                    fontSize: "inherit",
+                    fontFamily: "serif",
                   }}
                 >
                   se convierte en arte
-                </span>
+                </Typography>
               </Typography>
 
-              <Stack
-                spacing={5}
-                sx={{ maxWidth: { xs: "100%", lg: 560 }, mx: "auto" }}
+              <Typography
+                sx={{
+                  fontSize: { xs: "1.05rem", md: "1.2rem" },
+                  lineHeight: 1.8,
+                  color: "rgba(43, 30, 34, 0.8)",
+                  fontWeight: 450,
+                  mb: 4,
+                  maxWidth: 600,
+                }}
+              >
+                Creamos espacios diseñados para inspirar, conectar y acelerar tu
+                crecimiento profesional. Cada evento de Wapizima es una
+                inmersión total en las últimas tendencias globales de la
+                industria del nail art.
+              </Typography>
+
+              {/* Bloque Destacado */}
+              <Box
+                sx={{
+                  pl: { xs: 2.5, md: 3.5 },
+                  borderLeft: `3px solid ${brandPink}`,
+                  bgcolor: "#FFFFFF",
+                  p: { xs: 2.5, md: 3.5 },
+                  borderRadius: "0 20px 20px 0",
+                  boxShadow: "0 10px 30px -10px rgba(225, 29, 116, 0.08)",
+                  border: `1px solid ${borderTone}`,
+                  borderLeftWidth: 3,
+                  mb: 4,
+                }}
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.1rem", md: "1.25rem" },
-                    lineHeight: 1.8,
-                    color: "rgba(61, 43, 47, 0.8)",
-                    fontWeight: 400,
+                    fontSize: "0.82rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.15em",
+                    color: brandPink,
+                    textTransform: "uppercase",
+                    mb: 1,
                   }}
                 >
-                  Creamos espacios diseñados para inspirar, conectar y acelerar
-                  tu crecimiento profesional. Cada evento de Wapizima es una
-                  inmersión total en las últimas tendencias globales de la
-                  industria del nail art.
+                  Exposición, Networking y Más
                 </Typography>
 
-                <Box
+                <Typography
                   sx={{
-                    pl: { xs: 0, md: 4 },
-                    borderLeft: { xs: "none", md: `2px solid ${brandPink}` },
-                    position: "relative",
+                    fontSize: "0.95rem",
+                    color: "rgba(43, 30, 34, 0.82)",
+                    lineHeight: 1.7,
+                    mb: 2.5,
                   }}
                 >
-                  <Box sx={{ mb: 4 }}>
-                    <Typography
+                  <strong>Lanzamientos Exclusivos:</strong> Accede de primera
+                  mano a colecciones nuevas con precios preferenciales de marca.{" "}
+                  <br />
+                  <strong>Comunidad de Élite:</strong> Interactúa en zonas de
+                  práctica guiada y conecta cara a cara con las master
+                  instructors nacionales e internacionales.
+                </Typography>
+
+                <Typography
+                  sx={{
+                    fontSize: "0.7rem",
+                    fontWeight: 800,
+                    color: darkText,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    mb: 1.5,
+                  }}
+                >
+                  ¿Qué incluyen nuestras sedes?
+                </Typography>
+
+                <Stack
+                  direction='row'
+                  spacing={1}
+                  flexWrap='wrap'
+                  useFlexGap
+                  sx={{ gap: 1 }}
+                >
+                  {tags.map((tag) => (
+                    <Chip
+                      key={tag}
+                      label={tag}
+                      size='small'
                       sx={{
-                        fontSize: "1.1rem",
-                        color: deepText,
+                        bgcolor: "rgba(225, 29, 116, 0.06)",
+                        color: darkText,
+                        border: "1px solid rgba(225, 29, 116, 0.15)",
                         fontWeight: 700,
-                        mb: 1,
+                        fontSize: "0.68rem",
+                        borderRadius: "50px",
+                        transition: "all 0.2s ease",
+                        "&:hover": {
+                          bgcolor: brandPink,
+                          color: "#FFFFFF",
+                          borderColor: brandPink,
+                        },
                       }}
-                    >
-                      EXPOSICIÓN, NETWORKING Y MÁS
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: "1rem",
-                        color: "rgba(61, 43, 47, 0.7)",
-                        lineHeight: 1.7,
-                        mb: 3,
-                      }}
-                    >
-                      <b>Lanzamientos Exclusivos:</b> Accede de primera mano a
-                      colecciones nuevas con precios preferenciales de marca.
-                      ¡Eleva el nivel de tu mesa de trabajo! <br />
-                      <b>Comunidad de Élite:</b> Interactúa en zonas de práctica
-                      guiada y conecta cara a cara con las master instructors
-                      nacionales e internacionales más influyentes.
-                    </Typography>
+                    />
+                  ))}
+                </Stack>
+              </Box>
 
-                    <Typography
-                      variant='caption'
-                      sx={{
-                        color: deepText,
-                        fontWeight: 800,
-                        letterSpacing: "0.1em",
-                        display: "block",
-                        mb: 2,
-                        width: "fit-content",
-                        bgcolor: "#FFCBDA",
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: "4px",
-                      }}
-                    >
-                      ¿QUÉ INCLUYEN NUESTRAS SEDES?
-                    </Typography>
-
-                    <Stack
-                      direction='row'
-                      spacing={1}
-                      flexWrap='wrap'
-                      useFlexGap
-                    >
-                      {[
-                        "MASTER CLASSES",
-                        "ZONAS DE EXPERIENCIA",
-                        "SHOWS EN VIVO",
-                        "VENTA DIRECTA",
-                        "CERTIFICACIONES",
-                      ].map((tag) => (
-                        <Box
-                          key={tag}
-                          sx={{
-                            px: 1.5,
-                            py: 0.5,
-                            borderRadius: "4px",
-                            border: `1px solid ${brandPink}`,
-                            color: deepText,
-                            fontSize: "0.75rem",
-                            fontWeight: 600,
-                            mb: 1,
-                            bgcolor: "white",
-                          }}
-                        >
-                          {tag}
-                        </Box>
-                      ))}
-                    </Stack>
-                  </Box>
-
-                  <Typography
-                    sx={{
-                      fontSize: "0.75rem",
-                      fontWeight: 800,
-                      color: deepText,
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      width: "fit-content",
-                      display: "inline-block",
-                      bgcolor: "#FFCBDA",
-                      px: 1,
-                      py: 0.2,
-                    }}
-                  >
-                    #COMUNIDADWAPIZIMA
-                  </Typography>
-                </Box>
-              </Stack>
+              <Chip
+                label='#COMUNIDADWAPIZIMA'
+                sx={{
+                  bgcolor: brandPink,
+                  color: "#FFFFFF",
+                  fontWeight: 800,
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.15em",
+                  borderRadius: "50px",
+                  px: 1,
+                }}
+              />
             </motion.div>
           </Box>
 
-          {/* LADO DERECHO: COMPOSICIÓN VISUAL (Se mantiene idéntico) */}
+          {/* LADO DERECHO: COMPOSICIÓN VISUAL CON MARCO FLOTANTE */}
           <Box sx={{ position: "relative" }}>
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.2,
+              }}
             >
-              <Box sx={{ position: "relative", zIndex: 2 }}>
+              <Box
+                sx={{
+                  position: "relative",
+                  zIndex: 2,
+                  borderRadius: { xs: "24px", md: "32px" },
+                  overflow: "hidden",
+                  boxShadow: "0 20px 40px -15px rgba(225, 29, 116, 0.22)",
+                  border: "1px solid rgba(255, 255, 255, 0.8)",
+                  height: { xs: 380, md: 580 },
+                }}
+              >
                 <Box
+                  component='img'
+                  src={convencion}
+                  alt='Wapizima Events Elite'
                   sx={{
                     width: "100%",
-                    height: { xs: "400px", md: "650px" },
-                    overflow: "hidden",
-                    borderRadius: 1,
-                    border: "1px solid rgba(0, 0, 0, 0.05)",
-                    position: "relative",
-                    boxShadow: "0 20px 40px rgba(61, 43, 47, 0.1)",
+                    height: "100%",
+                    objectFit: "cover",
+                    transition: "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+                    "&:hover": {
+                      transform: "scale(1.04)",
+                    },
                   }}
-                >
-                  <Box
-                    component='img'
-                    src={convencion}
-                    alt='Wapizima Events Elite'
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      filter: "sepia(20%) contrast(1.1) brightness(0.95)",
-                      transition: "all 0.8s ease",
-                      "&:hover": {
-                        filter: "sepia(0%) contrast(1) brightness(1)",
-                        transform: "scale(1.05)",
-                      },
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "20%",
-                      background: `linear-gradient(to top, ${lightBg}, transparent)`,
-                    }}
-                  />
-                </Box>
+                />
               </Box>
 
+              {/* Marco Decorativo Acento */}
               <Box
                 sx={{
                   position: "absolute",
-                  top: -30,
-                  left: -30,
+                  top: 20,
+                  left: -20,
                   width: "100%",
                   height: "100%",
-                  borderRadius: 2,
-                  border: `1px solid ${brandPink}`,
-                  opacity: 0.4,
+                  borderRadius: { xs: "24px", md: "32px" },
+                  border: `2px solid ${brandPink}`,
+                  opacity: 0.35,
                   zIndex: 1,
                   pointerEvents: "none",
+                  display: { xs: "none", sm: "block" },
                 }}
               />
             </motion.div>

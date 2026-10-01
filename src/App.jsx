@@ -5,46 +5,24 @@ import Hero from "./components/sections/Hero";
 import AboutEvent from "./components/sections/AboutEvent";
 import Highlights from "./components/sections/Highlights";
 import Stats from "./components/sections/Stats";
-import MapSection from "./components/sections/MapSection";
 import Visitors from "./components/sections/Visitors";
-import Exhibitors from "./components/sections/Exhibitors";
-import Contact from "./components/sections/Contact";
-import Register from "./components/sections/Register";
 import ExperienceGallery from "./components/sections/ExperienceGallery";
-import { BrandAuthority } from "./components/sections/BrandAuthority";
 import Brands from "./components/sections/Brands";
-import { EventTimeline } from "./components/sections/EventTimeLine";
 
 export default function App() {
   return (
-    <div className='min-h-screen bg-[#0A0A0A]'>
+    <div className='min-h-screen bg-[#FFF5F8] text-[#2B1E22] selection:bg-[#E11D74] selection:text-white'>
       <Navbar />
       <main>
-        {/* HOME */}
-        <section id='inicio'>
+        <div id='events-list'>
           <Hero />
-          <AboutEvent />
-          <Highlights />
-          <Stats />
-          <Brands />
-          {/* <MapSection /> */}
-          <ExperienceGallery />
-          {/* <BrandAuthority /> */}
-        </section>
-        {/* VISITANTES */}
-        <section id='visitantes'>
-          <Visitors />
-        </section>
-        <section id='register'>{/* <Register /> */}</section>
-        {/* EXPOSITORES */}
-        <section id='expositores'>
-          {/* <Exhibitors /> */}
-          {/* <EventTimeline /> */}
-        </section>
-        {/* CONTACTO */}
-        {/* <section id='contacto'>
-          <Contact />
-        </section> */}
+        </div>
+        <AboutEvent />
+        <Highlights />
+        <Stats />
+        <Brands />
+        <ExperienceGallery />
+        <Visitors />
       </main>
       <Footer />
     </div>

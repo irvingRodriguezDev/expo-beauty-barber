@@ -6,19 +6,18 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
-import { Box, Container, Typography, Grid, Stack } from "@mui/material";
+import { Box, Container, Typography, Stack, Chip } from "@mui/material";
+import PublicIcon from "@mui/icons-material/Public";
 
-function Counter({ to, suffix = "" }) {
+function Counter({ to, suffix = "", brandPink }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   const count = useMotionValue(0);
   const rounded = useTransform(count, (v) => Math.round(v).toLocaleString());
 
-  const brandPink = "#ee6f97ff";
-
   useEffect(() => {
     if (inView) {
-      const c = animate(count, to, { duration: 3.5, ease: [0.19, 1, 0.22, 1] });
+      const c = animate(count, to, { duration: 2.5, ease: [0.16, 1, 0.3, 1] });
       return c.stop;
     }
   }, [inView, to]);
@@ -35,7 +34,7 @@ function Counter({ to, suffix = "" }) {
         sx={{
           color: brandPink,
           ml: 0.5,
-          fontSize: "0.4em",
+          fontSize: "0.45em",
           fontWeight: 900,
         }}
       >
@@ -45,7 +44,6 @@ function Counter({ to, suffix = "" }) {
   );
 }
 
-// Estadísticas consolidadas con enfoque multi-sede e histórico de la marca
 const stats = [
   {
     value: 7,
@@ -75,41 +73,41 @@ const stats = [
 
 export default function Stats() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const brandPink = "#ee6f97ff";
-  const deepText = "#3D2B2F";
-  const lightBg = "#FFD9E2";
+  // Paleta Unificada
+  const brandPink = "#E11D74";
+  const darkText = "#2B1E22";
+  const lightBg = "#FFF5F8";
+  const borderTone = "rgba(225, 29, 116, 0.12)";
 
   return (
     <Box
       ref={ref}
       component='section'
       sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
+        py: { xs: 8, md: 14 },
         bgcolor: lightBg,
         position: "relative",
         overflow: "hidden",
-        py: { xs: 10, md: 0 },
       }}
     >
-      {/* TÍTULO DE FONDO GIGANTE - Manteniendo tu identidad sutil */}
+      {/* Marca de Agua Tipográfica en Fondo */}
       <Typography
+        aria-hidden='true'
         sx={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          fontSize: { xs: "5rem", sm: "15rem", md: "23rem" },
+          fontSize: { xs: "22vw", md: "18vw" },
           fontWeight: 900,
-          background: `linear-gradient(180deg, rgba(225, 175, 186, 0.4) 0%, transparent 100%)`,
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
+          color: "transparent",
+          WebkitTextStroke: "1.5px rgba(225, 29, 116, 0.06)",
           whiteSpace: "nowrap",
           zIndex: 0,
           pointerEvents: "none",
+          userSelect: "none",
         }}
       >
         WAPIZIMA
@@ -117,70 +115,80 @@ export default function Stats() {
 
       <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
         {/* CABECERA EDITORIAL */}
-        <Grid container sx={{ mb: { xs: 6, md: 10 } }} spacing={2}>
-          <Grid item xs={12}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1 }}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gap: { xs: 3, md: 6 },
+            alignItems: "flex-end",
+            mb: { xs: 6, md: 8 },
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Chip
+              icon={
+                <PublicIcon
+                  sx={{ color: `${brandPink} !important`, fontSize: 16 }}
+                />
+              }
+              label='PRESENCIA NACIONAL'
+              size='small'
+              sx={{
+                bgcolor: "#FFFFFF",
+                color: darkText,
+                fontWeight: 800,
+                fontSize: "0.72rem",
+                letterSpacing: "0.12em",
+                borderRadius: "50px",
+                border: `1px solid ${borderTone}`,
+                mb: 2,
+                px: 0.5,
+                py: 1.8,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
+              }}
+            />
+            <Typography
+              variant='h3'
+              sx={{
+                fontWeight: 900,
+                color: darkText,
+                lineHeight: 1.08,
+                fontSize: { xs: "2.2rem", sm: "3rem", md: "3.8rem" },
+                letterSpacing: "-0.02em",
+              }}
             >
+              Evolucionando el arte <br />
               <Typography
+                component='span'
                 sx={{
-                  fontSize: { xs: "1.3rem", sm: "2.2rem", md: "3.2rem" },
-                  letterSpacing: { xs: "0.2em", md: "0.4em" },
-                  color: deepText,
-                  fontWeight: 800,
-                  mb: 2,
-                  lineHeight: 1.2,
-                  textAlign: { xs: "center", md: "left" },
-                  width: "fit-content",
-                  display: "block",
-                  bgcolor: "#FFCBDA",
-                  px: 1.5,
-                  py: 0.5,
-                  borderRadius: "4px",
+                  color: brandPink,
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  fontSize: "inherit",
+                  fontFamily: "serif",
                 }}
               >
-                PRESENCIA NACIONAL
+                en cada rincón del país.
               </Typography>
-              <Typography
-                variant='h3'
-                sx={{
-                  fontWeight: 800,
-                  color: deepText,
-                  maxWidth: { xs: "100%", md: "600px" },
-                  lineHeight: 1.15,
-                  fontSize: { xs: "1.8rem", md: "2.8rem" },
-                  textAlign: { xs: "center", md: "left" },
-                }}
-              >
-                Evolucionando el arte <br />
-                <span
-                  style={{
-                    color: brandPink,
-                    fontStyle: "italic",
-                    fontWeight: 400,
-                  }}
-                >
-                  en cada rincón del país.
-                </span>
-              </Typography>
-            </motion.div>
-          </Grid>
+            </Typography>
+          </motion.div>
 
-          <Grid
-            item
-            xs={12}
-            sx={{ textAlign: { md: "right" }, mt: { xs: 2, md: -12 } }}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <Typography
               sx={{
-                fontSize: "1.15rem",
-                color: "rgba(61, 43, 47, 0.75)",
-                maxWidth: { md: "520px" },
-                ml: { md: "auto" },
-                lineHeight: 1.8,
-                textAlign: { xs: "center", md: "right" },
+                fontSize: { xs: "1rem", md: "1.15rem" },
+                color: "rgba(43, 30, 34, 0.75)",
+                lineHeight: 1.75,
+                fontWeight: 450,
+                textAlign: { xs: "left", md: "right" },
               }}
             >
               Nuestra trayectoria no se detiene. Con una planeación estratégica
@@ -188,106 +196,98 @@ export default function Stats() {
               de élite y los mejores insumos a las plazas más importantes de la
               república.
             </Typography>
-          </Grid>
-        </Grid>
+          </motion.div>
+        </Box>
 
-        {/* GRID DE ESTADÍSTICAS */}
-        <Grid container spacing={{ xs: 4, md: 3 }}>
+        {/* GRID DE ESTADÍSTICAS EN TARJETAS DE ALTO IMPACTO */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(4, 1fr)",
+            },
+            gap: 3,
+          }}
+        >
           {stats.map((stat, i) => (
-            <Grid item xs={12} sm={6} md={3} key={i}>
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 1, delay: i * 0.15 }}
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: 0.2 + i * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              <Box
+                sx={{
+                  bgcolor: "#FFFFFF",
+                  p: { xs: 3, md: 3.5 },
+                  borderRadius: "24px",
+                  border: `1px solid ${borderTone}`,
+                  boxShadow: "0 10px 30px -10px rgba(225, 29, 116, 0.08)",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  transition: "all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                  "&:hover": {
+                    transform: "translateY(-6px)",
+                    borderColor: brandPink,
+                    boxShadow: "0 18px 35px -10px rgba(225, 29, 116, 0.2)",
+                  },
+                }}
               >
-                <Box
-                  sx={{
-                    position: "relative",
-                    p: { xs: 3, md: 4 },
-                    textAlign: { xs: "center", md: "left" },
-                    // Bordes premium responsivos al hover
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: 0,
-                      left: { xs: "50%", md: 0 },
-                      transform: { xs: "translateX(-50%)", md: "none" },
-                      width: "24px",
-                      height: "24px",
-                      borderTop: "1px solid rgba(61, 43, 47, 0.1)",
-                      borderLeft: "1px solid rgba(61, 43, 47, 0.1)",
-                      display: { xs: "none", md: "block" },
-                      borderRadius: "8px",
-                    },
-                    "&:hover::before": {
-                      borderColor: brandPink,
-                      width: "100%",
-                      height: "100%",
-                      transition: "0.5s ease",
-                    },
-                    borderBottom: {
-                      xs: "1px solid rgba(0, 0, 0, 0.05)",
-                      md: "none",
-                    },
-                    pb: { xs: 4, md: 4 },
-                    transition: "all 0.3s",
-                  }}
-                >
+                <Box>
                   <Typography
                     sx={{
                       fontWeight: 900,
-                      fontSize: { xs: "3.2rem", sm: "3.8rem", md: "4.8rem" },
+                      fontSize: { xs: "2.8rem", sm: "3.2rem", md: "3.8rem" },
                       lineHeight: 1,
-                      color: deepText,
-                      mb: 1,
+                      color: darkText,
+                      mb: 1.5,
                       letterSpacing: "-0.04em",
                     }}
                   >
-                    <Counter to={stat.value} suffix={stat.suffix} />
+                    <Counter
+                      to={stat.value}
+                      suffix={stat.suffix}
+                      brandPink={brandPink}
+                    />
                   </Typography>
 
-                  <Typography
+                  <Chip
+                    label={stat.label}
+                    size='small'
                     sx={{
-                      fontSize: "0.75rem",
+                      bgcolor: "rgba(225, 29, 116, 0.08)",
+                      color: brandPink,
                       fontWeight: 800,
-                      color: deepText,
-                      letterSpacing: "0.2em",
+                      fontSize: "0.65rem",
+                      letterSpacing: "0.1em",
+                      borderRadius: "6px",
                       mb: 2,
-                      whiteSpace: "pre-line",
-                      bgcolor: "#FFCBDA",
-                      width: "fit-content",
-                      display: "inline-block",
-                      px: 1,
-                      py: 0.2,
-                      borderRadius: "2px",
                     }}
-                  >
-                    {stat.label}
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      fontSize: "0.95rem",
-                      color: "rgba(61, 43, 47, 0.65)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {stat.desc}
-                  </Typography>
+                  />
                 </Box>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
 
-        <Stack
-          direction='row'
-          sx={{
-            mt: { xs: 6, md: 8 },
-            pt: 2,
-            borderTop: `1px solid rgba(255, 183, 206, 0.2)`,
-          }}
-        />
+                <Typography
+                  sx={{
+                    fontSize: "0.9rem",
+                    color: "rgba(43, 30, 34, 0.7)",
+                    lineHeight: 1.6,
+                    fontWeight: 450,
+                  }}
+                >
+                  {stat.desc}
+                </Typography>
+              </Box>
+            </motion.div>
+          ))}
+        </Box>
       </Container>
     </Box>
   );

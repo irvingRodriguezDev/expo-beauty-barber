@@ -15,8 +15,8 @@ import {
   Divider,
 } from "@mui/material";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import MethodGet from "../../config/service";
-import WapiLogo from "../../assets/images/wsinfilo.png";
+import MethodGet from "../config/service";
+import WapiLogo from "../assets/images/wsinfilo.png";
 
 const TicketView = () => {
   const { code } = useParams();

@@ -12,29 +12,34 @@ export default function EventsSlider({
   eventos = [],
   onViewDetails,
   onOpenPurchase,
-  brandPink = "#EE6F97",
-  deepText = "#3D2B2F",
+  brandPink = "#E11D74",
+  darkText = "#2B1E22",
 }) {
+  if (!eventos || eventos.length === 0) return null;
+
   return (
     <Box
       sx={{
-        padding: "0px 5px",
+        px: { xs: 1, sm: 2 },
+        py: 1,
         width: "100%",
-        maxWidth: "460px", // Limita el ancho máximo para mantener las proporciones estilizadas del flyer vertical
+        maxWidth: "460px",
         margin: "0 auto",
         "& .swiper-pagination-bullet": {
-          bgcolor: "rgba(61, 43, 47, 0.2)",
+          bgcolor: "rgba(43, 30, 34, 0.2)",
           opacity: 1,
+          height: "6px",
+          width: "6px",
+          transition: "all 0.3s ease",
         },
         "& .swiper-pagination-bullet-active": {
           bgcolor: brandPink,
-          width: "25px",
-          borderRadius: "4px",
-          transition: "all 0.4s ease",
+          width: "24px",
+          borderRadius: "10px",
         },
         "& .swiper-pagination": {
           position: "relative",
-          marginTop: "15px",
+          marginTop: "16px",
         },
       }}
     >
@@ -47,7 +52,7 @@ export default function EventsSlider({
         pagination={{ clickable: true }}
         loop={eventos.length > 1}
         autoplay={{
-          delay: 4000,
+          delay: 4500,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
@@ -55,13 +60,13 @@ export default function EventsSlider({
       >
         {eventos.map((evento, index) => (
           <SwiperSlide key={evento.id || index}>
-            <Box sx={{ p: 1, height: "100%" }}>
+            <Box sx={{ p: 0.5, height: "100%" }}>
               <EventCard
                 evento={evento}
                 onViewDetails={onViewDetails}
                 onOpenPurchase={onOpenPurchase}
                 brandPink={brandPink}
-                deepText={deepText}
+                darkText={darkText}
               />
             </Box>
           </SwiperSlide>

@@ -1,5 +1,8 @@
-import { Box, Typography, Paper } from "@mui/material";
-import { motion } from "framer-motion";
+import React from "react";
+import { Box, Typography, Container, Chip } from "@mui/material";
+import Marquee from "react-fast-marquee";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+
 import viktoria from "../../assets/images/LogoViktoria.png";
 import wapizima from "../../assets/images/LogoWapizima.png";
 import princess from "../../assets/images/LogoPrincess.png";
@@ -7,12 +10,7 @@ import princessspa from "../../assets/images/LogoPrincessSPA.png";
 import carolina from "../../assets/images/LogoCarolina.png";
 import spawapizima from "../../assets/images/LogoSpaWapizima.png";
 import tokyo from "../../assets/images/LogoTokyo.png";
-// --- PALETA COHERENTE CON EL DISEÑO ANTERIOR ---
-const brandPink = "#E53888";
-const softPink = "#FFD9E2";
-const goldAccent = "#FFD700"; // Para detalles de "Aniversario"
 
-// Asumo que tienes los logos importados como en tu código original
 const BRANDS = [
   { name: "VIKTORYA", image: viktoria },
   { name: "Princess", image: princess },
@@ -23,149 +21,158 @@ const BRANDS = [
   { name: "Tokyo", image: tokyo },
 ];
 
-function BrandCard({ image, name }) {
+function BrandCard({ image, name, brandPink, borderTone }) {
   return (
-    <Box sx={{ mx: 3, flexShrink: 0 }}>
-      <Paper
-        elevation={0}
-        sx={{
-          background: "rgba(255, 255, 255, 0.4)", // Glassmorphism
-          backdropFilter: "blur(8px)",
-          border: `1px solid rgba(229, 56, 136, 0.15)`,
-          borderRadius: "24px",
-          px: 4,
-          py: 3,
-          width: 220,
-          height: 120,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "all 0.4s ease",
-          "&:hover": {
-            borderColor: brandPink,
-            transform: "translateY(-5px)",
-            boxShadow: `0 15px 35px rgba(229, 56, 136, 0.1)`,
-            background: "rgba(255, 255, 255, 0.8)",
+    <Box
+      sx={{
+        mx: 1.5,
+        my: 1,
+        bgcolor: "#FFFFFF",
+        border: `1px solid ${borderTone}`,
+        borderRadius: "20px",
+        px: 3,
+        py: 2,
+        width: { xs: 180, md: 220 },
+        height: { xs: 90, md: 105 },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: "0 4px 15px rgba(225, 29, 116, 0.04)",
+        transition: "all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "&:hover": {
+          borderColor: brandPink,
+          transform: "translateY(-4px)",
+          boxShadow: "0 12px 28px rgba(225, 29, 116, 0.15)",
+          "& img": {
+            filter: "grayscale(0%) opacity(1)",
+            transform: "scale(1.05)",
           },
+        },
+      }}
+    >
+      <Box
+        component='img'
+        src={image}
+        alt={name}
+        sx={{
+          maxWidth: "85%",
+          maxHeight: "60px",
+          objectFit: "contain",
+          filter: "grayscale(100%) opacity(0.55)",
+          transition: "all 0.4s ease",
         }}
-      >
-        <img
-          src={image}
-          alt={name}
-          style={{
-            width: "100%",
-            height: "auto",
-            maxHeight: "70px",
-            objectFit: "contain",
-            filter: "grayscale(100%) opacity(0.7)", // Efecto elegante inicial
-            transition: "all 0.4s ease",
-          }}
-          onMouseOver={(e) =>
-            (e.currentTarget.style.filter = "grayscale(0%) opacity(1)")
-          }
-          onMouseOut={(e) =>
-            (e.currentTarget.style.filter = "grayscale(100%) opacity(0.7)")
-          }
-        />
-      </Paper>
+      />
     </Box>
   );
 }
 
 export default function Brands() {
-  // Duplicamos el array para que el scroll sea infinito y no tenga saltos
-  const duplicatedBrands = [...BRANDS, ...BRANDS];
+  // Paleta Unificada
+  const brandPink = "#E11D74";
+  const darkText = "#2B1E22";
+  const lightBg = "#FFF5F8";
+  const borderTone = "rgba(225, 29, 116, 0.12)";
 
   return (
     <Box
       component='section'
       sx={{
-        py: { xs: 8, md: 10 },
-        background: softPink,
-        overflow: "hidden",
+        py: { xs: 7, md: 10 },
+        bgcolor: lightBg,
         position: "relative",
-        mt: -30,
+        overflow: "hidden",
       }}
     >
-      <Box sx={{ textAlign: "center", mb: 6, px: 2 }}>
-        <Typography
+      <Container maxWidth='xl' sx={{ mb: 4, textAlign: "center" }}>
+        <Chip
+          icon={
+            <HandshakeIcon
+              sx={{ color: `${brandPink} !important`, fontSize: 16 }}
+            />
+          }
+          label='PATROCINADORES Y MARCAS OFICIALES'
+          size='small'
           sx={{
-            fontSize: "0.75rem",
+            bgcolor: "#FFFFFF",
+            color: darkText,
             fontWeight: 800,
-            letterSpacing: "0.4em",
-            color: brandPink,
-            textTransform: "uppercase",
-            mb: 1,
+            fontSize: "0.72rem",
+            letterSpacing: "0.12em",
+            borderRadius: "50px",
+            border: `1px solid ${borderTone}`,
+            mb: 2,
+            px: 0.5,
+            py: 1.8,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
           }}
-        >
-          Aliados Estratégicos
-        </Typography>
+        />
+
         <Typography
           variant='h3'
           sx={{
             fontWeight: 900,
-            color: "#3D2B2F",
-            fontFamily: "'Syne', sans-serif",
-            fontSize: { xs: "2rem", md: "3rem" },
+            color: darkText,
+            fontSize: { xs: "1.8rem", sm: "2.4rem", md: "3rem" },
+            letterSpacing: "-0.02em",
           }}
         >
-          Marcas que <span style={{ color: brandPink }}>nos acompañan</span>
+          Marcas que{" "}
+          <Typography
+            component='span'
+            sx={{
+              color: brandPink,
+              fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: "inherit",
+              fontFamily: "serif",
+            }}
+          >
+            nos acompañan
+          </Typography>
         </Typography>
-      </Box>
+      </Container>
 
-      {/* Contenedor del Marquee */}
-      <Box
-        sx={{
-          display: "flex",
-          width: "max-content",
-          position: "relative",
-        }}
-      >
-        <motion.div
-          animate={{
-            x: ["0%", "-50%"], // Se mueve la mitad para que sea infinito
+      {/* Contenedor Marquee con Gradientes Laterales Integrados */}
+      <Box sx={{ position: "relative", width: "100%" }}>
+        {/* Degradado Izquierdo */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: { xs: 40, md: 140 },
+            height: "100%",
+            background: `linear-gradient(90deg, ${lightBg} 0%, transparent 100%)`,
+            zIndex: 3,
+            pointerEvents: "none",
           }}
-          transition={{
-            ease: "linear",
-            duration: 30, // Ajusta la velocidad aquí
-            repeat: Infinity,
+        />
+
+        {/* Degradado Derecho */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: { xs: 40, md: 140 },
+            height: "100%",
+            background: `linear-gradient(-90deg, ${lightBg} 0%, transparent 100%)`,
+            zIndex: 3,
+            pointerEvents: "none",
           }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          {duplicatedBrands.map((brand, index) => (
-            <BrandCard key={`${brand.name}-${index}`} {...brand} />
+        />
+
+        <Marquee speed={40} pauseOnHover gradient={false}>
+          {BRANDS.map((brand, index) => (
+            <BrandCard
+              key={`${brand.name}-${index}`}
+              {...brand}
+              brandPink={brandPink}
+              borderTone={borderTone}
+            />
           ))}
-        </motion.div>
+        </Marquee>
       </Box>
-
-      {/* Degradados laterales para ocultar el corte del marquee */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "150px",
-          height: "100%",
-          //   background: `,
-          zIndex: 3,
-          pointerEvents: "none",
-        }}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "150px",
-          height: "100%",
-          background: `linear-gradient(-90deg, ${softPink} 0%, transparent 100%)`,
-          zIndex: 3,
-          pointerEvents: "none",
-        }}
-      />
     </Box>
   );
 }
