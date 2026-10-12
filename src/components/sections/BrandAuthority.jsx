@@ -79,7 +79,7 @@ export const BrandAuthority = () => {
               comerciales. Nuestra política se basa en la seguridad y el
               servicio de excelencia. Con éxitos comprobados como Expo Impresión
               y PubliFest, hoy consolidamos
-              <strong> Beauty Worl Mexico 2027</strong> bajo los más altos
+              <strong> Beauty Business Mexico 2027</strong> bajo los más altos
               estándares de calidad.
             </Typography>
           </Grid>

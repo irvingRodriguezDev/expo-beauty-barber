@@ -133,31 +133,17 @@ export default function Register() {
 
   const passOptions = [
     {
-      id: "SINGLE_DAY",
-      title: "ACCESO INDIVIDUAL 1 DÍA",
-      price: 150,
-      desc: "Acceso completo por 1 día a todas las áreas de exposición.",
+      id: "FIRST_DAY",
+      title: "ACCESO INDIVIDUAL DÍA 13 MARZO",
+      price: 350,
+      desc: "Acceso a todas las conferencias y actividades del primer día del evento.",
       color: brandPink,
     },
     {
-      id: "TWO_DAYS",
-      title: "ACCESO INDIVIDUAL 2 DÍAS",
-      price: 200,
-      desc: "Inmersión total los dos días del evento con beneficios exclusivos.",
-      color: deepText,
-    },
-    {
-      id: "GROUP_SINGLE",
-      title: "ACCESO GRUPAL 1 DÍA",
-      price: 1500,
-      desc: "Paquete corporativo (11 boletos) para un día de actualización.",
-      color: deepText,
-    },
-    {
-      id: "GROUP_TWO",
-      title: "ACCESO GRUPAL 2 DÍAS",
-      price: 2000,
-      desc: "La máxima experiencia grupal (11 boletos) para ambos días.",
+      id: "SECOND_DAY",
+      title: "ACCESO INDIVIDUAL DÍA 14 MARZO",
+      price: 350,
+      desc: "Acceso a todas las conferencias y actividades del segundo día del evento.",
       color: deepText,
     },
   ];
