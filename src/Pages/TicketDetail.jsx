@@ -142,7 +142,7 @@ const TicketView = () => {
                   fontWeight: 600,
                 }}
               >
-                WORLD TRADE CENTER • CDMX
+                EXPO REFORMA • CDMX • 2027
               </Typography>
             </Box>
 

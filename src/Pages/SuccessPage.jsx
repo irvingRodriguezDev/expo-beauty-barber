@@ -208,7 +208,7 @@ const SuccessPage = () => {
                 letterSpacing: 1,
               }}
             >
-              WORLD TRADE CENTER · CDMX
+              EXPO REFORMA · CDMX · 2027
             </Typography>
           </Paper>
         </motion.div>

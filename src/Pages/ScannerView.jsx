@@ -334,7 +334,7 @@ const ScannerView = () => {
                 letterSpacing: 1,
               }}
             >
-              World Trade Center • Ciudad de México
+              EXPO REFORMA • CIUDAD DE MEXICO • 2027
             </Typography>
           </Paper>
         </motion.div>
