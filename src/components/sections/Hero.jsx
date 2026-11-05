@@ -1,95 +1,103 @@
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Box,
   Container,
-  Button,
   CircularProgress,
   Grid,
   Typography,
+  Button,
 } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useEffect, useState } from "react";
 import MethodGet from "../../config/service";
 import EventCard from "../EventCard";
-
-const scrollTo = (id) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
-  const brandPink = "#ee6f97ff";
-  const lightBg = "#FFD9E2";
-  const deepText = "#3D2B2F";
+  const brandPink = "#E53888";
+  const deepText = "#1A1A1A";
 
   const [events, setEvents] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     let url = "/events";
     MethodGet(url)
       .then((res) => {
-        setLoading(true);
         setEvents(res.data || []);
         setLoading(false);
       })
       .catch((error) => {
-        setLoading(true);
         console.log(error, "ocurrio un error");
+        setLoading(false);
       });
   }, []);
 
-  const nextEvents = events ? events.slice(0, 5) : [];
+  const rawEvents = events ? events.slice(0, 3) : [];
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % nextEvents.length);
+  // Ordenamos los eventos para escritorio: el destacado (ej. el del costo de 1200 o el del centro) va en medio (índice 1)
+  // En móvil, podemos reordenar el arreglo para que el destacado quede al final (última posición).
+  // Identificamos el destacado por costo (ej. 1200) o por el índice central si son 3.
+  const getOrderedEvents = (isMobile) => {
+    if (rawEvents.length !== 3) return rawEvents;
+
+    // Buscamos el evento destacado (por ejemplo, el que cuesta 1200 o el del centro índice 1)
+    const highlightedIndex =
+      rawEvents.findIndex(
+        (ev) => Number(ev.costo) === 1200 || Number(ev.precio) === 1200,
+      ) !== -1
+        ? rawEvents.findIndex(
+            (ev) => Number(ev.costo) === 1200 || Number(ev.precio) === 1200,
+          )
+        : 1;
+
+    const restEvents = rawEvents.filter((_, idx) => idx !== highlightedIndex);
+    const highlightedEvent = rawEvents[highlightedIndex];
+
+    if (isMobile) {
+      // En móvil: ponemos los demás primero y el destacado al final
+      return [...restEvents, highlightedEvent];
+    } else {
+      // En escritorio: formato original (ej. [Día 1, Pase Completo, Día 2]) para que quede en el centro
+      return [restEvents[0], highlightedEvent, restEvents[1]];
+    }
   };
 
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + nextEvents.length) % nextEvents.length
-    );
-  };
-
-  if (loading || nextEvents.length === 0)
+  if (loading)
     return (
-      <>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            bgcolor: "#FFD9E2",
-            display: "flex",
-            justifyContent: "center",
-            padding: "30px",
-          }}
-        >
-          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-            <CircularProgress
-              aria-label='Cargando Eventos'
-              sx={{ color: "#EE6E97" }}
-            />
-          </Grid>
-          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-            <Typography
-              variant='h2'
-              sx={{
-                fontSize: { xs: ".9rem", sm: "1.2rem", md: "1.5rem" },
-                fontWeight: 900,
-                lineHeight: 1,
-                color: deepText,
-                mb: 5,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Consultando Eventos disponibles
-            </Typography>
-          </Grid>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          bgcolor: "#FFD9E2",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          padding: "30px",
+        }}
+      >
+        <Grid size={12} sx={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress
+            aria-label='Cargando Eventos'
+            sx={{ color: brandPink }}
+          />
         </Grid>
-      </>
+        <Grid size={12} sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography
+            variant='h2'
+            sx={{
+              fontSize: { xs: ".9rem", sm: "1.2rem", md: "1.5rem" },
+              fontWeight: 900,
+              lineHeight: 1,
+              color: deepText,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Consultando Eventos disponibles...
+          </Typography>
+        </Grid>
+      </Grid>
     );
-
-  const currentEvent = nextEvents[currentIndex];
 
   return (
     <Box
@@ -97,97 +105,162 @@ export default function Hero() {
       sx={{
         position: "relative",
         minHeight: "100vh",
-        width: "100vw",
-        bgcolor: lightBg,
-        overflow: "hidden",
+        width: "100%",
+        background: "linear-gradient(180deg, #FAF6F6 0%, #FFFFFF 100%)",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
+        py: { xs: 6, md: 8 },
+        px: 2,
+        overflowX: "hidden",
       }}
     >
-      <Container
-        maxWidth='xl'
-        sx={{ position: "relative", zIndex: 1, py: { xs: 8, md: 0 } }}
-      >
-        <AnimatePresence mode='wait'>
-          {/* El contenedor animado envuelve directamente a la tarjeta completa */}
-          <motion.div
-            key={currentEvent.id || currentIndex}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
-            <EventCard
-              evento={currentEvent}
-              brandPink={brandPink}
-              deepText={deepText}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </Container>
-
-      {/* CONTROLES LATERALES DEL SLIDER */}
-      {nextEvents.length > 1 && (
-        <>
-          <Button
-            onClick={handlePrev}
-            sx={{
-              position: "absolute",
-              left: 20,
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: deepText,
-              zIndex: 2,
-              minWidth: "auto",
-              p: 1.5,
-              borderRadius: "50%",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.4)" },
-            }}
-          >
-            <ArrowBackIosNewIcon fontSize='large' />
-          </Button>
-          <Button
-            onClick={handleNext}
-            sx={{
-              position: "absolute",
-              right: 20,
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: deepText,
-              zIndex: 2,
-              minWidth: "auto",
-              p: 1.5,
-              borderRadius: "50%",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.4)" },
-            }}
-          >
-            <ArrowForwardIosIcon fontSize='large' />
-          </Button>
-        </>
-      )}
-
-      {/* Flecha Scroll Down */}
-      <Box
-        onClick={() => scrollTo("visitantes")}
-        sx={{
-          position: "absolute",
-          bottom: 20,
-          left: "50%",
-          transform: "translateX(-50%)",
-          cursor: "pointer",
-          zIndex: 2,
-          display: { xs: "none", md: "block" },
-        }}
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
+      <Container maxWidth='xl' sx={{ position: "relative", zIndex: 1 }}>
+        {/* ENCABEZADO CENTRADO ARRIBA */}
+        <Box
+          component='header'
+          sx={{ textAlign: "center", maxWidth: "1200px", mx: "auto", mb: 6 }}
         >
-          <KeyboardArrowDownIcon
-            sx={{ color: brandPink, fontSize: 36, opacity: 0.8 }}
-          />
-        </motion.div>
-      </Box>
+          <Typography
+            variant='h1'
+            sx={{
+              fontSize: { xs: "2rem", sm: "2.3rem", md: "2.6rem" },
+              fontWeight: 800,
+              color: deepText,
+              lineHeight: 1.2,
+              marginBottom: "16px",
+              letterSpacing: "-0.5px",
+            }}
+          >
+            Elige tu Pase para <br />
+            <Box component='span' sx={{ color: brandPink }}>
+              Christmas Nails CDMX
+            </Box>
+          </Typography>
+          <Typography
+            variant='body1'
+            sx={{
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              color: "#64748B",
+              lineHeight: 1.6,
+            }}
+          >
+            Asegura tu lugar en la capacitación más esperada de la temporada.
+            <br />
+            Selecciona el acceso que mejor se adapte a ti.
+          </Typography>
+        </Box>
+
+        {/* GRID DE TARJETAS ORDENADAS RESPONSIVAS */}
+        {/* Usamos CSS Grid / Flex con orden responsivo mediante ocultamiento o duplicando vistas limpias para móvil y desktop, o bien ordenando por CSS order */}
+
+        {/* Vista para Escritorio (md en adelante): El destacado queda en medio */}
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            justifyContent: "center",
+            maxWidth: "100%",
+            mx: "auto",
+            display: { xs: "none", md: "flex" },
+          }}
+        >
+          {getOrderedEvents(false).map((evento, index) => {
+            const isHighlighted =
+              Number(evento.costo) === 1200 ||
+              Number(evento.precio) === 1200 ||
+              index === 1;
+            return (
+              <Grid
+                size={{ xs: 12, md: 4 }}
+                key={evento.id || index}
+                sx={{ display: "flex", m: 1 }}
+              >
+                <EventCard
+                  evento={evento}
+                  brandPink={brandPink}
+                  deepText={deepText}
+                  isHighlighted={isHighlighted}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+
+        {/* Vista para Celular (xs): El destacado pasa al final */}
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            justifyContent: "center",
+            maxWidth: "100%",
+            mx: "auto",
+            display: { xs: "flex", md: "none" },
+          }}
+        >
+          {getOrderedEvents(true).map((evento, index) => {
+            const isHighlighted =
+              Number(evento.costo) === 1200 || Number(evento.precio) === 1200;
+            return (
+              <Grid
+                size={{ xs: 12, md: 4 }}
+                key={evento.id || index}
+                sx={{ display: "flex", m: 1 }}
+              >
+                <EventCard
+                  evento={evento}
+                  brandPink={brandPink}
+                  deepText={deepText}
+                  isHighlighted={isHighlighted}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+
+        <Box sx={{ mt: 6, textAlign: "center" }}>
+          <Link
+            to={"https://bit.ly/ChristmasNails_Iraida"}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ textDecoration: "none" }}
+          >
+            <Button
+              sx={{
+                bgcolor: "#24CD63",
+                color: "#fff",
+                borderRadius: "12px",
+                px: 3,
+                py: 1.5,
+                textTransform: "none",
+                fontWeight: 700,
+                "&:hover": { bgcolor: "#20b356" },
+              }}
+            >
+              O compralo por WhatsApp <WhatsAppIcon sx={{ ml: 1 }} />
+            </Button>
+          </Link>
+        </Box>
+
+        {/* PIE DE PÁGINA Y MÉTODOS DE PAGO */}
+        <Box sx={{ mt: 6, textAlign: "center" }}>
+          <Typography
+            sx={{
+              color: "#64748B",
+              fontSize: "0.9rem",
+              mb: 1,
+              fontWeight: 500,
+            }}
+          >
+            💳 Pago seguro aceptado con Tarjeta (Débito/Crédito) y Efectivo en
+            OXXO
+          </Typography>
+          <Typography sx={{ color: "#64748B", fontSize: "0.875rem" }}>
+            © Eventos Wapizima. Pagos seguros y garantía de acceso.
+          </Typography>
+        </Box>
+      </Container>
     </Box>
   );
 }

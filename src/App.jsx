@@ -23,18 +23,16 @@ export default function App() {
         {/* HOME */}
         <section id='inicio'>
           <Hero />
-          <AboutEvent />
+          {/* <AboutEvent />
           <Highlights />
           <Stats />
-          <Brands />
+          <Brands /> */}
           {/* <MapSection /> */}
-          <ExperienceGallery />
+          {/* <ExperienceGallery /> */}
           {/* <BrandAuthority /> */}
         </section>
         {/* VISITANTES */}
-        <section id='visitantes'>
-          <Visitors />
-        </section>
+        <section id='visitantes'>{/* <Visitors /> */}</section>
         <section id='register'>{/* <Register /> */}</section>
         {/* EXPOSITORES */}
         <section id='expositores'>
@@ -46,7 +44,7 @@ export default function App() {
           <Contact />
         </section> */}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

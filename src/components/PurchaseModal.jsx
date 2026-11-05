@@ -28,8 +28,8 @@ export default function PurchaseModal({
   open,
   onClose,
   evento,
-  brandPink = "#EE6F97",
-  deepText = "#3D2B2F",
+  brandPink = "#E53888",
+  deepText = "#1A1A1A",
 }) {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -48,7 +48,7 @@ export default function PurchaseModal({
         telefono: "",
         cantidad_boletos: 1,
       });
-      setAceptaPoliticas(false); // Reiniciar el checkbox al abrir
+      setAceptaPoliticas(false);
     }
   }, [open, evento]);
 
@@ -133,17 +133,26 @@ export default function PurchaseModal({
 
   const totalPago = Number(formData.cantidad_boletos) * Number(evento.costo);
 
-  // Estilos comunes reutilizables para inputs refinados
+  // Estilos limpios y modernos para inputs
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
-      borderRadius: "14px",
-      transition: "all 0.3s ease",
+      borderRadius: "16px",
+      backgroundColor: "#FAFAFA",
+      transition: "all 0.2s ease",
+      "& fieldset": {
+        borderColor: "rgba(100, 116, 139, 0.2)",
+      },
+      "&:hover fieldset": {
+        borderColor: "rgba(229, 56, 136, 0.4)",
+      },
       "&.Mui-focused fieldset": {
         borderColor: brandPink,
+        borderWidth: "2px",
       },
     },
     "& .MuiInputLabel-root.Mui-focused": {
       color: brandPink,
+      fontWeight: 600,
     },
   };
 
@@ -157,10 +166,9 @@ export default function PurchaseModal({
       PaperProps={{
         sx: {
           borderRadius: "28px",
-          bgcolor: "rgba(255, 255, 255, 0.98)",
-          backdropFilter: "blur(20px)",
-          boxShadow: "0 24px 60px rgba(61, 43, 47, 0.18)",
-          border: "1px solid rgba(238, 111, 151, 0.25)",
+          bgcolor: "#FFFFFF",
+          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
+          border: "1px solid rgba(229, 56, 136, 0.12)",
           overflow: "hidden",
         },
       }}
@@ -169,28 +177,31 @@ export default function PurchaseModal({
         onClick={onClose}
         sx={{
           position: "absolute",
-          top: 20,
-          right: 20,
-          color: "rgba(61, 43, 47, 0.4)",
-          "&:hover": { color: deepText, bgcolor: "rgba(61,43,47,0.05)" },
+          top: 18,
+          right: 18,
+          color: "#64748B",
+          bgcolor: "#F1F5F9",
+          p: 1,
+          "&:hover": { color: deepText, bgcolor: "#E2E8F0" },
           zIndex: 10,
         }}
       >
-        <CloseIcon />
+        <CloseIcon fontSize='small' />
       </IconButton>
 
-      <DialogContent sx={{ p: { xs: 3, sm: 4.5 } }}>
+      <DialogContent sx={{ p: { xs: 3, sm: 4 } }}>
         <Box component='form' onSubmit={handleSubmit}>
           {/* ENCABEZADO */}
-          <Box sx={{ mb: 3, pr: 3 }}>
+          <Box sx={{ mb: 3, pr: 4 }}>
             <Typography
               variant='caption'
               sx={{
                 textTransform: "uppercase",
-                fontWeight: 900,
+                fontWeight: 800,
                 color: brandPink,
-                letterSpacing: "0.1em",
+                letterSpacing: "1px",
                 display: "block",
+                mb: 0.5,
               }}
             >
               Estás adquiriendo accesos para:
@@ -198,11 +209,10 @@ export default function PurchaseModal({
             <Typography
               variant='h5'
               sx={{
-                fontWeight: 900,
+                fontWeight: 800,
                 color: deepText,
-                lineHeight: 1.15,
-                mt: 0.5,
-                textTransform: "uppercase",
+                lineHeight: 1.2,
+                fontSize: "1.35rem",
               }}
             >
               {evento.titulo}
@@ -210,20 +220,21 @@ export default function PurchaseModal({
             <Typography
               variant='caption'
               sx={{
-                color: "rgba(61, 43, 47, 0.6)",
-                fontWeight: 700,
+                color: "#64748B",
+                fontWeight: 600,
                 display: "block",
-                mt: 0.8,
+                mt: 1,
+                fontSize: "0.85rem",
               }}
             >
               📍 {evento.lugar} • 📅 {FormatDate(evento.fecha)}
             </Typography>
           </Box>
 
-          <Divider sx={{ mb: 3, borderColor: "rgba(238, 111, 151, 0.15)" }} />
+          <Divider sx={{ mb: 3, borderColor: "rgba(229, 56, 136, 0.1)" }} />
 
           {/* FORMULARIO */}
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.2 }}>
             <TextField
               required
               fullWidth
@@ -236,7 +247,7 @@ export default function PurchaseModal({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <PersonIcon sx={{ color: "rgba(61, 43, 47, 0.35)" }} />
+                    <PersonIcon sx={{ color: "#94A3B8" }} />
                   </InputAdornment>
                 ),
               }}
@@ -256,7 +267,7 @@ export default function PurchaseModal({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <EmailIcon sx={{ color: "rgba(61, 43, 47, 0.35)" }} />
+                    <EmailIcon sx={{ color: "#94A3B8" }} />
                   </InputAdornment>
                 ),
               }}
@@ -278,7 +289,7 @@ export default function PurchaseModal({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <WhatsAppIcon sx={{ color: "rgba(61, 43, 47, 0.35)" }} />
+                    <WhatsAppIcon sx={{ color: "#94A3B8" }} />
                   </InputAdornment>
                 ),
               }}
@@ -293,20 +304,20 @@ export default function PurchaseModal({
                 justifyContent: "space-between",
                 p: 2,
                 borderRadius: "16px",
-                bgcolor: "rgba(61, 43, 47, 0.03)",
-                border: "1px solid rgba(61, 43, 47, 0.05)",
+                bgcolor: "#F8FAFC",
+                border: "1px solid #E2E8F0",
               }}
             >
               <Box>
                 <Typography
                   variant='body2'
-                  sx={{ fontWeight: 800, color: deepText }}
+                  sx={{ fontWeight: 700, color: deepText }}
                 >
                   Cantidad de Accesos
                 </Typography>
                 <Typography
                   variant='caption'
-                  sx={{ color: "rgba(61, 43, 47, 0.5)", fontWeight: 700 }}
+                  sx={{ color: "#64748B", fontWeight: 600 }}
                 >
                   {formatMexicanCurrency(Number(evento.costo) || 0)} MXN c/u
                 </Typography>
@@ -317,19 +328,21 @@ export default function PurchaseModal({
                   onClick={handleDecrement}
                   disabled={formData.cantidad_boletos <= 1}
                   sx={{
-                    bgcolor: "#FFF",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                    bgcolor: "#FFFFFF",
+                    border: "1px solid #CBD5E1",
+                    boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
                     p: 0.8,
-                    "&:hover": { bgcolor: "#f5f5f5" },
+                    "&:hover": { bgcolor: "#F1F5F9" },
+                    "&.Mui-disabled": { opacity: 0.5 },
                   }}
                 >
-                  <RemoveIcon sx={{ fontSize: "1.1rem", color: deepText }} />
+                  <RemoveIcon sx={{ fontSize: "1rem", color: deepText }} />
                 </IconButton>
 
                 <Typography
                   variant='body1'
                   sx={{
-                    fontWeight: 900,
+                    fontWeight: 800,
                     minWidth: "24px",
                     textAlign: "center",
                     color: deepText,
@@ -341,30 +354,38 @@ export default function PurchaseModal({
                 <IconButton
                   onClick={handleIncrement}
                   sx={{
-                    bgcolor: "#FFF",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                    bgcolor: "#FFFFFF",
+                    border: "1px solid #CBD5E1",
+                    boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
                     p: 0.8,
-                    "&:hover": { bgcolor: "#f5f5f5" },
+                    "&:hover": { bgcolor: "#F1F5F9" },
                   }}
                 >
-                  <AddIcon sx={{ fontSize: "1.1rem", color: deepText }} />
+                  <AddIcon sx={{ fontSize: "1rem", color: deepText }} />
                 </IconButton>
               </Box>
             </Box>
+
+            {/* AVISO DE PAGO */}
             <Box
               sx={{
-                bgcolor: "rgba(238, 111, 151, 0.08)",
+                bgcolor: "#FFF0F5",
                 p: 1.5,
-                borderRadius: "8px",
+                borderRadius: "12px",
+                border: "1px solid rgba(229, 56, 136, 0.15)",
               }}
             >
               <Typography
                 variant='caption'
-                color='text.secondary'
-                display='block'
+                sx={{
+                  color: "#831843",
+                  fontWeight: 600,
+                  display: "block",
+                  textAlign: "center",
+                }}
               >
-                Aceptamos **Tarjetas de Débito/Crédito** y pagos en efectivo en
-                **OXXO**.
+                💳 Aceptamos <b>Tarjetas de Débito/Crédito</b> y efectivo en{" "}
+                <b>OXXO</b>.
               </Typography>
             </Box>
           </Box>
@@ -372,44 +393,36 @@ export default function PurchaseModal({
           {/* TOTAL */}
           <Box
             sx={{
-              mt: 3.5,
-              mb: 3,
-              p: 2.2,
+              mt: 3,
+              mb: 2.5,
+              p: 2,
               borderRadius: "16px",
-              border: `1.5px dashed ${brandPink}60`,
-              bgcolor: `${brandPink}05`,
+              border: `2px dashed rgba(229, 56, 136, 0.3)`,
+              bgcolor: "rgba(229, 56, 136, 0.02)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
+            <Typography
+              variant='body2'
+              sx={{ fontWeight: 700, color: "#64748B" }}
             >
-              <Typography
-                variant='body2'
-                sx={{ fontWeight: 800, color: "rgba(61, 43, 47, 0.5)" }}
+              Total a pagar:
+            </Typography>
+            <Typography variant='h5' sx={{ fontWeight: 800, color: deepText }}>
+              {formatMexicanCurrency(Number(totalPago))}{" "}
+              <Box
+                component='span'
+                sx={{
+                  fontSize: "0.8rem",
+                  fontWeight: 700,
+                  color: "#94A3B8",
+                }}
               >
-                Total a pagar:
-              </Typography>
-              <Typography
-                variant='h4'
-                sx={{ fontWeight: 900, color: deepText }}
-              >
-                {formatMexicanCurrency(Number(totalPago))}{" "}
-                <Box
-                  component='span'
-                  sx={{
-                    fontSize: "0.85rem",
-                    fontWeight: 800,
-                    color: "rgba(61, 43, 47, 0.4)",
-                  }}
-                >
-                  MXN
-                </Box>
-              </Typography>
-            </Box>
+                MXN
+              </Box>
+            </Typography>
           </Box>
 
           {/* POLÍTICAS DE PRIVACIDAD */}
@@ -418,7 +431,7 @@ export default function PurchaseModal({
               display: "flex",
               alignItems: "flex-start",
               gap: 1,
-              mb: 3.5,
+              mb: 3,
               px: 0.5,
             }}
           >
@@ -427,7 +440,7 @@ export default function PurchaseModal({
               onChange={(e) => setAceptaPoliticas(e.target.checked)}
               size='small'
               sx={{
-                color: "rgba(61, 43, 47, 0.3)",
+                color: "#CBD5E1",
                 p: "2px",
                 "&.Mui-checked": { color: brandPink },
               }}
@@ -435,8 +448,8 @@ export default function PurchaseModal({
             <Typography
               variant='caption'
               sx={{
-                color: "rgba(61, 43, 47, 0.75)",
-                fontWeight: 600,
+                color: "#64748B",
+                fontWeight: 500,
                 lineHeight: 1.4,
                 userSelect: "none",
               }}
@@ -448,7 +461,7 @@ export default function PurchaseModal({
                 onClick={() => setOpenPolicyModal(true)}
                 sx={{
                   color: brandPink,
-                  fontWeight: 800,
+                  fontWeight: 700,
                   textDecoration: "underline",
                   cursor: "pointer",
                   "&:hover": { color: deepText },
@@ -470,16 +483,22 @@ export default function PurchaseModal({
             sx={{
               bgcolor: brandPink,
               color: "#FFF",
-              borderRadius: "14px",
-              fontWeight: 800,
-              fontSize: "1rem",
-              py: 1.8,
+              borderRadius: "16px",
+              fontWeight: 700,
+              fontSize: "0.95rem",
+              py: 1.6,
               textTransform: "none",
-              boxShadow: `0 8px 24px rgba(238, 111, 151, 0.3)`,
-              transition: "all 0.3s ease-in-out",
+              boxShadow: "0 10px 20px -5px rgba(229, 56, 136, 0.4)",
+              transition: "all 0.2s ease-in-out",
               "&:hover": {
-                bgcolor: "#D64C77",
-                boxShadow: "0 10px 28px rgba(61, 43, 47, 0.25)",
+                bgcolor: "#D82E7A",
+                boxShadow: "0 12px 24px -4px rgba(229, 56, 136, 0.5)",
+                transform: "translateY(-1px)",
+              },
+              "&.Mui-disabled": {
+                bgcolor: "#E2E8F0",
+                color: "#94A3B8",
+                boxShadow: "none",
               },
             }}
           >
