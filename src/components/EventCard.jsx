@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -34,17 +34,19 @@ export default function EventCard({
   const textMuted = "#64748B";
 
   return (
-    <Box
+    <Paper
+      elevation={5}
       sx={{
         background: cardBg,
         borderRadius: "24px",
         padding: "12px 12px",
+        marginTop: { xs: isHighlighted ? 4 : 2, lg: isHighlighted ? -2 : 0 },
         boxShadow: isHighlighted
           ? "0 15px 35px -5px rgba(229, 56, 136, 0.2)"
           : "0 10px 30px -5px rgba(229, 56, 136, 0.05)",
         border: isHighlighted
-          ? `2px solid ${brandPink}`
-          : "1px solid rgba(229, 56, 136, 0.1)",
+          ? `3px solid ${brandPink}`
+          : "1px solid rgba(229, 56, 136, 0.8)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -137,7 +139,7 @@ export default function EventCard({
 
         <Box
           sx={{
-            my: 2,
+            my: -4,
             py: 2,
             borderTop: "1px dashed #F1F5F9",
             borderBottom: "1px dashed #F1F5F9",
@@ -217,6 +219,6 @@ export default function EventCard({
           evento={selectedEvent}
         />
       )}
-    </Box>
+    </Paper>
   );
 }

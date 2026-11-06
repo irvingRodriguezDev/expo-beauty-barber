@@ -206,7 +206,10 @@ export default function Hero() {
               <Grid
                 size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
                 key={evento.id || index}
-                sx={{ display: "flex", m: 1 }}
+                sx={{
+                  display: "flex",
+                  m: 1,
+                }}
               >
                 <EventCard
                   evento={evento}

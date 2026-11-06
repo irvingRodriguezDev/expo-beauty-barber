@@ -219,6 +219,13 @@ export default function EventDetail({
                     sx={{
                       color: "#4a3a50",
                       lineHeight: 1.7,
+                      maxHeight: 600,
+                      overflowY: "auto",
+                      overflowX: "hidden",
+                      whiteSpace: "normal",
+                      overflowWrap: "anywhere",
+                      wordBreak: "normal",
+                      width: "100%",
                       "& p": { mb: 1.5 },
                     }}
                     dangerouslySetInnerHTML={{ __html: evento.descripcion }}
