@@ -191,7 +191,7 @@ export default function Hero() {
         {/* Vista para Celular (xs): El destacado pasa al final */}
         <Grid
           container
-          spacing={3}
+          spacing={4}
           sx={{
             justifyContent: "center",
             maxWidth: "100%",
@@ -204,7 +204,7 @@ export default function Hero() {
               Number(evento.costo) === 1200 || Number(evento.precio) === 1200;
             return (
               <Grid
-                size={{ xs: 12, md: 4 }}
+                size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
                 key={evento.id || index}
                 sx={{ display: "flex", m: 1 }}
               >
@@ -221,7 +221,9 @@ export default function Hero() {
 
         <Box sx={{ mt: 6, textAlign: "center" }}>
           <Link
-            to={"https://bit.ly/ChristmasNails_Iraida"}
+            to={
+              "https://wa.me/527221311650?text=Hola%2C%20me%20interesa%20m%C3%A1s%20informes%20para%20asistir%20al%20Christmas%20Nails%20de%20Wapizima%20%F0%9F%A9%B7%F0%9F%8E%84%F0%9F%A9%B7"
+            }
             target='_blank'
             rel='noopener noreferrer'
             style={{ textDecoration: "none" }}
@@ -257,7 +259,7 @@ export default function Hero() {
             OXXO
           </Typography>
           <Typography sx={{ color: "#64748B", fontSize: "0.875rem" }}>
-            © Eventos Wapizima. Pagos seguros y garantía de acceso.
+            © Eventos Wapizima. Todos los derechos reservados.
           </Typography>
         </Box>
       </Container>
