@@ -12,6 +12,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../assets/images/LOGO_VINO.webp";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Inicio", to: "inicio" },
@@ -41,7 +42,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
       const sections = navLinks.map((l) => document.getElementById(l.to));
       const current = sections.findLast(
-        (s) => s && s.getBoundingClientRect().top <= 120
+        (s) => s && s.getBoundingClientRect().top <= 120,
       );
       if (current) setActive(current.id);
     };
@@ -112,6 +113,40 @@ export default function Navbar() {
               sx={{ display: { xs: "none", md: "flex" } }}
             >
               <Stack direction='row' spacing={4}>
+                <Link
+                  to='https://masterclass.beautybusinessmexico.com'
+                  style={{ textDecoration: "none" }}
+                >
+                  <Box
+                    component='button'
+                    sx={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "0.7rem",
+                      fontWeight: 800,
+                      letterSpacing: "0.25em",
+                      textTransform: "uppercase",
+                      color:
+                        active === true ? brandPink : "rgba(61, 43, 47, 0.6)", // Texto suave cuando no está activo
+                      position: "relative",
+                      transition: "0.3s",
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: -6,
+                        left: 0,
+                        width: active === true ? "100%" : "0%",
+                        height: "2px",
+                        bgcolor: brandPink,
+                        transition: "0.3s ease",
+                      },
+                      "&:hover": { color: deepText },
+                    }}
+                  >
+                    Masterclass
+                  </Box>
+                </Link>
                 {navLinks.map((link) => (
                   <Box
                     key={link.to}
@@ -228,6 +263,40 @@ export default function Navbar() {
             </Typography>
 
             <Stack spacing={5} sx={{ zIndex: 1, textAlign: "center" }}>
+              <Link
+                to='https://masterclass.beautybusinessmexico.com'
+                style={{ textDecoration: "none" }}
+              >
+                <Box
+                  component='button'
+                  sx={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    fontSize: "2rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.25em",
+                    textTransform: "uppercase",
+                    color:
+                      active === true ? brandPink : "rgba(61, 43, 47, 0.6)", // Texto suave cuando no está activo
+                    position: "relative",
+                    transition: "0.3s",
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: -6,
+                      left: 0,
+                      width: active === true ? "100%" : "0%",
+                      height: "2px",
+                      bgcolor: brandPink,
+                      transition: "0.3s ease",
+                    },
+                    "&:hover": { color: deepText },
+                  }}
+                >
+                  Masterclass
+                </Box>
+              </Link>
               {navLinks.map((link, i) => (
                 <Typography
                   key={link.to}
