@@ -134,16 +134,23 @@ export default function Register() {
   const passOptions = [
     {
       id: "FIRST_DAY",
-      title: "ACCESO INDIVIDUAL DÍA 13 MARZO",
-      price: 350,
+      title: "ACCESO INDIV. DÍA 13 MARZO",
+      price: 150,
       desc: "Acceso a todas las conferencias y actividades del primer día del evento.",
       color: brandPink,
     },
     {
       id: "SECOND_DAY",
-      title: "ACCESO INDIVIDUAL DÍA 14 MARZO",
-      price: 350,
+      title: "ACCESO INDIV. DÍA 14 MARZO",
+      price: 150,
       desc: "Acceso a todas las conferencias y actividades del segundo día del evento.",
+      color: deepText,
+    },
+    {
+      id: "FULL_DAYS",
+      title: "ACCESO INDIV. AMBOS DIAS",
+      price: 200,
+      desc: "Acceso completo a la expo y stands ambos dias.",
       color: deepText,
     },
   ];

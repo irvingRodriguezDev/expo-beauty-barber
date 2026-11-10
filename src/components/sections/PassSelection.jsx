@@ -225,7 +225,6 @@ export const PassSelection = ({ options, onSelect }) => {
                     {(
                       pass.features || [
                         "Acceso a Zona Expo y Stands",
-                        "Entrada a Masterclasses en Vivo",
                         "Constancia Digital de Asistencia",
                       ]
                     ).map((feat, idx) => (
