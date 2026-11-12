@@ -185,29 +185,33 @@ export default function Navbar() {
               </Stack>
 
               <Stack direction='row' spacing={2} sx={{ ml: 4 }}>
-                <Button
-                  variant='contained'
-                  onClick={() => scrollTo("register")}
-                  sx={{
-                    bgcolor: brandPink,
-                    color: "#FFF", // Texto blanco sobre el rosa para mejor contraste
-                    borderRadius: 2,
-                    px: 4,
-                    py: 1.2,
-                    fontSize: "0.75rem",
-                    fontWeight: 900,
-                    letterSpacing: "0.1em",
-                    boxShadow: `0 8px 15px rgba(255, 183, 206, 0.3)`,
-                    "&:hover": {
-                      bgcolor: deepText,
-                      color: "#FFF",
-                      transform: "translateY(-2px)",
-                    },
-                    transition: "all 0.3s ease",
-                  }}
+                <Link
+                  to='/compra-tus-boletos'
+                  style={{ textDecoration: "none" }}
                 >
-                  QUIERO ASISTIR
-                </Button>
+                  <Button
+                    variant='contained'
+                    sx={{
+                      bgcolor: brandPink,
+                      color: "#FFF", // Texto blanco sobre el rosa para mejor contraste
+                      borderRadius: 2,
+                      px: 4,
+                      py: 1.2,
+                      fontSize: "0.75rem",
+                      fontWeight: 900,
+                      letterSpacing: "0.1em",
+                      boxShadow: `0 8px 15px rgba(255, 183, 206, 0.3)`,
+                      "&:hover": {
+                        bgcolor: deepText,
+                        color: "#FFF",
+                        transform: "translateY(-2px)",
+                      },
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    COMPRAR BOLETO
+                  </Button>
+                </Link>
               </Stack>
             </Stack>
 

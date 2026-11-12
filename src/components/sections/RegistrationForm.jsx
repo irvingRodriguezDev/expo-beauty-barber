@@ -106,7 +106,7 @@ export const RegistrationForm = ({
         </Button>
 
         <form onSubmit={handleSubmit(handleInternalSubmit)}>
-          <Stack spacing={4}>
+          <Stack spacing={2}>
             <Box>
               <Typography
                 sx={{

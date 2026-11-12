@@ -4,6 +4,7 @@ import App from "./App"; // Tu página de registro actual
 import ScannerView from "./Pages/ScannerView";
 import SuccessPage from "./Pages/SuccessPage";
 import MyTickets from "./Pages/MyTickets";
+import LandingRegister from "./Pages/LandingRegister";
 function Home() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function Home() {
         <Route path='/mis-boletos' element={<MyTickets />} />
         {/* Ruta para realizar el check-in del boleto */}
         <Route path='/admin/check-in' element={<ScannerView />} />
+        <Route path='/compra-tus-boletos' element={<LandingRegister />} />
         {/* Opcional: Ruta 404 */}
         <Route path='*' element={<div>Página no encontrada</div>} />
       </Routes>
