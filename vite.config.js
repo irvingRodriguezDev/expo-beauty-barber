@@ -9,7 +9,5 @@ export default defineConfig({
       "excogitable-mavis-sulfureous.ngrok-free.dev",
       "varmint-clamor-percolate.ngrok-free.dev",
     ],
-    port: 5173,
-    strictPort: true, // Te recomiendo añadir esto para que no salte al 5174 si el puerto se traba
   },
 });

@@ -10,9 +10,9 @@ import {
   Divider,
   IconButton,
   Grid,
+  Chip,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -20,6 +20,7 @@ import { TicketModal } from "../Modal/TicketModal";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import MethodGet from "../../config/service";
 import Navbar from "../../components/Layout/Navbar";
+
 const MyTickets = () => {
   const [email, setEmail] = useState("");
   const [tickets, setTickets] = useState([]);
@@ -29,9 +30,11 @@ const MyTickets = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const brandPink = "#ee6f97ff";
-  const deepText = "#3D2B2F";
-  const ivory = "#FFFBFB";
+  const brandPink = "#E53888";
+  const champagneGold = "#C5A059";
+  const deepText = "#2B1E22";
+  const mutedText = "#6E5D62";
+  const softPinkBg = "#FFF5F8";
 
   const fetchTickets = useCallback(
     async (isSilent = false) => {
@@ -40,7 +43,7 @@ const MyTickets = () => {
         setLoading(true);
       }
       try {
-        // CORRECCIÓN: Un solo objeto para toda la configuración
+        await executeRecaptcha("ticket_search");
         const response = await MethodGet(
           `/ticket/search?email=${email.toLowerCase().trim()}`,
         );
@@ -53,94 +56,164 @@ const MyTickets = () => {
         if (!isSilent) setLoading(false);
       }
     },
-    [email],
+    [email, executeRecaptcha],
   );
+
   useEffect(() => {
     let interval = null;
 
-    // Solo activamos el polling si ya se realizó una búsqueda inicial
-    // y si hay boletos en la lista
     if (searched && tickets.length > 0) {
       interval = setInterval(() => {
-        console.log("Actualizando estado de boletos...");
-        fetchTickets(true); // isSilent = true para que sea invisible al usuario
-      }, 40000); // 40 segundos
+        fetchTickets(true);
+      }, 40000);
     }
 
-    // Limpieza al desmontar o cambiar condiciones
     return () => {
       if (interval) clearInterval(interval);
     };
   }, [searched, tickets.length, fetchTickets]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchTickets();
+  };
+
   return (
     <>
       <Navbar />
-      <Box sx={{ bgcolor: "#FFD9E2", minHeight: "100vh", py: 10, px: 2 }}>
-        <Container maxWidth='md'>
-          <Stack spacing={8} alignItems='center'>
-            {/* Header con Estilo de Marca */}
-            <Box sx={{ textAlign: "center", position: "relative" }}>
+      <Box
+        sx={{
+          bgcolor: "#FFFFFF",
+          backgroundImage:
+            "radial-gradient(circle at 50% 15%, rgba(229, 56, 136, 0.08) 0%, rgba(255, 245, 248, 0.65) 38%, #FFFFFF 75%)",
+          minHeight: "100dvh",
+          py: { xs: 7, md: 10 },
+          px: 2,
+          position: "relative",
+          overflow: "hidden",
+          fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif',
+        }}
+      >
+        {/* Destellos decorativos sutiles en rosa y dorado champán */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-120px",
+            left: "-120px",
+            width: "440px",
+            height: "440px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(229, 56, 136, 0.09) 0%, rgba(255, 255, 255, 0) 70%)",
+            filter: "blur(35px)",
+            pointerEvents: "none",
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "-140px",
+            right: "-120px",
+            width: "480px",
+            height: "480px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(197, 160, 89, 0.13) 0%, rgba(255, 255, 255, 0) 70%)",
+            filter: "blur(35px)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <Container maxWidth='md' sx={{ position: "relative", zIndex: 1 }}>
+          <Stack spacing={6} alignItems='center'>
+            {/* Header Elegante */}
+            <Box sx={{ textAlign: "center" }}>
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Typography
+                <Chip
+                  label='✦ WAPIZIMA • PORTAL DE INVITADOS ✦'
                   sx={{
-                    letterSpacing: "0.6em",
-                    fontSize: "0.7rem",
-                    fontWeight: 900,
+                    bgcolor: softPinkBg,
                     color: brandPink,
-                    mb: 1,
-                    textTransform: "uppercase",
+                    border: "1px solid rgba(229, 56, 136, 0.24)",
+                    fontWeight: 700,
+                    fontSize: { xs: "0.68rem", sm: "0.76rem" },
+                    letterSpacing: "2.2px",
+                    px: 1.5,
+                    py: 2,
+                    borderRadius: "999px",
+                    mb: 2.5,
                   }}
-                >
-                  Portal de Invitados
-                </Typography>
+                />
                 <Typography
                   variant='h1'
                   sx={{
-                    // fontFamily: "'Syne', sans-serif",
                     fontWeight: 900,
-                    fontSize: { xs: "3rem", md: "5rem" },
+                    fontSize: { xs: "2.6rem", sm: "4rem", md: "4.8rem" },
                     color: deepText,
-                    lineHeight: 0.9,
+                    lineHeight: 0.98,
+                    letterSpacing: "-1.5px",
+                    textTransform: "uppercase",
                     mb: 2,
                   }}
                 >
-                  BUSCAR <br />{" "}
-                  <span style={{ color: brandPink }}>BOLETOS</span>
+                  BUSCA TUS{" "}
+                  <Box
+                    component='span'
+                    sx={{
+                      fontStyle: "italic",
+                      background: `linear-gradient(135deg, ${brandPink} 15%, ${champagneGold} 100%)`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      px: 0.5,
+                    }}
+                  >
+                    BOLETOS
+                  </Box>
                 </Typography>
-                <Box
+                <Typography
                   sx={{
-                    width: 60,
-                    height: 4,
-                    bgcolor: deepText,
+                    color: mutedText,
+                    fontSize: { xs: "0.92rem", sm: "1rem" },
+                    maxWidth: 460,
                     mx: "auto",
-                    borderRadius: 2,
+                    fontWeight: 500,
                   }}
-                />
+                >
+                  Ingresa el correo con el que realizaste tu compra para ver y
+                  descargar tus pases digitales.
+                </Typography>
               </motion.div>
             </Box>
 
-            {/* Buscador Estilo "Lounge" */}
+            {/* Buscador Elegante */}
             <Paper
+              component='form'
+              onSubmit={handleSubmit}
               elevation={0}
               sx={{
-                p: 1,
-                borderRadius: 10,
-                bgcolor: "#FFF",
+                p: 0.8,
+                borderRadius: "999px",
+                bgcolor: "#FFFFFF",
                 width: "100%",
-                maxWidth: 500,
+                maxWidth: 520,
                 display: "flex",
                 alignItems: "center",
-                border: "1px solid rgba(61, 43, 47, 0.08)",
-                boxShadow: "0 20px 40px rgba(61, 43, 47, 0.05)",
+                border: "1px solid rgba(197, 160, 89, 0.35)",
+                boxShadow: "0 14px 36px rgba(43, 30, 34, 0.06)",
+                transition: "all 0.25s ease",
+                "&:focus-within": {
+                  borderColor: brandPink,
+                  boxShadow: "0 16px 40px rgba(229, 56, 136, 0.14)",
+                },
               }}
             >
               <TextField
                 fullWidth
-                placeholder='Ingresa tu correo'
+                type='email'
+                placeholder='Ingresa tu correo electrónico'
                 variant='standard'
                 value={email}
                 autoComplete='off'
@@ -148,41 +221,52 @@ const MyTickets = () => {
                 InputProps={{
                   disableUnderline: true,
                   startAdornment: (
-                    <MailOutlineIcon sx={{ ml: 2, mr: 1, color: brandPink }} />
+                    <MailOutlineIcon
+                      sx={{ ml: 2, mr: 1.2, color: brandPink }}
+                    />
                   ),
-                  sx: { fontWeight: 600, color: deepText, px: 1 },
+                  sx: {
+                    fontWeight: 600,
+                    color: deepText,
+                    fontSize: { xs: "0.9rem", sm: "0.98rem" },
+                  },
                 }}
               />
               <IconButton
-                onClick={() => fetchTickets()}
+                type='submit'
                 disabled={loading}
                 sx={{
-                  bgcolor: deepText,
-                  color: "#FFF",
-                  p: 2,
-                  "&:hover": { bgcolor: brandPink },
-                  transition: "0.3s",
+                  background: `linear-gradient(135deg, ${brandPink} 0%, #C8236E 100%)`,
+                  color: "#FFFFFF",
+                  width: 48,
+                  height: 48,
+                  boxShadow: "0 8px 20px rgba(229, 56, 136, 0.28)",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(135deg, #D82E7A 0%, #AD1A5D 100%)",
+                  },
+                  transition: "all 0.25s ease",
                 }}
               >
                 {loading ? (
-                  <CircularProgress size={24} color='inherit' />
+                  <CircularProgress size={22} color='inherit' />
                 ) : (
                   <ArrowForwardIosIcon fontSize='small' />
                 )}
               </IconButton>
             </Paper>
 
-            {/* Lista de Tickets - Layout Editorial */}
-
-            <Grid container spacing={3} sx={{ mt: 4 }}>
+            {/* Lista de Tickets */}
+            <Grid container spacing={3} sx={{ pt: 1 }}>
               <AnimatePresence>
                 {tickets.map((ticket, index) => (
                   <Grid item xs={12} md={6} key={ticket.code}>
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 18 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ y: -5 }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ delay: index * 0.08 }}
+                      whileHover={{ y: -4 }}
                     >
                       <Box
                         onClick={() => {
@@ -191,38 +275,43 @@ const MyTickets = () => {
                         }}
                         sx={{
                           display: "flex",
-                          bgcolor: "#FFF",
-                          borderRadius: 1,
+                          bgcolor: "#FFFFFF",
+                          borderRadius: "18px",
                           overflow: "hidden",
-                          height: 140,
+                          minHeight: 136,
                           cursor: "pointer",
                           position: "relative",
-                          border: "1px solid rgba(255, 183, 206, 0.3)",
-                          boxShadow: "0 15px 30px rgba(61, 43, 47, 0.04)",
-                          "&:hover": { borderColor: brandPink },
+                          border: "1px solid rgba(197, 160, 89, 0.35)",
+                          boxShadow: "0 12px 30px rgba(43, 30, 34, 0.05)",
+                          transition: "all 0.25s ease",
+                          "&:hover": {
+                            borderColor: brandPink,
+                            boxShadow: "0 18px 38px rgba(229, 56, 136, 0.14)",
+                          },
                         }}
                       >
-                        {/* Lado izquierdo del ticket (ID Vertical) */}
+                        {/* Franja lateral elegante en rosa/magenta */}
                         <Box
                           sx={{
-                            width: 40,
-                            bgcolor: deepText,
+                            width: 44,
+                            background: `linear-gradient(180deg, ${brandPink} 0%, #C8236E 100%)`,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            flexShrink: 0,
                           }}
                         >
                           <Typography
                             sx={{
-                              color: brandPink,
+                              color: "#FFFFFF",
                               transform: "rotate(-90deg)",
                               whiteSpace: "nowrap",
-                              fontSize: "0.6rem",
-                              fontWeight: 900,
+                              fontSize: "0.62rem",
+                              fontWeight: 800,
                               letterSpacing: "0.2em",
                             }}
                           >
-                            PASS # {ticket.code.slice(-4)}
+                            PASS #{ticket.code?.slice(-4)}
                           </Typography>
                         </Box>
 
@@ -230,7 +319,8 @@ const MyTickets = () => {
                         <Box
                           sx={{
                             flexGrow: 1,
-                            p: 3,
+                            p: 2.5,
+                            pr: 3,
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
@@ -238,9 +328,21 @@ const MyTickets = () => {
                         >
                           <Typography
                             sx={{
-                              fontWeight: 900,
+                              fontSize: "0.68rem",
+                              fontWeight: 700,
+                              letterSpacing: "1.4px",
+                              color: champagneGold,
+                              textTransform: "uppercase",
+                              mb: 0.4,
+                            }}
+                          >
+                            Pase Digital
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontWeight: 800,
                               color: deepText,
-                              fontSize: "1.1rem",
+                              fontSize: "1.05rem",
                               textTransform: "uppercase",
                               lineHeight: 1.2,
                             }}
@@ -251,61 +353,63 @@ const MyTickets = () => {
                             sx={{
                               color: brandPink,
                               fontWeight: 700,
-                              fontSize: "0.7rem",
-                              mt: 0.5,
+                              fontSize: "0.78rem",
+                              mt: 0.6,
                             }}
                           >
-                            {JSON.stringify()}
-                            {ticket.evento?.titulo || "Eventos Wapizima"}
+                            {ticket.evento?.titulo ||
+                              "Christmas Nails Wapizima"}
                           </Typography>
                         </Box>
 
-                        {/* Perforación Visual del Ticket */}
+                        {/* Muescas superiores e inferiores */}
                         <Box
                           sx={{
                             position: "absolute",
-                            right: 80,
+                            right: 66,
                             top: -10,
                             width: 20,
                             height: 20,
                             borderRadius: "50%",
-                            bgcolor: "#FED9E1",
-                            border: "1px solid rgba(255, 183, 206, 0.9)",
+                            bgcolor: "#FFF5F8",
+                            border: "1px solid rgba(197, 160, 89, 0.35)",
                           }}
                         />
                         <Box
                           sx={{
                             position: "absolute",
-                            right: 80,
+                            right: 66,
                             bottom: -10,
                             width: 20,
                             height: 20,
                             borderRadius: "50%",
-                            bgcolor: "#FED9E1",
-                            border: "1px solid rgba(255, 183, 206, 0.9)",
+                            bgcolor: "#FFF5F8",
+                            border: "1px solid rgba(197, 160, 89, 0.35)",
                           }}
                         />
                         <Divider
                           orientation='vertical'
                           flexItem
-                          sx={{ borderStyle: "dashed", my: 2, mr: 10 }}
+                          sx={{
+                            borderStyle: "dashed",
+                            borderColor: "rgba(197, 160, 89, 0.5)",
+                            my: 2,
+                          }}
                         />
 
-                        {/* Botón Acción Lateral */}
+                        {/* Ícono lateral */}
                         <Box
                           sx={{
-                            position: "absolute",
-                            right: 0,
-                            top: 0,
-                            bottom: 0,
-                            width: 80,
+                            width: 76,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            bgcolor: softPinkBg,
+                            flexShrink: 0,
                           }}
                         >
                           <ConfirmationNumberIcon
-                            sx={{ color: brandPink, fontSize: 30 }}
+                            sx={{ color: brandPink, fontSize: 28 }}
                           />
                         </Box>
                       </Box>
@@ -316,18 +420,35 @@ const MyTickets = () => {
             </Grid>
 
             {searched && tickets.length === 0 && !loading && (
-              <Typography
-                sx={{ color: deepText, opacity: 0.5, fontWeight: 700 }}
+              <Paper
+                elevation={0}
+                sx={{
+                  px: 3,
+                  py: 2,
+                  borderRadius: "16px",
+                  bgcolor: softPinkBg,
+                  border: "1px solid rgba(229, 56, 136, 0.2)",
+                }}
               >
-                No se encontraron registros. Intenta con otro correo.
-              </Typography>
+                <Typography
+                  sx={{ color: mutedText, fontWeight: 600, fontSize: "0.9rem" }}
+                >
+                  No se encontraron boletos con ese correo. Verifica e intenta
+                  de nuevo.
+                </Typography>
+              </Paper>
             )}
+
             {tickets.length > 0 && (
               <Typography
                 variant='caption'
-                sx={{ color: brandPink, opacity: 0.7, marginTop: -14 }}
+                sx={{
+                  color: mutedText,
+                  fontWeight: 600,
+                  letterSpacing: "0.6px",
+                }}
               >
-                • La lista se actualiza automáticamente
+                ✦ La lista se actualiza automáticamente cada 40 segundos
               </Typography>
             )}
           </Stack>

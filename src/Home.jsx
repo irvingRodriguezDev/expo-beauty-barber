@@ -23,15 +23,15 @@ function Home() {
         {/* Grupo de rutas principal */}
         <Route path='/'>
           {/* URL: / (Página de inicio) */}
-          <Route index element={<App />} />
+          <Route index element={<SoldOutEvent />} />
 
           {/* URL: /evento/nombre-del-evento (Ignora el ?fbclid= automáticamente) */}
-          <Route path='evento/:slug' element={<EventDetai />} />
+          {/* <Route path='evento/:slug' element={<EventDetai />} /> */}
 
           {/* URLs de usuario */}
           <Route path='mis-boletos' element={<MyTickets />} />
-          <Route path='payment-success' element={<SuccessPage />} />
-          <Route path='payment-error' element={<ErrorPage />} />
+          {/* <Route path='payment-success' element={<SuccessPage />} /> */}
+          {/* <Route path='payment-error' element={<ErrorPage />} /> */}
           <Route path='ticket/:code' element={<TicketView />} />
 
           {/* URLs de administración */}
