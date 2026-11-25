@@ -15,6 +15,7 @@ import SoldOutEvent from "./components/Pages/SoldOutPage";
 import ComingSoon from "./components/Pages/CommingSoon";
 import AdminCreateEvent from "./components/Pages/AdminCreateEvent";
 import EventDetai from "./components/Pages/EventDetail";
+import RegisterVilleChristmas from "./components/Pages/RegisterVilleChristmas";
 
 function Home() {
   return (
@@ -23,7 +24,7 @@ function Home() {
         {/* Grupo de rutas principal */}
         <Route path='/'>
           {/* URL: / (Página de inicio) */}
-          <Route index element={<SoldOutEvent />} />
+          <Route index element={<RegisterVilleChristmas />} />
 
           {/* URL: /evento/nombre-del-evento (Ignora el ?fbclid= automáticamente) */}
           {/* <Route path='evento/:slug' element={<EventDetai />} /> */}
